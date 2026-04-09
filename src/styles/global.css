@@ -1,6 +1,4 @@
-/* ── Google Fonts ───────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap');
-
+/* ── Google Fonts (Loaded via BaseLayout.astro to prevent render-blocking) ───────────────── */
 /* ── Reset & Tokens ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -33,8 +31,20 @@
   --shadow-lg:  0 16px 40px rgba(15,15,15,0.10), 0 4px 16px rgba(15,15,15,0.06);
 }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+  scroll-padding-top: 80px;
+}
 
+/* Prevent layout shift (CLS) from ligature icon FOUT */
+.material-symbols-outlined {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 1em;
+  max-height: 1em;
+  vertical-align: middle;
+}
 body {
   font-family: var(--font-body);
   font-size: 16px;
@@ -70,6 +80,18 @@ a:hover { color: var(--accent); }
 strong { color: var(--ink); font-weight: 600; }
 
 /* ── Layout Utilities ───────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container {
   width: 100%;
   max-width: 1120px;
@@ -134,13 +156,13 @@ strong { color: var(--ink); font-weight: 600; }
 
 .btn-whatsapp {
   background: #25D366;
-  color: #fff;
+  color: var(--ink);
   border-color: #25D366;
 }
 .btn-whatsapp:hover {
   background: #1DB954;
   border-color: #1DB954;
-  color: #fff;
+  color: var(--ink);
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(37,211,102,0.35);
 }
@@ -571,7 +593,7 @@ strong { color: var(--ink); font-weight: 600; }
   height: 56px;
   border-radius: 50%;
   background: #25D366;
-  color: #fff;
+  color: var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -583,7 +605,7 @@ strong { color: var(--ink); font-weight: 600; }
 .whatsapp-float:hover {
   transform: scale(1.08);
   box-shadow: 0 6px 28px rgba(37,211,102,0.65);
-  color: #fff;
+  color: var(--ink);
 }
 .whatsapp-float svg { width: 28px; height: 28px; }
 
