@@ -10,7 +10,11 @@
   "dependencies": {
     "@astrojs/react": "^3.6.3",
     "@astrojs/sitemap": "^3.7.2",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/libre-baskerville": "^5.2.10",
+    "@fontsource/noto-sans": "^5.2.10",
     "astro": "^4.16.18",
+    "material-symbols": "^0.44.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
