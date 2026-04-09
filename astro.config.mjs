@@ -7,4 +7,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [react()],
   site: 'https://adacomplianceservices.tech',
+  build: {
+    inlineStylesheets: 'always',
+  },
 });
