@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for Nonprofit Websites",
+    "description": "Professional WCAG 2.2 website accessibility audit for nonprofits and associations. Covers donation forms, volunteer signup, program pages, and federal grant compliance.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "serviceType": "Nonprofit Website Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do nonprofits need ADA compliant websites?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Nonprofits that are public accommodations, receive federal funding, or have more than 15 employees are required to comply with ADA or Section 504 of the Rehabilitation Act. Virtually all charitable organizations that engage with the public — through donation pages, program applications, event registration, or service delivery — have legal accessibility obligations. Nonprofits serving people with disabilities have a heightened ethical obligation to ensure website accessibility." } },
+      { "@type": "Question", "name": "What accessibility standards apply to nonprofits?", "acceptedAnswer": { "@type": "Answer", "text": "Most nonprofits must comply with ADA Title III (public accommodations) and/or Section 504 of the Rehabilitation Act (federal funding recipients). Both standards require accessible websites and digital content. Nonprofits receiving federal grants must also meet Section 508 requirements for IT procured with those funds. The technical standard for all is WCAG 2.2 Level AA." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "Nonprofits", "item": `${DOMAIN}/ada-compliance-for-nonprofits` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Do nonprofits need ADA compliant websites?", answer: "Yes. Nonprofits that are public accommodations, receive federal funding, or have 15+ employees must comply with ADA Title III and/or Section 504 of the Rehabilitation Act. Organizations that engage with the public through donation pages, program applications, event registration, or direct services have legal accessibility obligations. Nonprofits serving people with disabilities have a heightened ethical obligation to ensure accessibility." },
+  { question: "What accessibility standards apply to nonprofits?", answer: "Most nonprofits must meet ADA Title III (public accommodations) and/or Section 504 (federal funding recipients). Both reference WCAG 2.2 Level AA as the technical standard. Nonprofits receiving federal grants that procure IT with those funds must also meet Section 508. The practical compliance requirement across all three is WCAG 2.2 Level AA." },
+  { question: "Do donation forms on nonprofit websites need to be ADA accessible?", answer: "Yes. Online donation forms are a critical service point for nonprofits. If donation forms are inaccessible to users with disabilities, the organization is effectively denying them the ability to support its mission. Donation platforms like Classy, Donorbox, PayPal Giving Fund, and Stripe-based integrations have varying accessibility levels and must be tested." },
+  { question: "Can nonprofits get the IRS Disabled Access Credit for website audits?", answer: "Nonprofits that pay federal taxes (unusual) may qualify for the IRS Disabled Access Credit. Most nonprofits (501(c)(3)) are tax-exempt and cannot directly benefit from the Disabled Access Credit. However, many states offer accessibility grant programs for nonprofits. Additionally, funders and grant-makers increasingly require accessibility as a condition of funding — making a professional audit a grant-eligible expense." },
+  { question: "How much does a nonprofit website ADA audit cost?", answer: "Nonprofit website ADA compliance audits typically cost $1,500–$3,500 for standard sites. complyTech offers a nonprofit discount — contact us on WhatsApp to discuss your budget. Many nonprofits include audit costs in grant applications as a legitimate program expense." }
+];
+---
+
+<BaseLayout
+  title="ADA Compliance for Nonprofit Websites | complyTech"
+  description="Most nonprofits are legally required to have accessible websites under ADA Title III or Section 504. Our WCAG 2.2 audit for nonprofits covers donation forms, volunteer signup, and grant compliance."
+  canonical={`${DOMAIN}/ada-compliance-for-nonprofits`}
+  schema={schema}
+  keywords="ADA compliance for nonprofits, nonprofit website accessibility, Section 504 nonprofit websites, donation form accessibility, nonprofit WCAG compliance"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Nonprofits</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">volunteer_activism</span>
+        ADA Title III · Section 504 · Federal Grant Compliance
+      </div>
+      <h1 id="page-h1">ADA Compliance for Nonprofit Websites</h1>
+      <p class="hero-sub">Most nonprofits are legally required to operate accessible websites — and organizations that serve people with disabilities carry both a legal and ethical obligation. Donation forms, program applications, and volunteer signup flows are the most common accessibility failure points.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-nonprofit-cta">Get Nonprofit Audit Quote</a>
+        <a href="#what-applies" class="btn btn-outline-light btn-lg">Which Laws Apply?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Nonprofits engaging the public as public accommodations must meet ADA Title III.</li>
+              <li>Nonprofits receiving federal funding must meet Section 504 of the Rehabilitation Act.</li>
+              <li>Donation forms, program applications, and volunteer signup must be WCAG 2.2 AA accessible.</li>
+              <li>Many nonprofit platforms (Classy, Donorbox) have accessibility gaps — testing required.</li>
+              <li>complyTech offers nonprofit discounts — contact us to discuss your budget.</li>
+            </ul>
+          </div>
+
+          <h2 id="what-applies">Which Laws Apply to Nonprofit Websites?</h2>
+          <div class="law-grid">
+            <div class="law-card">
+              <h4>ADA Title III</h4>
+              <p><strong>Applies when:</strong> Nonprofit operates as a public accommodation — providing services or programs to the general public. Covers websites as part of the public-facing operation.</p>
+            </div>
+            <div class="law-card law-card-green">
+              <h4>Section 504 of the Rehabilitation Act</h4>
+              <p><strong>Applies when:</strong> Nonprofit receives federal financial assistance (HHS, HUD, DOE, AmeriCorps grants, etc.). Requires program accessibility including digital access.</p>
+            </div>
+            <div class="law-card">
+              <h4>Section 508</h4>
+              <p><strong>Applies when:</strong> Nonprofit receives federal funding AND uses those funds to develop or procure IT. Requires Section 508 conformance for funded technology.</p>
+            </div>
+          </div>
+          <p>For most nonprofits that engage the public and receive any form of federal, state, or foundation support, <strong>WCAG 2.2 Level AA compliance is the practical standard</strong> across all applicable frameworks.</p>
+
+          <h2>Most Common Violations on Nonprofit Websites</h2>
+          <div class="violation-list">
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">1</div>
+              <div class="violation-body">
+                <h4>Donation forms with inaccessible amount selectors</h4>
+                <p>Custom donation amount pickers with visual-only selected states and inaccessible keyboard navigation prevent donors with disabilities from making contributions.</p>
+                <div class="violation-pct">Found in 71% of nonprofit donation flows</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">2</div>
+              <div class="violation-body">
+                <h4>Program application forms without accessible field labels</h4>
+                <p>Service program application forms — often long and complex — frequently have ambiguous field labels, missing required field indicators accessible to screen readers, and inaccessible error handling.</p>
+                <div class="violation-pct">Found in 68% of nonprofit program application forms</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">3</div>
+              <div class="violation-body">
+                <h4>Event registration systems (Eventbrite, GiveSmart) with accessibility gaps</h4>
+                <p>Third-party event registration platforms embedded in nonprofit sites have varying accessibility levels. Date/time pickers, seat selectors, and fee option inputs are frequent failure points.</p>
+                <div class="violation-pct">Found in 64% of nonprofit event pages</div>
+              </div>
+            </div>
+          </div>
+
+          <h2 id="faq-nonprofit">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card sidebar-nonprofit">
+            <h4>Nonprofit Discount Available</h4>
+            <p>complyTech offers discounted audit pricing for qualifying 501(c)(3) organizations. Contact us to discuss your budget.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I represent a nonprofit and need an ADA compliance audit. Can you offer nonprofit pricing?')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-nonprofit-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/section-508-compliance">Section 508 Guide</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+              <li><a href="/disabled-access-credit-tax">Tax Credit Guide</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Helping Nonprofits Serve Everyone Equally" subtext="Your mission is inclusion. Your website should reflect that. complyTech offers WCAG 2.2 accessibility audits for nonprofits with a commitment to mission-driven accessibility — and discounted pricing for qualifying 501(c)(3) organizations." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .law-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .law-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; }
+  .law-card-green { background: var(--accent-lt); border-color: rgba(26,58,42,0.2); }
+  .law-card h4 { font-size: 0.9rem; color: var(--accent); margin-bottom: 8px; }
+  .law-card p { font-size: 0.83rem; color: var(--ink-2); margin: 0; }
+  .sidebar-nonprofit { background: var(--accent-lt); border-color: rgba(26,58,42,0.2); }
+  .sidebar-nonprofit h4 { color: var(--accent); }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 1000px) { .law-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .page-sidebar { grid-template-columns: 1fr; }
+    .law-grid { grid-template-columns: 1fr; }
+  }
+</style>

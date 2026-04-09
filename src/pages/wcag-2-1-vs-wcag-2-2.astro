@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "WCAG 2.1 vs WCAG 2.2: What Changed and Why It Matters for ADA Compliance",
+    "description": "Complete comparison of WCAG 2.1 and WCAG 2.2 accessibility standards. Covers the 9 new success criteria in WCAG 2.2, what they mean for your website, and why complyTech audits to WCAG 2.2 Level AA.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "dateModified": "2026-04-07T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is the difference between WCAG 2.1 and WCAG 2.2?", "acceptedAnswer": { "@type": "Answer", "text": "WCAG 2.2, published by the W3C in September 2023, adds 9 new success criteria (2.4.11 through 2.4.13, 2.5.7, 2.5.8, 3.2.6, 3.3.7, 3.3.8, and 3.3.9) beyond WCAG 2.1, focusing on mobile usability and cognitive accessibility. All WCAG 2.1 Level A and AA criteria still apply in WCAG 2.2 except for 4.1.1 (Parsing), which was removed. WCAG 2.2 also removes Success Criterion 4.1.1 as browsers have matured to handle HTML parsing inconsistencies." } },
+      { "@type": "Question", "name": "Is WCAG 2.1 or WCAG 2.2 required for ADA compliance?", "acceptedAnswer": { "@type": "Answer", "text": "As of 2025, the Department of Justice's April 2024 final rule specifies WCAG 2.1 Level AA for state and local government websites. For private businesses under ADA Title III, courts use WCAG 2.1 AA as the minimum legal benchmark. However, complyTech recommends auditing to WCAG 2.2 Level AA — the current published standard — as it provides broader coverage, better protection against future legal claims, and genuinely better accessibility for users." } },
+      { "@type": "Question", "name": "Do I need to update my website from WCAG 2.1 to WCAG 2.2?", "acceptedAnswer": { "@type": "Answer", "text": "If your website was audited and remediated to WCAG 2.1 Level AA, it meets current minimum legal requirements. However, upgrading to WCAG 2.2 AA compliance adds 9 new success criteria — particularly important for mobile users, users with cognitive disabilities, and users with motor impairments. We recommend a WCAG 2.2 gap audit if your last audit was completed against WCAG 2.1." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "WCAG 2.1 vs 2.2", "item": `${DOMAIN}/wcag-2-1-vs-wcag-2-2` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "What is the difference between WCAG 2.1 and WCAG 2.2?", answer: "WCAG 2.2, published by the W3C in September 2023, adds 9 new success criteria beyond WCAG 2.1, focusing on mobile usability and cognitive accessibility. It also removes Success Criterion 4.1.1 (Parsing), which browsers now handle consistently. All other WCAG 2.1 Level A and AA criteria still apply in WCAG 2.2. The new criteria address minimum touch target sizes, focus visibility, accessible authentication, and consistent help mechanisms." },
+  { question: "Is WCAG 2.1 or WCAG 2.2 required for ADA compliance in 2025?", answer: "The DOJ's April 2024 final rule specifies WCAG 2.1 Level AA for state/local government websites. For private businesses under ADA Title III, courts use WCAG 2.1 AA as the minimum legal benchmark. However, complyTech recommends auditing to WCAG 2.2 Level AA — providing broader coverage, better protection against future legal claims, and genuinely better accessibility for real users." },
+  { question: "Do I need to re-audit my website for WCAG 2.2?", answer: "If your site was previously audited to WCAG 2.1 Level AA, it meets current minimum legal requirements. However, a WCAG 2.2 gap audit is recommended to address the 9 new criteria — particularly important if your site has significant mobile traffic or serves users with cognitive disabilities. A gap audit is less expensive than a full audit and focuses only on the new 2.2 criteria." },
+  { question: "What is WCAG 2.5.8 (Minimum Target Size)?", answer: "WCAG 2.5.8 requires that interactive elements (buttons, links, form controls) have a click/touch target size of at least 24×24 CSS pixels. This is especially important for mobile users and users with motor impairments who struggle to precisely tap small elements. Existing elements that don't meet this size requirement fail WCAG 2.2 Level AA." },
+  { question: "What is WCAG 3.3.8 (Accessible Authentication)?", answer: "WCAG 3.3.8 requires that authentication processes (login, CAPTCHA) do not rely on cognitive tests — like solving puzzles, transcribing text, or recognizing images — unless an accessible alternative is provided. This directly addresses CAPTCHAs that use image recognition or distorted text, which are inaccessible to many users with cognitive or visual disabilities." }
+];
+
+const newCriteria = [
+  { id: '2.4.11', name: 'Focus Not Obscured (Min)', level: 'AA', what: 'Focused components must not be entirely hidden by sticky headers, footers, or other elements.', impact: 'Sticky navigation and chat widgets covering focused elements fail this criterion.' },
+  { id: '2.4.12', name: 'Focus Not Obscured (Enhanced)', level: 'AAA', what: 'Focused component must be fully visible — no portion hidden.', impact: 'AAA — not required for minimum compliance but best practice.' },
+  { id: '2.4.13', name: 'Focus Appearance', level: 'AAA', what: 'The focus indicator must meet minimum contrast and size requirements.', impact: 'AAA level — addresses thin or low-contrast default focus rings.' },
+  { id: '2.5.7', name: 'Dragging Movements', level: 'AA', what: 'Functionality using drag-and-drop must have a single-pointer alternative.', impact: 'Drag-to-reorder lists, sliders operated by dragging, and similar interactions need pointer alternatives.' },
+  { id: '2.5.8', name: 'Target Size (Minimum)', level: 'AA', what: 'Touch/click targets must be at least 24×24 CSS pixels.', impact: 'Small icon buttons, close X buttons, and inline link text often fail this on mobile.' },
+  { id: '3.2.6', name: 'Consistent Help', level: 'A', what: 'Help mechanisms (chat, phone, contact link) must appear consistently across pages.', impact: 'Help buttons that appear on some pages but not others violate this criterion.' },
+  { id: '3.3.7', name: 'Redundant Entry', level: 'A', what: 'Users should not need to re-enter information already provided in the same process.', impact: 'Multi-step forms that ask for the same info (email, address) twice fail this criterion.' },
+  { id: '3.3.8', name: 'Accessible Authentication (Min)', level: 'AA', what: 'Authentication must not require cognitive tests (CAPTCHA) without alternatives.', impact: 'Image CAPTCHAs and puzzle CAPTCHAs fail this unless audio or alternative is provided.' },
+  { id: '3.3.9', name: 'Accessible Authentication (Enh)', level: 'AAA', what: 'Authentication must not rely on cognitive function tests at all.', impact: 'AAA level — full CAPTCHA removal required for AAA conformance.' },
+];
+---
+
+<BaseLayout
+  title="WCAG 2.1 vs WCAG 2.2: What Changed & Why It Matters | complyTech"
+  description="WCAG 2.2 adds 9 new success criteria beyond WCAG 2.1, focusing on mobile and cognitive accessibility. Learn what changed, what's required for ADA compliance, and whether you need a re-audit."
+  canonical={`${DOMAIN}/wcag-2-1-vs-wcag-2-2`}
+  schema={schema}
+  ogType="article"
+  keywords="WCAG 2.1 vs WCAG 2.2, what changed in WCAG 2.2, WCAG 2.2 new criteria, WCAG 2.2 ADA compliance, do I need WCAG 2.2"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/what-is-ada-compliance-websites">Resources</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">WCAG 2.1 vs 2.2</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">compare_arrows</span>
+        W3C Published September 2023 · 9 New Success Criteria
+      </div>
+      <h1 id="page-h1">WCAG 2.1 vs WCAG 2.2: What Changed and Why It Matters</h1>
+      <p class="hero-sub">WCAG 2.2 was published in September 2023, adding 9 new accessibility success criteria focused on mobile usability and cognitive accessibility. Here's exactly what changed, what's now required, and whether your existing audit needs to be updated.</p>
+      <div class="hero-actions">
+        <a href="#new-criteria" class="btn btn-whatsapp btn-lg" id="hero-wcag-cta">See 9 New Criteria</a>
+        <a href="#cta" class="btn btn-outline-light btn-lg">Get WCAG 2.2 Audit Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>WCAG 2.2 was published by the W3C on September 5, 2023 — it is the current standard.</li>
+              <li>WCAG 2.2 adds <strong>9 new success criteria</strong> and removes 1 (4.1.1 Parsing).</li>
+              <li>All WCAG 2.1 Level A and AA criteria still apply in WCAG 2.2.</li>
+              <li>New criteria focus on: touch target sizes, focus visibility, cognitive accessibility, and authentication.</li>
+              <li>The DOJ April 2024 rule mandates WCAG 2.1 AA for government; WCAG 2.2 AA is best practice for private businesses.</li>
+              <li>complyTech audits to WCAG 2.2 Level AA — the highest defensible standard as of 2025.</li>
+            </ul>
+          </div>
+
+          <h2>What Is WCAG?</h2>
+          <p><strong>WCAG</strong> (Web Content Accessibility Guidelines) is the technical standard for web accessibility developed by the World Wide Web Consortium (W3C). It is organized into three conformance levels: A (minimum), AA (standard), and AAA (enhanced). ADA Title III courts use WCAG Level AA as the benchmark for measuring website compliance.</p>
+
+          <h2>WCAG 2.1 vs WCAG 2.2 — Side-by-Side Comparison</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="WCAG 2.1 versus WCAG 2.2 comparison">
+              <thead><tr><th scope="col">Feature</th><th scope="col">WCAG 2.1</th><th scope="col">WCAG 2.2</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Published</strong></td><td>June 2018</td><td>September 5, 2023</td></tr>
+                <tr><td><strong>Total Success Criteria</strong></td><td>78</td><td>86 (net 87 total, –1 removed, +9 new)</td></tr>
+                <tr><td><strong>Level A Criteria</strong></td><td>30</td><td>32 (+2 new)</td></tr>
+                <tr><td><strong>Level AA Criteria</strong></td><td>20</td><td>24 (+4 new at AA)</td></tr>
+                <tr><td><strong>Level AAA Criteria</strong></td><td>28</td><td>30 (+3 new at AAA)</td></tr>
+                <tr><td><strong>New Focus Areas</strong></td><td>Mobile, low vision</td><td>Cognitive, motor, mobile UX</td></tr>
+                <tr><td><strong>Removed Criteria</strong></td><td>None</td><td>4.1.1 Parsing (no longer needed)</td></tr>
+                <tr><td><strong>DOJ Mandate</strong></td><td>Government: April 2024 rule</td><td>Not yet mandated (current best practice)</td></tr>
+                <tr><td><strong>ADA Court Standard</strong></td><td>Minimum legal benchmark</td><td>Best practice — future-proof defense</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="new-criteria">The 9 New WCAG 2.2 Success Criteria — Explained</h2>
+          <p>These are the criteria that appear in WCAG 2.2 but not in WCAG 2.1. If your last audit was against WCAG 2.1, your site has not been tested for any of these:</p>
+
+          <div class="criteria-list">
+            {newCriteria.map((c) => (
+              <div class="criterion-card">
+                <div class="criterion-header">
+                  <span class="criterion-id">{c.id}</span>
+                  <span class="criterion-name">{c.name}</span>
+                  <span class={`criterion-level level-${c.level.toLowerCase()}`}>{c.level}</span>
+                </div>
+                <p class="criterion-what"><strong>What it requires:</strong> {c.what}</p>
+                <p class="criterion-impact">{c.impact}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2>What Was Removed: 4.1.1 Parsing</h2>
+          <p>WCAG 2.2 removes Success Criterion 4.1.1 (Parsing), which required valid HTML markup free of parsing errors. This criterion was removed because modern browsers have become robust enough to handle HTML parsing inconsistencies consistently — the original purpose of 4.1.1 is now addressed by browser normalization behavior.</p>
+
+          <h2>Legal Status in 2025: Which Standard Is Required?</h2>
+          <ul>
+            <li><strong>Government websites</strong> (state/local): WCAG 2.1 Level AA mandated by DOJ final rule, April 2024</li>
+            <li><strong>Federal programs</strong> (Section 508): W3C WCAG 2.0 Level AA remains the formal reference, but agencies increasingly adopt 2.1</li>
+            <li><strong>Private businesses (ADA Title III)</strong>: Courts apply WCAG 2.1 AA as the minimum standard; WCAG 2.2 AA is best practice</li>
+          </ul>
+          <p>complyTech audits all clients to <strong>WCAG 2.2 Level AA</strong> — the current published standard. This provides the broadest legal protection and ensures your site meets both current and anticipated future enforcement standards.</p>
+
+          <h2 id="faq-wcag">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Get a WCAG 2.2 Audit</h4>
+            <p>We audit to WCAG 2.2 Level AA — 9 criteria beyond what your last audit may have covered.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I want a WCAG 2.2 accessibility audit for my website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-wcag-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card sidebar-version">
+            <div class="version-row"><span class="version-label">WCAG 2.1</span><span class="version-date">June 2018</span><span class="version-note">78 criteria · Legal minimum</span></div>
+            <div class="version-arrow" aria-hidden="true">↓ + 9 new criteria</div>
+            <div class="version-row version-current"><span class="version-label">WCAG 2.2</span><span class="version-date">Sep 2023</span><span class="version-note">86 criteria · Best practice</span></div>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a></li>
+              <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
+              <li><a href="/ada-compliance-checklist-2025">WCAG 2.2 Checklist</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Audit Your Website to WCAG 2.2 Level AA" subtext="complyTech audits to WCAG 2.2 — 9 criteria beyond what a WCAG 2.1 audit covers. Future-proof your compliance with the current published standard and a defensible legal record." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .criteria-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+  .criterion-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent-2); border-radius: var(--radius-md); padding: 16px 20px; }
+  .criterion-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .criterion-id { font-family: monospace; font-size: 0.82rem; background: var(--ink); color: #7ed4a0; padding: 2px 8px; border-radius: 4px; }
+  .criterion-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .criterion-level { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+  .level-a { background: #fee2e2; color: #991b1b; }
+  .level-aa { background: var(--accent-lt); color: var(--accent); }
+  .level-aaa { background: #e0e7ff; color: #3730a3; }
+  .criterion-what { font-size: 0.88rem; color: var(--ink-2); margin-bottom: 6px; }
+  .criterion-impact { font-size: 0.83rem; color: var(--ink-3); font-style: italic; margin: 0; }
+  .sidebar-version { background: var(--ink); border-color: transparent; }
+  .version-row { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
+  .version-row:last-child { border-bottom: none; }
+  .version-current { border-color: rgba(126,212,160,0.3) !important; border-left: 2px solid #7ed4a0; padding-left: 8px; }
+  .version-label { font-family: monospace; font-weight: 700; color: #7ed4a0; font-size: 0.9rem; }
+  .version-date { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+  .version-note { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+  .version-arrow { text-align: center; padding: 4px 0; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

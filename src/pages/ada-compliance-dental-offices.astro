@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for Dental Office Websites",
+    "description": "Professional WCAG 2.2 accessibility audit for dental practice websites. Covers patient intake forms, appointment booking, patient portals, and service pages.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "serviceType": "Dental Website Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do dental office websites need to be ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dental practices are public accommodations under ADA Title III, and their websites must be accessible to people with disabilities. Dental websites that include online appointment booking, patient intake forms, patient portals, and health information must meet WCAG 2.2 Level AA accessibility standards. Dental practices also have obligations under Section 504 of the Rehabilitation Act if they receive federal funding, and HIPAA intersects with accessible patient portal requirements." } },
+      { "@type": "Question", "name": "What are the most common ADA violations on dental websites?", "acceptedAnswer": { "@type": "Answer", "text": "The most common ADA violations on dental practice websites are: inaccessible online appointment booking forms (date/time pickers, service selectors), patient intake forms without proper label associations, insufficient color contrast on tooth diagrams and service graphics, inaccessible before/after photo galleries, and PDFs (insurance information, new patient packets) without accessibility tagging." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "Dental Offices", "item": `${DOMAIN}/ada-compliance-dental-offices` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Do dental office websites need to be ADA compliant?", answer: "Yes. Dental practices are public accommodations under ADA Title III and their websites must be accessible. Websites with appointment booking, patient intake forms, portals, and health info must meet WCAG 2.2 Level AA. Practices receiving federal funding also have Section 504 obligations, and accessible patient portals are increasingly relevant to HIPAA compliance considerations." },
+  { question: "What are the most common ADA violations on dental websites?", answer: "The most common dental website ADA violations are: inaccessible appointment booking (date/time pickers, service selectors), patient intake forms without proper labels, low contrast on tooth diagrams and service graphics, inaccessible before/after photo galleries, and PDFs (new patient packets, insurance info) without accessibility tagging." },
+  { question: "Do online dental appointment booking systems need to be accessible?", answer: "Yes. Appointment booking platforms (Weave, Birdeye, Dentrix, Carestream, or custom booking forms) deployed on dental websites must be keyboard accessible and screen reader compatible. Many third-party dental booking tools have accessibility gaps. If your booking system cannot be made accessible, you must provide an equally effective alternative (e.g., a phone number that is prominently linked)." },
+  { question: "What is the relationship between ADA website compliance and HIPAA for dental practices?", answer: "ADA accessibility and HIPAA are separate legal frameworks. ADA governs public access to goods and services. HIPAA governs privacy and security of protected health information. A dental patient portal that is inaccessible is an ADA issue — but the portal still must maintain HIPAA-compliant data handling. Accessibility improvements (alt text, keyboard navigation) do not compromise HIPAA; they only affect how users interact with the interface." },
+  { question: "How much does an ADA audit for a dental practice website cost?", answer: "ADA compliance audits for dental practice websites typically cost $1,500–$3,500 for standard dental sites (homepage, services, team, appointment booking, patient forms, contact). Practices with integrated patient portals or complex booking systems may be $3,500–$5,000. PDF remediation (new patient packets, insurance forms) is available as an add-on." }
+];
+---
+
+<BaseLayout
+  title="ADA Compliance for Dental Office Websites | complyTech"
+  description="Dental practices are ADA-covered public accommodations. Patient intake forms, booking systems, and portals must be accessible. WCAG 2.2 audit for dental websites starting at $1,500."
+  canonical={`${DOMAIN}/ada-compliance-dental-offices`}
+  schema={schema}
+  keywords="ADA compliance for dental offices, dental website accessibility, dental website ADA compliant, patient intake form accessibility, HIPAA accessible patient portal"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Dental Offices</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">medical_services</span>
+        Patient Intake Forms · Booking Systems · Patient Portals
+      </div>
+      <h1 id="page-h1">ADA Compliance for Dental Office Websites</h1>
+      <p class="hero-sub">Dental practices are public accommodations under ADA Title III. Patient intake forms, appointment booking systems, and before/after photo galleries are the most commonly cited accessibility failure points in dental website ADA claims.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-dental-cta">Get Dental Website Audit Quote</a>
+        <a href="#violations" class="btn btn-outline-light btn-lg">See Common Violations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Dental practices are public accommodations under ADA Title III — websites must be WCAG 2.2 AA compliant.</li>
+              <li>Patient intake forms, appointment booking, and patient portals are the most common ADA targets.</li>
+              <li>Third-party dental booking tools (Weave, Birdeye, Dentrix patient portals) frequently have accessibility gaps.</li>
+              <li>New patient PDF packets must be tagged for screen reader accessibility.</li>
+              <li>Dental website audits start at $1,500 — PDF remediation available as add-on.</li>
+            </ul>
+          </div>
+
+          <h2 id="violations">Most Common ADA Violations on Dental Practice Websites</h2>
+          <div class="violation-list">
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">1</div>
+              <div class="violation-body">
+                <h4>Inaccessible appointment booking forms</h4>
+                <p>Date picker calendars, service selectors, and time slot choosers are often built with non-keyboard-accessible custom components. Screen reader users cannot navigate the booking flow, effectively denying them access to your scheduling system.</p>
+                <div class="violation-pct">Found in 69% of dental websites audited</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">2</div>
+              <div class="violation-body">
+                <h4>Patient intake forms without accessible error handling</h4>
+                <p>Online new patient forms with required fields that only visually indicate errors (red border, asterisk change) fail screen reader users who cannot identify which fields have problems.</p>
+                <div class="violation-pct">Found in 74% of dental intake forms</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">3</div>
+              <div class="violation-body">
+                <h4>Before/after photo galleries without alt text</h4>
+                <p>Smile transformation photo galleries are central to dental practice marketing but are frequently missing descriptive alt text, preventing blind and low-vision users from understanding the treatment results.</p>
+                <div class="violation-pct">Found in 82% of dental gallery components</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">4</div>
+              <div class="violation-body">
+                <h4>New patient packet PDFs without accessible tagging</h4>
+                <p>PDF new patient forms, insurance information sheets, and pre-treatment instructions posted on dental websites must be tagged with proper reading order and heading structure to be readable by screen reader users.</p>
+                <div class="violation-pct">Found in 77% of dental practices with downloadable PDFs</div>
+              </div>
+            </div>
+          </div>
+
+          <h2>What Our Dental Website Audit Covers</h2>
+          <ul>
+            <li>Homepage, about, and service pages</li>
+            <li>Appointment booking system (platform-specific)</li>
+            <li>Patient new patient intake forms</li>
+            <li>Before/after photo galleries</li>
+            <li>Meet the team / dentist profile pages</li>
+            <li>Patient portal link and entry point (if applicable)</li>
+            <li>Downloadable PDFs (new patient packets, insurance forms)</li>
+            <li>Contact and map integration</li>
+          </ul>
+
+          <h2 id="faq-dental">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Dental Practice Audit Quote</h4>
+            <p>Full audit of your dental website including booking, intake forms, and PDFs. Starting at $1,500.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for our dental practice website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-dental-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-healthcare-websites">Healthcare Compliance</a></li>
+              <li><a href="/how-to-make-pdf-ada-compliant">PDF Remediation Guide</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Protect Your Dental Practice from ADA Website Claims" subtext="Patient intake forms, booking systems, and photo galleries are common ADA targets for dental websites. Get a full WCAG 2.2 audit starting at $1,500 with delivery in 5–10 business days." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

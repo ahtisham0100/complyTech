@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ADA Compliance Checklist 2025: WCAG 2.2 Website Accessibility",
+    "description": "Complete ADA website compliance checklist for small businesses. 50+ WCAG 2.2 Level AA checkpoints covering images, forms, navigation, color contrast, keyboard access, and more.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "dateModified": "2026-04-07T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is the ADA website compliance checklist based on?", "acceptedAnswer": { "@type": "Answer", "text": "This ADA website compliance checklist is based on WCAG 2.2 Level AA — the current web accessibility standard published by the W3C in September 2023. WCAG 2.2 Level AA is used by U.S. courts as the benchmark for ADA Title III website accessibility lawsuits and by the Department of Justice for government websites." } },
+      { "@type": "Question", "name": "Can I use this checklist instead of a professional audit?", "acceptedAnswer": { "@type": "Answer", "text": "This checklist is a starting point for identifying obvious accessibility barriers, but it should not replace a professional manual WCAG 2.2 audit. Automated tools and checklists detect approximately 30–40% of accessibility violations. Keyboard navigation testing, screen reader compatibility, and cognitive accessibility cannot be verified by a checklist alone." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "WCAG Checklist 2025", "item": `${DOMAIN}/ada-compliance-checklist-2025` }
+    ]
+  }
+];
+
+interface CheckItem { id: string; text: string; level: 'A' | 'AA'; }
+interface CheckCategory { category: string; icon: string; items: CheckItem[]; }
+
+const categories: CheckCategory[] = [
+  { category: 'Images & Media', icon: 'image', items: [
+    { id: 'img-1', text: 'All meaningful images have descriptive alt text', level: 'A' },
+    { id: 'img-2', text: 'Decorative images have empty alt text (alt="")', level: 'A' },
+    { id: 'img-3', text: 'Complex images (charts, graphs) have long descriptions', level: 'A' },
+    { id: 'img-4', text: 'All videos have accurate captions', level: 'A' },
+    { id: 'img-5', text: 'Videos have audio description for visual info', level: 'AA' },
+    { id: 'img-6', text: 'No content flashes more than 3 times per second', level: 'A' },
+  ]},
+  { category: 'Color & Contrast', icon: 'palette', items: [
+    { id: 'col-1', text: 'Normal text meets 4.5:1 contrast ratio', level: 'AA' },
+    { id: 'col-2', text: 'Large text (18pt or 14pt bold) meets 3:1 contrast ratio', level: 'AA' },
+    { id: 'col-3', text: 'Interactive UI components meet 3:1 contrast ratio', level: 'AA' },
+    { id: 'col-4', text: 'Color is not the only means of conveying information', level: 'A' },
+    { id: 'col-5', text: 'Links are distinguishable from surrounding text (not by color alone)', level: 'A' },
+  ]},
+  { category: 'Forms', icon: 'edit_note', items: [
+    { id: 'form-1', text: 'All form fields have visible, associated labels', level: 'A' },
+    { id: 'form-2', text: 'Required fields are identified (not only by asterisk color)', level: 'A' },
+    { id: 'form-3', text: 'Error messages identify the specific field and describe the problem', level: 'AA' },
+    { id: 'form-4', text: 'Error messages are announced to screen readers', level: 'AA' },
+    { id: 'form-5', text: 'Form fields show purpose (autocomplete attributes set)', level: 'AA' },
+    { id: 'form-6', text: 'Submission success is announced to screen readers', level: 'A' },
+    { id: 'form-7', text: 'No redundant data entry in multi-step processes (WCAG 2.2)', level: 'A' },
+  ]},
+  { category: 'Keyboard & Navigation', icon: 'keyboard', items: [
+    { id: 'key-1', text: 'All functionality is operable by keyboard alone', level: 'A' },
+    { id: 'key-2', text: 'No keyboard traps — user can always navigate away', level: 'A' },
+    { id: 'key-3', text: 'Focus order is logical and matches visual order', level: 'A' },
+    { id: 'key-4', text: 'Focus indicator is clearly visible on all interactive elements', level: 'AA' },
+    { id: 'key-5', text: 'Focused elements not hidden by sticky headers (WCAG 2.2)', level: 'AA' },
+    { id: 'key-6', text: 'Skip navigation link appears before main content', level: 'A' },
+    { id: 'key-7', text: 'Interactive touch targets are at least 24×24px (WCAG 2.2)', level: 'AA' },
+  ]},
+  { category: 'Structure & Heading', icon: 'format_indent_increase', items: [
+    { id: 'str-1', text: 'Page has exactly one <h1> — the primary page title', level: 'A' },
+    { id: 'str-2', text: 'Headings follow logical hierarchy (H1→H2→H3)', level: 'A' },
+    { id: 'str-3', text: 'Landmark regions used (main, nav, footer, header, aside)', level: 'A' },
+    { id: 'str-4', text: 'Page language is set on the <html> element', level: 'A' },
+    { id: 'str-5', text: 'Page title is descriptive and unique across the site', level: 'A' },
+    { id: 'str-6', text: 'Links have descriptive text (not "click here" or "read more")', level: 'A' },
+  ]},
+  { category: 'Popups & Dynamic Content', icon: 'wysiwyg', items: [
+    { id: 'dyn-1', text: 'Modal dialogs trap focus inside while open', level: 'A' },
+    { id: 'dyn-2', text: 'Modals return focus to trigger element on close', level: 'A' },
+    { id: 'dyn-3', text: 'Dynamic content changes are announced to screen readers', level: 'A' },
+    { id: 'dyn-4', text: 'Carousels and sliders can be paused and navigated by keyboard', level: 'A' },
+    { id: 'dyn-5', text: 'Time limits can be extended or turned off', level: 'A' },
+    { id: 'dyn-6', text: 'Content that moves or auto-updates can be paused', level: 'A' },
+  ]},
+  { category: 'Authentication & Help', icon: 'lock_open', items: [
+    { id: 'auth-1', text: 'Login does not require solving cognitive tests (WCAG 2.2)', level: 'AA' },
+    { id: 'auth-2', text: 'CAPTCHA has an audio alternative', level: 'A' },
+    { id: 'auth-3', text: 'Help mechanisms appear consistently across pages (WCAG 2.2)', level: 'A' },
+    { id: 'auth-4', text: 'Password managers and copy-paste are not blocked', level: 'AA' },
+  ]},
+];
+---
+
+<BaseLayout
+  title="ADA Compliance Checklist 2025: WCAG 2.2 Website Audit | complyTech"
+  description="Free 50+ item ADA website compliance checklist based on WCAG 2.2 Level AA. Covers images, forms, keyboard navigation, color contrast, popups, and authentication. Updated 2025."
+  canonical={`${DOMAIN}/ada-compliance-checklist-2025`}
+  schema={schema}
+  keywords="ADA compliance checklist, WCAG 2.2 checklist, website accessibility checklist 2025, ADA website checklist, WCAG 2.2 audit checklist"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/what-is-ada-compliance-websites">Resources</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">ADA Checklist 2025</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+        50+ Items · WCAG 2.2 Level AA · Updated 2025
+      </div>
+      <h1 id="page-h1">ADA Compliance Checklist 2025: WCAG 2.2 Level AA</h1>
+      <p class="hero-sub">Use this 50+ item checklist as a first-pass review of your website's accessibility. Based on WCAG 2.2 Level AA — the current standard used by U.S. courts in ADA Title III cases.</p>
+      <div class="hero-actions">
+        <a href="#checklist" class="btn btn-whatsapp btn-lg" id="hero-checklist-cta">Go to Checklist</a>
+        <a href="#cta" class="btn btn-outline-light btn-lg">Get Professional Audit</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="checklist-layout">
+        <div class="checklist-main">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>How to Use This Checklist</div>
+            <ul>
+              <li>This checklist covers the most commonly violated WCAG 2.2 Level AA success criteria.</li>
+              <li>Level A items are minimum; Level AA items are the legal compliance standard.</li>
+              <li>Items marked "WCAG 2.2" are <em>new</em> since WCAG 2.1 — check these even if you were previously audited.</li>
+              <li>A checklist cannot replace a professional manual audit — automated tools detect ~30% of violations.</li>
+              <li>After completing this checklist, <a href="/ada-compliance-audit-small-business">get a professional audit</a> to verify full compliance.</li>
+            </ul>
+          </div>
+
+          <div id="checklist" class="checklist-section">
+            {categories.map((cat) => (
+              <div class="check-category">
+                <h2 class="category-heading">
+                  <span class="material-symbols-outlined category-icon" aria-hidden="true">{cat.icon}</span>
+                  {cat.category}
+                </h2>
+                <ul class="check-list" role="list">
+                  {cat.items.map((item) => (
+                    <li class="check-item" role="listitem">
+                      <label class="check-label">
+                        <input type="checkbox" class="check-input" id={item.id} />
+                        <span class="check-text">{item.text}</span>
+                        <span class={`level-badge level-${item.level.toLowerCase()}`}>{item.level}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div class="checklist-cta-box">
+            <h2>This Checklist Only Gets You So Far</h2>
+            <p>Automated checkers and manual checklists detect approximately 30–40% of WCAG violations. Keyboard navigation testing, screen reader compatibility, and cognitive accessibility cannot be verified by a checklist alone. A professional WCAG 2.2 manual audit covers 100% of success criteria.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I completed the ADA checklist and want a professional WCAG 2.2 audit.')}`} class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer" id="checklist-bottom-cta">Get a Professional Audit — Starting at $495</a>
+          </div>
+
+        </div>
+
+        <aside class="checklist-sidebar">
+          <div class="sidebar-card sticky-sidebar">
+            <h4>Get Professional Audit</h4>
+            <p>A checklist is a starting point. A complyTech WCAG 2.2 audit is the complete answer.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a WCAG 2.2 ADA compliance audit for my website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-checklist-cta">Chat on WhatsApp</a>
+            <div class="sidebar-links-list">
+              <a href="/wcag-2-1-vs-wcag-2-2">What changed in WCAG 2.2?</a>
+              <a href="/ada-compliance-audit-pricing">Pricing</a>
+              <a href="/accessibility-overlay-alternatives">Why overlays don't work</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready for a Full WCAG 2.2 Professional Audit?" subtext="This checklist shows you where to start. A complyTech WCAG 2.2 manual audit shows you everything — 100% of success criteria, with a VPAT, remediation roadmap, and compliance certificate." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .checklist-layout { display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: start; }
+  .checklist-section { display: flex; flex-direction: column; gap: 32px; margin-top: 24px; }
+  .check-category { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .category-heading { display: flex; align-items: center; gap: 10px; font-size: 1rem; margin: 0; padding: 16px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .category-icon { color: var(--accent-2); font-size: 1.2rem; }
+  .check-list { list-style: none; padding: 12px 0; margin: 0; }
+  .check-item { border-bottom: 1px solid var(--border); }
+  .check-item:last-child { border-bottom: none; }
+  .check-label { display: flex; align-items: center; gap: 12px; padding: 11px 20px; cursor: pointer; transition: background 0.15s; }
+  .check-label:hover { background: var(--surface); }
+  .check-input { width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+  .check-input:checked + .check-text { text-decoration: line-through; color: var(--ink-3); }
+  .check-text { flex: 1; font-size: 0.88rem; color: var(--ink-2); }
+  .level-badge { font-size: 0.68rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; flex-shrink: 0; }
+  .level-a { background: #fee2e2; color: #991b1b; }
+  .level-aa { background: var(--accent-lt); color: var(--accent); }
+  .checklist-cta-box { background: linear-gradient(135deg, var(--accent) 0%, #0e2318 100%); border-radius: var(--radius-xl); padding: 36px; text-align: center; }
+  .checklist-cta-box h2 { color: rgba(255,255,255,0.9); font-size: 1.3rem; margin-bottom: 12px; }
+  .checklist-cta-box p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 24px; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .sticky-sidebar { position: sticky; top: 100px; }
+  .sidebar-links-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .sidebar-links-list a { font-size: 0.83rem; color: var(--accent-2); }
+  .sidebar-links-list a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .checklist-layout { grid-template-columns: 1fr; }
+    .checklist-sidebar { position: static; }
+    .sticky-sidebar { position: static; }
+  }
+</style>

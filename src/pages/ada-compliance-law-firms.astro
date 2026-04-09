@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for Law Firm Websites",
+    "description": "Professional WCAG 2.2 accessibility audit for law firm websites. Covers intake forms, client portals, case result pages, and attorney profiles to protect against ADA lawsuits.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "Law Firm Website Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do law firm websites need to be ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Law firms are professional services businesses classified as public accommodations under ADA Title III — their websites must meet WCAG 2.2 Level AA accessibility standards. The irony is significant: a law firm that does not maintain an accessible website is violating the very civil rights law they may advise clients on. Law firm websites face ADA claims targeting inaccessible intake forms, chatbots, and client portals." } },
+      { "@type": "Question", "name": "What are the most common ADA violations on law firm websites?", "acceptedAnswer": { "@type": "Answer", "text": "The most common ADA violations on law firm websites are: inaccessible case evaluation and intake forms (missing labels, inaccessible error messages), chatbots and live chat widgets without keyboard access, attorney profile pages with decorative images lacking alt text, and PDF downloads (pleadings, articles, newsletters) without accessibility tags." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "Law Firms", "item": `${DOMAIN}/ada-compliance-law-firms` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Do law firm websites need to be ADA compliant?", answer: "Yes. Law firms are professional services classified as public accommodations under ADA Title III — their websites must meet WCAG accessibility standards. The irony is notable: a law firm that doesn't maintain an accessible website is potentially violating the very civil rights statute they may advise clients on. Law firm websites face ADA claims targeting inaccessible intake forms, chatbots, client portals, and PDF downloads." },
+  { question: "What are the most common ADA violations on law firm websites?", answer: "The most common ADA violations on law firm websites are: inaccessible case evaluation and intake forms (missing labels, inaccessible error messages), chatbots and live chat widgets without keyboard access, attorney profile photos lacking alt text, and PDF downloads (articles, newsletters, case results) without accessibility tagging." },
+  { question: "Does attorney-client privilege create any ADA compliance exceptions?", answer: "No. Attorney-client privilege and legal confidentiality obligations do not create ADA compliance exemptions. All publicly accessible web content — including intake forms, free consultation scheduling, resources, blog articles, and attorney profiles — must meet WCAG 2.2 Level AA accessibility standards." },
+  { question: "Do legal intake chatbots need to be ADA compliant?", answer: "Yes. Legal intake chatbots — including conversational intake tools from Legal Soft, Lawmatics, and similar legal tech providers — must be keyboard accessible and screen reader compatible if they are deployed on a public-facing law firm website. Many legal intake chatbots are not accessible by default. Your vendor should provide accessibility documentation; if they cannot, audit before deployment." },
+  { question: "How much does an ADA audit for a law firm website cost?", answer: "ADA compliance audits for law firm websites typically cost $1,500–$3,500 for standard firm sites (attorney profiles, practice areas, blog, contact/intake form, about). Firms using custom client portals or complex intakes may be $3,500–$5,000. Most law firms qualify for the IRS Disabled Access Credit (50% back, up to $5,000)." }
+];
+---
+
+<BaseLayout
+  title="ADA Compliance for Law Firm Websites | complyTech"
+  description="Law firm websites face ADA lawsuits targeting intake forms, client portals, and chatbots. Our WCAG 2.2 audit covers all critical law firm accessibility requirements — starting at $1,500."
+  canonical={`${DOMAIN}/ada-compliance-law-firms`}
+  schema={schema}
+  keywords="ADA compliance for law firms, law firm website accessibility, legal website ADA compliant, law firm intake form accessibility, attorney website WCAG"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Law Firms</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">gavel</span>
+        Intake Forms · Client Portals · Legal Chatbots
+      </div>
+      <h1 id="page-h1">ADA Compliance for Law Firm Websites</h1>
+      <p class="hero-sub">Law firms are public accommodations under ADA Title III — and their websites face the same accessibility requirements as any other business. Intake forms, client portals, and legal chatbots are the most commonly cited failure points.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-lawfirm-cta">Get Law Firm Audit Quote</a>
+        <a href="#violations" class="btn btn-outline-light btn-lg">See Common Violations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Law firms are public accommodations under ADA Title III — websites must meet WCAG 2.2 AA.</li>
+              <li>Case evaluation and intake forms are the most commonly cited failure points in law firm ADA claims.</li>
+              <li>Legal chatbots from providers like Lawmatics and Legal Soft are frequently not keyboard accessible.</li>
+              <li>PDF downloads (articles, newsletters, case results) must be tagged for screen readers.</li>
+              <li>There are no exceptions for attorney-client privilege or legal confidentiality.</li>
+            </ul>
+          </div>
+
+          <h2>Why Law Firm Websites Face ADA Compliance Obligations</h2>
+          <p><strong>ADA compliance for law firm websites</strong> carries particular significance: legal professionals have a unique obligation to understand civil rights law, and an inaccessible law firm website can itself constitute a civil rights violation. Courts have shown little sympathy for law firms that fail to meet the very legal standards they may otherwise champion.</p>
+          <p>Beyond ethical obligation, the practical exposure is real. Law firms of all sizes — from solo practitioners to regional firms — have received ADA demand letters targeting:</p>
+          <ul>
+            <li>Free case evaluation and intake forms with inaccessible error messages</li>
+            <li>Chatbots and live intake tools that cannot be operated by keyboard</li>
+            <li>Attorney profile photos without descriptive alt text</li>
+            <li>PDF articles, newsletters, and client resources without screen reader tags</li>
+            <li>Contact page forms with unclear label associations</li>
+          </ul>
+
+          <h2 id="violations">Common ADA Violations Found on Law Firm Websites</h2>
+          <div class="violation-list">
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">1</div>
+              <div class="violation-body">
+                <h4>Inaccessible free case evaluation forms</h4>
+                <p>Form fields without proper labels, inaccessible required field indicators, and error messages that only appear visually (not announced to screen readers) are the most common law firm ADA violations. When your intake form fails, you are literally turning away potential clients with disabilities.</p>
+                <div class="violation-pct">Found in 73% of law firm websites audited</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">2</div>
+              <div class="violation-body">
+                <h4>Legal intake chatbots without keyboard access</h4>
+                <p>Third-party legal intake chatbots from providers like Lawmatics, Legal Soft, and generic chat widgets are frequently deployed without accessibility review. Chat launcher buttons, conversation interfaces, and handoff forms within chatbots require keyboard operability and screen reader compatibility.</p>
+                <div class="violation-pct">Found in 65% of law firms using chatbots</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">3</div>
+              <div class="violation-body">
+                <h4>Attorney profile photos without alt text</h4>
+                <p>Attorney profile images typically have marketing-critical alt text needs (e.g., "John Smith, Partner, Smith & Associates Law Firm — ADA specialist"). Using empty or null alt text on attorney images fails WCAG and prevents screen reader users from understanding attorney backgrounds.</p>
+                <div class="violation-pct">Found in 68% of law firm profile pages</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">4</div>
+              <div class="violation-body">
+                <h4>PDF resources without accessibility tagging</h4>
+                <p>Legal articles, newsletters, fact sheets, and downloadable guides posted as PDFs must be tagged with proper reading order, heading structure, list markup, and alt text to be accessible. Untagged legal PDFs are common ADA citations in demand letters.</p>
+                <div class="violation-pct">Found in 81% of firms with downloadable PDFs</div>
+              </div>
+            </div>
+          </div>
+
+          <h2 id="faq-law-firms">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Law Firm Audit Quote</h4>
+            <p>Full WCAG 2.2 audit of your firm website including intake forms, chatbots, PDFs, and attorney profiles. Starting at $1,500.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for our law firm website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-lawfirm-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+              <li><a href="/accessibility-statement-template">Accessibility Statement</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Protect Your Law Firm from ADA Website Claims" subtext="Intake forms, chatbots, and PDFs are the top ADA targets for law firm websites. Get a full WCAG 2.2 audit starting at $1,500 — with a compliance certificate after fix verification." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

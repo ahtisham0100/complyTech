@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is ADA compliance for websites?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ADA (Americans with Disabilities Act) website compliance means your website meets WCAG 2.2 Level AA accessibility standards so people with disabilities — including those who use screen readers, keyboard navigation, or other assistive technology — can fully use your site. The ADA Title III requires public accommodations (including private businesses) to make their digital services accessible." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is WCAG and how does it relate to the ADA?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WCAG (Web Content Accessibility Guidelines) is the technical standard for web accessibility developed by the W3C. U.S. courts apply WCAG 2.1 Level AA as the benchmark for ADA Title III website compliance. complyTech audits to WCAG 2.2 Level AA — the current published standard — providing broader coverage and future-proof protection." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does my small business website need to be ADA compliant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Any business that operates as a public accommodation — retail shops, restaurants, service providers, healthcare practices, law firms, e-commerce stores — must provide accessible websites under ADA Title III. There is no size or revenue exemption. Small business owners are the most common targets of ADA website demand letters because serial plaintiff law firms use automated tools to scan thousands of sites." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does ADA compliance cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A professional WCAG 2.2 manual audit starts at $495 for micro-sites (1–10 pages) and ranges to $3,500–$7,500 for e-commerce sites with 50–200 pages. Most small businesses also qualify for the IRS Disabled Access Credit, which returns 50% of qualifying accessibility costs up to $5,000 per year. Compare this to ADA lawsuit settlement costs of $12,000–$75,000 and the ROI of proactive compliance is clear." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I ignore ADA compliance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If your website is not ADA accessible, you are at risk of ADA demand letters and federal lawsuits. Over 4,000 ADA website lawsuits were filed in 2024. Ignoring a demand letter leads to formal litigation with typical total costs of $37,000–$125,000 (settlement + plaintiff attorney fees + your defense attorney fees). Proactive compliance starting at $495 is dramatically cheaper than reactive remediation under legal pressure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do accessibility overlays like accessiBe make my website ADA compliant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Accessibility overlays and AI-powered widgets do not make websites ADA compliant. Courts have consistently rejected overlays as sufficient remediation. The FTC took enforcement action against accessiBe in 2025 for deceptive compliance claims. Overlays detect only 20–30% of WCAG violations. The only legally defensible approach is genuine code-level remediation guided by a professional manual audit." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is included in a complyTech ADA audit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every complyTech audit includes: full WCAG 2.2 Level AA manual expert review (not just automated scanning), VPAT (Voluntary Product Accessibility Template), prioritized remediation roadmap, developer-ready fix guide with code examples, 60-minute findings walkthrough call, and a compliance certificate issued after your fixes are verified in a re-test audit." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does an ADA compliance audit take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "complyTech delivers audit reports in 5–14 business days depending on site size. Micro-sites (1–10 pages): 3–5 days. Small business sites (11–50 pages): 7–10 days. E-commerce sites (50–200 pages): 10–14 days. Rush delivery is available — ask about availability when you request your quote." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a WCAG 2.2 Level AA audit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A WCAG 2.2 Level AA audit is a structured manual review of your website against all WCAG 2.2 Level A and Level AA success criteria — 86 checkpoints covering perceivability, operability, understandability, and robustness. At Level AA, requires: keyboard navigability, screen reader compatibility, minimum color contrast (4.5:1), accessible forms, captions on videos, and more. Level AA is the legal benchmark for ADA Title III compliance." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between WCAG 2.1 and WCAG 2.2?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WCAG 2.2, published in September 2023, adds 9 new success criteria to WCAG 2.1 — focusing on mobile usability, cognitive accessibility, and authentication. New criteria include minimum touch target sizes (24×24px), focus visibility requirements, dragging movement alternatives, and accessible authentication (no cognitive CAPTCHAs). complyTech audits to WCAG 2.2, ensuring coverage of all new requirements." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a tax credit for ADA website accessibility?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The IRS Disabled Access Credit (Form 8826) allows eligible small businesses with 30 or fewer full-time employees OR $1 million or less in gross receipts to claim 50% of qualifying access expenditures between $250 and $10,250 per year — up to a maximum credit of $5,000 annually. Website accessibility audits and remediation costs qualify. Consult your tax advisor." }
+      },
+      {
+        "@type": "Question",
+        "name": "I received an ADA demand letter. What should I do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Do not ignore it. Do not contact the plaintiff's attorney directly. Do not install an accessibility overlay as your response. Engage an ADA Title III defense attorney immediately and simultaneously commission a professional accessibility audit. A proactive audit demonstrates good-faith compliance effort to the court — typically leading to faster, lower-cost settlements. Pre-litigation settlement averages $4,000–$20,000; post-lawsuit costs escalate to $37,000–$125,000+." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a VPAT?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A VPAT (Voluntary Product Accessibility Template) is a standardized document describing how a website or software product conforms to accessibility standards. When completed by an independent auditor, it becomes an ACR (Accessibility Conformance Report). VPATs are required for selling to U.S. federal agencies under Section 508, and increasingly required by enterprise and healthcare buyers in procurement." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does complyTech serve businesses outside the US?",
+        "acceptedAnswer": { "@type": "Answer", "text": "complyTech specializes in U.S. ADA and WCAG 2.2 compliance for businesses with U.S. customers or operations. We also produce audits and VPATs referencing European EN 301 549 and the UK Equality Act for clients with EU or UK obligations. Contact us via WhatsApp to discuss your specific jurisdiction requirements." }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "ADA Compliance FAQ", "item": `${DOMAIN}/ada-compliance-faq` }
+    ]
+  }
+];
+
+interface FAQGroup {
+  heading: string;
+  icon: string;
+  items: { question: string; answer: string }[];
+}
+
+const faqGroups: FAQGroup[] = [
+  {
+    heading: "ADA Compliance Basics",
+    icon: "help",
+    items: [
+      { question: "What is ADA compliance for websites?", answer: "ADA (Americans with Disabilities Act) website compliance means your website meets WCAG 2.2 Level AA accessibility standards so people with disabilities — including users of screen readers, keyboard navigation, and other assistive tech — can fully use your site. ADA Title III requires public accommodations including private businesses to make their digital services accessible." },
+      { question: "Does my small business website need to be ADA compliant?", answer: "Yes. Any business that operates as a public accommodation — retail shops, restaurants, service providers, healthcare practices, law firms, e-commerce stores — must provide an accessible website under ADA Title III. There is no size or revenue exemption. Small businesses are the most common targets of ADA demand letters because serial plaintiff law firms use automated tools to scan thousands of sites simultaneously." },
+      { question: "What is WCAG and how does it relate to the ADA?", answer: "WCAG (Web Content Accessibility Guidelines) is the technical standard for web accessibility, developed by the W3C. U.S. courts apply WCAG 2.1 Level AA as the minimum benchmark for ADA Title III compliance. complyTech audits to WCAG 2.2 Level AA — the current published standard — providing broader coverage and future-proof legal protection." },
+      { question: "What is the difference between WCAG 2.1 and WCAG 2.2?", answer: "WCAG 2.2, published in September 2023, adds 9 new success criteria to WCAG 2.1. New requirements include: minimum touch target sizes (24×24px), focus not obscured by sticky headers, accessible authentication without cognitive CAPTCHAs, dragging movement alternatives, consistent help mechanisms, and no redundant data entry in multi-step processes. complyTech audits to WCAG 2.2, covering all new criteria." },
+    ]
+  },
+  {
+    heading: "Costs & ROI",
+    icon: "paid",
+    items: [
+      { question: "How much does ADA compliance cost?", answer: "A professional WCAG 2.2 manual audit starts at $495 (micro-sites, 1–10 pages) and ranges up to $3,500–$7,500 for e-commerce sites (50–200 pages). Most small businesses qualify for the IRS Disabled Access Credit, returning 50% of qualifying costs up to $5,000/year. Compare this to ADA lawsuit settlement costs of $12,000–$75,000 — proactive compliance ROI is 10:1 or better." },
+      { question: "Is there a tax credit for ADA website accessibility?", answer: "Yes. The IRS Disabled Access Credit (Form 8826) allows eligible small businesses — 30 or fewer full-time employees OR $1 million or less in prior-year gross receipts — to claim 50% of qualifying access expenditures between $250 and $10,250/year, up to $5,000 annually. Website audits and remediation qualify. Consult your tax advisor to confirm eligibility." },
+      { question: "What happens if I ignore ADA compliance?", answer: "You risk ADA demand letters and federal lawsuits. Over 4,000 ADA website lawsuits were filed in 2024. Ignoring a demand letter leads to formal litigation costing a total of $37,000–$125,000 (settlement + plaintiff fees + your defense fees). Emergency remediation under legal pressure also costs significantly more than proactive auditing. Compliance starting at $495 is the far cheaper path." },
+    ]
+  },
+  {
+    heading: "Our Audit Service",
+    icon: "assignment",
+    items: [
+      { question: "What is included in a complyTech audit?", answer: "Every complyTech audit includes: full WCAG 2.2 Level AA manual expert review (not automated-only scanning), a VPAT (Voluntary Product Accessibility Template), a prioritized remediation roadmap, a developer-ready fix guide with code examples, a 60-minute findings walkthrough call, and a compliance certificate issued after your fixes are verified in a re-test audit." },
+      { question: "How long does an ADA compliance audit take?", answer: "Delivery times: micro-sites (1–10 pages): 3–5 business days. Small business sites (11–50 pages): 7–10 days. E-commerce sites (50–200 pages): 10–14 days. Rush delivery is available — contact us on WhatsApp to discuss availability and pricing." },
+      { question: "What is a VPAT and when do I need one?", answer: "A VPAT (Voluntary Product Accessibility Template), completed as an ACR (Accessibility Conformance Report), is a standardized document describing your website's accessibility conformance. It is required for selling to U.S. federal agencies (Section 508), increasingly required in enterprise and healthcare procurement, and serves as powerful evidence of good-faith compliance in ADA demand letter defense." },
+    ]
+  },
+  {
+    heading: "Overlays & Lawsuits",
+    icon: "gavel",
+    items: [
+      { question: "Do accessibility overlays like accessiBe make my site ADA compliant?", answer: "No. Courts have consistently rejected overlays as sufficient remediation. The FTC took enforcement action against accessiBe in 2025 for deceptive compliance claims. The National Federation of the Blind formally opposes overlay products. Overlays detect only 20–30% of WCAG violations — the remaining violations persist in your underlying code and create ongoing legal exposure." },
+      { question: "I received an ADA demand letter. What do I do?", answer: "Act immediately — do not ignore it. Steps: (1) Note the response deadline (typically 20–30 days). (2) Do NOT contact the plaintiff's attorney directly. (3) Engage an ADA defense attorney. (4) Commission a professional accessibility audit in parallel. (5) Begin code-level remediation — do not install an overlay. (6) Get a re-test audit and compliance certificate. Pre-litigation settlement averages $4,000–$20,000; waiting for a lawsuit escalates to $37,000–$125,000+." },
+      { question: "Can I still be sued if I'm currently fixing my website?", answer: "Being in active remediation does not automatically shield you from a demand letter or lawsuit. However, courts consistently give defendants significant credit for demonstrable good-faith compliance efforts — including a commissioned audit, a documented remediation timeline, and visible progress. This typically leads to faster, lower-cost settlements and may prevent injunctive relief from being granted." },
+    ]
+  },
+  {
+    heading: "Industry & Platform Questions",
+    icon: "storefront",
+    items: [
+      { question: "Is my Shopify or WooCommerce store ADA compliant by default?", answer: "No. Neither Shopify, WooCommerce, Magento, nor any other e-commerce platform is WCAG 2.2 compliant by default. Accessibility varies significantly by theme, customizations, and installed apps. Third-party apps (popups, review widgets, loyalty programs) are major sources of ADA violations in e-commerce stores. A platform-specific audit of your actual store implementation is required." },
+      { question: "Do restaurants need ADA compliant websites?", answer: "Yes. Restaurants are public accommodations under ADA Title III. PDF menus are the most frequently cited violation — particularly scanned-image PDFs which are completely inaccessible to screen reader users. Online ordering flows, reservation systems, and food photography backgrounds with text overlays are also common failure points." },
+      { question: "Do nonprofits need ADA compliant websites?", answer: "Yes. Most nonprofits that engage with the public are public accommodations under ADA Title III, and those receiving federal funding also have Section 504 obligations. Donation forms, program applications, and volunteer signup flows must be WCAG 2.2 Level AA accessible. complyTech offers discounted pricing for qualifying 501(c)(3) organizations." },
+    ]
+  },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance FAQ: 20+ Common Questions Answered | complyTech"
+  description="Answers to the most common ADA website compliance questions — what it is, what it costs, overlays, demand letters, WCAG 2.2, tax credits, and which industries must comply."
+  canonical={`${DOMAIN}/ada-compliance-faq`}
+  schema={schema}
+  keywords="ADA compliance FAQ, website accessibility questions, ADA compliance cost, WCAG 2.2 FAQ, ADA lawsuit questions, accessibility audit FAQ"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">ADA Compliance FAQ</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        20+ Questions · Plain-Language Answers · Updated 2025
+      </div>
+      <h1 id="page-h1">ADA Compliance FAQ: Your Questions Answered</h1>
+      <p class="hero-sub">Plain-language answers to the most common ADA website compliance questions from small business owners, marketers, and developers — covering compliance basics, costs, demand letters, overlays, and industry-specific requirements.</p>
+      <div class="hero-actions">
+        <a href="#faq-basics" class="btn btn-primary btn-lg" id="hero-faq-jump">Jump to Questions</a>
+        <a href="#cta" class="btn btn-outline-light btn-lg">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Jump Nav -->
+  <div class="faq-jump-bar" aria-label="Jump to FAQ section">
+    <div class="container">
+      <span class="jump-label">Jump to:</span>
+      {faqGroups.map((g, i) => (
+        <a href={`#faq-${i}`} class="jump-link">{g.heading}</a>
+      ))}
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-page-layout">
+
+        <div class="faq-main">
+          {faqGroups.map((group, i) => (
+            <div id={`faq-${i}`} class="faq-group">
+              <h2 class="faq-group-heading">
+                <span class="material-symbols-outlined group-icon" aria-hidden="true">{group.icon}</span>
+                {group.heading}
+              </h2>
+              <FAQAccordion items={group.items} client:visible />
+            </div>
+          ))}
+
+          <div class="still-have-questions">
+            <h2>Still Have a Question?</h2>
+            <p>Our team responds to all WhatsApp inquiries within 1 business day. Ask us anything about ADA compliance, your specific industry, or your current website.</p>
+            <a
+              href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I have a question about ADA compliance for my website.')}`}
+              class="btn btn-primary btn-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+              id="faq-bottom-cta"
+            >
+              <span class="material-symbols-outlined" style="font-size:1.1rem" aria-hidden="true">chat</span>
+              Ask on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <aside class="faq-sidebar">
+          <div class="sidebar-card sticky-sidebar">
+            <h4>Get a Free Quote</h4>
+            <p>Send us your site URL. We'll reply within 1 business day with scope, timeline, and exact pricing.</p>
+            <a
+              href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit. Can I get a quote?')}`}
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width:100%;justify-content:center;"
+              id="sidebar-faq-cta"
+            >
+              Chat on WhatsApp
+            </a>
+            <div class="sidebar-quick-links">
+              <div class="quick-links-label">Quick links</div>
+              <a href="/ada-compliance-audit-pricing">Pricing & Tax Credit</a>
+              <a href="/received-ada-demand-letter">Got a Demand Letter?</a>
+              <a href="/accessibility-overlay-alternatives">Why Overlays Don't Work</a>
+              <a href="/wcag-2-1-vs-wcag-2-2">WCAG 2.1 vs 2.2 Guide</a>
+              <a href="/ada-compliance-checklist-2025">Free ADA Checklist 2025</a>
+              <a href="/vpat-documentation-services">VPAT Services</a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Ready to Make Your Website ADA Compliant?"
+    subtext="Get a full WCAG 2.2 Level AA audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000 of your costs."
+  />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  /* Jump Bar */
+  .faq-jump-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    position: sticky;
+    top: 68px;
+    z-index: 90;
+  }
+  .faq-jump-bar .container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .jump-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  .jump-link {
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .jump-link:hover { background: var(--accent-lt); border-color: var(--accent-2); color: var(--accent); }
+
+  /* Layout */
+  .faq-page-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 48px;
+    align-items: start;
+  }
+  .faq-main { display: flex; flex-direction: column; gap: 40px; }
+
+  /* FAQ Groups */
+  .faq-group { scroll-margin-top: 120px; }
+  .faq-group-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-lt);
+  }
+  .group-icon { color: var(--accent-2); font-size: 1.3rem; }
+
+  /* Still have questions */
+  .still-have-questions {
+    background: linear-gradient(135deg, var(--accent) 0%, #0e2318 100%);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    text-align: center;
+  }
+  .still-have-questions h2 { color: rgba(255,255,255,0.95); font-size: 1.3rem; margin-bottom: 12px; }
+  .still-have-questions p { color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  /* Sidebar */
+  .sticky-sidebar { position: sticky; top: 116px; }
+  .sidebar-quick-links {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .quick-links-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-3);
+    margin-bottom: 4px;
+  }
+  .sidebar-quick-links a {
+    font-size: 0.83rem;
+    color: var(--accent-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .sidebar-quick-links a::before { content: '› '; }
+  .sidebar-quick-links a:hover { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .faq-page-layout { grid-template-columns: 1fr; }
+    .faq-sidebar { position: static; }
+    .sticky-sidebar { position: static; }
+    .faq-jump-bar { position: static; }
+  }
+</style>

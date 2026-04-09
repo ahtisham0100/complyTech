@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Section 508 Compliance for Websites: Requirements, Standards, and Audits",
+    "description": "Guide to Section 508 website compliance for federal agencies, contractors, and grant recipients. Covers WCAG 2.0/2.1 requirements, who must comply, VPATs, and audit services.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is Section 508 compliance?", "acceptedAnswer": { "@type": "Answer", "text": "Section 508 of the Rehabilitation Act of 1973 (as amended in 1998 and updated in 2017) requires U.S. federal agencies and their contractors to make electronic and information technology (EIT) — including websites, software, and digital documents — accessible to people with disabilities. The 2017 refresh updated Section 508 standards to incorporate WCAG 2.0 Level AA by reference." } },
+      { "@type": "Question", "name": "Who must comply with Section 508?", "acceptedAnswer": { "@type": "Answer", "text": "Section 508 applies to: (1) all U.S. federal agencies developing, procuring, maintaining, or using electronic and information technology; (2) organizations that are contractors for federal agencies (through FAR regulations); (3) organizations receiving federal funding that procure IT with those funds. State and local governments are governed by similar standards through Section 504 of the Rehabilitation Act and, increasingly, by their state-level digital accessibility laws." } },
+      { "@type": "Question", "name": "What is the difference between Section 508 and ADA compliance?", "acceptedAnswer": { "@type": "Answer", "text": "Section 508 and the ADA (Americans with Disabilities Act) have different scopes. Section 508 applies specifically to federal agencies and their contractors — it governs technology procurement and development. The ADA Title III governs private businesses as public accommodations and applies to websites broadly. Both reference WCAG as the technical standard: Section 508 formally incorporates WCAG 2.0 AA; ADA courts apply WCAG 2.1 AA as the current benchmark." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "Section 508", "item": `${DOMAIN}/section-508-compliance` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "What is Section 508 compliance?", answer: "Section 508 of the Rehabilitation Act requires U.S. federal agencies and their contractors to make electronic and information technology accessible to people with disabilities. The 2017 refresh updated Section 508 standards to incorporate WCAG 2.0 Level AA by reference, covering websites, software, documents, hardware, and other EIT." },
+  { question: "Who must comply with Section 508?", answer: "Section 508 applies to: (1) all U.S. federal agencies developing, procuring, maintaining, or using EIT; (2) federal contractors (through FAR regulations); (3) organizations receiving federal funding that procure IT with those funds. State and local governments have parallel obligations through Section 504 and, in some states, digital accessibility legislation." },
+  { question: "What is the difference between Section 508 and ADA compliance?", answer: "Section 508 covers federal agencies and contractors — it's a procurement requirement. ADA Title III covers private businesses as public accommodations — it's a civil rights statute. Both use WCAG: Section 508 formally references WCAG 2.0 AA; ADA courts apply WCAG 2.1 AA as the current benchmark. For private businesses selling to the federal government, both simultaneously apply." },
+  { question: "Does Section 508 apply to private companies?", answer: "Section 508 applies to private companies indirectly through federal contracting. If your organization sells software, websites, or digital services to a U.S. federal agency — or if you develop/maintain IT for a federal agency — your products must meet Section 508 standards. This is enforced through contract requirements and the FAR (Federal Acquisition Regulation)." },
+  { question: "What is a VPAT and when do I need one for Section 508?", answer: "A VPAT (Voluntary Product Accessibility Template) — completed as an ACR (Accessibility Conformance Report) — is required when selling IT products or services to federal agencies. Agencies cannot purchase products without a current, valid VPAT/ACR on file. The VPAT must honestly represent the product's conformance status; a false VPAT can disqualify your company from future federal contracting." }
+];
+---
+
+<BaseLayout
+  title="Section 508 Compliance: Requirements, Who Must Comply & Audits | complyTech"
+  description="Section 508 requires federal agencies and contractors to make websites and software accessible. Learn who must comply, WCAG 2.0 requirements, VPAT needs, and how to get a Section 508 audit."
+  canonical={`${DOMAIN}/section-508-compliance`}
+  schema={schema}
+  ogType="article"
+  keywords="Section 508 compliance, Section 508 website requirements, Section 508 WCAG, who must comply with Section 508, Section 508 audit"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/what-is-ada-compliance-websites">Resources</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Section 508</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">account_balance</span>
+        Federal Agencies · Contractors · Grant Recipients
+      </div>
+      <h1 id="page-h1">Section 508 Compliance: Requirements, Who Must Comply & Audit Services</h1>
+      <p class="hero-sub">Section 508 of the Rehabilitation Act requires federal agencies and their contractors to make websites and digital products accessible. If you sell technology to the government or receive federal funding, Section 508 compliance and VPAT documentation are not optional.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-508-cta">Get Section 508 Audit Quote</a>
+        <a href="#who-must-comply" class="btn btn-outline-light btn-lg">Who Must Comply?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Section 508 requires federal agencies and contractors to make EIT (websites, software, documents) accessible.</li>
+              <li>The 2017 refresh updated Section 508 to incorporate <strong>WCAG 2.0 Level AA</strong> by reference.</li>
+              <li>Private companies selling to the federal government must provide a valid VPAT/ACR.</li>
+              <li>Organizations receiving federal grants that procure IT with those funds must meet Section 508.</li>
+              <li>complyTech produces Section 508 VPAT/ACR documentation starting at $1,500.</li>
+            </ul>
+          </div>
+
+          <h2>What Is Section 508?</h2>
+          <p><strong>Section 508</strong> of the Rehabilitation Act of 1973 (29 U.S.C. § 794d), as amended in 1998 and comprehensively updated in 2017, requires federal agencies and their contractors to ensure that electronic and information technology (EIT) — including websites, software applications, hardware, and electronic documents — is accessible to employees and members of the public with disabilities.</p>
+          <p>The 2017 "Section 508 Refresh" updated the technical standards to incorporate the Web Content Accessibility Guidelines (WCAG) 2.0 Level AA by reference, aligning federal accessibility requirements with international web standards.</p>
+
+          <h2 id="who-must-comply">Who Must Comply with Section 508?</h2>
+          <div class="applies-grid">
+            <div class="applies-card">
+              <span class="material-symbols-outlined applies-icon" aria-hidden="true">account_balance</span>
+              <h4>Federal Agencies</h4>
+              <p>All executive branch agencies, independent agencies, and the legislative and judicial branches must comply with Section 508 when developing, procuring, maintaining, or using EIT.</p>
+            </div>
+            <div class="applies-card">
+              <span class="material-symbols-outlined applies-icon" aria-hidden="true">handshake</span>
+              <h4>Federal Contractors</h4>
+              <p>Private companies that develop, supply, or maintain electronic products and services for the federal government must ensure those products meet Section 508 standards.</p>
+            </div>
+            <div class="applies-card">
+              <span class="material-symbols-outlined applies-icon" aria-hidden="true">volunteer_activism</span>
+              <h4>Grant Recipients</h4>
+              <p>Organizations receiving federal grants that use those funds to develop or procure IT must comply with Section 508 requirements for the funded technology.</p>
+            </div>
+            <div class="applies-card applies-card-note">
+              <span class="material-symbols-outlined applies-icon" aria-hidden="true">info</span>
+              <h4>Private Businesses (ADA, Not 508)</h4>
+              <p>Private businesses not contracting with the federal government are governed by the ADA Title III, not Section 508. The technical standards overlap significantly but are legally separate.</p>
+            </div>
+          </div>
+
+          <h2>Section 508 vs. ADA — Key Differences</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Section 508 vs ADA comparison">
+              <thead><tr><th scope="col">Feature</th><th scope="col">Section 508</th><th scope="col">ADA Title III</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Who</strong></td><td>Federal agencies and contractors</td><td>Private businesses (public accommodations)</td></tr>
+                <tr><td><strong>WCAG Reference</strong></td><td>WCAG 2.0 Level AA (incorporated 2017)</td><td>WCAG 2.1 Level AA (court standard, 2025)</td></tr>
+                <tr><td><strong>Enforcement</strong></td><td>Agency complaints, contractor requirements</td><td>Private lawsuits + DOJ enforcement</td></tr>
+                <tr><td><strong>VPAT Required</strong></td><td>Yes — for federal procurement</td><td>Not required; recommended for defense</td></tr>
+                <tr><td><strong>Applies to Websites?</strong></td><td>Yes (federal and contractor sites)</td><td>Yes (all public-facing websites)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="faq-508">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Section 508 Audit & VPAT</h4>
+            <p>We produce Section 508-referencing VPATs and WCAG 2.2 ACRs for federal contractors. Starting at $1,500.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a Section 508 compliance audit and VPAT for our product.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-508-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/vpat-documentation-services">VPAT Services</a></li>
+              <li><a href="/wcag-2-1-vs-wcag-2-2">WCAG 2.2 Guide</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Section 508 Audit and VPAT Documentation" subtext="Selling to federal agencies? You need a valid VPAT/ACR and Section 508 conformance documentation. Our IAAP-certified team delivers audit-backed ACRs that meet federal procurement standards." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .applies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .applies-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .applies-card-note { background: #fffbeb; border-color: rgba(251,191,36,0.3); }
+  .applies-icon { color: var(--accent-2); font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .applies-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
+  .applies-card p { font-size: 0.85rem; color: var(--ink-2); margin: 0; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .applies-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

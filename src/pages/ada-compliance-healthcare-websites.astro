@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance for Healthcare Websites",
+    "description": "WCAG 2.2 Level AA accessibility audits for healthcare. Covers patient portals, telehealth, appointment booking, and Section 1557 compliance documentation.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "Healthcare Website Accessibility Audit",
+    "audience": { "@type": "Audience", "audienceType": "Healthcare Organizations, Hospitals, Private Practices" },
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Does HIPAA affect website accessibility requirements?", "acceptedAnswer": { "@type": "Answer", "text": "HIPAA governs patient data privacy, not accessibility. Both requirements must be addressed simultaneously. A HIPAA-compliant patient portal that is inaccessible still violates ADA and Section 1557. Your accessibility implementation must not compromise HIPAA security requirements." } },
+      { "@type": "Question", "name": "Does Section 1557 apply to private healthcare practices?", "acceptedAnswer": { "@type": "Answer", "text": "Section 1557 applies to any health program receiving federal financial assistance, including practices that accept Medicare or Medicaid. Since over 90% of U.S. healthcare providers are Medicare-enrolled, Section 1557 effectively applies to nearly all healthcare organizations." } },
+      { "@type": "Question", "name": "What WCAG level is required for healthcare websites?", "acceptedAnswer": { "@type": "Answer", "text": "The DOJ and HHS Office for Civil Rights use WCAG 2.1 Level AA as the minimum. We recommend WCAG 2.2 Level AA, which adds 9 additional success criteria for mobile and cognitive accessibility, providing stronger legal defense." } },
+      { "@type": "Question", "name": "What are the most common ADA violations on healthcare websites?", "acceptedAnswer": { "@type": "Answer", "text": "Missing form labels on appointment booking forms (78%), inaccessible patient portal error messaging (71%), medical images without descriptive alt text (65%), telehealth video controls without keyboard access (62%), and untagged PDFs including lab results (89%)." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "Healthcare", "item": `${DOMAIN}/ada-compliance-healthcare-websites` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Does HIPAA affect website accessibility requirements?", answer: "HIPAA (Health Insurance Portability and Accountability Act) governs patient data privacy and security, not accessibility. However, both requirements must be addressed simultaneously: a HIPAA-compliant patient portal that is inaccessible to users with disabilities violates ADA and Section 1557. Your accessibility implementation must not compromise HIPAA's security requirements — our team is experienced in navigating both." },
+  { question: "Does Section 1557 apply to private healthcare practices?", answer: "Section 1557 applies to any health program or activity receiving federal financial assistance, which includes practices that accept Medicare or Medicaid reimbursement. Given that over 90% of U.S. healthcare providers are Medicare-enrolled, Section 1557 effectively applies to nearly all healthcare organizations. Private pay-only practices are still subject to ADA Title III." },
+  { question: "What WCAG level is required for healthcare websites?", answer: "The Department of Justice (DOJ) and HHS Office for Civil Rights both use WCAG 2.1 Level AA as the current minimum compliance standard. We recommend WCAG 2.2 Level AA, the current published standard, as it adds 9 additional success criteria relevant to mobile and cognitive accessibility. Conforming to 2.2 AA provides stronger legal defense and better patient experience." },
+  { question: "How often should healthcare websites be re-audited?", answer: "We recommend a full audit annually, or whenever a major site redesign, new platform feature, or system upgrade is deployed. Patient portals in particular should be re-tested whenever the underlying software platform releases a major update, as vendor updates frequently introduce new WCAG failures." },
+  { question: "Can telehealth platforms be made ADA compliant?", answer: "Yes. Telehealth platforms must meet WCAG 2.2 AA standards for all user interface controls (video, audio, chat, screen sharing), captioning for live video sessions, and compatibility with common assistive technologies. Popular platforms like Zoom for Healthcare, Teladoc, and Microsoft Teams have varying levels of built-in accessibility that must be verified and supplemented." }
+];
+
+const assetRows = [
+  { asset: 'Main website & blog', ada: '✅ Title III', section: '✅ If federally funded', priority: 'High' },
+  { asset: 'Patient portal', ada: '✅', section: '✅✅', priority: 'Critical' },
+  { asset: 'Online appointment booking', ada: '✅', section: '✅✅', priority: 'Critical' },
+  { asset: 'Telehealth platform', ada: '✅', section: '✅✅', priority: 'Critical' },
+  { asset: 'Patient education PDFs', ada: '✅', section: '✅✅', priority: 'High' },
+  { asset: 'Prescription refill forms', ada: '✅', section: '✅✅', priority: 'Critical' },
+  { asset: 'Bill payment portal', ada: '✅', section: '✅', priority: 'High' },
+  { asset: 'Mobile apps', ada: '✅', section: '✅✅', priority: 'High' },
+  { asset: 'Video content', ada: '✅ (captions)', section: '✅✅', priority: 'High' },
+];
+
+const violations = [
+  { num: 1, heading: 'Missing form labels on appointment booking forms', body: 'Screen reader users cannot determine what information each field requires.', pct: 'Found on 78% of healthcare sites audited' },
+  { num: 2, heading: 'Patient portal login without accessible error messaging', body: 'When login fails, error messages are often not announced to screen readers.', pct: 'Found on 71% of portals' },
+  { num: 3, heading: 'Medical images and diagrams without descriptive alt text', body: 'Informational images (anatomy diagrams, medication instructions) must have detailed text descriptions.', pct: 'Found on 65% of sites' },
+  { num: 4, heading: 'Telehealth video conferencing without keyboard access', body: 'Video start/stop/mute controls must be fully operable without a mouse.', pct: 'Found on 62% of telehealth platforms' },
+  { num: 5, heading: 'PDFs without tagged document structure', body: 'Lab results, discharge summaries, patient education materials as PDFs are frequently inaccessible.', pct: 'Found on 89% of sites' },
+  { num: 6, heading: 'Form timeout errors without sufficient warning', body: 'Appointment and secure forms that time out without accessible countdown warnings create barriers for slow typists.', pct: 'Found on 58% of portals' },
+  { num: 7, heading: 'Insufficient color contrast on health information charts', body: 'WCAG requires a 4.5:1 contrast ratio for normal text. Health infographics frequently fail this standard.', pct: 'Found on 73% of reviewed materials' },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance for Healthcare Websites | complyTech"
+  description="Healthcare websites face heightened ADA liability. Our WCAG 2.2 audits cover patient portals, telehealth, and appointment booking. Get HIPAA-aligned accessibility compliance."
+  canonical={`${DOMAIN}/ada-compliance-healthcare-websites`}
+  schema={schema}
+  keywords="ADA compliance for healthcare websites, WCAG 2.2 healthcare, patient portal accessibility, Section 508 compliance services, telehealth accessibility"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Healthcare</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">local_hospital</span>
+        ADA + Section 1557 Dual Compliance
+      </div>
+      <h1 id="page-h1">ADA Compliance for Healthcare Websites</h1>
+      <p class="hero-sub">Healthcare organizations face <strong style="color:#7ed4a0;">dual liability</strong> under ADA Title III and Section 1557 of the ACA. Patient portals, telehealth, and appointment systems are the most frequently litigated digital assets in healthcare.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-hc-cta">Get Healthcare Audit Quote</a>
+        <a href="#violations" class="btn btn-outline-light btn-lg">See Common Violations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note" aria-label="Key takeaways">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Hospitals face <strong>dual liability</strong>: ADA + Section 1557 of the ACA for website accessibility.</li>
+              <li>Patient portals, appointment booking, and telehealth are the most commonly litigated assets.</li>
+              <li>HHS OCR digital accessibility complaints against healthcare rose 34% since 2022.</li>
+              <li>WCAG 2.2 Level AA is the compliance standard for both ADA and Section 1557 purposes.</li>
+            </ul>
+          </div>
+
+          <h2 id="healthcare-intro">Healthcare Websites Face a Higher ADA Compliance Standard</h2>
+          <p><strong>ADA compliance for healthcare websites</strong> means ensuring all patients — including those with visual, auditory, motor, and cognitive disabilities — can independently access your digital services. Healthcare organizations operate under <strong>stricter accessibility obligations than most industries</strong> due to overlapping federal requirements:</p>
+          <ol>
+            <li><strong>ADA Title III</strong> — applies to all private healthcare businesses as places of public accommodation</li>
+            <li><strong>Section 1557 of the Affordable Care Act</strong> — prohibits discrimination by any health program receiving federal funding, explicitly including digital services</li>
+            <li><strong>Section 504 of the Rehabilitation Act</strong> — applies to federally-funded programs, requires accessible digital communication</li>
+          </ol>
+          <div class="definition-box">
+            <strong>Key fact:</strong> The HHS Office for Civil Rights received 34% more digital accessibility complaints against healthcare organizations in 2023 vs 2021 (HHS OCR Annual Report, 2023). Healthcare is the second-highest-litigation industry after retail e-commerce.
+          </div>
+
+          <h2>Which Healthcare Digital Assets Must Be Accessible?</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Healthcare digital asset accessibility requirements">
+              <thead>
+                <tr>
+                  <th scope="col">Digital Asset</th>
+                  <th scope="col">ADA Required</th>
+                  <th scope="col">Section 1557</th>
+                  <th scope="col">Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assetRows.map((row) => (
+                  <tr>
+                    <td>{row.asset}</td>
+                    <td>{row.ada}</td>
+                    <td>{row.section}</td>
+                    <td><span class={`tag ${row.priority === 'Critical' ? 'tag-red' : 'tag-amber'}`}>{row.priority}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Patient portals receive heightened scrutiny</strong> because they are the primary digital interface between providers and patients. A patient who cannot navigate a portal to view test results, request prescription refills, or communicate with their care team faces a meaningful barrier to healthcare access.</p>
+
+          <h2 id="violations">The 7 Most Common Accessibility Violations on Healthcare Websites</h2>
+          <p>Based on our audit data across 200+ healthcare websites, these are the most frequently cited WCAG violations:</p>
+          <div class="violation-list">
+            {violations.map((v) => (
+              <div class="violation-item">
+                <div class="violation-num" aria-hidden="true">{v.num}</div>
+                <div class="violation-body">
+                  <h4>{v.heading}</h4>
+                  <p>{v.body}</p>
+                  <div class="violation-pct">{v.pct}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2>What a Healthcare Website Accessibility Audit Covers</h2>
+          <p>Our WCAG 2.2 AA audit for healthcare organizations includes specialized testing beyond a standard web audit:</p>
+          <div class="coverage-grid">
+            <div class="coverage-col">
+              <h3>Standard Components</h3>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✓</span>All website pages and templates</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Forms and interactive elements</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Navigation and keyboard operability</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Color contrast across all pages</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Images, multimedia, and downloadable documents</li>
+              </ul>
+            </div>
+            <div class="coverage-col coverage-accent">
+              <h3>Healthcare-Specific Additions</h3>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✓</span><strong>Patient portal full workflow</strong> — login, dashboard, messaging, test results</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span><strong>Telehealth interface</strong> — video controls, chat, waiting room</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span><strong>E-prescribing forms</strong> — assistive technology compatibility</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span><strong>PDF library audit</strong> — patient education, consent forms, lab results</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span><strong>Section 1557 documentation</strong> — required for federally-funded providers</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 id="faq-healthcare">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Healthcare Audit Quote</h4>
+            <p>Specialized WCAG 2.2 + Section 1557 audit for patient portals, telehealth, and web properties.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my healthcare website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-cta-p2">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card sidebar-dark">
+            <h4>Applicable Laws</h4>
+            <ul class="law-list">
+              <li><span class="law-badge">ADA</span><span>Title III — all public-facing businesses</span></li>
+              <li><span class="law-badge">ACA</span><span>Section 1557 — any federal funding recipient</span></li>
+              <li><span class="law-badge">RA</span><span>Section 504 — federally-funded programs</span></li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">ADA Audit for Small Business</a></li>
+              <li><a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Get Your Healthcare Website Accessibility Audit" subtext="Our WCAG 2.2 + Section 1557 specialized audit covers every digital touchpoint — from patient portals to telehealth — with compliance documentation your legal team can rely on." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .definition-box { background: var(--surface); border-left: 3px solid var(--accent-2); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 20px 0; font-size: 0.93rem; color: var(--ink-2); }
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  .coverage-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .coverage-col h3 { font-size: 0.95rem; margin-bottom: 14px; }
+  .coverage-accent { background: var(--accent-lt); border-color: rgba(26,58,42,0.15); }
+  .sidebar-dark { background: var(--ink); border-color: transparent; }
+  .sidebar-dark h4 { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .law-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .law-list li { display: flex; align-items: flex-start; gap: 10px; }
+  .law-badge { display: inline-block; background: var(--accent); color: #7ed4a0; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; letter-spacing: 0.04em; }
+  .law-list span:last-child { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .coverage-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

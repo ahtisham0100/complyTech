@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "VPAT Documentation Services",
+    "description": "Professional VPAT (Voluntary Product Accessibility Template) documentation for websites and software. IAAP-certified reviewers produce ACR documents to WCAG 2.2 Level AA for government, enterprise, and B2B sales.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "VPAT and ACR Documentation",
+    "areaServed": "United States",
+    "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "USD", "description": "Website VPAT documentation starting at $1,500" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a VPAT?", "acceptedAnswer": { "@type": "Answer", "text": "A VPAT (Voluntary Product Accessibility Template) is a standardized document that describes how an IT product, software, or website conforms to the Section 508 and WCAG accessibility standards. When completed by an independent auditor, the resulting document is called an ACR (Accessibility Conformance Report). VPATs are required by federal agencies and many enterprise organizations before purchasing software or digital services." } },
+      { "@type": "Question", "name": "When do I need a VPAT?", "acceptedAnswer": { "@type": "Answer", "text": "You need a VPAT when: (1) selling software or websites to U.S. federal agencies (required under Section 508), (2) pursuing enterprise B2B sales where accessibility due diligence is required by procurement teams, (3) contracting with state or local government entities, (4) selling to healthcare systems or educational institutions with accessibility procurement policies, or (5) demonstrating good-faith ADA compliance as a risk mitigation document." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `${DOMAIN}/ada-compliance-audit-small-business` },
+      { "@type": "ListItem", "position": 3, "name": "VPAT Services", "item": `${DOMAIN}/vpat-documentation-services` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "What is a VPAT?", answer: "A VPAT (Voluntary Product Accessibility Template) is a standardized document that describes how an IT product, software, or website conforms to accessibility standards (Section 508 and WCAG). When completed by an independent auditor, the document is called an ACR (Accessibility Conformance Report). VPATs are required by federal agencies and many enterprise buyers before purchasing software or digital services." },
+  { question: "When do I need a VPAT?", answer: "You need a VPAT when: (1) selling to U.S. federal agencies (required under Section 508), (2) pursuing enterprise B2B deals where procurement has accessibility due diligence requirements, (3) contracting with state/local government, (4) selling to healthcare systems or educational institutions with accessibility procurement policies, or (5) demonstrating good-faith ADA compliance as a risk mitigation document." },
+  { question: "What is the difference between a VPAT and an ACR?", answer: "A VPAT is the blank template published by the Information Technology Industry Council (ITI). An ACR (Accessibility Conformance Report) is the completed version of that template — filled in with specific conformance findings for your product by a qualified accessibility evaluator. When customers ask for your 'VPAT', they typically mean your completed ACR." },
+  { question: "Who should fill out a VPAT?", answer: "A VPAT/ACR should be completed by a qualified accessibility evaluator — typically an IAAP-certified accessibility professional who has conducted a thorough audit of the product. Self-reported VPATs filled in by product teams without independent audit are increasingly rejected by procurement teams, who recognize that internal teams have incentives to overclaim conformance." },
+  { question: "How much does VPAT documentation cost?", answer: "complyTech VPAT documentation services start at $1,500 for website ACRs based on a full accessibility audit. SaaS product VPATs typically cost $3,500–$7,500 depending on feature complexity. Annual VPAT updates (required to keep documentation current) cost 40–60% of the original audit price." }
+];
+---
+
+<BaseLayout
+  title="VPAT Documentation Services for Websites & Software | complyTech"
+  description="IAAP-certified VPAT (ACR) documentation for federal procurement, enterprise B2B sales, and government contracting. Starting at $1,500. Section 508 and WCAG 2.2 conformance reporting."
+  canonical={`${DOMAIN}/vpat-documentation-services`}
+  schema={schema}
+  keywords="VPAT documentation services, website VPAT, ACR accessibility conformance report, Section 508 VPAT, VPAT for government contracts"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/ada-compliance-audit-small-business">Services</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">VPAT Services</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">description</span>
+        Section 508 · WCAG 2.2 · Government & Enterprise Procurement
+      </div>
+      <h1 id="page-h1">VPAT Documentation Services</h1>
+      <p class="hero-sub">A VPAT (Voluntary Product Accessibility Template) — completed as an ACR (Accessibility Conformance Report) by an independent auditor — is required for federal procurement contracts and increasingly demanded by enterprise and healthcare buyers. Our IAAP-certified team produces audit-backed VPAT documents that meet procurement standards.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-vpat-cta">Request VPAT Quote</a>
+        <a href="#what-is-vpat" class="btn btn-outline-light btn-lg">What Is a VPAT?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>A VPAT (completed as an ACR) is required for selling to U.S. federal agencies (Section 508).</li>
+              <li>Enterprise, healthcare, and education buyers increasingly require ACRs in procurement.</li>
+              <li>Self-reported VPATs are increasingly rejected — independent audit-backed ACRs are the standard.</li>
+              <li>complyTech produces audit-backed VPATs by IAAP-certified evaluators starting at $1,500.</li>
+              <li>Annual VPAT updates are required to keep documentation current for ongoing contracts.</li>
+            </ul>
+          </div>
+
+          <h2 id="what-is-vpat">What Is a VPAT?</h2>
+          <p>A <strong>VPAT</strong> (Voluntary Product Accessibility Template) is a standardized document format published by the <strong>Information Technology Industry Council (ITI)</strong> that describes how a software product, website, or digital service conforms to accessibility standards. When filled in by a qualified evaluator, the completed document is officially called an <strong>ACR</strong> (Accessibility Conformance Report).</p>
+          <p>VPATs can be issued against multiple standards — the most common are:</p>
+          <ul>
+            <li><strong>VPAT 2.x WCAG</strong> — references Web Content Accessibility Guidelines 2.x directly</li>
+            <li><strong>VPAT 2.x 508</strong> — references Section 508 standards (incorporating WCAG 2.0 by reference)</li>
+            <li><strong>VPAT 2.x EU</strong> — references EU EN 301 549 standard for European procurement</li>
+            <li><strong>VPAT 2.x WCAG + 508 + EU</strong> — combined international version</li>
+          </ul>
+
+          <h2>When Do You Need a VPAT?</h2>
+          <div class="use-case-grid">
+            <div class="use-case-card">
+              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">account_balance</span>
+              <h4>Federal Government Sales</h4>
+              <p>Required by law under Section 508 of the Rehabilitation Act. All IT products and services procured by federal agencies must have a VPAT/ACR.</p>
+            </div>
+            <div class="use-case-card">
+              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">corporate_fare</span>
+              <h4>Enterprise B2B Procurement</h4>
+              <p>Fortune 500 and large enterprise buyers increasingly require ACRs as part of vendor due diligence. A missing or self-reported VPAT can block deals.</p>
+            </div>
+            <div class="use-case-card">
+              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">local_hospital</span>
+              <h4>Healthcare & Education</h4>
+              <p>Hospital systems, universities, K–12 districts, and healthcare organizations routinely require VPAT documentation from digital vendors.</p>
+            </div>
+            <div class="use-case-card">
+              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">shield</span>
+              <h4>ADA Risk Mitigation</h4>
+              <p>A current, audit-backed VPAT demonstrates good-faith compliance effort — valuable documentation in ADA demand letter defense and settlement negotiations.</p>
+            </div>
+          </div>
+
+          <h2>VPAT Pricing</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="VPAT documentation pricing">
+              <thead><tr><th scope="col">Product Type</th><th scope="col">Price Range</th><th scope="col">Includes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Website ACR</strong> (up to 50 pages)</td><td>$1,500–$3,500</td><td>Full WCAG 2.2 audit + VPAT 2.5 WCAG</td></tr>
+                <tr><td><strong>SaaS Product ACR</strong></td><td>$3,500–$7,500</td><td>Full feature audit + combined VPAT (508 + WCAG)</td></tr>
+                <tr><td><strong>Mobile App ACR</strong></td><td>$2,500–$5,000</td><td>iOS + Android accessibility audit + VPAT</td></tr>
+                <tr><td><strong>Annual VPAT Update</strong></td><td>40–60% of original</td><td>Re-test of changed areas + updated ACR</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="faq-vpat">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Request VPAT Quote</h4>
+            <p>Tell us your product type and target procurement standard. We'll respond within 1 business day with scope and pricing.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a VPAT/ACR document for my website or software product.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-vpat-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
+              <li><a href="/section-508-compliance">Section 508 Guide</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Need a VPAT for Government or Enterprise Sales?" subtext="Our IAAP-certified team produces audit-backed ACR documents that meet federal procurement and enterprise buyer standards. Starting at $1,500 for websites." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .use-case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .use-case-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .use-case-icon { color: var(--accent-2); font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .use-case-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
+  .use-case-card p { font-size: 0.85rem; color: var(--ink-2); margin: 0; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .use-case-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

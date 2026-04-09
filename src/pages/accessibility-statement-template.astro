@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Accessibility Statement: What It Is, What to Include, and Free Template",
+    "description": "A website accessibility statement demonstrates your commitment to WCAG compliance. Learn what to include, why it matters for ADA defense, and download a free template.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a website accessibility statement?", "acceptedAnswer": { "@type": "Answer", "text": "A website accessibility statement is a public-facing page that documents an organization's commitment to web accessibility, the current conformance status of the website (fully conformant, partially conformant, or non-conformant), the standard being used (WCAG 2.2 Level AA), known limitations, and how users can contact the organization to report accessibility barriers or request accessible formats." } },
+      { "@type": "Question", "name": "Is an accessibility statement legally required?", "acceptedAnswer": { "@type": "Answer", "text": "An accessibility statement is legally required for European Union websites under the EU Web Accessibility Directive (EN 301 549) and for most U.S. federal and state government websites. For private U.S. businesses under ADA Title III, an accessibility statement is not explicitly required by law, but it is strongly recommended as evidence of good-faith compliance effort — particularly in the context of ADA demand letter defense." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "Accessibility Statement", "item": `${DOMAIN}/accessibility-statement-template` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "What is a website accessibility statement?", answer: "A website accessibility statement is a public-facing page documenting your organization's commitment to web accessibility, the conformance status of the website (fully or partially conformant), the standard being used (WCAG 2.2 Level AA), known limitations, and how users can contact you to report barriers or request accessible formats." },
+  { question: "Is an accessibility statement legally required in the US?", answer: "For private U.S. businesses under ADA Title III, an accessibility statement is not explicitly required by law. However, it is strongly recommended as evidence of good-faith compliance effort — court cases frequently weigh whether a business demonstrated proactive accessibility commitment. For EU-based or UK-based services, accessibility statements are legally required under EN 301 549 and the Public Sector Bodies Accessibility Regulations." },
+  { question: "Where should I put my accessibility statement on my website?", answer: "Accessibility statements should be linked from the footer of every page — ideally in the same location as your Privacy Policy and Terms of Service links. The statement should also be reachable from any place on your site where a user might encounter an accessibility barrier, such as the contact page." },
+  { question: "What does 'partially conformant' mean in an accessibility statement?", answer: "A website claiming 'partially conformant' status means some parts of the content do not fully conform to WCAG 2.2 Level AA due to third-party content, known technical limitations, or specific exempted content types. Partially conformant statements must identify the non-conformant areas and explain why they are not yet remediated." }
+];
+---
+
+<BaseLayout
+  title="Accessibility Statement Template: What to Include + Free Template | complyTech"
+  description="Learn what a website accessibility statement is, what to include, and why it matters for ADA defense. Free WCAG 2.2 accessibility statement template included."
+  canonical={`${DOMAIN}/accessibility-statement-template`}
+  schema={schema}
+  ogType="article"
+  keywords="accessibility statement template, website accessibility statement, WCAG accessibility statement, ADA accessibility statement, accessibility page template"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/what-is-ada-compliance-websites">Resources</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Accessibility Statement</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">policy</span>
+        Free Template · WCAG 2.2 · ADA Good-Faith Evidence
+      </div>
+      <h1 id="page-h1">Website Accessibility Statement: Complete Guide + Free Template</h1>
+      <p class="hero-sub">An accessibility statement demonstrates your commitment to WCAG compliance, identifies known barriers, and provides a user contact mechanism. It is considered good-faith compliance evidence in ADA demand letter defense and required by EU law for online services.</p>
+      <div class="hero-actions">
+        <a href="#template" class="btn btn-whatsapp btn-lg" id="hero-statement-cta">Get Free Template</a>
+        <a href="#what-to-include" class="btn btn-outline-light btn-lg">What to Include</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>An accessibility statement is a public page documenting your WCAG conformance status, known issues, and user contact mechanism.</li>
+              <li>Required by EU law (EN 301 549); strongly recommended for U.S. businesses as ADA good-faith evidence.</li>
+              <li>Link it from the footer of every page alongside Privacy Policy.</li>
+              <li>Contents: conformance status, standard, known issues, contact/feedback method, review date.</li>
+              <li>Do not claim "fully conformant" if your site has not been professionally audited.</li>
+            </ul>
+          </div>
+
+          <h2>What Is a Website Accessibility Statement?</h2>
+          <p>An <strong>accessibility statement</strong> is a dedicated page on your website that publicly communicates your organization's commitment to web accessibility, the current conformance status of your website against WCAG 2.2 Level AA, known accessibility limitations, and how users can contact you to report barriers or request accessible content.</p>
+
+          <h2 id="what-to-include">What to Include in Your Accessibility Statement</h2>
+          <ol>
+            <li><strong>Conformance Status</strong> — Fully conformant, partially conformant, or non-conformant (be accurate — false full conformance claims can be used against you)</li>
+            <li><strong>Standard Reference</strong> — WCAG 2.2 Level AA published by W3C</li>
+            <li><strong>Covered Content</strong> — What parts of your site the statement covers</li>
+            <li><strong>Known Non-Conformant Areas</strong> — List any known limitations with brief explanation</li>
+            <li><strong>Feedback & Contact Mechanism</strong> — Email, phone, or contact form users can use to report issues</li>
+            <li><strong>Response Commitment</strong> — How quickly you commit to responding to feedback (e.g., 2 business days)</li>
+            <li><strong>Formal Complaints Process</strong> — Mention of formal complaints avenue (e.g., DOJ, relevant EU body)</li>
+            <li><strong>Last Review Date</strong> — When the statement was last reviewed/updated</li>
+          </ol>
+
+          <h2 id="template">Free Accessibility Statement Template</h2>
+          <div class="template-box" aria-label="Accessibility statement template">
+            <div class="template-header">Accessibility Statement — [Your Website Name]</div>
+<pre class="template-content">
+[Organization Name] is committed to ensuring digital 
+accessibility for people with disabilities. We continually 
+improve the user experience for everyone and apply relevant 
+accessibility standards.
+
+CONFORMANCE STATUS
+This website is [partially conformant / fully conformant] 
+with WCAG 2.2 Level AA, published by the World Wide Web 
+Consortium (W3C). [Partially conformant means some parts 
+of the content do not fully conform to the accessibility 
+standard. Fully conformant means only when a site has 
+been verified by audit.]
+
+KNOWN LIMITATIONS
+[List any known barriers — e.g., "Third-party embedded 
+maps may not meet all accessibility criteria. We are 
+working with the provider on a resolution."]
+
+FEEDBACK & CONTACT
+If you encounter accessibility barriers or need information 
+in a different format, please contact us:
+
+Email: [accessibility@yourdomain.com]
+Phone: [+X XXX XXX XXXX]
+Response time: We aim to respond within 2 business days.
+
+FORMAL COMPLAINTS
+If you are not satisfied with our response, you may 
+contact the U.S. Department of Justice or [EU equivalent 
+enforcement body if applicable].
+
+This statement was last reviewed: [Month Year].
+Audited to WCAG 2.2 Level AA by complyTech.
+</pre>
+          </div>
+          <p>Replace all bracketed items with your specific information. If your site has not been professionally audited, use "non-conformant" or "partially conformant" as your conformance status.</p>
+
+          <h2 id="faq-accessibility-statement">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Get Your Site Audited First</h4>
+            <p>An accessibility statement is most effective when backed by a professional audit. Get yours starting at $495.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I want to get an accessibility audit to back my accessibility statement.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-statement-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Audit Services</a></li>
+              <li><a href="/ada-compliance-checklist-2025">WCAG Checklist</a></li>
+              <li><a href="/what-is-ada-compliance-websites">ADA Compliance Guide</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Back Your Accessibility Statement With a Real Audit" subtext="An accessibility statement claiming full conformance without a professional audit can create legal liability if the claim is inaccurate. Back yours with a complyTech WCAG 2.2 audit." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .template-box { background: var(--ink); border-radius: var(--radius-lg); overflow: hidden; margin: 24px 0; }
+  .template-header { background: rgba(255,255,255,0.06); padding: 12px 20px; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+  .template-content { padding: 20px; color: rgba(255,255,255,0.75); font-family: monospace; font-size: 0.82rem; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word; margin: 0; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

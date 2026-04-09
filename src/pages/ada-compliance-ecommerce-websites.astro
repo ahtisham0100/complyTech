@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for E-commerce Websites",
+    "description": "Professional WCAG 2.2 accessibility audits for e-commerce stores. Covers checkout flows, product pages, cart, search, and dynamic content. Protects against ADA lawsuits targeting online retailers.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "E-commerce Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Are e-commerce websites required to be ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Online retailers are required to be ADA compliant under Title III of the Americans with Disabilities Act. E-commerce websites account for approximately 78% of all ADA digital accessibility lawsuits filed in the United States, making them the most frequently targeted business category. There is no revenue, size, or product category exemption." } },
+      { "@type": "Question", "name": "What parts of an e-commerce site are most commonly cited in ADA lawsuits?", "acceptedAnswer": { "@type": "Answer", "text": "The most commonly cited e-commerce accessibility failures in ADA lawsuits are: inaccessible checkout flows (keyboard navigation failures, form errors), product images without alt text, search functionality not operable by keyboard, popup and modal dialogs trapping focus, filter and sort controls inaccessible to screen readers, and insufficient color contrast on sale prices and CTAs." } },
+      { "@type": "Question", "name": "Is my Shopify or WooCommerce store ADA compliant by default?", "acceptedAnswer": { "@type": "Answer", "text": "No. Neither Shopify, WooCommerce, Magento, nor any other e-commerce platform is ADA compliant by default. Platform accessibility varies significantly by theme, installed apps, and customization. Third-party apps frequently introduce new accessibility barriers. A professional WCAG 2.2 audit of your specific store implementation is required to identify and remediate all violations." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "E-commerce", "item": `${DOMAIN}/ada-compliance-ecommerce-websites` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Are e-commerce websites required to be ADA compliant?", answer: "Yes. Online retailers are required to be ADA compliant under Title III of the ADA. E-commerce websites account for approximately 78% of all ADA digital accessibility lawsuits, making them the most frequently targeted business category. There is no revenue, size, or product category exemption — a $200,000/year Etsy-style boutique faces the same legal obligation as a major retailer." },
+  { question: "What parts of an e-commerce site are most commonly cited?", answer: "The most frequently cited e-commerce accessibility failures in lawsuits are: inaccessible checkout flows, product images without alt text, search functionality not operable by keyboard, popup and modal dialogs trapping keyboard focus, filter and sort controls inaccessible to screen readers, and insufficient color contrast on sale prices and CTAs." },
+  { question: "Is my Shopify store ADA compliant by default?", answer: "No. Shopify themes have varying accessibility levels, and third-party apps frequently introduce new barriers. Popular Shopify tools like review apps, chat widgets, popup builders, and loyalty programs are common accessibility failure points. A professional WCAG 2.2 audit of your specific store — including your theme and installed apps — is required." },
+  { question: "How much does an e-commerce ADA audit cost?", answer: "E-commerce ADA compliance audit costs typically range from $3,500 to $7,500 for stores with 50–200 pages, including checkout flow testing. This compares favorably to the average ADA lawsuit settlement cost of $12,000–$75,000. Most e-commerce businesses also qualify for the IRS Disabled Access Credit, which can offset up to $5,000 of audit costs annually." },
+  { question: "Do I need to audit every product page?", answer: "No. Professional audits test representative templates rather than every individual product page. For a store with 5,000 products using 3 product page templates, we audit all 3 templates thoroughly — this covers 99% of your accessibility exposure. We also separately audit all critical user flows: search, filtering, cart, checkout, account creation, and post-purchase confirmation." }
+];
+
+const violations = [
+  { num: 1, title: 'Product images without descriptive alt text', desc: 'Screen reader users cannot understand what products look like or what they sell. Found on 82% of e-commerce sites audited.', pct: '82% prevalence' },
+  { num: 2, title: 'Checkout forms without accessible error messages', desc: 'When checkout fails, screen reader users often cannot identify which field has an error or what correction is needed.', pct: '74% prevalence' },
+  { num: 3, title: 'Add to Cart and Buy Now buttons without accessible names', desc: 'Repeating "Add to Cart" buttons without product context make it impossible for keyboard users to distinguish between products.', pct: '68% prevalence' },
+  { num: 4, title: 'Category filter and sort controls not keyboard accessible', desc: 'Faceted search filters — price range sliders, color swatches, size selectors — frequently fail keyboard operability testing.', pct: '71% prevalence' },
+  { num: 5, title: 'Popup promotions and cookie banners trapping keyboard focus', desc: 'Promotional overlays that appear on page load and trap keyboard focus prevent all site navigation for keyboard users.', pct: '65% prevalence' },
+  { num: 6, title: 'Insufficient color contrast on sale prices and CTAs', desc: 'Sale price colors (light green, orange) and promotional badge text frequently fall below the 4.5:1 WCAG contrast ratio.', pct: '79% prevalence' },
+];
+
+const platforms = ['Shopify', 'WooCommerce', 'Magento / Adobe Commerce', 'BigCommerce', 'Squarespace Commerce', 'Wix eCommerce', 'Custom-built stores'];
+---
+
+<BaseLayout
+  title="ADA Compliance for E-commerce Websites | complyTech"
+  description="E-commerce sites account for 78% of ADA lawsuits. Our WCAG 2.2 audit covers checkout flows, product pages, cart, and dynamic content. Protect your online store today."
+  canonical={`${DOMAIN}/ada-compliance-ecommerce-websites`}
+  schema={schema}
+  keywords="ADA compliance for ecommerce websites, ecommerce accessibility audit, Shopify ADA compliance, WooCommerce accessibility, ADA compliant online store"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">E-commerce</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+        78% of ADA Lawsuits Target E-commerce
+      </div>
+      <h1 id="page-h1">ADA Compliance for E-commerce Websites</h1>
+      <p class="hero-sub">Online retailers are the single most targeted business category in ADA digital accessibility litigation. Checkout flows, product pages, and filters are the most commonly cited barriers — and no platform is compliant by default.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-ecom-cta">Get E-commerce Audit Quote</a>
+        <a href="#violations" class="btn btn-outline-light btn-lg">See Top Violations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>E-commerce websites account for <strong>78% of all ADA digital accessibility lawsuits</strong> (UsableNet 2024).</li>
+              <li>Checkout flows, product images, and filter controls are the most commonly cited violations.</li>
+              <li>No major platform — Shopify, WooCommerce, Magento, BigCommerce — is WCAG compliant by default.</li>
+              <li>Third-party apps and plugins are major violation sources on all platforms.</li>
+              <li>An e-commerce ADA audit costs $3,500–$7,500 vs. lawsuit settlements of $12,000–$75,000.</li>
+            </ul>
+          </div>
+
+          <h2>Why E-commerce Sites Are the #1 ADA Lawsuit Target</h2>
+          <p><strong>ADA compliance for e-commerce websites</strong> is the single most important legal risk management action available to online retailers in 2025. E-commerce stores accounted for approximately 78% of all ADA digital accessibility federal lawsuits filed in 2024, according to UsableNet's annual accessibility report — the highest concentration of any business category.</p>
+          <p>The reasons are structural:</p>
+          <ul>
+            <li><strong>High complexity</strong> — checkout flows, filtering systems, dynamic product content, and interactive UI elements create many more accessibility failure points than static websites</li>
+            <li><strong>High settlement value</strong> — plaintiff attorneys know that e-commerce operators cannot afford business interruption from website takedowns</li>
+            <li><strong>Automated scanning</strong> — serial plaintiff law firms use automated tools to scan thousands of e-commerce sites simultaneously, identifying violations at scale</li>
+            <li><strong>Platform dependency</strong> — third-party themes, apps, and plugins routinely introduce new accessibility barriers after initial setup</li>
+          </ul>
+
+          <h2 id="violations">Top 6 E-commerce Accessibility Violations</h2>
+          <div class="violation-list">
+            {violations.map((v) => (
+              <div class="violation-item">
+                <div class="violation-num" aria-hidden="true">{v.num}</div>
+                <div class="violation-body">
+                  <h4>{v.title}</h4>
+                  <p>{v.desc}</p>
+                  <div class="violation-pct">{v.pct}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2>What Our E-commerce Audit Covers</h2>
+          <p>Our e-commerce WCAG 2.2 audit tests every critical user flow and content type in your online store:</p>
+          <div class="audit-scope-grid">
+            <div class="audit-scope-col">
+              <h3>User Flows Tested</h3>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✓</span>Homepage and navigation</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Category browsing and filtering</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Product search and search results</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Product detail pages</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Add to cart and cart management</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Full checkout flow (multi-step)</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Account creation and login</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Order confirmation pages</li>
+              </ul>
+            </div>
+            <div class="audit-scope-col audit-scope-accent">
+              <h3>Content Types Audited</h3>
+              <ul class="checklist">
+                <li><span class="check-icon" aria-hidden="true">✓</span>Product images and galleries</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Product videos</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Customer review components</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Popup promotions and banners</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Cookie consent notices</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Live chat and support widgets</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Loyalty program components</li>
+                <li><span class="check-icon" aria-hidden="true">✓</span>Third-party payment interfaces</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>Platforms We Audit</h2>
+          <div class="platform-tags">
+            {platforms.map((p) => <span class="platform-tag">{p}</span>)}
+          </div>
+          <p>We audit all major e-commerce platforms. Platform choice does not determine compliance — your specific theme, customizations, and installed apps are the primary variables. Every audit is tailored to your actual implementation.</p>
+
+          <h2 id="faq-ecommerce">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>E-commerce Audit Quote</h4>
+            <p>Full WCAG 2.2 audit including checkout flow, product pages, filters, and all dynamic content. Starting at $3,500.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my e-commerce website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-ecom-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card sidebar-stat-card">
+            <h4>E-commerce ADA Risk</h4>
+            <div class="big-stat">78%</div>
+            <p>of all ADA digital accessibility lawsuits target e-commerce websites</p>
+            <div class="stat-divider"></div>
+            <div class="big-stat">$75K</div>
+            <p>average lawsuit settlement — vs. $3,500–$7,500 for a full audit</p>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-shopify">Shopify ADA Compliance</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Audit Pricing</a></li>
+              <li><a href="/vpat-documentation-services">VPAT Services</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Protect Your E-commerce Store from ADA Lawsuits" subtext="78% of ADA digital accessibility lawsuits target online retailers. Our WCAG 2.2 e-commerce audit covers every critical flow — checkout, search, filtering, and product content — with a clear remediation roadmap." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .audit-scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  .audit-scope-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .audit-scope-col h3 { font-size: 0.95rem; margin-bottom: 14px; }
+  .audit-scope-accent { background: var(--accent-lt); border-color: rgba(26,58,42,0.15); }
+  .platform-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .platform-tag { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 0.83rem; font-weight: 500; color: var(--ink-2); }
+  .sidebar-stat-card { background: linear-gradient(135deg, var(--accent) 0%, #0e2318 100%); border-color: transparent; }
+  .sidebar-stat-card h4 { color: rgba(255,255,255,0.55); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .big-stat { font-family: var(--font-head); font-size: 2.8rem; font-weight: 700; color: #7ed4a0; line-height: 1; }
+  .sidebar-stat-card p { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin: 6px 0 14px; }
+  .stat-divider { border-top: 1px solid rgba(255,255,255,0.1); margin: 8px 0 12px; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .audit-scope-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

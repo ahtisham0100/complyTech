@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Accessibility Overlay Alternatives: Why Widgets Don't Work and What Does",
+    "description": "AI-powered accessibility overlays don't prevent ADA lawsuits — courts, the FTC, and disability organizations all agree. Learn why overlays fail and what genuine WCAG 2.2 compliance actually requires.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "dateModified": "2026-04-07T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do accessibility overlays make my website ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "No. Accessibility overlays and AI-powered widgets do not make websites ADA compliant. Multiple federal courts have ruled that overlays fail to remediate underlying code barriers. The FTC took enforcement action against accessiBe in 2025 for deceptive compliance claims. The National Federation of the Blind, the American Council of the Blind, and Disability Rights Advocates have all issued formal statements opposing overlays as compliance solutions." } },
+      { "@type": "Question", "name": "Can I still be sued if I use accessiBe or UserWay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Companies using accessiBe, UserWay, and similar overlay products have continued to receive ADA lawsuits. Overlays cannot fix underlying HTML, CSS, and JavaScript barriers — they attempt to patch over them at the presentation layer, which screen reader users often find interferes with their own assistive technology. The presence of an overlay widget does not constitute a legal defense under ADA Title III." } },
+      { "@type": "Question", "name": "What is the best alternative to an accessibility overlay?", "acceptedAnswer": { "@type": "Answer", "text": "The only legally defensible alternative to an overlay is genuine code-level remediation guided by a professional WCAG 2.2 Level AA audit. A professional audit identifies every barrier (automated tools and overlays only detect 30–40% of violations), and a developer-ready remediation guide enables your team to fix the underlying HTML, CSS, and JavaScript so the site works correctly for screen reader users, keyboard users, and all other assistive technology." } },
+      { "@type": "Question", "name": "What issues can accessibility overlays not fix?", "acceptedAnswer": { "@type": "Answer", "text": "Accessibility overlays cannot fix: keyboard navigation traps, broken focus order in dynamic content, inaccessible JavaScript-driven components (carousels, modals, accordions), ARIA attribute misuse, time limits without accessible warnings, complex form error handling, custom UI controls without accessible names, PDF document accessibility, or video captioning quality. These require code-level remediation." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "Overlay Alternatives", "item": `${DOMAIN}/accessibility-overlay-alternatives` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Do accessibility overlays make my website ADA compliant?", answer: "No. Accessibility overlays and AI-powered widgets do not make websites ADA compliant. Multiple federal courts have ruled that overlays fail to remediate underlying code barriers. The FTC took enforcement action against accessiBe in 2025 for deceptive compliance claims. The National Federation of the Blind, the American Council of the Blind, and Disability Rights Advocates have all issued formal statements opposing overlays as compliance solutions. Companies using overlays continue to be sued." },
+  { question: "Can I still get sued if I use accessiBe or UserWay?", answer: "Yes. Companies using accessiBe, UserWay, and similar overlay products have continued to receive ADA lawsuits. Overlays cannot fix underlying HTML, CSS, and JavaScript barriers — they attempt to patch over them at the presentation layer, which screen reader users often find interferes with their own assistive technology. The presence of an overlay widget is not a recognized legal defense under ADA Title III." },
+  { question: "What is the best alternative to an accessibility overlay?", answer: "The only legally defensible alternative to an overlay is genuine code-level remediation guided by a professional WCAG 2.2 Level AA manual audit. A professional audit identifies 100% of violations (overlays detect 20–30%), and a developer-ready fix guide enables your team to remediate the underlying HTML, CSS, and JavaScript — so the site actually works for screen reader and keyboard users." },
+  { question: "Why do so many websites use overlays if they don't work?", answer: "Accessibility overlays are extensively marketed to business owners with misleading compliance claims — 'instant compliance', 'get compliant in 48 hours', 'one line of code.' These claims are legally inaccurate and several overlay companies have faced FTC enforcement. Overlays are significantly cheaper than a genuine audit ($49/month vs. $1,500+), which makes them appealing to businesses unaware of their legal ineffectiveness." },
+  { question: "What can overlays actually detect and fix?", answer: "Accessibility overlays can reliably detect and adjust: missing image alt text (often incorrectly), color contrast ratios (applied as CSS overrides), font size adjustments, cursor size adjustments, and basic focus highlighting. These represent approximately 20–30% of WCAG violations and do not address the most legally significant barriers — keyboard navigation, screen reader compatibility, and dynamic content accessibility." }
+];
+
+const comparison = [
+  { issue: 'Missing alt text on images', overlay: '⚠️ Partially (often wrong)', manual: '✅ 100% accurate' },
+  { issue: 'Keyboard navigation traps', overlay: '❌ Cannot detect or fix', manual: '✅ Full testing' },
+  { issue: 'Screen reader incompatible components', overlay: '❌ Cannot fix', manual: '✅ Fully tested with NVDA/JAWS' },
+  { issue: 'Form label errors', overlay: '⚠️ Basic only', manual: '✅ All ARIA patterns' },
+  { issue: 'Dynamic content (modals, carousels)', overlay: '❌ Cannot fix', manual: '✅ Fully tested' },
+  { issue: 'Focus order and management', overlay: '❌ Cannot detect', manual: '✅ Full review' },
+  { issue: 'Color contrast', overlay: '⚠️ CSS override only', manual: '✅ Design-level fix' },
+  { issue: 'PDF accessibility', overlay: '❌ Cannot fix documents', manual: '✅ Full document audit' },
+  { issue: 'Video captioning quality', overlay: '❌ Cannot generate captions', manual: '✅ Caption accuracy review' },
+  { issue: 'Legal compliance certificate', overlay: '❌ Not issued', manual: '✅ Included post-remediation' },
+  { issue: 'FTC enforcement risk', overlay: '⚠️ accessiBe penalized 2025', manual: '✅ Zero risk' },
+  { issue: 'Court-accepted evidence', overlay: '❌ Rejected by multiple courts', manual: '✅ Accepted documentation' },
+];
+---
+
+<BaseLayout
+  title="Accessibility Overlay Alternatives: Why Widgets Don't Work | complyTech"
+  description="Accessibility overlays including accessiBe and UserWay don't prevent ADA lawsuits. The FTC and courts agree. See why overlays fail and what actually works: manual WCAG 2.2 audits."
+  canonical={`${DOMAIN}/accessibility-overlay-alternatives`}
+  schema={schema}
+  ogType="article"
+  keywords="accessibility overlay alternative, accessiBe alternative, does accessiBe work, do accessibility overlays work, accessibility widget vs audit"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/what-is-ada-compliance-websites">Resources</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Overlay Alternatives</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">policy</span>
+        FTC Action 2025 · Courts Agree · NFB Opposed
+      </div>
+      <h1 id="page-h1">Accessibility Overlays Don't Work. Here's What Does.</h1>
+      <p class="hero-sub">AI-powered widgets like accessiBe and UserWay promise ADA compliance in "one line of code." Courts disagree — and so does the FTC. This guide explains why overlays fail and what <strong style="color:#7ed4a0;">genuinely protects your business</strong>.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-overlay-cta">Get a Real Compliance Audit</a>
+        <a href="#comparison" class="btn btn-outline-light btn-lg">See Overlay vs. Audit</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Accessibility overlays (accessiBe, UserWay, etc.) detect only 20–30% of WCAG violations.</li>
+              <li>The FTC issued an enforcement order against accessiBe in 2025 for deceptive compliance claims.</li>
+              <li>Multiple federal courts have ruled overlays insufficient — companies using them continue to be sued.</li>
+              <li>The National Federation of the Blind formally opposes overlays as compliance solutions.</li>
+              <li>The only legally defensible approach is code-level remediation guided by a professional manual audit.</li>
+            </ul>
+          </div>
+
+          <h2>What Are Accessibility Overlays?</h2>
+          <p>An <strong>accessibility overlay</strong> (also called an accessibility widget or AI accessibility plugin) is a JavaScript file added to your website — typically via one line of code — that attempts to automatically detect and "fix" accessibility barriers as users browse your site. Popular products include accessiBe, UserWay, AudioEye's automated tier, EqualWeb, and dozens of similar services.</p>
+          <p>Overlays are marketed aggressively to small business owners with claims like:</p>
+          <ul>
+            <li>"Get ADA compliant in 48 hours"</li>
+            <li>"Install in 2 minutes — no coding required"</li>
+            <li>"AI-powered accessibility — fully WCAG compliant"</li>
+            <li>"Protect yourself from ADA lawsuits"</li>
+          </ul>
+          <div class="definition-box">
+            <strong>The reality:</strong> These claims are legally inaccurate. Overlays cannot fix underlying website code — they apply CSS overrides and JavaScript patches at the presentation layer. Independent research by Deque Systems found overlays detect approximately 20–30% of WCAG violations. The remaining 70–80% persist in your underlying code, invisible to the overlay.
+          </div>
+
+          <h2>The Evidence Against Overlays</h2>
+
+          <h3>1. FTC Enforcement Action Against accessiBe (2025)</h3>
+          <p>In 2025, the Federal Trade Commission issued an enforcement order against accessiBe for deceptive marketing practices, specifically penalizing the company for claiming its automated overlay could make websites "fully compliant" with ADA and WCAG standards. The FTC found these claims to be materially false and misleading. This marked a significant regulatory shift signaling that overlay compliance claims are legally untenable in the United States.</p>
+
+          <h3>2. Federal Court Rulings on Overlays</h3>
+          <p>Multiple federal courts have ruled that overlay products do not constitute ADA compliance. Courts have found that:</p>
+          <ul>
+            <li>Overlays do not remediate the underlying structural code barriers</li>
+            <li>Screen reader users report that overlays often <em>interfere</em> with their existing assistive technology</li>
+            <li>The presence of an overlay widget does not demonstrate "good-faith compliance effort" sufficient to influence settlement</li>
+            <li>Companies using overlays continue to be liable for ADA violations in their underlying code</li>
+          </ul>
+
+          <h3>3. Disability Community Statements</h3>
+          <p>The world's largest disability advocacy organizations have formally opposed overlay products:</p>
+          <ul>
+            <li><strong>National Federation of the Blind (NFB)</strong> — issued a formal resolution opposing overlay products, stating they "create a false sense of security about the accessibility of a website"</li>
+            <li><strong>American Council of the Blind (ACB)</strong> — formally opposed overlays as compliance solutions</li>
+            <li><strong>Disability Rights Advocates (DRA)</strong> — has filed amicus briefs in ADA cases arguing overlays are insufficient remediation</li>
+            <li><strong>Over 900 accessibility professionals</strong> signed the "Overlay Fact Sheet" at overlayFactSheet.com opposing overlay products</li>
+          </ul>
+
+          <h2 id="comparison">Accessibility Overlay vs. Manual Expert Audit — Full Comparison</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Accessibility overlay compared to manual expert audit">
+              <thead>
+                <tr>
+                  <th scope="col">Accessibility Issue</th>
+                  <th scope="col">🔌 Overlay Widget</th>
+                  <th scope="col">👤 Manual Expert Audit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.map((row) => (
+                  <tr>
+                    <td>{row.issue}</td>
+                    <td class={row.overlay.includes('❌') ? 'status-fail' : row.overlay.includes('⚠️') ? 'status-partial' : 'status-pass'}>{row.overlay}</td>
+                    <td class="status-pass">{row.manual}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>What Actually Works: Manual WCAG 2.2 Expert Audit</h2>
+          <p>The only approach that provides genuine legal protection and actual accessibility is a professional WCAG 2.2 Level AA manual audit followed by code-level remediation. Unlike overlays, a professional audit:</p>
+          <ul>
+            <li><strong>Detects 100% of violations</strong> — including keyboard navigation, screen reader compatibility, and dynamic content barriers that overlays cannot detect</li>
+            <li><strong>Provides verified documentation</strong> — VPAT and conformance report accepted by courts and government buyers</li>
+            <li><strong>Generates a developer fix guide</strong> — code-level instructions that enable permanent remediation</li>
+            <li><strong>Issues a compliance certificate</strong> — after re-test confirms all violations resolved</li>
+            <li><strong>Has no FTC enforcement risk</strong> — you are paying for genuine compliance, not marketing claims</li>
+          </ul>
+
+          <h2>How Much Does a Manual Audit Cost vs. an Overlay?</h2>
+          <div class="cost-comparison">
+            <div class="cost-col">
+              <h4>🔌 Overlay Widget</h4>
+              <div class="cost-num">$49–$490/mo</div>
+              <p class="cost-note">$588–$5,880/year for a product that courts reject and disability users often disable</p>
+            </div>
+            <div class="cost-col cost-col-accent">
+              <h4>👤 complyTech Manual Audit</h4>
+              <div class="cost-num green">$495–$3,500</div>
+              <p class="cost-note">One-time cost for genuine WCAG 2.2 compliance with VPAT, certificate, and permanent code fixes</p>
+            </div>
+          </div>
+          <p>An overlay subscription buys you ongoing legal exposure. A professional audit, at a comparable or lower annual cost, buys you genuine compliance and zero litigation risk from the violations you fix.</p>
+
+          <h2 id="faq-overlays">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Switch from Overlay to Real Compliance</h4>
+            <p>Cancel your expensive overlay subscription and invest in a one-time audit that actually protects you. Starting at $495.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I want to replace my accessibility overlay with a real ADA compliance audit.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-overlay-cta">Get Real Compliance</a>
+          </div>
+          <div class="sidebar-card sidebar-facts">
+            <h4>Key Facts</h4>
+            <div class="fact-item"><span class="fact-icon">⚖️</span><span>FTC penalized accessiBe in 2025 for deceptive claims</span></div>
+            <div class="fact-item"><span class="fact-icon">🏛️</span><span>Multiple federal courts rejected overlays as compliance evidence</span></div>
+            <div class="fact-item"><span class="fact-icon">🦯</span><span>NFB formally opposes overlay products</span></div>
+            <div class="fact-item"><span class="fact-icon">📊</span><span>Overlays detect 20–30% of WCAG violations maximum</span></div>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/received-ada-demand-letter">Received an ADA Letter?</a></li>
+              <li><a href="/ada-compliance-audit-small-business">What a Real Audit Includes</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing Comparison</a></li>
+              <li><a href="/what-is-ada-compliance-websites">ADA Compliance Guide</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Replace Your Overlay With Real ADA Compliance" subtext="An overlay subscription costs $49–$490/month and courts reject it. A complyTech manual audit starts at $495 one-time and gives you genuine legal protection, VPAT documentation, and a compliance certificate." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .definition-box { background: var(--surface); border-left: 3px solid var(--accent-2); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 20px 0; font-size: 0.93rem; color: var(--ink-2); }
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .status-pass { color: #1a3a2a; font-weight: 500; }
+  .status-partial { color: #b45309; font-weight: 500; }
+  .status-fail { color: #c0392b; font-weight: 500; }
+  .cost-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  .cost-col { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; text-align: center; }
+  .cost-col-accent { background: var(--accent-lt); border-color: rgba(26,58,42,0.2); }
+  .cost-col h4 { font-size: 0.9rem; margin-bottom: 10px; }
+  .cost-num { font-family: var(--font-head); font-size: 1.7rem; font-weight: 700; color: var(--danger); margin-bottom: 8px; }
+  .cost-num.green { color: var(--accent); }
+  .cost-note { font-size: 0.82rem; color: var(--ink-2); }
+  .sidebar-facts { background: var(--ink); border-color: transparent; }
+  .sidebar-facts h4 { color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .fact-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.83rem; color: rgba(255,255,255,0.65); }
+  .fact-item:last-child { border-bottom: none; }
+  .fact-icon { flex-shrink: 0; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cost-comparison { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

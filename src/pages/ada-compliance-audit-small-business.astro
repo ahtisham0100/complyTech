@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+import AuditTable from '../components/AuditTable.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for Small Business",
+    "description": "Professional WCAG 2.2 Level AA website accessibility audits for small businesses. Includes full manual expert review, conformance report, VPAT, and prioritized remediation roadmap.",
+    "provider": {
+      "@type": "Organization",
+      "name": "complyTech",
+      "url": DOMAIN,
+      "telephone": "+923010910933",
+      "address": { "@type": "PostalAddress", "addressCountry": "US" }
+    },
+    "areaServed": "United States",
+    "serviceType": "Website Accessibility Audit",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "priceRange": "$495 - $7500",
+      "availability": "https://schema.org/InStock"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long does an ADA compliance audit take for a small business?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A professional ADA compliance audit for a small business website typically takes 5–14 business days, depending on site size. A micro-site (1–10 pages) can be audited in 3–5 days. An e-commerce site with 50–200 pages typically requires 10–14 days for a full manual review. Rush audits are available at a premium." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use a free tool like WAVE to check if my website is ADA compliant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Free automated tools like WAVE, axe, and Lighthouse are useful for identifying some accessibility issues, but they detect only 30–40% of WCAG violations according to Deque Systems. They cannot test keyboard navigation, screen reader compatibility, cognitive accessibility, or dynamic content. A professional manual audit is required for legal-grade compliance verification." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does having an accessibility widget make my website ADA compliant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Accessibility overlays and widgets do not constitute ADA compliance. Multiple federal courts have ruled that overlays fail to remediate underlying code barriers. Companies using overlays have continued to be successfully sued. Genuine compliance requires fixing the underlying HTML, CSS, and JavaScript of your website." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between ADA compliance and WCAG compliance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ADA (Americans with Disabilities Act) is the U.S. civil rights law requiring accessible websites. WCAG (Web Content Accessibility Guidelines) is the technical standard developed by the W3C that courts use to measure ADA conformance. Achieving WCAG 2.2 Level AA is the current best-practice compliance standard for websites as of 2025." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my small business required to be ADA compliant online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, if your business serves the public. ADA Title III applies to places of public accommodation, and courts have consistently applied this to websites. There is no revenue or employee-count exemption. The only businesses explicitly excluded are private clubs and religious organizations." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a website accessibility audit cost for small business?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Website accessibility audit costs for small businesses typically range from $495 for a micro-site to $7,500 for a full e-commerce audit. Compare this to average ADA lawsuit settlement costs of $12,000–$75,000. Most small business audits pay for themselves the first time you avoid a demand letter." }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `${DOMAIN}/services` },
+      { "@type": "ListItem", "position": 3, "name": "ADA Compliance Audit for Small Business", "item": `${DOMAIN}/ada-compliance-audit-small-business` }
+    ]
+  }
+];
+
+const faqItems = [
+  {
+    question: "How long does an ADA compliance audit take for a small business?",
+    answer: "A professional ADA compliance audit for a small business website typically takes 5–14 business days, depending on site size. A micro-site (1–10 pages) can be audited in 3–5 days. An e-commerce site with 50–200 pages typically requires 10–14 days for a full manual review. Rush audits (3–5 day turnaround) are available at a premium."
+  },
+  {
+    question: "Can I use a free tool like WAVE to check if my website is ADA compliant?",
+    answer: "Free automated tools like WAVE, axe, and Lighthouse are useful for identifying a subset of accessibility issues, but they detect only 30–40% of WCAG violations (Deque Systems). They cannot test keyboard navigation, screen reader compatibility, cognitive accessibility, or dynamic content like modals and carousels. A professional manual audit is required for legal-grade compliance verification."
+  },
+  {
+    question: "Does having an accessibility widget make my website ADA compliant?",
+    answer: "No. Accessibility overlays and widgets — including AI-powered ones — do not constitute ADA compliance. Multiple federal courts have ruled that overlays fail to remediate underlying code barriers. Companies using overlays have continued to be successfully sued. Genuine compliance requires fixing the underlying HTML, CSS, and JavaScript of your website."
+  },
+  {
+    question: "What is the difference between ADA compliance and WCAG compliance?",
+    answer: "ADA (Americans with Disabilities Act) is the U.S. civil rights law that prohibits discrimination against people with disabilities, including on websites. WCAG (Web Content Accessibility Guidelines) is the technical standard — developed by the W3C — that specifies how to make websites accessible. Courts and the DOJ use WCAG 2.1 Level AA as the measuring stick for ADA website compliance. Achieving WCAG 2.2 AA conformance is the current best practice."
+  },
+  {
+    question: "Is my small business required to be ADA compliant online?",
+    answer: "Yes, if your business serves the public. ADA Title III applies to 'places of public accommodation,' and courts have consistently applied this to websites. There is no revenue or employee-count exemption. The only businesses explicitly excluded are private clubs and religious organizations."
+  },
+  {
+    question: "What happens after I receive my audit report?",
+    answer: "You will receive a prioritized list of violations, a WCAG 2.2 conformance statement, and a developer-ready fix guide. You can implement fixes with your own development team using our documentation, or engage our remediation team. After fixes are deployed, we conduct a re-test audit and issue a formal compliance certificate."
+  }
+];
+
+const pricingRows = [
+  { size: 'Micro site', pages: '1–10 pages', type: 'Automated + spot manual', cost: '$495–$999' },
+  { size: 'Small business', pages: '11–50 pages', type: 'Full manual audit', cost: '$1,500–$3,500' },
+  { size: 'E-commerce', pages: '50–200 pages', type: 'Full manual + cart flow', cost: '$3,500–$7,500' },
+  { size: 'Mid-market', pages: '200+ pages', type: 'Enterprise audit + VPAT', cost: 'Custom quote' },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance Audit for Small Business | complyTech"
+  description="Protect your small business from ADA lawsuits. Our certified accessibility audit identifies every WCAG 2.2 violation and gives you a clear remediation roadmap. Get a free quote today."
+  canonical={`${DOMAIN}/ada-compliance-audit-small-business`}
+  schema={schema}
+  keywords="ADA compliance audit for small business, website accessibility audit cost, WCAG 2.2 audit, ADA remediation services, is my website ADA compliant"
+>
+  <Nav slot="nav" />
+
+  <!-- ═══ HERO ════════════════════════════════════════════════════════════ -->
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <a href="/">Services</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current">ADA Audit for Small Business</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">verified</span>
+        WCAG 2.2 Level AA · IAAP-Certified Team
+      </div>
+      <h1 id="page-h1">ADA Compliance Audit for Small Business</h1>
+      <p class="hero-sub">Identify every barrier that puts your business at legal risk. Our manual expert review catches the 60–70% of violations that automated tools miss — delivered with a clear remediation roadmap.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-audit-cta">Get Free Quote</a>
+        <a href="#what-included" class="btn btn-outline-light btn-lg">See What's Included</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MAIN CONTENT ════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+
+        <!-- PROSE -->
+        <article class="prose-section">
+
+          <!-- TL;DR -->
+          <div class="tldr-box" role="note" aria-label="Key takeaways">
+            <div class="tldr-label">
+              <span class="material-symbols-outlined" aria-hidden="true">bolt</span>
+              TL;DR — Key Takeaways
+            </div>
+            <ul>
+              <li>Over 4,000 ADA website lawsuits were filed in federal court in 2024 alone.</li>
+              <li>Small businesses with under $25M revenue are the most frequently targeted.</li>
+              <li>A professional ADA compliance audit identifies 100% of WCAG 2.2 violations — automated tools catch only 30–40%.</li>
+              <li>Remediation typically takes 2–8 weeks depending on site size.</li>
+              <li><strong>Settlement costs average $12,000–$75,000</strong> — a professional audit starts at a fraction of that.</li>
+            </ul>
+          </div>
+
+          <!-- TOC -->
+          <nav class="toc" aria-label="Table of contents">
+            <div class="toc-title">Table of Contents</div>
+            <ol>
+              <li><a href="#what-is">What Is an ADA Compliance Audit?</a></li>
+              <li><a href="#does-it-apply">Does ADA Apply to My Small Business?</a></li>
+              <li><a href="#what-included">What Does a Professional Audit Include?</a></li>
+              <li><a href="#cost">ADA Compliance Audit Cost</a></li>
+              <li><a href="#risk">The Risk of Skipping Your Audit</a></li>
+              <li><a href="#process">Our Audit Process — Step by Step</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+              <li><a href="#cta">Get Your Free Quote</a></li>
+            </ol>
+          </nav>
+
+          <!-- SECTION 1 -->
+          <h2 id="what-is">What Is an ADA Compliance Audit for Websites?</h2>
+          <p>An <strong>ADA compliance audit for small business websites</strong> is a systematic review of your website's code, content, and functionality against the Americans with Disabilities Act (ADA) and its technical standard — the Web Content Accessibility Guidelines (WCAG) 2.2 Level AA. This guide is for small business owners, e-commerce operators, and marketing managers who need to understand their legal exposure and how to fix it.</p>
+          <p>The audit identifies every barrier that prevents users with visual, auditory, motor, or cognitive disabilities from accessing your site. The result is a prioritized remediation roadmap you can hand to your development team — or have our specialists fix for you.</p>
+          <div class="definition-box">
+            <strong>Definition:</strong> An ADA website compliance audit is a technical and functional review of a website that measures conformance to WCAG 2.2 Level AA standards, as required under Title III of the Americans with Disabilities Act for businesses open to the public.
+          </div>
+
+          <!-- SECTION 2 -->
+          <h2 id="does-it-apply">Does the ADA Apply to My Small Business Website?</h2>
+          <p><strong>Yes.</strong> The ADA does not provide a size exemption for businesses. Any private business that serves the public — a "place of public accommodation" under Title III — is required to ensure its website is accessible. Courts in California, New York, and Florida (the three highest-litigation states) have consistently ruled that websites themselves qualify as places of public accommodation.</p>
+          <p>Key facts about ADA website requirements for small businesses:</p>
+          <ul>
+            <li><strong>No revenue threshold:</strong> Businesses with $1M or $500M in revenue face the same legal obligation.</li>
+            <li><strong>4,000+ federal cases filed in 2024</strong> (ADA Title III Institute, 2024) — a sustained multi-year trend.</li>
+            <li><strong>82% of targets are small businesses</strong> with under $25M annual revenue (UsableNet 2024 Report).</li>
+            <li>The Department of Justice's April 2024 final rule mandates <strong>WCAG 2.1 AA</strong> for state/local government sites, accelerating private sector enforcement expectations.</li>
+            <li>Average settlement cost: <strong>$12,000–$75,000</strong>, plus plaintiff attorney fees and remediation costs.</li>
+          </ul>
+          <p>The risk is asymmetric: companies that proactively audit and remediate face zero ongoing legal exposure plus better conversion rates. Companies that wait face both the lawsuit and the remediation cost simultaneously — under time pressure.</p>
+
+          <!-- SECTION 3 -->
+          <h2 id="what-included">What Does a Professional ADA Compliance Audit Include?</h2>
+          <p>A professional audit goes far beyond what automated scanners like WAVE or axe can detect. Automated tools identify approximately <strong>30–40% of accessibility issues</strong> (Deque Systems); the remaining 60–70% require human judgment and assistive technology testing.</p>
+          <p>Our small business audit package includes:</p>
+          <AuditTable client:visible />
+          <h3>Deliverables You Receive</h3>
+          <ol>
+            <li><strong>Conformance Report (WCAG 2.2 AA)</strong> — every violation, severity level, and affected pages</li>
+            <li><strong>VPAT (Voluntary Product Accessibility Template)</strong> — the document your enterprise buyers and government clients require</li>
+            <li><strong>Prioritized remediation roadmap</strong> — fixes ranked by legal risk and user impact</li>
+            <li><strong>Fix-it guide</strong> — code-level instructions your developer can implement immediately</li>
+            <li><strong>Re-test certificate</strong> — once fixes are deployed, we re-audit and issue a compliance certificate</li>
+          </ol>
+
+          <!-- SECTION 4 - COST -->
+          <h2 id="cost">How Much Does an ADA Compliance Audit Cost for a Small Business?</h2>
+          <p>Website accessibility audit pricing for small businesses typically ranges depending on site size and complexity:</p>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="ADA compliance audit pricing by site size">
+              <thead>
+                <tr>
+                  <th scope="col">Site Size</th>
+                  <th scope="col">Page Count</th>
+                  <th scope="col">Audit Type</th>
+                  <th scope="col">Estimated Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pricingRows.map((row) => (
+                  <tr>
+                    <td>{row.size}</td>
+                    <td>{row.pages}</td>
+                    <td>{row.type}</td>
+                    <td><strong>{row.cost}</strong></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p><strong>In comparison:</strong> A single ADA demand letter typically results in $12,000–$75,000 in legal fees and settlement. Most small business audits pay for themselves the first time you avoid a demand letter.</p>
+
+          <!-- SECTION 5 - RISK -->
+          <h2 id="risk">The Risk of Not Getting an Accessibility Audit</h2>
+          <p>Over 5,000 ADA digital accessibility lawsuits were filed in the United States in 2023 (law firm Seyfarth Shaw), with filings remaining elevated in 2024 and 2025. Unlike GDPR violations where regulatory agencies initiate enforcement, <strong>ADA Title III is enforced entirely by private plaintiffs</strong> — meaning a plaintiff's law firm can file on a client's behalf without any prior complaint to a government agency.</p>
+          <p>Common accessibility violations that trigger lawsuits:</p>
+          <div class="violation-list">
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">1</div>
+              <div class="violation-body">
+                <h4>Missing alt text on product images</h4>
+                <p>The most common trigger — screen readers cannot convey image content to users who are blind.</p>
+                <div class="violation-pct">Most common lawsuit trigger</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">2</div>
+              <div class="violation-body">
+                <h4>Forms without visible labels or ARIA labels</h4>
+                <p>Screen reader users cannot determine what information each field requires.</p>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">3</div>
+              <div class="violation-body">
+                <h4>Videos without synchronized captions</h4>
+                <p>Required for users who are deaf or hard of hearing under WCAG Success Criterion 1.2.2.</p>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">4</div>
+              <div class="violation-body">
+                <h4>Checkout flows not operable by keyboard alone</h4>
+                <p>Users with motor disabilities who cannot use a mouse are completely locked out of purchases.</p>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">5</div>
+              <div class="violation-body">
+                <h4>PDFs without tagged structure</h4>
+                <p>Menus, brochures, and contracts distributed as PDFs must have accessible document structure.</p>
+              </div>
+            </div>
+          </div>
+          <div class="danger-box">
+            <p><strong>The overlay myth:</strong> Accessibility widgets and overlays (including popular AI-powered overlays) do <strong>not</strong> provide legal protection. Multiple courts have found that overlays fail to remediate underlying code barriers and often make the experience worse for screen reader users. Several companies continued to be sued while using overlay products.</p>
+          </div>
+
+          <!-- SECTION 6 - PROCESS -->
+          <h2 id="process">Our Audit Process — Step by Step</h2>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">1</div>
+              <div class="step-content">
+                <h4>Site Discovery (Day 1–2)</h4>
+                <p>We crawl your entire website, map all page templates, user flows (checkout, login, forms), and identify all content types (images, video, PDFs, dynamic content).</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">2</div>
+              <div class="step-content">
+                <h4>Automated Scan (Day 2–3)</h4>
+                <p>We run industry-standard tools including Deque's axe-core and Siteimprove to establish the baseline of detectable issues.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">3</div>
+              <div class="step-content">
+                <h4>Manual Expert Audit (Day 3–10)</h4>
+                <p>Our IAAP-certified specialists conduct screen reader testing (NVDA + JAWS + VoiceOver), keyboard-only navigation testing, cognitive accessibility review, and color/contrast analysis under WCAG 2.2 criteria.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">4</div>
+              <div class="step-content">
+                <h4>Report &amp; Roadmap Delivery (Day 10–14)</h4>
+                <p>You receive your full conformance report, VPAT, and prioritized fix list. We host a 60-minute walkthrough call to review findings.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">5</div>
+              <div class="step-content">
+                <h4>Remediation Support (Optional)</h4>
+                <p>Our development team can implement all fixes, or we can support your in-house team. Re-test and compliance certification follows.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ -->
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>
+              <span class="material-symbols-outlined" aria-hidden="true">schedule_send</span>
+              Get a Free Quote
+            </h4>
+            <p>Response within 1 business day. No obligation — includes scope, timeline, and pricing.</p>
+            <a
+              href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my small business website.')}`}
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width:100%;justify-content:center;"
+              id="sidebar-cta-p1"
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+
+          <div class="sidebar-card sidebar-stats">
+            <h4>Why Act Now?</h4>
+            <div class="sidebar-stat">
+              <span class="ss-num">4,000+</span>
+              <span class="ss-label">Federal ADA cases in 2024</span>
+            </div>
+            <div class="sidebar-stat">
+              <span class="ss-num">82%</span>
+              <span class="ss-label">Of targets are small businesses</span>
+            </div>
+            <div class="sidebar-stat">
+              <span class="ss-num">$75K</span>
+              <span class="ss-label">Avg. settlement cost</span>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a></li>
+              <li><a href="/ada-compliance-healthcare-websites">Healthcare Compliance</a></li>
+              <li><a href="/what-is-ada-compliance-websites#faq">WCAG 2.2 Explained</a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .definition-box {
+    background: var(--surface);
+    border-left: 3px solid var(--accent-2);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 20px 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .btn-outline-light {
+    background: transparent;
+    color: rgba(255,255,255,0.9);
+    border-color: rgba(255,255,255,0.4);
+  }
+  .btn-outline-light:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.7);
+    color: #fff;
+  }
+  .sidebar-stats { background: var(--accent); border-color: transparent; }
+  .sidebar-stats h4 { color: rgba(255,255,255,0.7); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .sidebar-stat { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-stat:last-child { border-bottom: none; }
+  .ss-num { display: block; font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; color: #7ed4a0; line-height: 1.1; }
+  .ss-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); display: flex; align-items: center; gap: 5px; }
+  .sidebar-links li a::before { content: '›'; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .page-sidebar { grid-template-columns: 1fr; }
+  }
+</style>

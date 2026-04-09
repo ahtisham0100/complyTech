@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://adacomplianceservices.tech/sitemap.xml
+
+# Disallow build artifacts
+Disallow: /dist/

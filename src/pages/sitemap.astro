@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Sitemap", "item": `${DOMAIN}/sitemap` }
+    ]
+  }
+];
+
+interface SitemapLink {
+  href: string;
+  label: string;
+  desc: string;
+}
+interface SitemapSection {
+  heading: string;
+  icon: string;
+  links: SitemapLink[];
+}
+
+const sections: SitemapSection[] = [
+  {
+    heading: 'Main Pages',
+    icon: 'home',
+    links: [
+      { href: '/', label: 'Home', desc: 'complyTech — ADA compliance audit services for US small businesses.' },
+      { href: '/what-is-ada-compliance-websites', label: 'What Is ADA Compliance?', desc: 'Complete 2025 guide to ADA Title III, WCAG 2.2, and website accessibility law.' },
+      { href: '/ada-compliance-faq', label: 'ADA Compliance FAQ', desc: '20+ plain-language answers to the most common ADA and WCAG compliance questions.' },
+      { href: '/ada-compliance-checklist-2025', label: 'ADA Compliance Checklist 2025', desc: '50+ interactive WCAG 2.2 Level AA checkpoints to self-audit your website.' },
+    ]
+  },
+  {
+    heading: 'Services',
+    icon: 'assignment',
+    links: [
+      { href: '/ada-compliance-audit-small-business', label: 'ADA Audit for Small Business', desc: 'Full WCAG 2.2 manual audit with VPAT, remediation roadmap, and compliance certificate.' },
+      { href: '/ada-compliance-audit-pricing', label: 'Pricing & Tax Credit', desc: 'Transparent audit pricing by site size, ROI analysis, and IRS Disabled Access Credit guide.' },
+      { href: '/vpat-documentation-services', label: 'VPAT Documentation Services', desc: 'Voluntary Product Accessibility Template (VPAT/ACR) for federal procurement and enterprise buyers.' },
+      { href: '/how-to-make-pdf-ada-compliant', label: 'PDF Accessibility Guide', desc: '8-step guide to making PDF documents ADA compliant — with professional remediation available.' },
+      { href: '/accessibility-statement-template', label: 'Accessibility Statement Template', desc: 'Free template and guide for writing a WCAG 2.2 website accessibility statement.' },
+    ]
+  },
+  {
+    heading: 'Industry Verticals',
+    icon: 'storefront',
+    links: [
+      { href: '/ada-compliance-healthcare-websites', label: 'Healthcare Websites', desc: 'ADA and Section 1557 compliance for patient portals, telehealth, and appointment systems.' },
+      { href: '/ada-compliance-ecommerce-websites', label: 'E-commerce Websites', desc: 'WCAG 2.2 compliance for online stores — product pages, checkout, and cart flows.' },
+      { href: '/ada-compliance-shopify', label: 'Shopify Stores', desc: 'Shopify-specific ADA audit covering themes, apps, and checkout accessibility.' },
+      { href: '/ada-compliance-restaurants', label: 'Restaurants', desc: 'PDF menus, online ordering, and reservation system ADA compliance for restaurants.' },
+      { href: '/ada-compliance-law-firms', label: 'Law Firms', desc: 'Attorney websites, client intake forms, and legal chatbot ADA compliance.' },
+      { href: '/ada-compliance-dental-offices', label: 'Dental Offices', desc: 'Dental practice website compliance — booking, patient intake forms, and photo galleries.' },
+      { href: '/ada-compliance-for-nonprofits', label: 'Nonprofit Organizations', desc: 'ADA Title III and Section 504 compliance for nonprofit websites and donation forms.' },
+    ]
+  },
+  {
+    heading: 'High-Intent Resources',
+    icon: 'gavel',
+    links: [
+      { href: '/received-ada-demand-letter', label: 'Received an ADA Demand Letter?', desc: '6-step response plan, cost analysis, and how a professional audit helps your defense.' },
+      { href: '/accessibility-overlay-alternatives', label: 'Accessibility Overlay Alternatives', desc: 'Why overlays fail ADA compliance — and what genuine remediation looks like.' },
+    ]
+  },
+  {
+    heading: 'Reference Guides',
+    icon: 'menu_book',
+    links: [
+      { href: '/wcag-2-1-vs-wcag-2-2', label: 'WCAG 2.1 vs WCAG 2.2', desc: 'Detailed comparison of all 9 new WCAG 2.2 success criteria and what changed.' },
+      { href: '/section-508-compliance', label: 'Section 508 Compliance', desc: 'Who must comply, how it differs from ADA, and VPAT requirements for federal contractors.' },
+      { href: '/disabled-access-credit-tax', label: 'IRS Disabled Access Credit', desc: 'How to claim up to $5,000/year in federal tax credits for ADA accessibility costs.' },
+    ]
+  },
+];
+---
+
+<BaseLayout
+  title="Sitemap — All Pages | complyTech ADA Compliance"
+  description="Complete sitemap of complyTech — ADA compliance audits, industry guides, WCAG resources, and accessibility tools for US small businesses."
+  canonical={`${DOMAIN}/sitemap`}
+  schema={schema}
+  keywords="complyTech sitemap, ADA compliance pages, website accessibility resources"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero sitemap-hero" aria-labelledby="sitemap-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Sitemap</span>
+      </nav>
+      <h1 id="sitemap-h1">Site Map</h1>
+      <p class="hero-sub">Every page on complyTech, organized by category. Use this to find ADA compliance guides, industry-specific resources, and our service pages.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="sitemap-grid">
+        {sections.map((section) => (
+          <div class="sitemap-section">
+            <h2 class="sitemap-heading">
+              <span class="material-symbols-outlined section-icon" aria-hidden="true">{section.icon}</span>
+              {section.heading}
+            </h2>
+            <ul class="sitemap-links" role="list">
+              {section.links.map((link) => (
+                <li class="sitemap-item">
+                  <a href={link.href} class="sitemap-link">
+                    <span class="link-label">{link.label}</span>
+                    <span class="link-url">{DOMAIN}{link.href}</span>
+                  </a>
+                  <p class="link-desc">{link.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- XML Sitemap callout -->
+      <div class="xml-callout" role="note">
+        <span class="material-symbols-outlined" aria-hidden="true">travel_explore</span>
+        <div>
+          <strong>For search engines:</strong> The machine-readable XML sitemap is available at{' '}
+          <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">adacomplianceservices.tech/sitemap.xml</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .sitemap-hero {
+    padding: 60px 0 48px;
+  }
+  .sitemap-hero h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin: 12px 0 14px;
+  }
+
+  /* Grid layout */
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 56px;
+  }
+
+  /* Section */
+  .sitemap-section { display: flex; flex-direction: column; gap: 0; }
+  .sitemap-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-lt);
+    margin-bottom: 4px;
+  }
+  .section-icon { font-size: 1.1rem; color: var(--accent-2); }
+
+  /* Links */
+  .sitemap-links { list-style: none; display: flex; flex-direction: column; }
+  .sitemap-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sitemap-item:last-child { border-bottom: none; }
+  .sitemap-link {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+  .link-label {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--accent-2);
+    transition: color 0.15s;
+  }
+  .sitemap-link:hover .link-label { color: var(--accent); text-decoration: underline; }
+  .link-url {
+    font-size: 0.75rem;
+    color: var(--ink-4);
+    font-family: monospace;
+  }
+  .link-desc {
+    font-size: 0.83rem;
+    color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* XML callout */
+  .xml-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .xml-callout .material-symbols-outlined { color: var(--accent-2); flex-shrink: 0; margin-top: 1px; }
+  .xml-callout a { color: var(--accent-2); font-weight: 500; }
+  .xml-callout a:hover { color: var(--accent); }
+
+  @media (max-width: 800px) {
+    .sitemap-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

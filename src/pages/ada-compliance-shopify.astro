@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Shopify ADA Compliance Audit",
+    "description": "Professional WCAG 2.2 accessibility audit for Shopify stores. Covers themes, checkout, apps, product pages, and cart flows to protect against ADA lawsuits.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "Shopify Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is Shopify ADA compliant by default?", "acceptedAnswer": { "@type": "Answer", "text": "No. Shopify platform code has some baseline accessibility features, but no Shopify theme — including Shopify's own Dawn theme — is fully WCAG 2.2 Level AA compliant out of the box. Accessibility varies significantly by theme version, customization, and installed apps. Third-party Shopify apps are major sources of accessibility failures, as they inject code outside of Shopify's accessibility review process." } },
+      { "@type": "Question", "name": "Can Shopify accessibility apps make my store ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "No. Shopify accessibility overlay apps work the same way as standalone overlay products — they apply presentation-layer patches that cannot fix underlying code barriers. Courts have rejected overlay products as insufficient remediation. Installing an accessibility app from the Shopify App Store does not protect your store from ADA lawsuits. A manual WCAG 2.2 audit of your specific store implementation is required." } },
+      { "@type": "Question", "name": "What Shopify apps cause the most ADA accessibility issues?", "acceptedAnswer": { "@type": "Answer", "text": "The most common ADA accessibility problem sources in Shopify stores are: popup and email capture apps, review and rating apps, loyalty and rewards apps, subscription apps, live chat widgets, and custom upsell components. These third-party apps typically add inaccessible UI elements without the store owner's knowledge. Any app that adds interactive elements to your storefront should be accessibility-tested." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "E-commerce", "item": `${DOMAIN}/ada-compliance-ecommerce-websites` },
+      { "@type": "ListItem", "position": 3, "name": "Shopify", "item": `${DOMAIN}/ada-compliance-shopify` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Is Shopify ADA compliant by default?", answer: "No. Shopify has built some accessibility features into its platform, but no theme — including Shopify's own Dawn theme — is fully WCAG 2.2 Level AA compliant by default. Accessibility varies significantly by theme, customization code, and installed apps. Third-party Shopify apps are major sources of accessibility failures because they inject code outside of Shopify's accessibility review process." },
+  { question: "Can Shopify accessibility apps make my store ADA compliant?", answer: "No. Shopify accessibility overlay apps (AudioEye, UserWay, Accessibly, etc.) apply presentation-layer patches that cannot fix underlying code barriers in your theme or apps. Courts have rejected overlay products as insufficient remediation. Installing an accessibility app from the Shopify App Store does not protect you from ADA lawsuits. A manual WCAG 2.2 audit of your specific store implementation is required." },
+  { question: "What Shopify apps cause the most accessibility issues?", answer: "The most common ADA accessibility problem sources in Shopify stores are: popup and email capture apps (Privy, Klaviyo popups), review apps (Yotpo, Judge.me), loyalty apps (LoyaltyLion, Smile), subscription apps (Recharge), live chat widgets (Gorgias, Tidio), and custom upsell components. These add inaccessible UI elements without your knowledge." },
+  { question: "Does Shopify's checkout meet ADA requirements?", answer: "Shopify's built-in checkout (Shopify Checkout) has improved accessibility significantly in recent versions, particularly for Shopify Plus merchants with checkout extensibility. However, custom checkout modifications, payment method fields, and custom order confirmation pages require testing. Many stores fail specifically on shipping method selection and address form error handling." },
+  { question: "How much does a Shopify ADA compliance audit cost?", answer: "A Shopify accessibility audit for a standard store (under 50 unique page templates) typically costs $1,500–$3,500. E-commerce stores with 50–200 pages, complex filtering, and custom checkout flows cost $3,500–$7,500. Rush audits are available. Most Shopify merchants qualify for the IRS Disabled Access Credit (50% back, up to $5,000)." }
+];
+
+const appCategories = [
+  { category: 'Popup & Email Capture', examples: 'Privy, Klaviyo Popups, Justuno', risk: '🔴 High', issue: 'Focus trapping, keyboard inaccessible close buttons' },
+  { category: 'Reviews & Ratings', examples: 'Yotpo, Judge.me, Loox', risk: '🟡 Medium', issue: 'Star rating inputs lack ARIA, review forms have label issues' },
+  { category: 'Loyalty & Rewards', examples: 'LoyaltyLion, Smile.io, Rise.ai', risk: '🔴 High', issue: 'Points popups, notification modals have focus management failures' },
+  { category: 'Subscriptions', examples: 'Recharge, Bold Subscriptions', risk: '🟡 Medium', issue: 'Subscription frequency selectors often fail keyboard nav' },
+  { category: 'Live Chat', examples: 'Gorgias, Tidio, Zendesk', risk: '🟡 Medium', issue: 'Chat launchers lack accessible names; open state not announced' },
+  { category: 'Upsell & Cross-sell', examples: 'ReConvert, CartHook', risk: '🔴 High', issue: 'Post-purchase flows frequently break keyboard navigation' },
+  { category: 'Product Customization', examples: 'Infinite Options, Bold Product Options', risk: '🔴 High', issue: 'Custom option selectors lack labels and ARIA attributes' },
+];
+---
+
+<BaseLayout
+  title="Shopify ADA Compliance: Is Your Store Accessible? | complyTech"
+  description="Shopify themes and apps are not ADA compliant by default. Our WCAG 2.2 audit covers your theme, checkout, and all installed apps. Protect your Shopify store from ADA lawsuits."
+  canonical={`${DOMAIN}/ada-compliance-shopify`}
+  schema={schema}
+  keywords="Shopify ADA compliance, is Shopify ADA compliant, Shopify accessibility audit, Shopify WCAG compliance, Shopify store ADA lawsuit"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/ada-compliance-ecommerce-websites">E-commerce</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Shopify</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">storefront</span>
+        Shopify · WooCommerce · Magento · All Platforms
+      </div>
+      <h1 id="page-h1">Is Your Shopify Store ADA Compliant?</h1>
+      <p class="hero-sub">No Shopify theme is WCAG 2.2 compliant by default — and third-party apps make it worse. Our manual expert audit covers your specific theme, checkout, and every installed app that adds UI components to your storefront.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-shopify-cta">Audit My Shopify Store</a>
+        <a href="#apps" class="btn btn-outline-light btn-lg">See High-Risk Apps</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — Shopify ADA Compliance</div>
+            <ul>
+              <li>No Shopify theme — including Dawn — is fully WCAG 2.2 AA compliant out of the box.</li>
+              <li>Third-party apps (popups, reviews, loyalty, chat) are the #1 source of ADA violations in Shopify stores.</li>
+              <li>Shopify accessibility overlay apps (Accessibly, UserWay) don't fix your underlying code — courts reject them.</li>
+              <li>Shopify Checkout has improved but still requires testing for custom modifications.</li>
+              <li>An audit of your specific store (theme + apps) is the only way to know your actual compliance status.</li>
+            </ul>
+          </div>
+
+          <h2>Why Shopify Stores Are Not ADA Compliant by Default</h2>
+          <p><strong>Shopify ADA compliance</strong> is not a checkbox you can mark off after choosing a theme. Shopify provides a platform — but platform code, your chosen theme, your customizations, and every installed app all contribute to your store's accessibility status independently.</p>
+          <p>Shopify has invested in accessibility in recent years, particularly with the Dawn theme refresh and Checkout Extensibility improvements. However, a store built on Dawn with 12 third-party apps installed may have 40+ WCAG violations — entirely from the app layer, not from Shopify's own code.</p>
+
+          <h2 id="apps">High-Risk Shopify App Categories</h2>
+          <p>These app categories are the most common sources of ADA accessibility violations in Shopify stores. Every app that adds interactive UI components to your storefront must be accessibility-tested:</p>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Shopify app categories and ADA accessibility risk">
+              <thead>
+                <tr>
+                  <th scope="col">App Category</th>
+                  <th scope="col">Common Examples</th>
+                  <th scope="col">Risk Level</th>
+                  <th scope="col">Common Issue</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appCategories.map((row) => (
+                  <tr>
+                    <td><strong>{row.category}</strong></td>
+                    <td class="small-text">{row.examples}</td>
+                    <td>{row.risk}</td>
+                    <td class="small-text">{row.issue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>What Our Shopify Audit Covers</h2>
+          <ul>
+            <li><strong>Theme audit</strong> — header, footer, navigation, typography, color contrast across all templates</li>
+            <li><strong>Product pages</strong> — galleries, variant selectors, add to cart, quantity inputs, reviews</li>
+            <li><strong>Collection pages</strong> — filtering, sorting, pagination, product grids</li>
+            <li><strong>Search</strong> — search field, predictive search dropdown, results page</li>
+            <li><strong>Cart</strong> — line items, quantity update, remove, coupon code, proceed to checkout</li>
+            <li><strong>Checkout</strong> — contact info, shipping, payment, order confirmation</li>
+            <li><strong>Account pages</strong> — login, register, order history, account settings</li>
+            <li><strong>Installed apps</strong> — every app that renders UI components is tested</li>
+          </ul>
+
+          <div class="danger-box">
+            <p><strong>Warning about Shopify accessibility overlay apps:</strong> Apps like "Accessibly", "UserWay", and similar products in the Shopify App Store are accessibility overlay products. They apply presentation-layer patches that cannot fix your theme or app code barriers. Installing one of these apps does not provide legal protection. Multiple courts have rejected overlay evidence in ADA cases.</p>
+          </div>
+
+          <h2 id="faq-shopify">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Shopify Store Audit</h4>
+            <p>Send us your store URL on WhatsApp and get a quote within 1 business day — including scope, timeline, and exact pricing.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my Shopify store.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-shopify-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-ecommerce-websites">E-commerce ADA Guide</a></li>
+              <li><a href="/accessibility-overlay-alternatives">Why Overlay Apps Don't Work</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Audit Your Shopify Store for ADA Compliance" subtext="Send us your store URL and get a WCAG 2.2 audit quote within 1 business day. We test your theme, checkout flow, and every installed app — not just what automated scanners can find." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .small-text { font-size: 0.82rem; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

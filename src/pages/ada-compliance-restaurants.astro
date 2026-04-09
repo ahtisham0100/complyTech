@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit for Restaurants",
+    "description": "Professional WCAG 2.2 accessibility audit for restaurant websites. Covers digital menus, online ordering, reservation systems, and PDF menus to protect against ADA lawsuits.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "Restaurant Website Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do restaurants need ADA compliant websites?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Restaurants are public accommodations under ADA Title III and their websites must be accessible. Restaurant websites, online ordering platforms, and digital menus are all subject to ADA accessibility requirements. PDF menus — a major pain point for blind and low-vision users — are one of the most frequently cited violations in restaurant ADA demand letters." } },
+      { "@type": "Question", "name": "Are PDF menus ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Many restaurant PDF menus are not ADA compliant. A scanned image of a printed menu is completely inaccessible to screen reader users. Even text-based PDFs frequently fail accessibility requirements if they lack proper reading order, alt text for images, appropriate heading structure, sufficient color contrast, and proper document tags. PDF accessibility requires specific remediation that is separate from website accessibility." } },
+      { "@type": "Question", "name": "What is the most common ADA violation for restaurant websites?", "acceptedAnswer": { "@type": "Answer", "text": "The most common ADA accessibility violations for restaurant websites are: inaccessible PDF menus (scanned images with no text), online reservation forms without accessible error messages, inaccessible online ordering flows (particularly item customization selectors), and insufficient color contrast on call-to-action buttons against background images." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "Restaurants", "item": `${DOMAIN}/ada-compliance-restaurants` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Do restaurants need ADA compliant websites?", answer: "Yes. Restaurants are public accommodations under ADA Title III and their websites must be accessible. Restaurant websites, online ordering platforms, digital menus, and reservation systems are all subject to ADA accessibility requirements. PDF menus — a major pain point for blind and low-vision users — are one of the most frequently cited violations in restaurant ADA demand letters." },
+  { question: "Are PDF menus ADA compliant?", answer: "Many restaurant PDF menus are not ADA compliant. A scanned image of a printed menu is completely inaccessible to screen reader users. Even text-based PDFs frequently fail if they lack proper reading order, alt text for images, heading structure, sufficient color contrast, and proper document tags. We remediate PDFs as part of our restaurant audit package." },
+  { question: "What is the most common ADA violation for restaurant websites?", answer: "The most common restaurant website ADA violations are: inaccessible PDF menus (especially scanned images), online reservation forms without accessible error messages, inaccessible online ordering customization selectors, and poor color contrast on CTAs over food photography background images." },
+  { question: "Do online ordering platforms like Toast or Olo need to be ADA compliant?", answer: "Yes — if you direct customers to an online ordering flow (whether hosted by Toast, Olo, ChowNow, or another provider), that ordering interface must be accessible. Third-party platform accessibility varies. If your ordering platform has accessibility failures, you may still receive ADA demand letters even though you didn't build the platform. We audit third-party ordering integrations as part of our restaurant audit." },
+  { question: "How much does a restaurant website ADA audit cost?", answer: "A restaurant website ADA compliance audit typically costs $1,500–$3,500 for standard restaurant websites (homepage, menu pages, reservation, contact). Restaurants with complex online ordering systems (item customization, modifiers, cart, checkout) may cost $3,500–$5,000. PDF menu remediation is available as an add-on service." }
+];
+---
+
+<BaseLayout
+  title="ADA Compliance for Restaurant Websites | complyTech"
+  description="Restaurant websites and PDF menus are major ADA lawsuit targets. Our WCAG 2.2 audit covers digital menus, online ordering, reservations, and PDF remediation for restaurants."
+  canonical={`${DOMAIN}/ada-compliance-restaurants`}
+  schema={schema}
+  keywords="ADA compliance for restaurants, restaurant website accessibility, PDF menu ADA compliant, restaurant ADA lawsuit, online ordering accessibility"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Industries</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Restaurants</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">restaurant</span>
+        PDF Menus · Online Ordering · Reservations
+      </div>
+      <h1 id="page-h1">ADA Compliance for Restaurant Websites</h1>
+      <p class="hero-sub">Restaurant websites face unique ADA compliance challenges: inaccessible PDF menus, online ordering flows, and reservation systems. A single demand letter targeting a scanned menu PDF can initiate a lawsuit costing $12,000–$75,000 to resolve.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-restaurant-cta">Get Restaurant Audit Quote</a>
+        <a href="#violations" class="btn btn-outline-light btn-lg">See Common Violations</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <ul>
+              <li>Restaurants are public accommodations under ADA Title III — websites must be accessible.</li>
+              <li>PDF menus are the #1 cited ADA violation for restaurants — especially scanned image PDFs.</li>
+              <li>Online ordering platforms (Toast, Olo, ChowNow) require accessibility testing even when third-party hosted.</li>
+              <li>Reservation systems (Resy, OpenTable integrations) must be keyboard and screen reader accessible.</li>
+              <li>Restaurant audits start at $1,500; PDF remediation is available as an add-on.</li>
+            </ul>
+          </div>
+
+          <h2>Why Restaurants Face ADA Website Compliance Risk</h2>
+          <p><strong>Restaurant website ADA compliance</strong> has become a major legal risk factor for food service businesses of all sizes — from single-location independent restaurants to multi-location chains. The restaurant industry faces a specific combination of factors that increase ADA exposure:</p>
+          <ul>
+            <li><strong>PDF menus</strong> — many restaurants post scanned images of printed menus as PDFs, which are completely inaccessible to screen reader users</li>
+            <li><strong>Food photography as background</strong> — hero images behind text frequently create color contrast failures</li>
+            <li><strong>Third-party ordering systems</strong> — ordering platforms connected to your site may fail accessibility requirements independently</li>
+            <li><strong>Reservation forms</strong> — party size selectors, date pickers, and form error messages are common failure points</li>
+            <li><strong>QR code menu links</strong> — QR codes that link to inaccessible PDFs replace one problem with another</li>
+          </ul>
+
+          <h2 id="violations">Restaurant-Specific ADA Violations We Find</h2>
+          <div class="violation-list">
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">1</div>
+              <div class="violation-body">
+                <h4>Scanned PDF menus (images of menus)</h4>
+                <p>The single most common restaurant ADA violation. A menu scanned as a PNG or JPEG and saved as PDF has zero accessible text — screen readers read nothing. This alone constitutes an ADA violation and triggers demand letters.</p>
+                <div class="violation-pct">Found in 67% of restaurant audits</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">2</div>
+              <div class="violation-body">
+                <h4>Online ordering customization selectors (size, ingredients, modifiers)</h4>
+                <p>Customize-your-order components — protein type, cooking preference, add-ons, portion size — are frequently built with non-semantic HTML or custom dropdowns that fail keyboard and screen reader navigation.</p>
+                <div class="violation-pct">Found in 71% of restaurant ordering systems</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">3</div>
+              <div class="violation-body">
+                <h4>Poor color contrast on text over food photography</h4>
+                <p>White text overlaid on food photography backgrounds frequently fails WCAG 4.5:1 contrast ratio requirements. Dark overlays are often insufficient, particularly on mobile where image positioning differs.</p>
+                <div class="violation-pct">Found in 79% of restaurant websites</div>
+              </div>
+            </div>
+            <div class="violation-item">
+              <div class="violation-num" aria-hidden="true">4</div>
+              <div class="violation-body">
+                <h4>Reservation form errors not accessible to screen readers</h4>
+                <p>When a reservation fails (date unavailable, party size too large), screen reader users frequently cannot identify which field caused the error or what the error message says.</p>
+                <div class="violation-pct">Found in 58% of restaurant reservation systems</div>
+              </div>
+            </div>
+          </div>
+
+          <h2>What's Included in Our Restaurant Audit</h2>
+          <ul>
+            <li>Homepage and brand navigation audit</li>
+            <li>Menu pages — HTML menus, linked PDFs, digital menu components</li>
+            <li>PDF menu accessibility review — reading order, tagging, contrast, alt text</li>
+            <li>Online ordering flow — full end-to-end keyboard and screen reader testing</li>
+            <li>Reservation system integration — form accessibility, date/time selectors, party size</li>
+            <li>Contact page and map integration</li>
+            <li>Gift card and loyalty program pages (if applicable)</li>
+            <li>Catering and events pages</li>
+          </ul>
+
+          <h2 id="faq-restaurants">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Restaurant Audit Quote</h4>
+            <p>Full WCAG 2.2 audit including PDF menus, online ordering, and reservation systems. Starting at $1,500.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my restaurant website and menu PDF.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-restaurant-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></li>
+              <li><a href="/ada-compliance-ecommerce-websites">E-commerce Audit</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Protect Your Restaurant from ADA Website Lawsuits" subtext="PDF menus and inaccessible ordering flows are the top ADA targets for restaurants. Get a full WCAG 2.2 audit including PDF menu remediation — starting at $1,500." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

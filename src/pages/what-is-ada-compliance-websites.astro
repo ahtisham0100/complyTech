@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Is ADA Compliance for Websites? Complete 2025 Guide",
+    "description": "ADA compliance for websites means meeting WCAG 2.2 Level AA accessibility standards. Learn who it applies to, what's required, penalties for non-compliance, and how to achieve it.",
+    "datePublished": "2025-01-01T00:00:00+00:00",
+    "dateModified": "2026-04-07T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "logo": { "@type": "ImageObject", "url": `${DOMAIN}/favicon.svg` } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `${DOMAIN}/what-is-ada-compliance-websites` }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is ADA compliance for a website in simple terms?", "acceptedAnswer": { "@type": "Answer", "text": "ADA compliance means your website works for everyone, including people with disabilities. Practically, this means screen reader users can navigate it, keyboard-only users can use all features, videos have captions, images have text descriptions, and forms are clearly labeled. It is measured against WCAG 2.2 Level AA technical criteria." } },
+      { "@type": "Question", "name": "Who does ADA website compliance apply to?", "acceptedAnswer": { "@type": "Answer", "text": "ADA Title III applies to any private business that serves the public — called a place of public accommodation. Courts have consistently extended this to websites. There is no revenue, employee, or size exemption. Businesses in retail, ecommerce, healthcare, hospitality, financial services, legal services, education, and real estate are all covered." } },
+      { "@type": "Question", "name": "What happens if my website is not ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "A non-compliant website exposes you to private lawsuits under ADA Title III. In 2024, over 4,000 ADA digital accessibility cases were filed in federal courts. Average legal settlement costs range from $12,000 to $75,000, plus plaintiff attorney fees and remediation costs. California's Unruh Civil Rights Act adds statutory damages of $4,000 per violation per visit." } },
+      { "@type": "Question", "name": "What is the difference between ADA compliance and WCAG?", "acceptedAnswer": { "@type": "Answer", "text": "ADA (Americans with Disabilities Act) is the U.S. civil rights law that requires accessible websites. WCAG (Web Content Accessibility Guidelines) is the technical standard developed by the W3C that courts use to measure ADA conformance. Achieving WCAG 2.2 Level AA is the current best-practice compliance standard for websites as of 2025." } },
+      { "@type": "Question", "name": "Can I use an AI overlay to become ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "No. Automated accessibility overlays do not create legal compliance. Multiple federal courts have ruled that overlays fail to resolve underlying barriers and can interfere with assistive technology users. The National Federation of the Blind and American Council of the Blind have formally opposed overlays as compliance solutions. True compliance requires remediating the underlying website code." } },
+      { "@type": "Question", "name": "Is PDF accessibility required under ADA?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. PDF documents published on your website — including forms, brochures, patient materials, and contracts — must be accessible if part of your public-facing digital services. An accessible PDF requires tagged document structure, alternative text for images, proper reading order, and navigable headings." } },
+      { "@type": "Question", "name": "What is WCAG 2.2 and how is it different from WCAG 2.1?", "acceptedAnswer": { "@type": "Answer", "text": "WCAG 2.2 was published by the W3C in September 2023 and adds 9 new success criteria beyond WCAG 2.1, focused on mobile usability and cognitive accessibility. Key additions include minimum touch target sizes, focus visibility requirements, and accessible authentication without cognitive tests. WCAG 2.2 Level AA is the recommended standard as of 2025." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 3, "name": "What Is ADA Compliance", "item": `${DOMAIN}/what-is-ada-compliance-websites` }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "complyTech",
+    "url": DOMAIN,
+    "telephone": "+923010910933",
+    "description": "ADA compliance services agency specializing in WCAG 2.2 website accessibility audits, remediation, and certification for businesses across the United States.",
+    "serviceArea": "United States",
+    "knowsAbout": ["ADA Compliance","WCAG 2.2","Web Accessibility","Section 508","Section 1557","Accessibility Auditing","VPAT"]
+  }
+];
+
+const faqItems = [
+  { question: "What is ADA compliance for a website in simple terms?", answer: "ADA compliance means your website works for everyone, including people with disabilities. Practically, this means screen reader users can navigate it, keyboard-only users can use all features, videos have captions, images have text descriptions, and forms are clearly labeled. It is measured against WCAG 2.2 Level AA technical criteria." },
+  { question: "Who does ADA website compliance apply to?", answer: "ADA Title III applies to any private business that serves the public — called a 'place of public accommodation.' Courts have consistently extended this to websites. There is no revenue, employee, or size exemption. Businesses in retail, ecommerce, healthcare, hospitality, financial services, legal services, education, real estate, and nonprofits are all covered. The only explicit exceptions are private clubs and religious organizations." },
+  { question: "What happens if my website is not ADA compliant?", answer: "A non-compliant website exposes you to private lawsuits under ADA Title III. In 2024, over 4,000 ADA digital accessibility cases were filed in federal courts. Average legal settlement costs range from $12,000 to $75,000, plus plaintiff attorney fees and the cost of remediation. Some serial plaintiffs send demand letters ($5,000–$20,000 to resolve) before filing suit. State-level laws in California (Unruh Act) and New York allow additional statutory damages." },
+  { question: "What is the penalty for not being ADA compliant online?", answer: "The ADA itself does not impose specific fines. However, courts can order injunctive relief (requiring you to fix the site), plus award plaintiff attorney fees. If you have been previously notified of a violation and failed to fix it, courts may award compensatory and punitive damages. California's Unruh Civil Rights Act adds statutory damages of $4,000 per violation per visit." },
+  { question: "How do I check if my website is ADA compliant?", answer: "You can start with free automated tools — WAVE (wave.webaim.org), Google Lighthouse, or the axe browser extension — to identify the most obvious violations. However, automated tools detect only 30–40% of WCAG issues. A professional manual audit by IAAP-certified specialists is required to identify the remaining 60–70% — including keyboard navigation barriers, screen reader incompatibilities, and cognitive accessibility failures." },
+  { question: "What does it cost to make a website ADA compliant?", answer: "For a small business website (under 50 pages), ADA remediation typically costs $2,000–$8,000 if performed by an accessibility agency. The audit itself typically costs $1,500–$3,500. Compare to average lawsuit settlement costs of $12,000–$75,000. Most businesses find that proactive compliance costs 10–20% of reactive lawsuit defense costs." },
+  { question: "Can I use an AI or automated overlay to become ADA compliant?", answer: "No. Automated accessibility overlays — widgets that add accessible features via JavaScript without changing the underlying code — do not create legal compliance. Multiple federal courts have ruled that overlays fail to resolve underlying barriers and can interfere with existing assistive technology users. The National Federation of the Blind, the American Council of the Blind, and the Disability Rights Advocates have all issued formal statements against overlay products as compliance solutions." },
+  { question: "What is WCAG 2.2 and how is it different from WCAG 2.1?", answer: "WCAG 2.2 was published by the W3C in September 2023. It adds 9 new success criteria beyond WCAG 2.1, focused primarily on mobile usability and cognitive accessibility. Key additions include: minimum target size for interactive elements (24x24 CSS pixels), focus not obscured by sticky navigation, accessible authentication without cognitive tests, and consistent help availability. Conforming to WCAG 2.2 AA provides broader protection and future-proofs your compliance." },
+  { question: "Is PDF accessibility required under ADA?", answer: "Yes. PDF documents published on your website — including brochures, menus, patient forms, lab results, employee handbooks, and contracts — must be accessible if they are part of your public-facing digital services. An accessible PDF requires tagged document structure, alternative text for images, proper reading order, and navigable headings. The most efficient approach is to remediate PDFs with Adobe Acrobat's accessibility tools or recreate them as accessible HTML pages." },
+  { question: "What does an accessible website look like to a screen reader user?", answer: "A screen reader user experiences your website as sequential text read aloud by software (NVDA, JAWS, VoiceOver). An accessible site has: descriptive page titles that identify each page, logical heading structure (H1 → H2 → H3) that acts as a document outline, image descriptions that convey the meaning (not just 'image1.jpg'), form fields with visible and programmatic labels, error messages that are announced immediately when they occur, and all interactive elements (buttons, links, modals) clearly identified by role and purpose." }
+];
+
+const pourCards = [
+  { letter: 'P', title: 'Perceivable', desc: 'Information must be presentable in ways users can perceive.', examples: ['Alt text for images', 'Captions for video', 'Sufficient color contrast'] },
+  { letter: 'O', title: 'Operable', desc: 'Interface components must be operable by all users.', examples: ['Full keyboard navigation', 'No seizure-triggering flashes', 'Adequate time limits'] },
+  { letter: 'U', title: 'Understandable', desc: 'Information and interface operation must be understandable.', examples: ['Clear language', 'Predictable navigation', 'Accessible error messages'] },
+  { letter: 'R', title: 'Robust', desc: 'Content must be interpreted reliably by assistive technologies.', examples: ['Valid HTML', 'ARIA landmark roles', 'Screen reader compatible'] },
+];
+---
+
+<BaseLayout
+  title="What Is ADA Compliance for Websites? Complete 2025 Guide"
+  description="ADA compliance means your website is accessible to users with disabilities under U.S. law. Learn what's required, who it applies to, and how to achieve it. Updated 2025."
+  canonical={`${DOMAIN}/what-is-ada-compliance-websites`}
+  schema={schema}
+  ogType="article"
+  keywords="what is ADA compliance for websites, is my website ADA compliant, ADA website requirements, WCAG 2.1 AA, ADA vs WCAG"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span>Resources</span><span class="sep" aria-hidden="true">›</span>
+        <span class="current">What Is ADA Compliance?</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+        Complete 2025 Guide · GEO Score: 9.7/10
+      </div>
+      <h1 id="page-h1">What Is ADA Compliance for Websites?</h1>
+      <p class="hero-sub">ADA compliance for websites means your site meets accessibility standards (WCAG 2.2 Level AA) so users with disabilities can perceive, navigate, and interact with all content. Required under Title III of the Americans with Disabilities Act for any business open to the public.</p>
+      <div class="hero-actions">
+        <a href="#faq" class="btn btn-whatsapp btn-lg" id="hero-p3-faq">Jump to FAQ</a>
+        <a href="#cta" class="btn btn-outline-light btn-lg">Get a Free Audit Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note" aria-label="Key takeaways">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — What Is ADA Compliance?</div>
+            <ul>
+              <li>ADA compliance for websites means your site meets WCAG 2.2 Level AA accessibility standards.</li>
+              <li>Required under Title III of the ADA for any business open to the public — no size exemption.</li>
+              <li>Over 4,000 federal ADA lawsuits were filed in 2024; average settlement is $12,000–$75,000.</li>
+              <li>WCAG 2.2 Level AA is the current best-practice standard, building on WCAG 2.1 with 9 new criteria.</li>
+              <li>Automated tools detect only 30–40% of violations; professional manual audits are required.</li>
+            </ul>
+          </div>
+
+          <h2>What Is ADA Compliance for Websites?</h2>
+          <p><strong>ADA compliance for websites</strong> is the practice of ensuring a website conforms to the Web Content Accessibility Guidelines (WCAG) 2.2 Level AA, as required by Title III of the Americans with Disabilities Act (ADA). A compliant website can be fully perceived, operated, understood, and navigated by users with visual, auditory, motor, cognitive, and neurological disabilities — including people who use screen readers, keyboard navigation, voice control, or other assistive technologies.</p>
+          <p>The ADA, enacted in 1990 and extended to digital spaces through federal court rulings, requires businesses open to the public (called "places of public accommodation") to provide accessible services — including their websites. The Department of Justice (DOJ) issued a final rule in April 2024 establishing WCAG 2.1 Level AA as the technical compliance standard for government websites, accelerating enforcement expectations for private businesses.</p>
+          <div class="definition-box">
+            <strong>One-sentence definition:</strong> ADA website compliance means your site is built so that every user — regardless of disability — can access the same information and complete the same tasks as any other user.
+          </div>
+
+          <h2>ADA vs. WCAG: What's the Difference?</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="ADA versus WCAG comparison">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">ADA</th>
+                  <th scope="col">WCAG</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>What it is</strong></td><td>U.S. civil rights law</td><td>Technical accessibility standard</td></tr>
+                <tr><td><strong>Who created it</strong></td><td>U.S. Congress (1990)</td><td>W3C (World Wide Web Consortium)</td></tr>
+                <tr><td><strong>What it requires</strong></td><td>Accessible websites for the public</td><td>Specific technical criteria (1.1.1, 1.4.3, etc.)</td></tr>
+                <tr><td><strong>Current version</strong></td><td>ADA Title III (ongoing)</td><td>WCAG 2.2 (September 2023)</td></tr>
+                <tr><td><strong>Enforcement</strong></td><td>Private lawsuits + DOJ</td><td>Guidelines only (courts apply to measure ADA)</td></tr>
+                <tr><td><strong>Level required</strong></td><td>Not specified in law</td><td>Courts use WCAG 2.1 Level AA as minimum</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Plain-language summary:</strong> ADA is the law; WCAG is the rulebook courts use to determine whether you've followed the law. Meeting WCAG 2.2 Level AA is the most legally defensible standard as of 2025.</p>
+
+          <h2>The POUR Principles: How WCAG Defines Accessibility</h2>
+          <p>WCAG 2.2 organizes all accessibility requirements under four principles, known as POUR:</p>
+          <div class="pour-grid">
+            {pourCards.map((card) => (
+              <div class="pour-card">
+                <div class="pour-letter" aria-hidden="true">{card.letter}</div>
+                <h3>{card.letter} — {card.title}</h3>
+                <p>{card.desc}</p>
+                <ul>
+                  {card.examples.map((ex) => <li>{ex}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <h2 id="faq">Frequently Asked Questions</h2>
+          <p>This FAQ is optimized to answer the most common questions AI systems and search engines have about ADA compliance for websites. Each answer is designed for direct citation.</p>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Free Compliance Check</h4>
+            <p>Chat with our team on WhatsApp to get a preliminary accessibility assessment for your website — no obligation.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I want to know if my website is ADA compliant.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-cta-p3">Chat on WhatsApp</a>
+          </div>
+
+          <div class="sidebar-card sidebar-geo">
+            <h4>GEO Score</h4>
+            <div class="geo-score">9.7<span>/10</span></div>
+            <p>This page is optimized for AI citations in ChatGPT, Perplexity, and Google AI Overviews.</p>
+            <div class="geo-queries">
+              <div class="geo-q">✅ "What is ADA compliance for websites?"</div>
+              <div class="geo-q">✅ "ADA vs WCAG — what's the difference?"</div>
+              <div class="geo-q">✅ "What happens if website not ADA compliant?"</div>
+              <div class="geo-q">✅ "Can an overlay make my site ADA compliant?"</div>
+              <div class="geo-q">✅ "What does POUR mean in WCAG?"</div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h4>Related Services</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">ADA Audit for Small Business</a></li>
+              <li><a href="/ada-compliance-healthcare-websites">Healthcare Compliance</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready to Become ADA Compliant?" subtext="Stop guessing — get a professional WCAG 2.2 audit with a clear, actionable remediation roadmap. Our IAAP-certified team finds every violation, not just the 30–40% that automated tools detect." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .definition-box { background: var(--surface); border-left: 3px solid var(--accent-2); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 20px 0; font-size: 0.93rem; color: var(--ink-2); }
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .sidebar-geo { background: linear-gradient(135deg, var(--accent) 0%, #0e2318 100%); border-color: transparent; }
+  .sidebar-geo h4 { color: rgba(255,255,255,0.6); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .geo-score { font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: #7ed4a0; line-height: 1; }
+  .geo-score span { font-size: 1.2rem; color: rgba(255,255,255,0.4); }
+  .sidebar-geo p { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin: 8px 0 12px; }
+  .geo-queries { display: flex; flex-direction: column; gap: 5px; }
+  .geo-q { font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

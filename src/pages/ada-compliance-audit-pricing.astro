@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Audit Pricing",
+    "description": "Transparent pricing for professional WCAG 2.2 website accessibility audits. Small business audits start at $495. Full pricing by site size with VPAT and compliance certificate included.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN, "telephone": "+923010910933" },
+    "serviceType": "Website Accessibility Audit",
+    "areaServed": "United States",
+    "offers": [
+      { "@type": "Offer", "name": "Micro Site Audit", "price": "495", "priceCurrency": "USD", "description": "1–10 pages, automated + spot manual review" },
+      { "@type": "Offer", "name": "Small Business Audit", "price": "1500", "priceCurrency": "USD", "description": "11–50 pages, full manual WCAG 2.2 audit" },
+      { "@type": "Offer", "name": "E-commerce Audit", "price": "3500", "priceCurrency": "USD", "description": "50–200 pages, full manual + cart flow audit" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How much does an ADA compliance audit cost for a small business?", "acceptedAnswer": { "@type": "Answer", "text": "ADA compliance audit costs for small businesses range from $495 for a micro-site (1–10 pages) to $7,500 for a full e-commerce audit (50–200 pages). A standard small business site of 11–50 pages typically costs $1,500–$3,500. Compare this to average ADA lawsuit settlement costs of $12,000–$75,000 — audits pay for themselves the first time you avoid a demand letter." } },
+      { "@type": "Question", "name": "Is there a tax credit for ADA website accessibility?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The IRS Disabled Access Credit (Form 8826) allows eligible small businesses to claim 50% of qualified accessibility expenses between $250–$10,250 per year, up to a maximum credit of $5,000 annually. To qualify, your business must have either 30 or fewer full-time employees OR $1 million or less in gross receipts in the preceding tax year." } },
+      { "@type": "Question", "name": "What is included in a complyTech ADA compliance audit?", "acceptedAnswer": { "@type": "Answer", "text": "Every complyTech audit includes: full WCAG 2.2 Level AA manual review, VPAT (Voluntary Product Accessibility Template), prioritized remediation roadmap, developer-ready fix guide with code examples, 60-minute findings walkthrough call, and a compliance certificate after fixes are verified in a re-test audit." } },
+      { "@type": "Question", "name": "Why is an ADA audit cheaper than a lawsuit?", "acceptedAnswer": { "@type": "Answer", "text": "Average ADA website lawsuit settlement costs range from $12,000 to $75,000, plus plaintiff attorney fees typically ranging from $5,000 to $20,000. A professional audit starts at $495. Even the most comprehensive enterprise audit costs a fraction of the legal exposure. Many businesses also qualify for the IRS Disabled Access Credit, which can offset up to $5,000 of accessibility spending." } },
+      { "@type": "Question", "name": "How long does an ADA audit take?", "acceptedAnswer": { "@type": "Answer", "text": "complyTech delivers audit reports in 5–14 business days depending on site size. Micro-sites (1–10 pages) are typically complete in 3–5 days. Small business sites (11–50 pages) take 7–10 days. E-commerce sites (50–200 pages) require 10–14 days for full manual testing. Rush delivery (3–5 day turnaround) is available at a premium." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "ADA Compliance Audit Pricing", "item": `${DOMAIN}/ada-compliance-audit-pricing` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "How much does an ADA compliance audit cost for a small business?", answer: "ADA compliance audit costs for small businesses range from $495 for a micro-site (1–10 pages) to $7,500 for a full e-commerce audit (50–200 pages). A standard small business site of 11–50 pages typically costs $1,500–$3,500. Compare this to average ADA lawsuit settlement costs of $12,000–$75,000 — professional audits pay for themselves the first time you avoid a demand letter." },
+  { question: "Is there a tax credit for ADA website accessibility costs?", answer: "Yes. The IRS Disabled Access Credit (Form 8826) allows eligible small businesses to claim 50% of qualified accessibility expenses between $250–$10,250 per year, up to a maximum credit of $5,000 annually. To qualify: 30 or fewer full-time employees OR $1 million or less in gross receipts in the preceding tax year. Consult your tax advisor." },
+  { question: "What is included in a complyTech audit?", answer: "Every audit includes: full WCAG 2.2 Level AA manual expert review, VPAT documentation, prioritized remediation roadmap, developer-ready fix guide with code examples, 60-minute findings walkthrough call, and a compliance certificate after your fixes are verified in a re-test audit." },
+  { question: "Why is a professional audit cheaper than just waiting?", answer: "Average ADA lawsuit settlement costs range from $12,000 to $75,000, plus plaintiff attorney fees ($5,000–$20,000) and emergency remediation costs under time pressure. A complyTech audit starts at $495. The math is clear: proactive audit cost is 5–15% of reactive lawsuit cost, and you qualify for a federal tax credit on top of that." },
+  { question: "How long does complyTech take to deliver an audit?", answer: "complyTech delivers audit reports in 5–14 business days depending on site size. Micro-sites (1–10 pages): 3–5 days. Small business (11–50 pages): 7–10 days. E-commerce (50–200 pages): 10–14 days. Rush delivery (3–5 days) is available at a premium — ask about availability when you request your quote." }
+];
+
+const pricingTiers = [
+  { tier: 'Micro Site', pages: '1–10 pages', includes: 'Automated + spot manual review', price: '$495–$999', badge: 'Entry', badgeClass: 'badge-gray' },
+  { tier: 'Small Business', pages: '11–50 pages', includes: 'Full manual WCAG 2.2 audit', price: '$1,500–$3,500', badge: 'Most Popular', badgeClass: 'badge-green' },
+  { tier: 'E-commerce', pages: '50–200 pages', includes: 'Full manual + cart/checkout flow', price: '$3,500–$7,500', badge: 'Best Value', badgeClass: 'badge-blue' },
+  { tier: 'Enterprise', pages: '200+ pages', includes: 'Enterprise audit + VPAT + ACR', price: 'Custom Quote', badge: 'Custom', badgeClass: 'badge-dark' },
+];
+
+const deliverables = [
+  { icon: 'description', title: 'WCAG 2.2 Conformance Report', desc: 'Every violation listed with WCAG criterion, severity, and affected page URL' },
+  { icon: 'assignment', title: 'VPAT Document', desc: 'Voluntary Product Accessibility Template — required by enterprise buyers and government clients' },
+  { icon: 'route', title: 'Remediation Roadmap', desc: 'Violations ranked by legal risk and user impact — your developers know exactly where to start' },
+  { icon: 'code', title: 'Developer Fix Guide', desc: 'Code-level instructions with before/after examples for every violation category' },
+  { icon: 'call', title: '60-Minute Walkthrough Call', desc: 'Live review of findings with your team — questions welcome' },
+  { icon: 'workspace_premium', title: 'Compliance Certificate', desc: 'Issued after re-test confirms all violations resolved — dated and audit-referenced' },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance Audit Cost & Pricing 2025 | complyTech"
+  description="Transparent ADA compliance audit pricing starting at $495. See full costs by site size, what's included, and how the IRS Disabled Access Credit saves you up to $5,000."
+  canonical={`${DOMAIN}/ada-compliance-audit-pricing`}
+  schema={schema}
+  keywords="ADA compliance audit cost, website accessibility audit pricing, WCAG audit price, how much does ADA audit cost, disabled access credit"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Pricing</span>
+      </nav>
+      <div class="hero-badge">
+        <span class="material-symbols-outlined" aria-hidden="true">attach_money</span>
+        Transparent Pricing · No Hidden Fees
+      </div>
+      <h1 id="page-h1">ADA Compliance Audit Cost & Pricing</h1>
+      <p class="hero-sub">Unlike competitors who hide pricing behind sales demos, complyTech publishes full pricing by site size. Audits start at <strong style="color:#7ed4a0;">$495</strong>. The average ADA lawsuit settlement costs <strong style="color:#fbbf24;">$12,000–$75,000</strong> — a professional audit pays for itself the first time.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-pricing-cta">Get Your Quote on WhatsApp</a>
+        <a href="#pricing-table" class="btn btn-outline-light btn-lg">See Full Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — Pricing Summary</div>
+            <ul>
+              <li>Micro-site (1–10 pages): <strong>$495–$999</strong></li>
+              <li>Small business (11–50 pages): <strong>$1,500–$3,500</strong></li>
+              <li>E-commerce (50–200 pages): <strong>$3,500–$7,500</strong></li>
+              <li>Enterprise (200+ pages): Custom quote</li>
+              <li>IRS Disabled Access Credit can offset <strong>up to $5,000</strong> of your audit cost</li>
+              <li>Average ADA lawsuit settlement: <strong>$12,000–$75,000</strong> — audit ROI is clear</li>
+            </ul>
+          </div>
+
+          <!-- PRICING TABLE -->
+          <h2 id="pricing-table">ADA Compliance Audit Pricing by Site Size</h2>
+          <p>Pricing for professional WCAG 2.2 Level AA manual expert audits. Every tier includes a full conformance report, VPAT, and remediation roadmap.</p>
+
+          <div class="pricing-grid">
+            {pricingTiers.map((tier) => (
+              <div class={`pricing-card ${tier.badge === 'Most Popular' ? 'pricing-card-featured' : ''}`}>
+                <div class={`pricing-badge ${tier.badgeClass}`}>{tier.badge}</div>
+                <h3>{tier.tier}</h3>
+                <div class="pages-range">{tier.pages}</div>
+                <div class="price-display">{tier.price}</div>
+                <p class="tier-includes">{tier.includes}</p>
+                <a href="#cta" class="btn btn-primary" style="width:100%;justify-content:center;">Get Quote</a>
+              </div>
+            ))}
+          </div>
+
+          <div class="danger-box">
+            <p><strong>Compare to lawsuit cost:</strong> A single ADA demand letter typically leads to $12,000–$75,000 in legal fees and settlement cost, plus emergency remediation under time pressure. At $1,500–$3,500 for a full small business audit, the ROI of proactive compliance is 10:1 minimum.</p>
+          </div>
+
+          <!-- WHAT'S INCLUDED -->
+          <h2 id="deliverables">What's Included in Every Audit</h2>
+          <p>Every complyTech audit at every price tier includes a complete set of deliverables — not just a list of violations.</p>
+
+          <div class="deliverables-grid">
+            {deliverables.map((d) => (
+              <div class="deliverable-card">
+                <span class="material-symbols-outlined deliverable-icon" aria-hidden="true">{d.icon}</span>
+                <div>
+                  <h4>{d.title}</h4>
+                  <p>{d.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- TAX CREDIT -->
+          <h2 id="tax-credit">IRS Disabled Access Credit — Up to $5,000 Back</h2>
+          <p>Many small businesses qualify for a federal tax credit that effectively reduces your audit cost by up to 50%. The <strong>IRS Disabled Access Credit (Form 8826)</strong> allows eligible businesses to claim 50% of qualified accessibility expenditures over $250 and up to $10,250 — for a maximum annual credit of <strong>$5,000</strong>.</p>
+
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Disabled Access Credit eligibility and examples">
+              <thead>
+                <tr>
+                  <th scope="col">Requirement</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Employee size</strong></td><td>30 or fewer full-time employees, OR</td></tr>
+                <tr><td><strong>Revenue limit</strong></td><td>$1 million or less in gross receipts in prior tax year</td></tr>
+                <tr><td><strong>Credit rate</strong></td><td>50% of eligible expenses between $250 and $10,250</td></tr>
+                <tr><td><strong>Maximum credit</strong></td><td>$5,000 per year</td></tr>
+                <tr><td><strong>Form</strong></td><td>IRS Form 8826</td></tr>
+                <tr><td><strong>Example</strong></td><td>$3,500 audit → $1,625 tax credit → effective net cost of $1,875</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="disclaimer-note">⚠️ This information is for educational purposes only and does not constitute tax advice. Consult a qualified tax professional before claiming the credit.</p>
+
+          <!-- ROI Section -->
+          <h2>ADA Audit ROI: Audit vs. Lawsuit Cost Comparison</h2>
+          <div class="roi-visual">
+            <div class="roi-col">
+              <div class="roi-label audit-label">complyTech Audit</div>
+              <div class="roi-price">$1,500–$3,500</div>
+              <ul class="roi-list">
+                <li>✅ Full WCAG 2.2 manual audit</li>
+                <li>✅ VPAT + compliance certificate</li>
+                <li>✅ Developer fix guide</li>
+                <li>✅ Re-test + certificate</li>
+                <li>✅ Federal tax credit eligible</li>
+                <li>✅ 5–14 day delivery</li>
+              </ul>
+            </div>
+            <div class="roi-vs" aria-hidden="true">vs</div>
+            <div class="roi-col roi-col-red">
+              <div class="roi-label lawsuit-label">ADA Lawsuit Settlement</div>
+              <div class="roi-price red">$12,000–$75,000</div>
+              <ul class="roi-list">
+                <li>❌ Plaintiff attorney fees: $5,000–$20,000</li>
+                <li>❌ Your attorney fees: $10,000+</li>
+                <li>❌ Emergency remediation: rushed + expensive</li>
+                <li>❌ Business disruption and stress</li>
+                <li>❌ Potential injunction + monitoring</li>
+                <li>❌ Reputation exposure</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 id="faq-pricing">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Get Your Quote</h4>
+            <p>Tell us your site URL and we'll respond within 1 business day with scope, timeline, and exact pricing.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit pricing quote for my website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-pricing-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card sidebar-green">
+            <h4>Tax Credit Available</h4>
+            <div class="tax-credit-amount">$5,000</div>
+            <p>Max annual IRS Disabled Access Credit for qualifying small businesses. Effectively reduces your audit cost by up to 50%.</p>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Pages</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">ADA Audit for Small Business</a></li>
+              <li><a href="/ada-compliance-healthcare-websites">Healthcare Compliance</a></li>
+              <li><a href="/vpat-documentation-services">VPAT Services</a></li>
+              <li><a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready to Get Your ADA Compliance Audit?" subtext="Get a transparent quote in 1 business day. Pricing starts at $495 — and you may qualify for up to $5,000 in federal tax credits that offset your audit cost." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+  .pricing-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 20px; position: relative; text-align: center; }
+  .pricing-card-featured { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(26,58,42,0.12); }
+  .pricing-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+  .badge-gray { background: #f0f0ed; color: var(--ink-3); }
+  .badge-green { background: var(--accent-lt); color: var(--accent); }
+  .badge-blue { background: #e8f0fe; color: #1a56db; }
+  .badge-dark { background: var(--ink); color: #7ed4a0; }
+  .pricing-card h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .pages-range { font-size: 0.82rem; color: var(--ink-3); margin-bottom: 12px; }
+  .price-display { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .tier-includes { font-size: 0.82rem; color: var(--ink-2); margin-bottom: 16px; min-height: 40px; }
+  .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .deliverable-card { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border-radius: var(--radius-md); padding: 16px; border: 1px solid var(--border); }
+  .deliverable-icon { color: var(--accent-2); font-size: 1.6rem; flex-shrink: 0; }
+  .deliverable-card h4 { font-size: 0.9rem; margin-bottom: 4px; }
+  .deliverable-card p { font-size: 0.82rem; color: var(--ink-2); margin: 0; }
+  .roi-visual { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: start; margin: 24px 0; }
+  .roi-col { background: var(--accent-lt); border-radius: var(--radius-lg); padding: 24px; border: 1px solid rgba(26,58,42,0.15); }
+  .roi-col-red { background: #fdf1f0; border-color: rgba(192,57,43,0.15); }
+  .roi-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .audit-label { color: var(--accent); }
+  .lawsuit-label { color: var(--danger); }
+  .roi-price { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+  .roi-price.red { color: var(--danger); }
+  .roi-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .roi-list li { font-size: 0.85rem; color: var(--ink-2); }
+  .roi-vs { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: var(--ink-3); align-self: center; padding-top: 40px; }
+  .sidebar-green { background: var(--accent); border-color: transparent; }
+  .sidebar-green h4 { color: rgba(255,255,255,0.6); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .tax-credit-amount { font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; color: #7ed4a0; }
+  .sidebar-green p { color: rgba(255,255,255,0.65); font-size: 0.83rem; margin-top: 6px; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  .disclaimer-note { font-size: 0.8rem; color: var(--ink-3); font-style: italic; margin-top: 8px; }
+  @media (max-width: 1000px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    .roi-visual { grid-template-columns: 1fr; }
+    .roi-vs { display: none; }
+  }
+  @media (max-width: 600px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .page-sidebar { grid-template-columns: 1fr; }
+  }
+</style>
