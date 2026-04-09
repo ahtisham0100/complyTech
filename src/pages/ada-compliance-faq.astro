@@ -1,4 +1,6 @@
 ---
+import { HelpCircle, MessageCircle } from 'lucide-react';
+import { HelpCircle, ShieldCheck, CheckCircle2, CircleDollarSign, ClipboardCheck, Gavel, Store } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -96,14 +98,14 @@ const schema = [
 
 interface FAQGroup {
   heading: string;
-  icon: string;
+  icon: any;
   items: { question: string; answer: string }[];
 }
 
 const faqGroups: FAQGroup[] = [
   {
     heading: "ADA Compliance Basics",
-    icon: "help",
+    icon: HelpCircle,
     items: [
       { question: "What is ADA compliance for websites?", answer: "ADA (Americans with Disabilities Act) website compliance means your website meets WCAG 2.2 Level AA accessibility standards so people with disabilities — including users of screen readers, keyboard navigation, and other assistive tech — can fully use your site. ADA Title III requires public accommodations including private businesses to make their digital services accessible." },
       { question: "Does my small business website need to be ADA compliant?", answer: "Yes. Any business that operates as a public accommodation — retail shops, restaurants, service providers, healthcare practices, law firms, e-commerce stores — must provide an accessible website under ADA Title III. There is no size or revenue exemption. Small businesses are the most common targets of ADA demand letters because serial plaintiff law firms use automated tools to scan thousands of sites simultaneously." },
@@ -113,7 +115,7 @@ const faqGroups: FAQGroup[] = [
   },
   {
     heading: "Costs & ROI",
-    icon: "paid",
+    icon: CircleDollarSign,
     items: [
       { question: "How much does ADA compliance cost?", answer: "A professional WCAG 2.2 manual audit starts at $495 (micro-sites, 1–10 pages) and ranges up to $3,500–$7,500 for e-commerce sites (50–200 pages). Most small businesses qualify for the IRS Disabled Access Credit, returning 50% of qualifying costs up to $5,000/year. Compare this to ADA lawsuit settlement costs of $12,000–$75,000 — proactive compliance ROI is 10:1 or better." },
       { question: "Is there a tax credit for ADA website accessibility?", answer: "Yes. The IRS Disabled Access Credit (Form 8826) allows eligible small businesses — 30 or fewer full-time employees OR $1 million or less in prior-year gross receipts — to claim 50% of qualifying access expenditures between $250 and $10,250/year, up to $5,000 annually. Website audits and remediation qualify. Consult your tax advisor to confirm eligibility." },
@@ -122,7 +124,7 @@ const faqGroups: FAQGroup[] = [
   },
   {
     heading: "Our Audit Service",
-    icon: "assignment",
+    icon: ClipboardCheck,
     items: [
       { question: "What is included in a complyTech audit?", answer: "Every complyTech audit includes: full WCAG 2.2 Level AA manual expert review (not automated-only scanning), a VPAT (Voluntary Product Accessibility Template), a prioritized remediation roadmap, a developer-ready fix guide with code examples, a 60-minute findings walkthrough call, and a compliance certificate issued after your fixes are verified in a re-test audit." },
       { question: "How long does an ADA compliance audit take?", answer: "Delivery times: micro-sites (1–10 pages): 3–5 business days. Small business sites (11–50 pages): 7–10 days. E-commerce sites (50–200 pages): 10–14 days. Rush delivery is available — contact us on WhatsApp to discuss availability and pricing." },
@@ -131,7 +133,7 @@ const faqGroups: FAQGroup[] = [
   },
   {
     heading: "Overlays & Lawsuits",
-    icon: "gavel",
+    icon: Gavel,
     items: [
       { question: "Do accessibility overlays like accessiBe make my site ADA compliant?", answer: "No. Courts have consistently rejected overlays as sufficient remediation. The FTC took enforcement action against accessiBe in 2025 for deceptive compliance claims. The National Federation of the Blind formally opposes overlay products. Overlays detect only 20–30% of WCAG violations — the remaining violations persist in your underlying code and create ongoing legal exposure." },
       { question: "I received an ADA demand letter. What do I do?", answer: "Act immediately — do not ignore it. Steps: (1) Note the response deadline (typically 20–30 days). (2) Do NOT contact the plaintiff's attorney directly. (3) Engage an ADA defense attorney. (4) Commission a professional accessibility audit in parallel. (5) Begin code-level remediation — do not install an overlay. (6) Get a re-test audit and compliance certificate. Pre-litigation settlement averages $4,000–$20,000; waiting for a lawsuit escalates to $37,000–$125,000+." },
@@ -140,7 +142,7 @@ const faqGroups: FAQGroup[] = [
   },
   {
     heading: "Industry & Platform Questions",
-    icon: "storefront",
+    icon: Store,
     items: [
       { question: "Is my Shopify or WooCommerce store ADA compliant by default?", answer: "No. Neither Shopify, WooCommerce, Magento, nor any other e-commerce platform is WCAG 2.2 compliant by default. Accessibility varies significantly by theme, customizations, and installed apps. Third-party apps (popups, review widgets, loyalty programs) are major sources of ADA violations in e-commerce stores. A platform-specific audit of your actual store implementation is required." },
       { question: "Do restaurants need ADA compliant websites?", answer: "Yes. Restaurants are public accommodations under ADA Title III. PDF menus are the most frequently cited violation — particularly scanned-image PDFs which are completely inaccessible to screen reader users. Online ordering flows, reservation systems, and food photography backgrounds with text overlays are also common failure points." },
@@ -166,7 +168,7 @@ const faqGroups: FAQGroup[] = [
         <span class="current">ADA Compliance FAQ</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        <HelpCircle className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         20+ Questions · Plain-Language Answers · Updated 2025
       </div>
       <h1 id="page-h1">ADA Compliance FAQ: Your Questions Answered</h1>
@@ -196,7 +198,7 @@ const faqGroups: FAQGroup[] = [
           {faqGroups.map((group, i) => (
             <div id={`faq-${i}`} class="faq-group">
               <h2 class="faq-group-heading">
-                <span class="material-symbols-outlined group-icon" aria-hidden="true">{group.icon}</span>
+                {(() => { const Icon = group.icon; return <Icon className="lucide-icon group-icon" aria-hidden="true" size={24} strokeWidth={2} />; })()}
                 {group.heading}
               </h2>
               <FAQAccordion items={group.items} client:visible />
@@ -213,7 +215,7 @@ const faqGroups: FAQGroup[] = [
               rel="noopener noreferrer"
               id="faq-bottom-cta"
             >
-              <span class="material-symbols-outlined" style="font-size:1.1rem" aria-hidden="true">chat</span>
+              <MessageCircle className="lucide-icon" style="font-size:1.1rem" aria-hidden="true" size={20} strokeWidth={2} />
               Ask on WhatsApp
             </a>
           </div>

@@ -1,4 +1,5 @@
 ---
+import { FileText, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -81,7 +82,7 @@ const steps = [
         <span class="current">PDF Accessibility</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">picture_as_pdf</span>
+        <FileText className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         8-Step Guide · Menus · Forms · Legal Documents
       </div>
       <h1 id="page-h1">How to Make a PDF ADA Compliant: Complete Guide</h1>
@@ -99,7 +100,7 @@ const steps = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>PDFs on public websites must be ADA accessible — menus, forms, brochures, guides all count.</li>
               <li>Scanned PDF images are completely inaccessible — recreate from text-based source when possible.</li>

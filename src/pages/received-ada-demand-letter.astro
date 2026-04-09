@@ -1,4 +1,5 @@
 ---
+import { AlertTriangle, Scale, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -77,7 +78,7 @@ const steps = [
         <span class="current">ADA Demand Letter</span>
       </nav>
       <div class="hero-badge badge-urgent">
-        <span class="material-symbols-outlined" aria-hidden="true">warning</span>
+        <AlertTriangle className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Legal Guidance · Consult an Attorney for Your Specific Situation
       </div>
       <h1 id="page-h1">Received an ADA Website Demand Letter? Here's What to Do.</h1>
@@ -95,12 +96,12 @@ const steps = [
         <article class="prose-section">
 
           <div class="legal-disclaimer" role="note">
-            <span class="material-symbols-outlined" aria-hidden="true">balance</span>
+            <Scale className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             <div><strong>Legal Disclaimer:</strong> This guide is for educational purposes only and does not constitute legal advice. ADA demand letters have serious legal implications. Consult a licensed attorney experienced in ADA Title III website accessibility defense immediately upon receiving a demand letter.</div>
           </div>
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — Immediate Action Steps</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Immediate Action Steps</div>
             <ul>
               <li><strong>Note the response deadline</strong> — typically 20–30 days from letter date</li>
               <li><strong>Do NOT ignore it</strong> — non-response leads to automatic lawsuit filing</li>
@@ -214,7 +215,7 @@ const steps = [
   .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
   .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
   .legal-disclaimer { display: flex; gap: 12px; align-items: flex-start; background: #fffbeb; border: 1px solid #fbbf24; border-radius: var(--radius-md); padding: 14px 16px; font-size: 0.88rem; color: #92400e; margin-bottom: 24px; }
-  .legal-disclaimer .material-symbols-outlined { color: #f59e0b; font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .legal-disclaimer .lucide-icon { color: #f59e0b; font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
   .definition-box { background: var(--surface); border-left: 3px solid var(--accent-2); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 20px 0; font-size: 0.93rem; color: var(--ink-2); }
   .step-red { background: var(--danger) !important; }
   .step-amber { background: #f59e0b !important; }

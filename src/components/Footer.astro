@@ -1,4 +1,5 @@
 ---
+import { ShieldCheck, User, Globe, MessageCircle, MapPin } from 'lucide-react';
 ---
 
 <footer class="site-footer">
@@ -7,7 +8,7 @@
       <!-- Brand -->
       <div class="footer-brand">
         <a href="/" class="nav-logo" style="margin-bottom:14px;display:inline-flex;">
-          <span class="logo-icon material-symbols-outlined" aria-hidden="true">verified_user</span>
+          <ShieldCheck className="lucide-icon logo-icon" aria-hidden="true" size={20} strokeWidth={2} />
           <span class="logo-text">comply<strong>Tech</strong><span class="sr-only"> - ADA Compliance Services</span></span>
         </a>
         <p class="brand-desc">
@@ -56,19 +57,19 @@
         <h2 class="footer-heading">Contact</h2>
         <ul class="footer-contact">
           <li>
-            <span class="material-symbols-outlined" aria-hidden="true">person</span>
+            <User className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             Muhammad Ahtisham Arif
           </li>
           <li>
-            <span class="material-symbols-outlined" aria-hidden="true">language</span>
+            <Globe className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             adacomplianceservices.tech
           </li>
           <li>
-            <span class="material-symbols-outlined" aria-hidden="true">chat</span>
+            <MessageCircle className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             <a href="https://wa.me/923010910933" target="_blank" rel="noopener"><span class="sr-only">Contact us on WhatsApp: </span>+92 301 091 0933</a>
           </li>
           <li>
-            <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+            <MapPin className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             United States (Remote)
           </li>
         </ul>
@@ -162,7 +163,7 @@
     font-size: 0.88rem;
     line-height: 1.4;
   }
-  .footer-contact .material-symbols-outlined {
+  .footer-contact .lucide-icon {
     font-size: 1rem;
     color: #7ed4a0;
     margin-top: 1px;

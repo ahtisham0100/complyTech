@@ -1,4 +1,5 @@
 ---
+import { Compass, Home, ClipboardCheck, Store, Gavel, BookOpen } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -23,14 +24,14 @@ interface SitemapLink {
 }
 interface SitemapSection {
   heading: string;
-  icon: string;
+  icon: any;
   links: SitemapLink[];
 }
 
 const sections: SitemapSection[] = [
   {
     heading: 'Main Pages',
-    icon: 'home',
+    icon: Home,
     links: [
       { href: '/', label: 'Home', desc: 'complyTech — ADA compliance audit services for US small businesses.' },
       { href: '/what-is-ada-compliance-websites', label: 'What Is ADA Compliance?', desc: 'Complete 2025 guide to ADA Title III, WCAG 2.2, and website accessibility law.' },
@@ -40,7 +41,7 @@ const sections: SitemapSection[] = [
   },
   {
     heading: 'Services',
-    icon: 'assignment',
+    icon: ClipboardCheck,
     links: [
       { href: '/ada-compliance-audit-small-business', label: 'ADA Audit for Small Business', desc: 'Full WCAG 2.2 manual audit with VPAT, remediation roadmap, and compliance certificate.' },
       { href: '/ada-compliance-audit-pricing', label: 'Pricing & Tax Credit', desc: 'Transparent audit pricing by site size, ROI analysis, and IRS Disabled Access Credit guide.' },
@@ -51,7 +52,7 @@ const sections: SitemapSection[] = [
   },
   {
     heading: 'Industry Verticals',
-    icon: 'storefront',
+    icon: Store,
     links: [
       { href: '/ada-compliance-healthcare-websites', label: 'Healthcare Websites', desc: 'ADA and Section 1557 compliance for patient portals, telehealth, and appointment systems.' },
       { href: '/ada-compliance-ecommerce-websites', label: 'E-commerce Websites', desc: 'WCAG 2.2 compliance for online stores — product pages, checkout, and cart flows.' },
@@ -64,7 +65,7 @@ const sections: SitemapSection[] = [
   },
   {
     heading: 'High-Intent Resources',
-    icon: 'gavel',
+    icon: Gavel,
     links: [
       { href: '/received-ada-demand-letter', label: 'Received an ADA Demand Letter?', desc: '6-step response plan, cost analysis, and how a professional audit helps your defense.' },
       { href: '/accessibility-overlay-alternatives', label: 'Accessibility Overlay Alternatives', desc: 'Why overlays fail ADA compliance — and what genuine remediation looks like.' },
@@ -72,7 +73,7 @@ const sections: SitemapSection[] = [
   },
   {
     heading: 'Reference Guides',
-    icon: 'menu_book',
+    icon: BookOpen,
     links: [
       { href: '/wcag-2-1-vs-wcag-2-2', label: 'WCAG 2.1 vs WCAG 2.2', desc: 'Detailed comparison of all 9 new WCAG 2.2 success criteria and what changed.' },
       { href: '/section-508-compliance', label: 'Section 508 Compliance', desc: 'Who must comply, how it differs from ADA, and VPAT requirements for federal contractors.' },
@@ -108,7 +109,7 @@ const sections: SitemapSection[] = [
         {sections.map((section) => (
           <div class="sitemap-section">
             <h2 class="sitemap-heading">
-              <span class="material-symbols-outlined section-icon" aria-hidden="true">{section.icon}</span>
+              {(() => { const Icon = section.icon; return <Icon className="lucide-icon section-icon" aria-hidden="true" size={20} strokeWidth={2} />; })()}
               {section.heading}
             </h2>
             <ul class="sitemap-links" role="list">
@@ -128,7 +129,7 @@ const sections: SitemapSection[] = [
 
       <!-- XML Sitemap callout -->
       <div class="xml-callout" role="note">
-        <span class="material-symbols-outlined" aria-hidden="true">travel_explore</span>
+        <Compass className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         <div>
           <strong>For search engines:</strong> The machine-readable XML sitemap is available at{' '}
           <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">adacomplianceservices.tech/sitemap.xml</a>
@@ -219,7 +220,7 @@ const sections: SitemapSection[] = [
     font-size: 0.88rem;
     color: var(--ink-2);
   }
-  .xml-callout .material-symbols-outlined { color: var(--accent-2); flex-shrink: 0; margin-top: 1px; }
+  .xml-callout .lucide-icon { color: var(--accent-2); flex-shrink: 0; margin-top: 1px; }
   .xml-callout a { color: var(--accent-2); font-weight: 500; }
   .xml-callout a:hover { color: var(--accent); }
 

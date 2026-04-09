@@ -1,4 +1,5 @@
 ---
+import { FileCheck, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -81,7 +82,7 @@ const comparison = [
         <span class="current">Overlay Alternatives</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">policy</span>
+        <FileCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         FTC Action 2025 · Courts Agree · NFB Opposed
       </div>
       <h1 id="page-h1">Accessibility Overlays Don't Work. Here's What Does.</h1>
@@ -99,7 +100,7 @@ const comparison = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Accessibility overlays (accessiBe, UserWay, etc.) detect only 20–30% of WCAG violations.</li>
               <li>The FTC issued an enforcement order against accessiBe in 2025 for deceptive compliance claims.</li>

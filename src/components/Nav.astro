@@ -1,4 +1,5 @@
 ---
+import { ShieldCheck, ChevronDown, PhoneCall } from 'lucide-react';
 const currentPath = Astro.url.pathname;
 
 const dropdowns = [
@@ -47,7 +48,7 @@ const dropdowns = [
   <div class="container nav-inner">
     <!-- Logo -->
     <a href="/" class="nav-logo">
-      <span class="logo-icon material-symbols-outlined" aria-hidden="true">verified_user</span>
+      <ShieldCheck className="lucide-icon logo-icon" aria-hidden="true" size={20} strokeWidth={2} />
       <span class="logo-text">comply<strong>Tech</strong><span class="sr-only"> - ADA Compliance Services</span></span>
     </a>
 
@@ -61,7 +62,7 @@ const dropdowns = [
             class={`nav-link nav-link-dd ${dd.items.some(i => i.href === currentPath) || currentPath === dd.href ? 'active' : ''}`}
           >
             {dd.label}
-            <span class="material-symbols-outlined dd-arrow" aria-hidden="true">expand_more</span>
+            <ChevronDown className="lucide-icon dd-arrow" aria-hidden="true" size={20} strokeWidth={2} />
           </a>
           <div class="dropdown-menu" role="menu">
             {dd.items.map((item) => (
@@ -86,7 +87,7 @@ const dropdowns = [
         rel="noopener noreferrer"
         id="nav-cta-btn"
       >
-        <span class="material-symbols-outlined" style="font-size:1rem;" aria-hidden="true">phone_in_talk</span>
+        <PhoneCall className="lucide-icon" style="font-size:1rem;" aria-hidden="true" size={20} strokeWidth={2} />
         Free Quote
       </a>
 

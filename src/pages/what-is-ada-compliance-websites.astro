@@ -1,4 +1,5 @@
 ---
+import { BookOpen, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -92,7 +93,7 @@ const pourCards = [
         <span class="current">What Is ADA Compliance?</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+        <BookOpen className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Complete 2025 Guide · GEO Score: 9.7/10
       </div>
       <h1 id="page-h1">What Is ADA Compliance for Websites?</h1>
@@ -110,7 +111,7 @@ const pourCards = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note" aria-label="Key takeaways">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — What Is ADA Compliance?</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — What Is ADA Compliance?</div>
             <ul>
               <li>ADA compliance for websites means your site meets WCAG 2.2 Level AA accessibility standards.</li>
               <li>Required under Title III of the ADA for any business open to the public — no size exemption.</li>

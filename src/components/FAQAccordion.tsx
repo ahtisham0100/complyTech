@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -30,9 +31,9 @@ export default function FAQAccordion({ items }: Props) {
             id={`faq-btn-${i}`}
           >
             <span className="faq-q-text">{item.question}</span>
-            <span className="faq-icon material-symbols-outlined" aria-hidden="true">
-              {open === i ? 'remove' : 'add'}
-            </span>
+            <div className="faq-icon" aria-hidden="true">
+              {open === i ? <Minus size={20} strokeWidth={2} /> : <Plus size={20} strokeWidth={2} />}
+            </div>
           </button>
           <div
             className="faq-answer"

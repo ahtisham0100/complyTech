@@ -1,4 +1,6 @@
 ---
+import { CircleDollarSign, Zap } from 'lucide-react';
+import { FileText, ClipboardCheck, Route, Code, PhoneCall, Award, CheckCircle2 } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -59,12 +61,12 @@ const pricingTiers = [
 ];
 
 const deliverables = [
-  { icon: 'description', title: 'WCAG 2.2 Conformance Report', desc: 'Every violation listed with WCAG criterion, severity, and affected page URL' },
-  { icon: 'assignment', title: 'VPAT Document', desc: 'Voluntary Product Accessibility Template — required by enterprise buyers and government clients' },
-  { icon: 'route', title: 'Remediation Roadmap', desc: 'Violations ranked by legal risk and user impact — your developers know exactly where to start' },
-  { icon: 'code', title: 'Developer Fix Guide', desc: 'Code-level instructions with before/after examples for every violation category' },
-  { icon: 'call', title: '60-Minute Walkthrough Call', desc: 'Live review of findings with your team — questions welcome' },
-  { icon: 'workspace_premium', title: 'Compliance Certificate', desc: 'Issued after re-test confirms all violations resolved — dated and audit-referenced' },
+  { icon: FileText, title: 'WCAG 2.2 Conformance Report', desc: 'Every violation listed with WCAG criterion, severity, and affected page URL' },
+  { icon: ClipboardCheck, title: 'VPAT Document', desc: 'Voluntary Product Accessibility Template — required by enterprise buyers and government clients' },
+  { icon: Route, title: 'Remediation Roadmap', desc: 'Violations ranked by legal risk and user impact — your developers know exactly where to start' },
+  { icon: Code, title: 'Developer Fix Guide', desc: 'Code-level instructions with before/after examples for every violation category' },
+  { icon: PhoneCall, title: '60-Minute Walkthrough Call', desc: 'Live review of findings with your team — questions welcome' },
+  { icon: Award, title: 'Compliance Certificate', desc: 'Issued after re-test confirms all violations resolved — dated and audit-referenced' },
 ];
 ---
 
@@ -84,7 +86,7 @@ const deliverables = [
         <span class="current">Pricing</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">attach_money</span>
+        <CircleDollarSign className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Transparent Pricing · No Hidden Fees
       </div>
       <h1 id="page-h1">ADA Compliance Audit Cost & Pricing</h1>
@@ -102,7 +104,7 @@ const deliverables = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR — Pricing Summary</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Pricing Summary</div>
             <ul>
               <li>Micro-site (1–10 pages): <strong>$495–$999</strong></li>
               <li>Small business (11–50 pages): <strong>$1,500–$3,500</strong></li>
@@ -141,7 +143,7 @@ const deliverables = [
           <div class="deliverables-grid">
             {deliverables.map((d) => (
               <div class="deliverable-card">
-                <span class="material-symbols-outlined deliverable-icon" aria-hidden="true">{d.icon}</span>
+                {(() => { const Icon = d.icon; return <Icon className="lucide-icon deliverable-icon" aria-hidden="true" size={24} strokeWidth={2} />; })()}
                 <div>
                   <h4>{d.title}</h4>
                   <p>{d.desc}</p>

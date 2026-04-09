@@ -1,4 +1,5 @@
 ---
+import { Stethoscope, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -62,7 +63,7 @@ const faqItems = [
         <span class="current">Dental Offices</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">medical_services</span>
+        <Stethoscope className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Patient Intake Forms · Booking Systems · Patient Portals
       </div>
       <h1 id="page-h1">ADA Compliance for Dental Office Websites</h1>
@@ -80,7 +81,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Dental practices are public accommodations under ADA Title III — websites must be WCAG 2.2 AA compliant.</li>
               <li>Patient intake forms, appointment booking, and patient portals are the most common ADA targets.</li>

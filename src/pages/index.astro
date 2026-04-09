@@ -1,4 +1,5 @@
 ---
+import { ShieldCheck, ArrowRight, CheckCircle2, Search, Hospital, BookOpen } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -27,21 +28,21 @@ const schema = [
 
 const services = [
   {
-    icon: 'search',
+    icon: Search,
     href: '/ada-compliance-audit-small-business',
     title: 'ADA Audit for Small Business',
     desc: 'Identify every WCAG 2.2 violation with a full manual expert review — automated tools miss 60–70% of issues. Delivery in 5–14 business days.',
     badge: 'Most Popular',
   },
   {
-    icon: 'local_hospital',
+    icon: Hospital,
     href: '/ada-compliance-healthcare-websites',
     title: 'Healthcare Website Compliance',
     desc: 'Patient portals, telehealth, and appointment systems face dual liability under ADA and Section 1557 of the ACA. Specialized audit coverage.',
     badge: 'Highest Revenue',
   },
   {
-    icon: 'menu_book',
+    icon: BookOpen,
     href: '/what-is-ada-compliance-websites',
     title: 'What Is ADA Compliance?',
     desc: 'Our complete 2025 guide covers what ADA requires, who it applies to, WCAG explained, penalties, and how to achieve compliance affordably.',
@@ -64,7 +65,7 @@ const services = [
 
       <div class="hero-badge-row">
         <span class="hero-badge">
-          <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+          <ShieldCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
           IAAP-Certified Accessibility Specialists
         </span>
       </div>
@@ -85,15 +86,15 @@ const services = [
         </a>
         <a href="/what-is-ada-compliance-websites" class="btn btn-outline btn-outline-hero btn-lg" id="hero-learn-more-btn">
           Learn More<span class="sr-only"> about ADA Compliance</span>
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          <ArrowRight className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         </a>
       </div>
 
       <div class="hero-trust">
-        <span><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> WCAG 2.2 Level AA</span>
-        <span><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> VPAT Included</span>
-        <span><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> Compliance Certificate</span>
-        <span><span class="material-symbols-outlined" aria-hidden="true">check_circle</span> 1-Day Response</span>
+        <span><CheckCircle2 className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} /> WCAG 2.2 Level AA</span>
+        <span><CheckCircle2 className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} /> VPAT Included</span>
+        <span><CheckCircle2 className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} /> Compliance Certificate</span>
+        <span><CheckCircle2 className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} /> 1-Day Response</span>
       </div>
     </div>
   </section>
@@ -136,13 +137,13 @@ const services = [
           <a href={s.href} class="service-card" id={`service-card-${s.icon}`}>
             {s.badge && <span class="service-badge">{s.badge}</span>}
             <div class="service-icon">
-              <span class="material-symbols-outlined" aria-hidden="true">{s.icon}</span>
+              {(() => { const Icon = s.icon; return <Icon className="lucide-icon" aria-hidden="true" size={28} strokeWidth={2} />; })()}
             </div>
             <h3>{s.title}</h3>
             <p>{s.desc}</p>
             <span class="learn-more">
               Explore
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              <ArrowRight className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             </span>
           </a>
         ))}
@@ -239,7 +240,7 @@ const services = [
     color: rgba(255,255,255,0.65);
     font-size: 0.85rem;
   }
-  .hero-trust .material-symbols-outlined { color: #7ed4a0; font-size: 1rem; }
+  .hero-trust .lucide-icon { color: #7ed4a0; }
 
   /* Stats */
   .stats-section { background: var(--surface); }

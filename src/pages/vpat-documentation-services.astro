@@ -1,4 +1,5 @@
 ---
+import { FileText, Zap, Landmark, Building2, Hospital, Shield } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -63,7 +64,7 @@ const faqItems = [
         <span class="current">VPAT Services</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">description</span>
+        <FileText className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Section 508 · WCAG 2.2 · Government & Enterprise Procurement
       </div>
       <h1 id="page-h1">VPAT Documentation Services</h1>
@@ -81,7 +82,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>A VPAT (completed as an ACR) is required for selling to U.S. federal agencies (Section 508).</li>
               <li>Enterprise, healthcare, and education buyers increasingly require ACRs in procurement.</li>
@@ -104,22 +105,22 @@ const faqItems = [
           <h2>When Do You Need a VPAT?</h2>
           <div class="use-case-grid">
             <div class="use-case-card">
-              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">account_balance</span>
+              <Landmark className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Federal Government Sales</h4>
               <p>Required by law under Section 508 of the Rehabilitation Act. All IT products and services procured by federal agencies must have a VPAT/ACR.</p>
             </div>
             <div class="use-case-card">
-              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">corporate_fare</span>
+              <Building2 className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Enterprise B2B Procurement</h4>
               <p>Fortune 500 and large enterprise buyers increasingly require ACRs as part of vendor due diligence. A missing or self-reported VPAT can block deals.</p>
             </div>
             <div class="use-case-card">
-              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">local_hospital</span>
+              <Hospital className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Healthcare & Education</h4>
               <p>Hospital systems, universities, K–12 districts, and healthcare organizations routinely require VPAT documentation from digital vendors.</p>
             </div>
             <div class="use-case-card">
-              <span class="material-symbols-outlined use-case-icon" aria-hidden="true">shield</span>
+              <Shield className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>ADA Risk Mitigation</h4>
               <p>A current, audit-backed VPAT demonstrates good-faith compliance effort — valuable documentation in ADA demand letter defense and settlement negotiations.</p>
             </div>

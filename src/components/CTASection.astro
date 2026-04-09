@@ -1,4 +1,5 @@
 ---
+import { CalendarClock, CheckCircle2, ClipboardCheck, Award } from 'lucide-react';
 interface Props {
   heading?: string;
   subtext?: string;
@@ -26,19 +27,19 @@ const waLink = `https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need
 
     <div class="cta-trust">
       <div class="cta-trust-item">
-        <span class="icon material-symbols-outlined" aria-hidden="true">schedule</span>
+        <CalendarClock className="lucide-icon icon" aria-hidden="true" size={20} strokeWidth={2} />
         Response within 1 business day
       </div>
       <div class="cta-trust-item">
-        <span class="icon material-symbols-outlined" aria-hidden="true">verified</span>
+        <CheckCircle2 className="lucide-icon icon" aria-hidden="true" size={20} strokeWidth={2} />
         IAAP-certified audit team
       </div>
       <div class="cta-trust-item">
-        <span class="icon material-symbols-outlined" aria-hidden="true">assignment_turned_in</span>
+        <ClipboardCheck className="lucide-icon icon" aria-hidden="true" size={20} strokeWidth={2} />
         No obligation — includes scope &amp; pricing
       </div>
       <div class="cta-trust-item">
-        <span class="icon material-symbols-outlined" aria-hidden="true">workspace_premium</span>
+        <Award className="lucide-icon icon" aria-hidden="true" size={20} strokeWidth={2} />
         Compliance certificate post-remediation
       </div>
     </div>

@@ -1,4 +1,5 @@
 ---
+import { HeartHandshake, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -62,7 +63,7 @@ const faqItems = [
         <span class="current">Nonprofits</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">volunteer_activism</span>
+        <HeartHandshake className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         ADA Title III · Section 504 · Federal Grant Compliance
       </div>
       <h1 id="page-h1">ADA Compliance for Nonprofit Websites</h1>
@@ -80,7 +81,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Nonprofits engaging the public as public accommodations must meet ADA Title III.</li>
               <li>Nonprofits receiving federal funding must meet Section 504 of the Rehabilitation Act.</li>

@@ -2,20 +2,10 @@
 import '../styles/global.css';
 
 // Self-hosting fonts
-import '@fontsource/libre-baskerville/400.css';
-import '@fontsource/libre-baskerville/400-italic.css';
-import '@fontsource/libre-baskerville/700.css';
-import '@fontsource/inter/300.css';
 import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
-import '@fontsource/noto-sans/300.css';
-import '@fontsource/noto-sans/400.css';
-import '@fontsource/noto-sans/500.css';
-import '@fontsource/noto-sans/600.css';
-import '@fontsource/noto-sans/700.css';
-import 'material-symbols/outlined.css';
+
+import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 export interface Props {
   title: string;
@@ -47,6 +37,7 @@ const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [s
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#1a3a2a" />
   <title>{title}</title>
+  <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin="anonymous" />
   <meta name="description" content={description} />
   {keywords && <meta name="keywords" content={keywords} />}
   <meta name="author" content="complyTech — ADA Compliance Services" />

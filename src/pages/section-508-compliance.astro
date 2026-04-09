@@ -1,4 +1,5 @@
 ---
+import { Landmark, Zap, Handshake, HeartHandshake, Info } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -63,7 +64,7 @@ const faqItems = [
         <span class="current">Section 508</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">account_balance</span>
+        <Landmark className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Federal Agencies · Contractors · Grant Recipients
       </div>
       <h1 id="page-h1">Section 508 Compliance: Requirements, Who Must Comply & Audit Services</h1>
@@ -81,7 +82,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Section 508 requires federal agencies and contractors to make EIT (websites, software, documents) accessible.</li>
               <li>The 2017 refresh updated Section 508 to incorporate <strong>WCAG 2.0 Level AA</strong> by reference.</li>
@@ -98,22 +99,22 @@ const faqItems = [
           <h2 id="who-must-comply">Who Must Comply with Section 508?</h2>
           <div class="applies-grid">
             <div class="applies-card">
-              <span class="material-symbols-outlined applies-icon" aria-hidden="true">account_balance</span>
+              <Landmark className="lucide-icon applies-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Federal Agencies</h4>
               <p>All executive branch agencies, independent agencies, and the legislative and judicial branches must comply with Section 508 when developing, procuring, maintaining, or using EIT.</p>
             </div>
             <div class="applies-card">
-              <span class="material-symbols-outlined applies-icon" aria-hidden="true">handshake</span>
+              <Handshake className="lucide-icon applies-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Federal Contractors</h4>
               <p>Private companies that develop, supply, or maintain electronic products and services for the federal government must ensure those products meet Section 508 standards.</p>
             </div>
             <div class="applies-card">
-              <span class="material-symbols-outlined applies-icon" aria-hidden="true">volunteer_activism</span>
+              <HeartHandshake className="lucide-icon applies-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Grant Recipients</h4>
               <p>Organizations receiving federal grants that use those funds to develop or procure IT must comply with Section 508 requirements for the funded technology.</p>
             </div>
             <div class="applies-card applies-card-note">
-              <span class="material-symbols-outlined applies-icon" aria-hidden="true">info</span>
+              <Info className="lucide-icon applies-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Private Businesses (ADA, Not 508)</h4>
               <p>Private businesses not contracting with the federal government are governed by the ADA Title III, not Section 508. The technical standards overlap significantly but are legally separate.</p>
             </div>

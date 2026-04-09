@@ -1,4 +1,5 @@
 ---
+import { Hospital, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -87,7 +88,7 @@ const violations = [
         <span class="current">Healthcare</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">local_hospital</span>
+        <Hospital className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         ADA + Section 1557 Dual Compliance
       </div>
       <h1 id="page-h1">ADA Compliance for Healthcare Websites</h1>
@@ -105,7 +106,7 @@ const violations = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note" aria-label="Key takeaways">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Hospitals face <strong>dual liability</strong>: ADA + Section 1557 of the ACA for website accessibility.</li>
               <li>Patient portals, appointment booking, and telehealth are the most commonly litigated assets.</li>

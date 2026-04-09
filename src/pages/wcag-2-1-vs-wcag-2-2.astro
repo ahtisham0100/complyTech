@@ -1,4 +1,5 @@
 ---
+import { ArrowLeftRight, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -77,7 +78,7 @@ const newCriteria = [
         <span class="current">WCAG 2.1 vs 2.2</span>
       </nav>
       <div class="hero-badge">
-        <span class="material-symbols-outlined" aria-hidden="true">compare_arrows</span>
+        <ArrowLeftRight className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         W3C Published September 2023 · 9 New Success Criteria
       </div>
       <h1 id="page-h1">WCAG 2.1 vs WCAG 2.2: What Changed and Why It Matters</h1>
@@ -95,7 +96,7 @@ const newCriteria = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><span class="material-symbols-outlined" aria-hidden="true">bolt</span>TL;DR</div>
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>WCAG 2.2 was published by the W3C on September 5, 2023 — it is the current standard.</li>
               <li>WCAG 2.2 adds <strong>9 new success criteria</strong> and removes 1 (4.1.1 Parsing).</li>
