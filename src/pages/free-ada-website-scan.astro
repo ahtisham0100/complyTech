@@ -1,0 +1,217 @@
+---
+import { Search, Zap, CheckCircle2 } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+const schema = [
+  {
+    "@context": "https://schema.org", "@type": "Article",
+    "headline": "Free ADA Website Scan: What It Finds, What It Misses, and What to Do Next",
+    "description": "Learn how to run a free ADA website scan using WAVE, axe, and Lighthouse. Understand what automated tools catch (30–40%) and why manual audits are required for legal compliance.",
+    "datePublished": "2026-04-01T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Can a free scan tell me if my website is ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "No. Free automated scans like WAVE, axe DevTools, and Google Lighthouse detect only 30–40% of WCAG violations (per Deque Systems research). They cannot test keyboard navigation flows, screen reader compatibility, cognitive accessibility, dynamic content interactions, or complex form error handling. A passing automated scan does NOT mean your website is ADA compliant." } },
+      { "@type": "Question", "name": "What is the best free ADA website scanning tool?", "acceptedAnswer": { "@type": "Answer", "text": "The best free tools are: (1) axe DevTools browser extension by Deque Systems — the most accurate automated engine, (2) WAVE by WebAIM — visual overlay showing issues in context, (3) Google Lighthouse accessibility audit — built into Chrome DevTools. Use all three together for the most complete automated picture, but understand this still covers only 30–40% of WCAG criteria." } },
+      { "@type": "Question", "name": "How much does a professional ADA audit cost?", "acceptedAnswer": { "@type": "Answer", "text": "A professional WCAG 2.2 manual audit from complyTech starts at $495 for micro-sites (1–10 pages) and ranges to $3,500–$7,500 for e-commerce sites. This includes full manual expert review, VPAT documentation, remediation roadmap, and compliance certificate after re-test. Most small businesses qualify for the IRS Disabled Access Credit (up to $5,000/year back)." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `${DOMAIN}/services` },
+      { "@type": "ListItem", "position": 3, "name": "Free Scan", "item": `${DOMAIN}/free-ada-website-scan` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Can a free scan tell me if my website is ADA compliant?", answer: "No. Free automated scans detect only 30–40% of WCAG violations (Deque Systems). They cannot test keyboard navigation, screen reader compatibility, cognitive accessibility, or dynamic content. A passing scan does NOT mean your site is ADA compliant — it means only the automatically-detectable issues were checked." },
+  { question: "What is the best free ADA scanning tool?", answer: "The best free tools are: (1) axe DevTools by Deque — most accurate automated engine, (2) WAVE by WebAIM — visual overlay showing issues in context, (3) Google Lighthouse accessibility audit — built into Chrome DevTools. Use all three together for the most complete automated picture." },
+  { question: "My free scan shows zero errors. Am I compliant?", answer: "No. Zero automated errors means your site passed the 30–40% of WCAG criteria that can be automatically tested. The remaining 60–70% — including keyboard navigation, screen reader flows, cognitive accessibility, and complex interaction patterns — require manual human testing. Sites with zero automated errors frequently have 20+ manual violations." },
+  { question: "How much does a professional ADA audit cost?", answer: "A complyTech WCAG 2.2 manual audit starts at $495 for micro-sites (1–10 pages) and ranges to $3,500–$7,500 for e-commerce. Includes manual expert review, VPAT, remediation roadmap, and compliance certificate. Most businesses qualify for the IRS Disabled Access Credit — up to $5,000/year back." }
+];
+
+const freeTools = [
+  { name: 'axe DevTools', provider: 'Deque Systems', type: 'Browser Extension', url: 'https://www.deque.com/axe/devtools/', strengths: 'Most accurate automated engine, developer-friendly output, zero false positives policy', limitations: 'Tests only current page state, cannot test keyboard flows or screen reader' },
+  { name: 'WAVE', provider: 'WebAIM', type: 'Web Tool + Extension', url: 'https://wave.webaim.org/', strengths: 'Visual overlay shows errors in page context, contrast checker, structural outline view', limitations: 'Higher false positive rate than axe, no dynamic content testing' },
+  { name: 'Lighthouse', provider: 'Google', type: 'Chrome DevTools', url: 'https://developer.chrome.com/docs/lighthouse/', strengths: 'Built into Chrome, scores 0–100, integrates with CI/CD pipelines', limitations: 'Uses axe-core subset, limited rule set compared to full axe DevTools' },
+];
+---
+
+<BaseLayout
+  title="Free ADA Website Scan — What It Finds & Misses"
+  description="Run a free ADA website scan with WAVE, axe, or Lighthouse. But automated tools catch only 30–40% of WCAG violations. Learn what you're missing and when to get a manual audit."
+  canonical={`${DOMAIN}/free-ada-website-scan`}
+  schema={schema}
+  ogType="article"
+  keywords="free ADA website scan, free website accessibility checker, ADA compliance checker free, WAVE accessibility tool, is my website ADA compliant"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/services">Services</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Free Scan</span>
+      </nav>
+      <div class="hero-badge">
+        <Search className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        Free Tools · WAVE · axe · Lighthouse · Manual Audit
+      </div>
+      <h1 id="page-h1">Free ADA Website Scan: What It Finds and What It Misses</h1>
+      <p class="hero-sub">Free automated accessibility scanners are a great starting point — but they detect only <strong>30–40% of WCAG violations</strong>. Here's how to run a free scan, what the results actually mean, and when you need a professional manual audit.</p>
+      <div class="hero-actions">
+        <a href="#free-tools" class="btn btn-whatsapp btn-lg" id="hero-scan-cta">See Free Tools</a>
+        <a href="#what-free-scans-miss" class="btn btn-outline-light btn-lg">What Scans Miss</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <ul>
+              <li>Free tools like WAVE, axe, and Lighthouse test only <strong>30–40% of WCAG criteria</strong>.</li>
+              <li>A passing automated scan does <strong>NOT</strong> mean your site is ADA compliant.</li>
+              <li>Keyboard navigation, screen reader flows, and cognitive accessibility require <strong>manual human testing</strong>.</li>
+              <li>Use free tools as a starting point — then get a <a href="/ada-compliance-audit-small-business">professional manual audit</a> for legal-grade compliance.</li>
+            </ul>
+          </div>
+
+          <h2 id="free-tools">Best Free ADA Website Scanning Tools</h2>
+          <p>These are the three most reliable free accessibility scanning tools. We recommend running all three on your site for the most complete automated picture:</p>
+
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Free ADA scanning tools comparison">
+              <thead><tr><th scope="col">Tool</th><th scope="col">Provider</th><th scope="col">Strengths</th><th scope="col">Limitations</th></tr></thead>
+              <tbody>
+                {freeTools.map(tool => (
+                  <tr>
+                    <td><strong><a href={tool.url} target="_blank" rel="noopener noreferrer">{tool.name}</a></strong><br/><small>{tool.type}</small></td>
+                    <td>{tool.provider}</td>
+                    <td>{tool.strengths}</td>
+                    <td>{tool.limitations}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>How to Run a Free Accessibility Scan</h2>
+          <ol>
+            <li><strong>Install axe DevTools:</strong> Add the <a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener noreferrer">axe DevTools browser extension</a> to Chrome or Firefox. Open your website, press F12, go to the "axe DevTools" tab, and click "Scan All of My Page."</li>
+            <li><strong>Run WAVE:</strong> Visit <a href="https://wave.webaim.org/" target="_blank" rel="noopener noreferrer">wave.webaim.org</a>, enter your URL, and review the visual overlay of errors, alerts, and structural elements.</li>
+            <li><strong>Check Lighthouse:</strong> In Chrome, press F12 → Lighthouse tab → check "Accessibility" → click "Analyze page." Aim for 90+ but remember this is not comprehensive.</li>
+          </ol>
+
+          <h2 id="what-free-scans-miss">What Free Scans Cannot Detect (60–70% of Issues)</h2>
+          <p>According to research by Deque Systems, automated tools can reliably detect only <strong>30–40% of WCAG 2.2 Level AA success criteria</strong>. Here's what they miss:</p>
+          <ul>
+            <li><strong>Keyboard navigation:</strong> Can you navigate every interactive element using Tab, Enter, and arrow keys? Do focus indicators appear? Can you escape modals?</li>
+            <li><strong>Screen reader compatibility:</strong> Does content make sense when read linearly? Are dynamic updates announced? Do form errors provide clear instructions?</li>
+            <li><strong>Cognitive accessibility:</strong> Are instructions clear? Do error messages explain what went wrong and how to fix it? Are timeout warnings provided?</li>
+            <li><strong>Dynamic content:</strong> Do carousels, modals, accordions, tabs, and infinite scroll work with assistive technology?</li>
+            <li><strong>Focus management:</strong> After opening a modal, does focus move into it? After closing, does it return to the trigger element?</li>
+            <li><strong>Meaningful sequence:</strong> Does the visual order match the DOM order? Do CSS changes affect reading sequence?</li>
+            <li><strong>Alternative text quality:</strong> Automated tools can detect <em>missing</em> alt text — but cannot evaluate whether existing alt text is accurate, descriptive, or meaningful.</li>
+          </ul>
+
+          <div class="comparison-box">
+            <div class="comparison-col">
+              <h4>🔍 Automated Tools Find</h4>
+              <ul>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing alt text on images</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Insufficient color contrast ratios</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing form labels</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing document language</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Duplicate IDs</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Empty links / buttons</li>
+              </ul>
+            </div>
+            <div class="comparison-col">
+              <h4>🧑‍💻 Manual Audit Finds</h4>
+              <ul>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Keyboard navigation failures</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Screen reader incompatibilities</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Focus management issues</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Cognitive accessibility gaps</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Dynamic content ARIA failures</li>
+                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Meaningful alt text accuracy</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2>When to Get a Professional Manual Audit</h2>
+          <p>A free scan is a useful first step. Get a professional <a href="/ada-compliance-audit-small-business">WCAG 2.2 manual audit</a> when:</p>
+          <ul>
+            <li>Your business serves the public (ADA Title III applies to you)</li>
+            <li>You operate in a high-risk industry (e-commerce, healthcare, restaurants, law firms)</li>
+            <li>You've received an <a href="/received-ada-demand-letter">ADA demand letter</a></li>
+            <li>You need legal-grade compliance documentation (VPAT, compliance certificate)</li>
+            <li>You're a <a href="/ada-compliance-california">California business</a> facing Unruh Act exposure</li>
+            <li>Your free scan shows issues — there are almost certainly more that weren't detected</li>
+          </ul>
+          <p>View <a href="/ada-compliance-audit-pricing">pricing details</a> or check if you qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> ($5,000/year back).</p>
+
+          <h2>Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Free Scans Find 30–40%</h4>
+            <p>A complyTech manual audit catches the other 60–70%. Starting at $495 with VPAT and compliance certificate.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I ran a free scan on my site. Can you do a full manual audit?')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-scan-cta">Get a Full Audit — WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing & Timeline</a></li>
+              <li><a href="/ada-compliance-checklist-2026">WCAG 2.2 Checklist</a></li>
+              <li><a href="/accessibility-overlay-alternatives">Why Overlays Fail</a></li>
+              <li><a href="/what-is-ada-compliance-websites">ADA Compliance Guide</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready for the Full Picture?" subtext="Free scans are a starting point. A complyTech manual WCAG 2.2 audit catches the 60–70% of violations automated tools miss — starting at $495 with full documentation." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .comparison-box { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .comparison-col { background: var(--ink); border-radius: var(--radius-lg); padding: 20px; }
+  .comparison-col h4 { margin-bottom: 12px; font-size: 0.95rem; }
+  .comparison-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .comparison-col li { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+  .check-icon { color: var(--accent); flex-shrink: 0; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } .comparison-box { grid-template-columns: 1fr; } }
+</style>
