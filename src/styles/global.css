@@ -947,3 +947,35 @@ strong { color: var(--ink); font-weight: 600; }
   .pour-grid { grid-template-columns: 1fr; }
   .cta-trust { gap: 10px 18px; }
 }
+
+/* ── Related Industry Grid (Internal Linking) ──────────────────────────── */
+.related-industry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.rel-ind-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.2s var(--ease);
+}
+.rel-ind-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+  border-color: var(--border-2);
+}
+.rel-ind-card strong {
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.rel-ind-card span {
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  line-height: 1.4;
+}

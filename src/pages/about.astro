@@ -1,0 +1,199 @@
+---
+import { ShieldCheck, Award, CheckCircle2, Globe, Users, Zap } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "complyTech",
+    "url": DOMAIN,
+    "description": "IAAP-certified ADA compliance audit agency specializing in WCAG 2.2 Level AA accessibility audits, VPAT documentation, and remediation services for U.S. small businesses.",
+    "founder": {
+      "@type": "Person",
+      "name": "Muhammad Ahtisham Arif",
+      "jobTitle": "Founder & Lead Accessibility Auditor"
+    },
+    "areaServed": "United States",
+    "knowsAbout": ["ADA Compliance", "WCAG 2.2", "Section 508", "Website Accessibility", "VPAT Documentation"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": `${DOMAIN}/about` }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="About complyTech — ADA Compliance Audit Experts"
+  description="complyTech is an IAAP-certified accessibility audit agency helping U.S. small businesses achieve WCAG 2.2 Level AA compliance. Meet our team and learn about our mission."
+  canonical={`${DOMAIN}/about`}
+  schema={schema}
+  keywords="about complyTech, ADA compliance team, IAAP certified accessibility auditor, website accessibility experts"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">About</span>
+      </nav>
+      <div class="hero-badge">
+        <ShieldCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        IAAP-Certified · WCAG 2.2 Specialists
+      </div>
+      <h1 id="page-h1">About complyTech</h1>
+      <p class="hero-sub">We help small businesses protect themselves from ADA lawsuits through professional WCAG 2.2 accessibility audits — not automated scanners, not overlays, and not shortcuts.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note" aria-label="Key facts">
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />Who We Are</div>
+            <ul>
+              <li>IAAP-certified accessibility professionals specializing in <strong>WCAG 2.2 Level AA</strong> manual audits.</li>
+              <li>Focused exclusively on <strong>U.S. small businesses</strong> — the most common targets of ADA demand letters.</li>
+              <li>Every audit includes a VPAT, prioritized remediation roadmap, and compliance certificate after verification.</li>
+              <li>We do not sell overlay products. We do not run automated-only scans. We audit your actual code.</li>
+            </ul>
+          </div>
+
+          <h2>Our Mission</h2>
+          <p><strong>complyTech</strong> exists because small business owners shouldn't have to choose between a $75,000 lawsuit settlement and a $7,500 "enterprise accessibility" engagement that's designed for Fortune 500 companies. We provide the same quality of <a href="/ada-compliance-audit-small-business">manual WCAG 2.2 accessibility audit</a> that large enterprises receive — at pricing that makes sense for businesses with 1–200 page websites.</p>
+          <p>Our audit methodology is straightforward: a certified human expert manually reviews every critical page and user flow on your website against all 86 WCAG 2.2 Level AA success criteria. We test with real assistive technology — screen readers (NVDA, JAWS, VoiceOver), keyboard-only navigation, and magnification tools. The result is a report your development team can act on immediately, with prioritized fixes and code-level guidance.</p>
+
+          <h2>What Sets complyTech Apart</h2>
+          <div class="values-grid">
+            <div class="value-card">
+              <Award className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <h3>IAAP Certified</h3>
+              <p>Our auditors hold IAAP (International Association of Accessibility Professionals) certifications — the industry gold standard for accessibility expertise. Every audit is conducted by a certified professional, not an automated tool.</p>
+            </div>
+            <div class="value-card">
+              <CheckCircle2 className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <h3>Manual Expert Review</h3>
+              <p>Automated scanners detect only 20–30% of WCAG violations. Our audits combine automated scanning with comprehensive manual testing — the only approach that catches the other 70–80% of real-world accessibility barriers.</p>
+            </div>
+            <div class="value-card">
+              <Globe className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <h3>Small Business Focus</h3>
+              <p>We specialize in websites with 1–200 pages. Our <a href="/ada-compliance-audit-pricing">pricing starts at $495</a> for micro-sites, and most clients qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — returning up to $5,000 of audit costs.</p>
+            </div>
+            <div class="value-card">
+              <Users className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <h3>Real Assistive Technology Testing</h3>
+              <p>We test with the same tools your users rely on: NVDA (Windows screen reader), JAWS, VoiceOver (Mac/iOS), keyboard-only navigation, and browser zoom. This isn't simulated — it's real-world accessibility validation.</p>
+            </div>
+          </div>
+
+          <h2>Industries We Serve</h2>
+          <p>Our audit team has deep experience across the industries most targeted by ADA website lawsuits:</p>
+          <ul>
+            <li><a href="/ada-compliance-ecommerce-websites"><strong>E-commerce</strong></a> — Shopify, WooCommerce, Magento, BigCommerce, and custom stores</li>
+            <li><a href="/ada-compliance-healthcare-websites"><strong>Healthcare</strong></a> — patient portals, telehealth, appointment booking, Section 1557 compliance</li>
+            <li><a href="/ada-compliance-restaurants"><strong>Restaurants</strong></a> — digital menus, online ordering, reservation systems, PDF menu remediation</li>
+            <li><a href="/ada-compliance-law-firms"><strong>Law Firms</strong></a> — intake forms, client portals, legal chatbots, PDF compliance</li>
+            <li><a href="/ada-compliance-dental-offices"><strong>Dental Practices</strong></a> — booking systems, patient intake forms, photo galleries</li>
+            <li><a href="/ada-compliance-for-nonprofits"><strong>Nonprofits</strong></a> — donation forms, program applications, event registration, Section 504</li>
+            <li><a href="/ada-compliance-shopify"><strong>Shopify Stores</strong></a> — theme audits, checkout testing, app compatibility analysis</li>
+          </ul>
+
+          <h2>Our Audit Process</h2>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">1</div>
+              <div class="step-content">
+                <h4>Scope & Quote</h4>
+                <p>Send us your website URL via <a href="https://wa.me/923010910933" target="_blank" rel="noopener noreferrer">WhatsApp</a>. We review your site and respond within 1 business day with scope, timeline, and exact pricing.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">2</div>
+              <div class="step-content">
+                <h4>Manual WCAG 2.2 Audit</h4>
+                <p>Our certified auditor manually reviews every critical page and user flow against all 86 WCAG 2.2 Level AA success criteria using real assistive technology.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">3</div>
+              <div class="step-content">
+                <h4>Report & Walkthrough</h4>
+                <p>You receive a complete audit report with a VPAT, prioritized remediation roadmap, and developer-ready fix guide. We walk through findings in a 60-minute call.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num" aria-hidden="true">4</div>
+              <div class="step-content">
+                <h4>Fix Verification & Certificate</h4>
+                <p>After your team implements fixes, we re-test and issue a compliance certificate — documented proof of your good-faith accessibility effort.</p>
+              </div>
+            </div>
+          </div>
+
+          <h2>Contact Us</h2>
+          <p>Ready to protect your business? Reach out through any channel:</p>
+          <ul>
+            <li><strong>WhatsApp:</strong> <a href="https://wa.me/923010910933" target="_blank" rel="noopener noreferrer">+92 301 091 0933</a> (responds within 1 business day)</li>
+            <li><strong>Email:</strong> <a href="mailto:ahtisham0100@gmail.com">ahtisham0100@gmail.com</a></li>
+            <li><strong>Website:</strong> <a href="https://adacomplianceservices.tech">adacomplianceservices.tech</a></li>
+          </ul>
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Get a Free Quote</h4>
+            <p>Send your website URL and receive scope, timeline, and exact pricing within 1 business day.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my website.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-about-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Quick Links</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Audit Details</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing</a></li>
+              <li><a href="/vpat-documentation-services">VPAT Services</a></li>
+              <li><a href="/ada-compliance-faq">FAQ</a></li>
+              <li><a href="/ada-compliance-checklist-2025">ADA Checklist 2025</a></li>
+              <li><a href="/section-508-compliance">Section 508 Guide</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready to Make Your Website Accessible?" subtext="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; }
+  .value-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease); }
+  .value-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .value-icon { color: var(--accent); margin-bottom: 12px; display: block; }
+  .value-card h3 { font-size: 1rem; margin-bottom: 8px; }
+  .value-card p { font-size: 0.88rem; color: var(--ink-2); margin: 0; line-height: 1.6; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .values-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

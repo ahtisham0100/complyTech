@@ -5,7 +5,7 @@ const currentPath = Astro.url.pathname;
 const dropdowns = [
   {
     label: 'Services',
-    href: '/ada-compliance-audit-small-business',
+    href: '/services',
     items: [
       { href: '/ada-compliance-audit-small-business', label: 'Small Business Audit' },
       { href: '/ada-compliance-audit-pricing', label: 'Pricing & Tax Credit' },
@@ -16,7 +16,7 @@ const dropdowns = [
   },
   {
     label: 'Industries',
-    href: '/ada-compliance-ecommerce-websites',
+    href: '/industries',
     items: [
       { href: '/ada-compliance-ecommerce-websites', label: 'E-commerce' },
       { href: '/ada-compliance-shopify', label: 'Shopify' },
@@ -42,6 +42,8 @@ const dropdowns = [
     ]
   },
 ];
+
+const showAbout = true;
 ---
 
 <header class="site-nav" id="site-header">
@@ -76,6 +78,7 @@ const dropdowns = [
           </div>
         </div>
       ))}
+      <a href="/about" class={`nav-link ${currentPath === '/about' ? 'active' : ''}`} aria-current={currentPath === '/about' ? 'page' : undefined}>About</a>
     </nav>
 
     <!-- CTA -->
@@ -111,6 +114,7 @@ const dropdowns = [
         ))}
       </>
     ))}
+    <a href="/about" class={`mobile-link ${currentPath === '/about' ? 'active' : ''}`}>About</a>
     <a
       href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my website.')}`}
       class="btn btn-primary"

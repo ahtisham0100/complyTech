@@ -1,0 +1,179 @@
+---
+import { ClipboardCheck, FileText, Search, FileBadge, FileCheck, ArrowRight } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "ADA Compliance Services",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "description": "Professional WCAG 2.2 Level AA accessibility audit services for websites, including manual expert audits, VPAT documentation, PDF remediation, and accessibility statements.",
+    "areaServed": "United States",
+    "serviceType": "Website Accessibility Audit"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `${DOMAIN}/services` }
+    ]
+  }
+];
+
+const services = [
+  {
+    icon: ClipboardCheck,
+    title: 'ADA Compliance Audit',
+    desc: 'Full WCAG 2.2 Level AA manual expert review of your entire website. Includes VPAT, prioritized remediation roadmap, developer-ready fix guide, and compliance certificate after re-test.',
+    href: '/ada-compliance-audit-small-business',
+    price: 'From $495',
+  },
+  {
+    icon: FileText,
+    title: 'VPAT Documentation',
+    desc: 'IAAP-certified VPAT/ACR documents for federal procurement, enterprise B2B sales, and government contracting. Section 508 and WCAG 2.2 conformance reporting.',
+    href: '/vpat-documentation-services',
+    price: 'From $1,500',
+  },
+  {
+    icon: FileBadge,
+    title: 'PDF Accessibility Remediation',
+    desc: 'Full PDF remediation including tagging, reading order, alt text, table structure, and color contrast. Individual documents or bulk remediation packages.',
+    href: '/how-to-make-pdf-ada-compliant',
+    price: 'From $50/doc',
+  },
+  {
+    icon: FileCheck,
+    title: 'Accessibility Statement',
+    desc: 'Professional accessibility statement template and customization for your website — demonstrating your commitment to inclusive design and ADA compliance.',
+    href: '/accessibility-statement-template',
+    price: 'Included',
+  },
+  {
+    icon: Search,
+    title: 'Section 508 Compliance',
+    desc: 'Specialized audits and VPAT documentation for federal contractors, agencies, and grant recipients. Full Section 508 conformance reporting.',
+    href: '/section-508-compliance',
+    price: 'From $1,500',
+  },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance Services — Audits, VPAT, PDF Remediation | complyTech"
+  description="Professional ADA compliance services: WCAG 2.2 audits, VPAT documentation, PDF remediation, accessibility statements, and Section 508 compliance. Pricing starts at $495."
+  canonical={`${DOMAIN}/services`}
+  schema={schema}
+  keywords="ADA compliance services, WCAG 2.2 audit services, VPAT documentation, PDF accessibility remediation, Section 508 compliance services"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Services</span>
+      </nav>
+      <h1 id="page-h1">ADA Compliance Services</h1>
+      <p class="hero-sub">Professional WCAG 2.2 Level AA accessibility services for U.S. small businesses — from full website audits to VPAT documentation and PDF remediation. Every service is delivered by IAAP-certified accessibility professionals.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-services-cta">Get Free Quote</a>
+        <a href="/ada-compliance-audit-pricing" class="btn btn-outline-light btn-lg">See Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="services-hub-grid">
+        {services.map((s) => (
+          <a href={s.href} class="service-hub-card">
+            <div class="shc-icon">
+              {(() => { const Icon = s.icon; return <Icon className="lucide-icon" aria-hidden="true" size={28} strokeWidth={2} />; })()}
+            </div>
+            <div class="shc-content">
+              <h2>{s.title}</h2>
+              <p>{s.desc}</p>
+              <div class="shc-footer">
+                <span class="shc-price">{s.price}</span>
+                <span class="shc-link">Learn more <ArrowRight className="lucide-icon" aria-hidden="true" size={16} strokeWidth={2} /></span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="related-section">
+        <h2>Related Resources</h2>
+        <div class="related-links-grid">
+          <a href="/ada-compliance-audit-pricing" class="related-link-card">
+            <h3>Pricing & Tax Credit</h3>
+            <p>Transparent audit pricing starting at $495. Learn about the IRS Disabled Access Credit that can return up to $5,000.</p>
+          </a>
+          <a href="/ada-compliance-checklist-2025" class="related-link-card">
+            <h3>ADA Compliance Checklist 2025</h3>
+            <p>Free downloadable WCAG 2.2 Level AA checklist covering all 86 success criteria organized by priority.</p>
+          </a>
+          <a href="/what-is-ada-compliance-websites" class="related-link-card">
+            <h3>What Is ADA Compliance?</h3>
+            <p>Complete guide to ADA website compliance — what it means, who must comply, and what happens if you don't.</p>
+          </a>
+          <a href="/received-ada-demand-letter" class="related-link-card">
+            <h3>Got a Demand Letter?</h3>
+            <p>Step-by-step guide for small business owners who have received an ADA website demand letter.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready to Get Started?" subtext="Send us your website URL on WhatsApp and receive a detailed scope, timeline, and exact pricing within 1 business day. No obligation." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  .services-hub-grid { display: flex; flex-direction: column; gap: 20px; }
+  .service-hub-card {
+    display: flex; gap: 24px; align-items: flex-start;
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 32px; text-decoration: none; transition: all 0.25s var(--ease);
+  }
+  .service-hub-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--border-2); }
+  .shc-icon {
+    width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--accent-lt);
+    display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0;
+  }
+  .shc-content { flex: 1; }
+  .shc-content h2 { font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; }
+  .shc-content p { font-size: 0.9rem; color: var(--ink-2); line-height: 1.65; margin: 0 0 14px; }
+  .shc-footer { display: flex; justify-content: space-between; align-items: center; }
+  .shc-price { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
+  .shc-link { font-size: 0.85rem; font-weight: 600; color: var(--accent-2); display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .service-hub-card:hover .shc-link { gap: 8px; }
+
+  .related-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .related-section h2 { text-align: center; margin-bottom: 32px; }
+  .related-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .related-link-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+    padding: 24px; text-decoration: none; transition: all 0.2s var(--ease);
+  }
+  .related-link-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .related-link-card h3 { font-size: 1rem; color: var(--ink); margin-bottom: 8px; }
+  .related-link-card p { font-size: 0.85rem; color: var(--ink-2); margin: 0; line-height: 1.6; }
+
+  @media (max-width: 700px) {
+    .service-hub-card { flex-direction: column; gap: 16px; }
+    .related-links-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -38,7 +38,7 @@ const schema = [
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
-      { "@type": "ListItem", "position": 2, "name": "Resources", "item": `${DOMAIN}/resources` },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": `${DOMAIN}/services` },
       { "@type": "ListItem", "position": 3, "name": "PDF Accessibility Guide", "item": `${DOMAIN}/how-to-make-pdf-ada-compliant` }
     ]
   }
@@ -65,8 +65,8 @@ const steps = [
 ---
 
 <BaseLayout
-  title="How to Make a PDF ADA Compliant: 8-Step Guide | complyTech"
-  description="Step-by-step guide to PDF ADA accessibility. Covers tagging, reading order, alt text, table structure, color contrast, and Acrobat accessibility check — with professional remediation available."
+  title="How to Make a PDF ADA Compliant | complyTech"
+  description="Free 2026 guide: how to make PDFs ADA compliant with proper tagging, reading order, and alt text. Professional PDF remediation available starting at $50 per document."
   canonical={`${DOMAIN}/how-to-make-pdf-ada-compliant`}
   schema={schema}
   ogType="article"
@@ -174,6 +174,22 @@ const steps = [
   </section>
 
   <CTASection heading="Need Professional PDF Accessibility Remediation?" subtext="Our team handles full PDF remediation — tagging, reading order, alt text, tables, contrast — starting at $50 per document. Volume discounts available for bulk document sets." />
+
+  <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2 style="text-align:center;margin-bottom:12px;">Industries That Need PDF Accessibility</h2>
+      <p style="text-align:center;max-width:560px;margin:0 auto 32px;color:var(--ink-2);font-size:0.92rem;">PDF accessibility issues are common across these industries. <a href="/industries">View all industry guides</a>.</p>
+      <div class="related-industry-grid">
+        <a href="/ada-compliance-restaurants" class="rel-ind-card"><strong>Restaurants</strong><span>Menu PDFs — the #1 cited violation</span></a>
+        <a href="/ada-compliance-law-firms" class="rel-ind-card"><strong>Law Firms</strong><span>Newsletters, articles, legal guides</span></a>
+        <a href="/ada-compliance-healthcare-websites" class="rel-ind-card"><strong>Healthcare</strong><span>Patient forms, health information</span></a>
+        <a href="/ada-compliance-dental-offices" class="rel-ind-card"><strong>Dental Offices</strong><span>New patient packets, insurance</span></a>
+        <a href="/ada-compliance-for-nonprofits" class="rel-ind-card"><strong>Nonprofits</strong><span>Annual reports, program guides</span></a>
+        <a href="/section-508-compliance" class="rel-ind-card"><strong>Government</strong><span>Section 508 mandatory compliance</span></a>
+      </div>
+      <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/ada-compliance-audit-small-business">Full Audit Details</a></p>
+    </div>
+  </section>
   <Footer slot="footer" />
 </BaseLayout>
 

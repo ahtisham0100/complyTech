@@ -1,0 +1,182 @@
+---
+import { ShoppingCart, Hospital, Utensils, Gavel, Stethoscope, HeartHandshake, Store, ArrowRight } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "ADA Compliance by Industry",
+    "url": `${DOMAIN}/industries`,
+    "description": "Industry-specific ADA compliance audit guides and services. E-commerce, healthcare, restaurants, law firms, dental offices, nonprofits, and Shopify stores.",
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` }
+    ]
+  }
+];
+
+const industries = [
+  {
+    icon: ShoppingCart,
+    title: 'E-commerce Websites',
+    desc: 'E-commerce sites account for 78% of all ADA digital accessibility lawsuits. Checkout flows, product pages, and filter controls are the most commonly cited barriers.',
+    href: '/ada-compliance-ecommerce-websites',
+    stat: '78% of ADA lawsuits',
+  },
+  {
+    icon: Store,
+    title: 'Shopify Stores',
+    desc: 'No Shopify theme is WCAG 2.2 compliant by default. Third-party apps — popups, reviews, loyalty programs — are the #1 source of accessibility violations.',
+    href: '/ada-compliance-shopify',
+    stat: 'Themes not compliant',
+  },
+  {
+    icon: Hospital,
+    title: 'Healthcare Websites',
+    desc: 'Healthcare organizations face dual liability under ADA Title III and Section 1557 of the ACA. Patient portals, telehealth, and appointment booking are critical.',
+    href: '/ada-compliance-healthcare-websites',
+    stat: 'Dual legal liability',
+  },
+  {
+    icon: Utensils,
+    title: 'Restaurant Websites',
+    desc: 'PDF menus are the #1 cited ADA violation for restaurants. Online ordering flows and reservation systems are also common accessibility failure points.',
+    href: '/ada-compliance-restaurants',
+    stat: 'PDF menus = #1 target',
+  },
+  {
+    icon: Gavel,
+    title: 'Law Firm Websites',
+    desc: 'Law firms have a unique ethical obligation — their websites must meet the same civil rights standards they advise clients on. Intake forms and chatbots are key targets.',
+    href: '/ada-compliance-law-firms',
+    stat: 'Ethical obligation',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Dental Office Websites',
+    desc: 'Dental practices face ADA claims targeting inaccessible appointment booking, patient intake forms, and before/after photo galleries.',
+    href: '/ada-compliance-dental-offices',
+    stat: 'Booking systems at risk',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Nonprofit Websites',
+    desc: 'Most nonprofits must comply with ADA Title III and/or Section 504. Donation forms, program applications, and event registration are key failure points.',
+    href: '/ada-compliance-for-nonprofits',
+    stat: 'ADA + Section 504',
+  },
+];
+---
+
+<BaseLayout
+  title="ADA Compliance by Industry — Healthcare, E-commerce, Restaurants & More | complyTech"
+  description="Industry-specific ADA compliance guides and audit services. E-commerce, healthcare, restaurants, law firms, dental offices, nonprofits, and Shopify stores. Find your industry."
+  canonical={`${DOMAIN}/industries`}
+  schema={schema}
+  keywords="ADA compliance by industry, healthcare ADA compliance, ecommerce ADA compliance, restaurant website accessibility, law firm ADA compliance, dental ADA compliance"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Industries</span>
+      </nav>
+      <h1 id="page-h1">ADA Compliance by Industry</h1>
+      <p class="hero-sub">Every industry faces unique ADA compliance challenges. Our audit team has specialized experience across the industries most targeted by accessibility lawsuits — with industry-specific testing protocols and remediation guidance.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-industries-cta">Get Your Industry Audit Quote</a>
+        <a href="/ada-compliance-audit-pricing" class="btn btn-outline-light btn-lg">See Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="industry-grid">
+        {industries.map((ind) => (
+          <a href={ind.href} class="industry-card">
+            <div class="ind-header">
+              <div class="ind-icon">
+                {(() => { const Icon = ind.icon; return <Icon className="lucide-icon" aria-hidden="true" size={28} strokeWidth={2} />; })()}
+              </div>
+              <span class="ind-stat">{ind.stat}</span>
+            </div>
+            <h2>{ind.title}</h2>
+            <p>{ind.desc}</p>
+            <span class="ind-link">View industry guide <ArrowRight className="lucide-icon" aria-hidden="true" size={16} strokeWidth={2} /></span>
+          </a>
+        ))}
+      </div>
+
+      <div class="cross-links-section">
+        <h2>Not Sure Which Industry Guide Applies?</h2>
+        <p>All of our <a href="/ada-compliance-audit-small-business">ADA compliance audits</a> are customized to your specific website, regardless of industry. If your industry isn't listed above, our WCAG 2.2 audit still covers all accessibility requirements.</p>
+        <div class="cross-links">
+          <a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a>
+          <a href="/ada-compliance-faq">ADA Compliance FAQ</a>
+          <a href="/ada-compliance-checklist-2025">Free ADA Checklist 2025</a>
+          <a href="/ada-compliance-audit-pricing">Audit Pricing</a>
+          <a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a>
+          <a href="/vpat-documentation-services">VPAT Documentation</a>
+          <a href="/section-508-compliance">Section 508 Guide</a>
+          <a href="/received-ada-demand-letter">Got a Demand Letter?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Get Your Industry-Specific ADA Compliance Audit" subtext="Every audit is customized to your industry's specific compliance challenges. Send us your website URL and we'll include industry-specific testing protocols in your quote." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .industry-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 28px; text-decoration: none; transition: all 0.25s var(--ease);
+    display: flex; flex-direction: column;
+  }
+  .industry-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--border-2); }
+  .ind-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .ind-icon {
+    width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--accent-lt);
+    display: flex; align-items: center; justify-content: center; color: var(--accent);
+  }
+  .ind-stat {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--danger); background: var(--danger-lt); padding: 4px 10px; border-radius: 4px;
+  }
+  .industry-card h2 { font-size: 1.1rem; color: var(--ink); margin-bottom: 10px; }
+  .industry-card p { font-size: 0.88rem; color: var(--ink-2); line-height: 1.6; flex: 1; margin: 0 0 16px; }
+  .ind-link { font-size: 0.85rem; font-weight: 600; color: var(--accent-2); display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .industry-card:hover .ind-link { gap: 8px; }
+
+  .cross-links-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); text-align: center; }
+  .cross-links-section h2 { margin-bottom: 12px; }
+  .cross-links-section > p { max-width: 640px; margin: 0 auto 24px; }
+  .cross-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .cross-links a {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 6px 16px; font-size: 0.85rem; font-weight: 500; color: var(--ink-2);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .cross-links a:hover { background: var(--accent-lt); border-color: var(--accent-2); color: var(--accent); }
+
+  @media (max-width: 700px) { .industry-grid { grid-template-columns: 1fr; } }
+</style>

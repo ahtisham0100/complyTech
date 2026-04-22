@@ -1,0 +1,198 @@
+---
+import { Globe, Zap } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+const schema = [
+  {
+    "@context": "https://schema.org", "@type": "Service",
+    "name": "WordPress ADA Compliance Audit",
+    "description": "WCAG 2.2 accessibility audit for WordPress websites. Covers themes, plugins, Gutenberg blocks, forms, and WooCommerce stores.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "serviceType": "WordPress Accessibility Audit",
+    "areaServed": "United States"
+  },
+  {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is WordPress ADA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "WordPress core has a dedicated accessibility team, but no WordPress theme or plugin combination is WCAG 2.2 compliant by default. Accessibility depends entirely on your specific theme, installed plugins, and content implementation. Third-party themes from ThemeForest and similar marketplaces frequently introduce critical accessibility barriers." } },
+      { "@type": "Question", "name": "Do WordPress accessibility plugins work?", "acceptedAnswer": { "@type": "Answer", "text": "WordPress accessibility plugins like WP Accessibility, One Click Accessibility, and overlay plugins (accessiBe, UserWay) address only a fraction of WCAG requirements. Plugins cannot fix underlying theme HTML structure, missing ARIA labels in third-party plugins, or content-level issues like missing alt text on uploaded images. A manual WCAG 2.2 audit is required." } },
+      { "@type": "Question", "name": "Which WordPress themes are most accessible?", "acceptedAnswer": { "@type": "Answer", "text": "WordPress themes tagged 'accessibility-ready' in the WordPress.org theme directory meet minimum accessibility criteria reviewed by the WordPress accessibility team. However, 'accessibility-ready' is not equivalent to WCAG 2.2 Level AA compliance — it covers only a subset of criteria. The most accessible default themes are Twenty Twenty-Four and Twenty Twenty-Three, but even these require auditing when customized." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "WordPress", "item": `${DOMAIN}/ada-compliance-wordpress` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Is WordPress ADA compliant?", answer: "WordPress core has a dedicated accessibility team, but no WordPress theme or plugin combination is WCAG 2.2 compliant by default. Accessibility depends on your specific theme, plugins, and content. Third-party themes from ThemeForest and similar marketplaces frequently introduce critical accessibility barriers." },
+  { question: "Do WordPress accessibility plugins work?", answer: "WordPress accessibility plugins like WP Accessibility and overlay plugins (accessiBe, UserWay) address only a fraction of WCAG requirements. They cannot fix underlying theme HTML, missing ARIA labels in third-party plugins, or content-level issues. A manual WCAG 2.2 audit is required for genuine compliance." },
+  { question: "Which WordPress themes are most accessible?", answer: "Themes tagged 'accessibility-ready' on WordPress.org meet minimum criteria but are NOT WCAG 2.2 Level AA compliant. Twenty Twenty-Four and Twenty Twenty-Three are the most accessible default themes, but even these require auditing when customized with page builders or custom CSS." },
+  { question: "Does Elementor/Divi make my site ADA non-compliant?", answer: "Page builders like Elementor, Divi, and WPBakery add significant accessibility risk. Common issues include: missing heading hierarchy, decorative images without empty alt attributes, inaccessible accordion and tab widgets, focus management failures in popups, and semantic HTML violations. Sites built with page builders almost always require manual remediation." },
+  { question: "How much does a WordPress ADA audit cost?", answer: "A WordPress accessibility audit for a standard site (1–50 pages) costs $495–$3,500. WooCommerce stores with product pages, cart flows, and checkout require $3,500–$7,500. Most WordPress site owners qualify for the IRS Disabled Access Credit — up to $5,000 back per year." }
+];
+
+const pluginRisks = [
+  { category: 'Contact Form Plugins', examples: 'Contact Form 7, WPForms, Gravity Forms', risk: 'Medium', issue: 'Missing form labels, error handling not announced to screen readers' },
+  { category: 'Page Builders', examples: 'Elementor, Divi, WPBakery', risk: 'High', issue: 'Broken heading hierarchy, inaccessible widgets, semantic HTML violations' },
+  { category: 'Slider/Carousel', examples: 'Revolution Slider, Smart Slider, MetaSlider', risk: 'High', issue: 'Auto-advancing without pause control, keyboard inaccessible navigation' },
+  { category: 'Popup Plugins', examples: 'Popup Maker, OptinMonster, Elementor Popups', risk: 'High', issue: 'Focus trapping, no keyboard close, not announced to screen readers' },
+  { category: 'E-commerce (Woo)', examples: 'WooCommerce, Easy Digital Downloads', risk: 'High', issue: 'Product variations lack labels, cart/checkout keyboard navigation issues' },
+  { category: 'Gallery/Lightbox', examples: 'Envira, FooGallery, NextGEN', risk: 'Medium', issue: 'Lightbox modals not keyboard accessible, missing image alt text propagation' },
+];
+---
+
+<BaseLayout
+  title="WordPress ADA Compliance — Is Your Site Accessible?"
+  description="No WordPress theme is WCAG 2.2 compliant by default. Plugins and page builders make it worse. Get a manual ADA audit for your WordPress site. Starting at $495."
+  canonical={`${DOMAIN}/ada-compliance-wordpress`}
+  schema={schema}
+  ogType="article"
+  keywords="WordPress ADA compliance, WordPress accessibility audit, is WordPress ADA compliant, WordPress WCAG, Elementor accessibility"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/industries">Industries</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">WordPress</span>
+      </nav>
+      <div class="hero-badge">
+        <Globe className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        WordPress · WooCommerce · Elementor · All Themes
+      </div>
+      <h1 id="page-h1">Is Your WordPress Website ADA Compliant?</h1>
+      <p class="hero-sub">WordPress powers 43% of all websites — but no theme, plugin, or page builder makes your site WCAG 2.2 compliant by default. Accessibility overlay plugins don't fix underlying code barriers. Your WordPress site needs a manual expert audit.</p>
+      <div class="hero-actions">
+        <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a WordPress ADA compliance audit for my website.')}`} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener noreferrer" id="hero-wp-cta">Audit My WordPress Site</a>
+        <a href="#plugin-risks" class="btn btn-outline-light btn-lg">See Plugin Risks</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — WordPress Accessibility</div>
+            <ul>
+              <li>No WordPress theme is fully WCAG 2.2 Level AA compliant out of the box.</li>
+              <li>"Accessibility-ready" themes meet <strong>minimum</strong> criteria — not full WCAG 2.2 AA.</li>
+              <li>Page builders (Elementor, Divi) add significant accessibility barriers.</li>
+              <li><a href="/accessibility-overlay-alternatives">Overlay plugins don't work</a> — courts reject them as sufficient remediation.</li>
+              <li>Third-party plugins are the #1 source of WordPress accessibility violations.</li>
+              <li>A manual audit covers your <strong>specific</strong> theme + plugin combination.</li>
+            </ul>
+          </div>
+
+          <h2>Why WordPress Websites Fail ADA Compliance</h2>
+          <p>WordPress itself has an accessibility team that contributes to core platform code. However, the vast majority of WordPress accessibility issues come from three sources that WordPress core cannot control:</p>
+          <ol>
+            <li><strong>Third-party themes:</strong> Most commercial themes (ThemeForest, Elegant Themes, StudioPress) are designed for visual appeal, not accessibility. Custom header menus, hero sliders, and footer widgets frequently lack proper ARIA attributes, keyboard navigation, and semantic HTML structure.</li>
+            <li><strong>Page builders:</strong> Elementor, Divi, WPBakery, and Beaver Builder generate complex nested HTML that breaks heading hierarchy, introduces inaccessible interactive widgets (tabs, accordions, toggles), and creates focus management failures in popups and modals.</li>
+            <li><strong>Plugins:</strong> Every plugin that adds UI elements to your frontend introduces potential accessibility barriers — from contact forms with missing labels to sliders without pause controls to popups that trap keyboard focus.</li>
+          </ol>
+
+          <h2 id="plugin-risks">High-Risk WordPress Plugins for ADA Compliance</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="WordPress plugin accessibility risk assessment">
+              <thead><tr><th scope="col">Category</th><th scope="col">Common Plugins</th><th scope="col">Risk</th><th scope="col">Typical Issue</th></tr></thead>
+              <tbody>
+                {pluginRisks.map(row => (
+                  <tr>
+                    <td><strong>{row.category}</strong></td>
+                    <td>{row.examples}</td>
+                    <td>{row.risk === 'High' ? '🔴 High' : '🟡 Medium'}</td>
+                    <td>{row.issue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>The "Accessibility-Ready" Myth</h2>
+          <p>WordPress.org tags certain themes as <strong>"accessibility-ready"</strong> after a review by the WordPress accessibility team. While this is better than nothing, "accessibility-ready" is <strong>not equivalent to WCAG 2.2 Level AA compliance</strong>:</p>
+          <ul>
+            <li>The review covers only a subset of WCAG criteria</li>
+            <li>It tests the default theme — not your customizations, content, or plugins</li>
+            <li>It doesn't test WooCommerce integration, contact forms, or dynamic content</li>
+            <li>It doesn't verify screen reader compatibility or keyboard navigation flows</li>
+          </ul>
+          <p>The most accessible default themes are Twenty Twenty-Four and Twenty Twenty-Three — but even these require a professional audit once you add content, forms, and plugins.</p>
+
+          <h2>Does an Accessibility Plugin Fix My WordPress Site?</h2>
+          <p>No. WordPress accessibility plugins fall into two categories — both insufficient for legal compliance:</p>
+          <ul>
+            <li><strong>Overlay/widget plugins</strong> (accessiBe, UserWay, AudioEye): Apply presentation-layer patches that <a href="/accessibility-overlay-alternatives">courts have rejected</a> as sufficient remediation. They detect only 20–30% of WCAG violations.</li>
+            <li><strong>Helper plugins</strong> (WP Accessibility, One Click Accessibility): Add skip navigation links, fix some ARIA issues, and improve keyboard navigation in certain areas. Useful as supplements — but cannot fix theme HTML structure, third-party plugin barriers, or content-level issues like missing alt text.</li>
+          </ul>
+          <p>The only legally defensible approach is genuine code-level remediation guided by a <a href="/ada-compliance-audit-small-business">professional manual audit</a>.</p>
+
+          <h2>What a complyTech WordPress Audit Covers</h2>
+          <p>Our WordPress-specific audit tests your <strong>actual site implementation</strong> — your specific theme, all installed plugins, WooCommerce (if applicable), and all custom content:</p>
+          <ul>
+            <li>Full WCAG 2.2 Level AA manual expert review (86 success criteria)</li>
+            <li>Theme-specific HTML structure and semantic markup analysis</li>
+            <li>Plugin-by-plugin accessibility assessment for all frontend-facing plugins</li>
+            <li>WooCommerce cart, checkout, product page, and filter testing</li>
+            <li>Contact form, popup, and interactive element keyboard/screen reader testing</li>
+            <li>VPAT documentation and compliance certificate after re-test</li>
+          </ul>
+          <p>View full <a href="/ada-compliance-audit-pricing">pricing and timeline details</a>. Most WordPress site owners qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — up to $5,000/year back.</p>
+
+          <h2 id="faq-wordpress">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card">
+            <h4>Get Your WordPress Site Audited</h4>
+            <p>We test your exact theme + plugin setup, not a generic WordPress install. Starting at $495.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a WordPress ADA compliance audit.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-wp-cta">Chat on WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing & Timeline</a></li>
+              <li><a href="/accessibility-overlay-alternatives">Why Overlays Fail</a></li>
+              <li><a href="/ada-compliance-shopify">Shopify Compliance</a></li>
+              <li><a href="/ada-compliance-ecommerce-websites">E-commerce Compliance</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Your WordPress Site Deserves a Real Accessibility Audit" subtext="Plugins and overlays can't fix what they can't detect. A complyTech manual audit covers your specific WordPress theme, plugins, and content — starting at $495." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>

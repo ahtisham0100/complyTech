@@ -1,0 +1,186 @@
+---
+import { MapPin, Zap, AlertTriangle } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+import FAQAccordion from '../components/FAQAccordion.tsx';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+const schema = [
+  {
+    "@context": "https://schema.org", "@type": "Service",
+    "name": "ADA Website Compliance Audit for Small Businesses in California",
+    "description": "WCAG 2.2 accessibility audit for California businesses facing heightened ADA and Unruh Civil Rights Act liability.",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "serviceType": "ADA Website Accessibility Audit for small business in California",
+    "areaServed": { "@type": "State", "name": "California" }
+  },
+  {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Why are California businesses targeted more for ADA lawsuits?", "acceptedAnswer": { "@type": "Answer", "text": "California's Unruh Civil Rights Act provides statutory damages of $4,000 per violation per visit — on top of federal ADA remedies. This makes California businesses significantly more profitable targets. California accounts for 30–40% of all federal ADA website filings." } },
+      { "@type": "Question", "name": "What is the Unruh Civil Rights Act?", "acceptedAnswer": { "@type": "Answer", "text": "The Unruh Civil Rights Act (Cal. Civil Code §51) prohibits discrimination by California businesses. Courts apply it to websites. Unlike federal ADA, it provides $4,000 statutory damages per violation per visit. Attorney fees are also recoverable." } },
+      { "@type": "Question", "name": "Does the Unruh Act apply to out-of-state businesses?", "acceptedAnswer": { "@type": "Answer", "text": "If your business serves California customers via e-commerce or online services, the Unruh Act may apply regardless of your physical location. California courts have extended Unruh jurisdiction to out-of-state businesses transacting with California consumers." } }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": `${DOMAIN}/industries` },
+      { "@type": "ListItem", "position": 3, "name": "California", "item": `${DOMAIN}/ada-compliance-california` }
+    ]
+  }
+];
+
+const faqItems = [
+  { question: "Why are California businesses targeted more for ADA lawsuits?", answer: "California's Unruh Civil Rights Act provides statutory damages of $4,000 per violation per visit — on top of federal ADA remedies. This makes California businesses more profitable targets for serial plaintiff firms. California accounts for 30–40% of all federal ADA website filings." },
+  { question: "What is the Unruh Civil Rights Act?", answer: "The Unruh Civil Rights Act (Cal. Civil Code §51) prohibits discrimination by California businesses. Courts have applied it to website accessibility. Unlike the federal ADA (injunctive relief only), Unruh provides $4,000 statutory damages per violation per visit — meaning damages accumulate rapidly." },
+  { question: "How much does an ADA lawsuit cost in California?", answer: "Pre-litigation demand letters in California typically seek $8,000–$25,000. Full lawsuits including settlement ($15,000–$100,000+), plaintiff attorney fees ($10,000–$30,000), and defense fees ($10,000–$25,000) can total $50,000–$150,000+. A proactive audit starts at $495." },
+  { question: "Does the Unruh Act apply to out-of-state businesses?", answer: "If your business serves California customers via e-commerce or online services, the Unruh Act may apply regardless of physical location. California courts have extended jurisdiction to out-of-state businesses transacting with California consumers." },
+  { question: "What industries in California face the most ADA lawsuits?", answer: "E-commerce retailers, restaurants, healthcare providers, hospitality businesses, and real estate companies face the highest rates. Retail and e-commerce account for the majority. Any business with online ordering, reservations, or booking is at elevated risk." }
+];
+---
+
+<BaseLayout
+  title="ADA Website Compliance California — Unruh Act Guide"
+  description="California businesses face $4,000 per violation under the Unruh Act — on top of federal ADA penalties. Get a WCAG 2.2 audit to protect your business. Starting at $495."
+  canonical={`${DOMAIN}/ada-compliance-california`}
+  schema={schema}
+  ogType="article"
+  keywords="ADA compliance California, Unruh Civil Rights Act website, California website accessibility, California ADA audit"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero page-hero-urgent" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <a href="/industries">Industries</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">California</span>
+      </nav>
+      <div class="hero-badge badge-urgent">
+        <MapPin className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        California · Unruh Civil Rights Act · $4,000 Per Violation
+      </div>
+      <h1 id="page-h1">ADA Website Compliance for California Businesses</h1>
+      <p class="hero-sub">California businesses face the highest ADA website lawsuit risk in the U.S. The <strong style="color:#fbbf24;">Unruh Civil Rights Act</strong> adds <strong style="color:#fbbf24;">$4,000 per violation per visit</strong> — on top of federal ADA penalties. If you serve California customers, your website must be WCAG 2.2 compliant.</p>
+      <div class="hero-actions">
+        <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need a California-focused ADA compliance audit for my website.')}`} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener noreferrer" id="hero-ca-cta">Get a California-Focused Audit</a>
+        <a href="#unruh" class="btn btn-outline-light btn-lg">Learn About Unruh Act</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-layout">
+        <article class="prose-section">
+
+          <div class="tldr-box" role="note">
+            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — California ADA Risk</div>
+            <ul>
+              <li>California leads the U.S. in ADA website lawsuits — <strong>30–40% of all federal filings</strong>.</li>
+              <li>The Unruh Act adds <strong>$4,000 per violation per visit</strong> in statutory damages.</li>
+              <li>A single plaintiff visiting 10 times = $40,000+ in potential statutory damages alone.</li>
+              <li>Pre-litigation demand letters in California typically seek <strong>$8,000–$25,000</strong>.</li>
+              <li>Full lawsuit exposure: <strong>$50,000–$150,000+</strong> including all fees.</li>
+              <li>A proactive <a href="/ada-compliance-audit-small-business">WCAG 2.2 audit</a> starts at $495.</li>
+            </ul>
+          </div>
+
+          <h2 id="unruh">The California Unruh Civil Rights Act — What Every Business Owner Must Know</h2>
+          <p>The <strong>Unruh Civil Rights Act</strong> (California Civil Code §51) is California's state civil rights law prohibiting discrimination by all business establishments. While the federal ADA provides injunctive relief and attorney fee recovery, the Unruh Act goes further by providing <strong>statutory damages of $4,000 per violation per visit</strong>.</p>
+          <p>This makes California the most dangerous state for ADA website non-compliance. Under federal ADA alone, damages are limited. Under Unruh, a single plaintiff who identifies multiple violations across multiple visits can accumulate damages rapidly — settlements of $15,000–$100,000+ are common in California.</p>
+
+          <div class="danger-box">
+            <p><strong>Real-world impact:</strong> A California plaintiff who visits your non-compliant website 5 times and identifies 3 violations per visit could claim $60,000 in statutory damages alone — before attorney fees, court costs, and remediation.</p>
+          </div>
+
+          <h2>Why California Businesses Are Disproportionately Targeted</h2>
+          <ul>
+            <li><strong>Financial incentive:</strong> The $4,000 per-violation per-visit Unruh damages make California filings more profitable for plaintiff firms.</li>
+            <li><strong>Plaintiff-friendly courts:</strong> California federal and state courts consistently uphold website accessibility claims.</li>
+            <li><strong>Serial plaintiff infrastructure:</strong> Concentrated plaintiff firms in LA, SF, and San Diego specialize in high-volume ADA filings.</li>
+            <li><strong>No prior notice requirement:</strong> California allows plaintiffs to file suit immediately upon discovering a violation.</li>
+            <li><strong>Out-of-state reach:</strong> The Unruh Act may apply to any business serving California customers, regardless of physical location.</li>
+          </ul>
+
+          <h2>Federal ADA vs. California Unruh Act — Cost Comparison</h2>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Federal ADA versus California Unruh Act">
+              <thead><tr><th scope="col">Factor</th><th scope="col">Federal ADA</th><th scope="col">California Unruh</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Statutory damages</strong></td><td>None (injunctive only)</td><td>$4,000/violation/visit</td></tr>
+                <tr><td><strong>Attorney fees</strong></td><td>Recoverable</td><td>Recoverable</td></tr>
+                <tr><td><strong>Pre-suit notice</strong></td><td>Not required</td><td>Not required</td></tr>
+                <tr><td><strong>Demand letter range</strong></td><td>$4K–$20K</td><td>$8K–$25K</td></tr>
+                <tr><td><strong>Full lawsuit cost</strong></td><td>$12K–$75K</td><td>$50K–$150K+</td></tr>
+                <tr><td><strong>Proactive audit</strong></td><td colspan="2" style="text-align:center;color:var(--accent);font-weight:700;">$495–$3,500 (complyTech)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Who Must Comply in California?</h2>
+          <p>Under both ADA and Unruh, <strong>any business serving the public</strong> must provide accessible digital services:</p>
+          <ul>
+            <li><strong>E-commerce/retail:</strong> Online stores, carts, catalogs (<a href="/ada-compliance-ecommerce-websites">e-commerce guide</a>)</li>
+            <li><strong>Restaurants:</strong> Digital menus, online ordering, reservations (<a href="/ada-compliance-restaurants">restaurant guide</a>)</li>
+            <li><strong>Healthcare:</strong> Patient portals, telehealth, booking (<a href="/ada-compliance-healthcare-websites">healthcare guide</a>)</li>
+            <li><strong>Legal services:</strong> Intake forms, client portals (<a href="/ada-compliance-law-firms">law firm guide</a>)</li>
+            <li><strong>Dental practices:</strong> Booking, patient intake (<a href="/ada-compliance-dental-offices">dental guide</a>)</li>
+            <li><strong>Nonprofits:</strong> Donation forms, applications (<a href="/ada-compliance-for-nonprofits">nonprofit guide</a>)</li>
+          </ul>
+
+          <h2>How to Protect Your California Business</h2>
+          <p>The most cost-effective defense is a <strong>proactive WCAG 2.2 Level AA manual audit</strong>. Unlike automated tools (30–40% detection), a complyTech manual audit identifies 100% of barriers with court-accepted documentation.</p>
+          <p>Your audit includes: full WCAG 2.2 manual review, VPAT documentation, prioritized remediation roadmap, developer fix guide, compliance certificate after re-test, and a 60-minute walkthrough call.</p>
+          <p>Already <a href="/received-ada-demand-letter">received a demand letter</a>? Commissioning an audit immediately demonstrates good-faith compliance. Most businesses also qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — up to $5,000/year back. See full <a href="/ada-compliance-audit-pricing">pricing details</a>.</p>
+
+          <h2 id="faq-california">Frequently Asked Questions</h2>
+          <FAQAccordion items={faqItems} client:load />
+
+        </article>
+
+        <aside class="page-sidebar">
+          <div class="sidebar-card sidebar-urgent-card">
+            <h4>California Risk: Critical</h4>
+            <p>Unruh Act damages are per-violation, per-visit. A single plaintiff can accumulate $40,000+ in statutory damages.</p>
+            <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA audit for my California business.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-ca-cta">Get Protected — WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Related Resources</h4>
+            <ul class="sidebar-links">
+              <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
+              <li><a href="/ada-compliance-audit-pricing">Pricing & Timeline</a></li>
+              <li><a href="/received-ada-demand-letter">Got a Demand Letter?</a></li>
+              <li><a href="/disabled-access-credit-tax">ADA Tax Credit</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Protect Your California Business Before the Next Demand Letter" subtext="California businesses face the highest ADA risk in the country. A complyTech WCAG 2.2 audit starts at $495 — a fraction of one Unruh Act demand letter." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero-urgent { background: linear-gradient(135deg, #1a0a08 0%, var(--accent) 100%); }
+  .badge-urgent { border: 1px solid rgba(251,191,36,0.4); color: #fbbf24; }
+  .btn-outline-light { background: transparent; color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #fff; }
+  .danger-box { background: #fdf1f0; border: 1px solid rgba(192,57,43,0.2); border-left: 3px solid var(--danger); padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 20px 0; font-size: 0.93rem; color: #7f1d1d; }
+  .sidebar-urgent-card { background: #fdf1f0; border-color: rgba(192,57,43,0.25); }
+  .sidebar-urgent-card h4 { color: var(--danger); }
+  .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
+  .sidebar-links li a::before { content: '› '; }
+  @media (max-width: 900px) {
+    .page-layout { grid-template-columns: 1fr; }
+    .page-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 600px) { .page-sidebar { grid-template-columns: 1fr; } }
+</style>
