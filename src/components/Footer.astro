@@ -49,6 +49,7 @@ import { ShieldCheck, User, Globe, MessageCircle, MapPin, Mail } from 'lucide-re
           <li><a href="/accessibility-overlay-alternatives">Why Overlays Fail</a></li>
           <li><a href="/disabled-access-credit-tax">Tax Credit Guide</a></li>
           <li><a href="/about">About complyTech</a></li>
+          <li><a href="/testimonials">Client Testimonials</a></li>
           <li><a href="/sitemap">Sitemap</a></li>
         </ul>
       </div>
@@ -78,6 +79,12 @@ import { ShieldCheck, User, Globe, MessageCircle, MapPin, Mail } from 'lucide-re
             United States (Remote)
           </li>
         </ul>
+        <h2 class="footer-heading" style="margin-top: 20px;">Find Us on Fiverr</h2>
+        <ul class="footer-links">
+          <li><a href="https://fiverr.com/ayti_shami" target="_blank" rel="noopener noreferrer">Fiverr Profile</a></li>
+          <li><a href="https://www.fiverr.com/s/EgwdYAe" target="_blank" rel="noopener noreferrer">ADA Compliance Gig</a></li>
+          <li><a href="https://www.fiverr.com/s/XLroErm" target="_blank" rel="noopener noreferrer">Web Accessibility Gig</a></li>
+        </ul>
       </div>
     </div>
 
@@ -85,6 +92,8 @@ import { ShieldCheck, User, Globe, MessageCircle, MapPin, Mail } from 'lucide-re
       <p>© {new Date().getFullYear()} complyTech — ADA Compliance Services. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="/about">About</a>
+        <span aria-hidden="true">·</span>
+        <a href="/testimonials">Testimonials</a>
         <span aria-hidden="true">·</span>
         <a href="/privacy-policy">Privacy Policy</a>
         <span aria-hidden="true">·</span>
@@ -209,6 +218,27 @@ import { ShieldCheck, User, Globe, MessageCircle, MapPin, Mail } from 'lucide-re
   }
   .footer-bottom-links a:hover { color: rgba(255,255,255,0.65); }
   .footer-bottom-links span { color: rgba(255,255,255,0.2); }
+  .footer-fiverr-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    margin-top: 8px;
+    flex-basis: 100%;
+  }
+  .fiverr-label {
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .footer-fiverr-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-fiverr-links a:hover { color: #7ed4a0; }
+  .footer-fiverr-links span { color: rgba(255,255,255,0.2); }
 
   @media (max-width: 900px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }

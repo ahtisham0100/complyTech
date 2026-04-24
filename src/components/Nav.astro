@@ -79,6 +79,7 @@ const showAbout = true;
         </div>
       ))}
       <a href="/about" class={`nav-link ${currentPath === '/about' ? 'active' : ''}`} aria-current={currentPath === '/about' ? 'page' : undefined}>About</a>
+      <a href="/testimonials" class={`nav-link ${currentPath === '/testimonials' ? 'active' : ''}`} aria-current={currentPath === '/testimonials' ? 'page' : undefined}>Testimonials</a>
     </nav>
 
     <!-- CTA -->
@@ -115,6 +116,7 @@ const showAbout = true;
       </>
     ))}
     <a href="/about" class={`mobile-link ${currentPath === '/about' ? 'active' : ''}`}>About</a>
+    <a href="/testimonials" class={`mobile-link ${currentPath === '/testimonials' ? 'active' : ''}`}>Testimonials</a>
     <a
       href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my website.')}`}
       class="btn btn-primary"

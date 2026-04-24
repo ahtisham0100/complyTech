@@ -1,0 +1,472 @@
+---
+import { ShieldCheck, Star, Quote, Briefcase, MapPin, Zap, ExternalLink } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTASection from '../components/CTASection.astro';
+
+const DOMAIN = 'https://adacomplianceservices.tech';
+
+const FIVERR_PROFILE = 'https://www.fiverr.com/ayti_shami?public_mode=true';
+
+const testimonials = [
+  {
+    name: 'manny1818',
+    initials: 'M',
+    country: 'United States',
+    countryCode: 'US',
+    rating: 5,
+    year: '2026',
+    review: 'Great job thanks so much.',
+    gig: 'Custom Websites, Website Accessibility Audit & Remediation',
+    color: '#2d6246',
+  },
+  {
+    name: 'gch280000',
+    initials: 'G',
+    country: 'United States',
+    countryCode: 'US',
+    rating: 5,
+    year: '2026',
+    review: 'Easy to work with, was able to get work done earlier than expected just for when I needed it. Very in depth on what needed to be repaired on the site — would recommend.',
+    gig: 'Software Testing, Website Accessibility Audit & Remediation',
+    color: '#1a3a2a',
+  },
+  {
+    name: 'chriswolb',
+    initials: 'C',
+    country: 'United Kingdom',
+    countryCode: 'GB',
+    rating: 5,
+    year: '2026',
+    review: 'The work has been done exceptionally fast and to a high standard. Thank you so much.',
+    gig: 'Custom Websites, Website Accessibility Audit & Remediation',
+    color: '#173300',
+  },
+  {
+    name: 'oblakms',
+    initials: 'O',
+    country: 'Bosnia and Herzegovina',
+    countryCode: 'BA',
+    rating: 5,
+    year: '2025',
+    review: 'The work was delivered within the agreed timeframe and according to the provided specifications. Communication was professional and responses were generally prompt. The code is clean and functional, with a few minor adjustments resolved after feedback. The price matched the scope of the project. Overall, a positive experience and I would consider working together again on future projects.',
+    gig: 'Custom Websites, Website Accessibility Audit & Remediation',
+    color: '#2d6246',
+  },
+  {
+    name: 'oblakms',
+    initials: 'O',
+    country: 'Bosnia and Herzegovina',
+    countryCode: 'BA',
+    rating: 5,
+    year: '2025',
+    review: 'Fixed several tricky issues in my project and did it with care and patience. Quick to understand the problems, clear about the plan, and kept me updated the whole time. Turnaround was fast, and everything worked as expected after the fixes. Also spotted a few related problems I hadn\'t noticed and suggested improvements — which shows real attention to detail. Highly recommended for anyone looking for reliable, quality work.',
+    gig: 'Custom Websites, Website Accessibility Audit & Remediation',
+    color: '#1a3a2a',
+  },
+];
+
+const avgRating = 5;
+const totalReviews = testimonials.length;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "complyTech",
+    "url": DOMAIN,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": avgRating,
+      "bestRating": 5,
+      "worstRating": 1,
+      "ratingCount": totalReviews
+    },
+    "review": testimonials.map(t => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": t.name
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": t.rating,
+        "bestRating": 5
+      },
+      "reviewBody": t.review
+    }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": DOMAIN },
+      { "@type": "ListItem", "position": 2, "name": "Testimonials", "item": `${DOMAIN}/testimonials` }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Client Testimonials — complyTech ADA Compliance Services"
+  description="Read verified client reviews of complyTech's ADA compliance audits, WCAG 2.2 remediation, and web accessibility services. 5-star rated by businesses across the US, UK, and Europe."
+  canonical={`${DOMAIN}/testimonials`}
+  schema={schema}
+  keywords="complyTech reviews, ADA compliance testimonials, WCAG audit reviews, web accessibility service reviews, complyTech client feedback"
+>
+  <Nav slot="nav" />
+
+  <section class="page-hero" aria-labelledby="page-h1">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span class="sep" aria-hidden="true">›</span>
+        <span class="current">Testimonials</span>
+      </nav>
+      <div class="hero-badge">
+        <ShieldCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        Verified Client Reviews
+      </div>
+      <h1 id="page-h1">What Our Clients Say</h1>
+      <p class="hero-sub">Real feedback from real businesses. Every project, every review — 100% verified and unedited.</p>
+    </div>
+  </section>
+
+  <!-- Stats Summary -->
+  <section class="section-sm" style="background: var(--surface); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="testimonials-stats">
+        <div class="testimonial-stat-card">
+          <div class="stat-icon-wrap">
+            <Star className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+          </div>
+          <div>
+            <span class="stat-number">5.0</span>
+            <span class="stat-label">Average Rating</span>
+          </div>
+        </div>
+        <div class="testimonial-stat-card">
+          <div class="stat-icon-wrap">
+            <Briefcase className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+          </div>
+          <div>
+            <span class="stat-number">{totalReviews}</span>
+            <span class="stat-label">Verified Reviews</span>
+          </div>
+        </div>
+        <div class="testimonial-stat-card">
+          <div class="stat-icon-wrap">
+            <MapPin className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+          </div>
+          <div>
+            <span class="stat-number">3</span>
+            <span class="stat-label">Countries Served</span>
+          </div>
+        </div>
+        <div class="testimonial-stat-card">
+          <div class="stat-icon-wrap">
+            <Zap className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+          </div>
+          <div>
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Client Satisfaction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="section" aria-label="Client reviews">
+    <div class="container">
+      <div class="testimonials-grid">
+        {testimonials.map((t, i) => (
+          <article class="testimonial-card" id={`review-${i + 1}`}>
+            <div class="testimonial-quote-icon" aria-hidden="true">
+              <Quote className="lucide-icon" size={28} strokeWidth={1.5} />
+            </div>
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" style={`background: ${t.color};`}>
+                {t.initials}
+              </div>
+              <div class="testimonial-meta">
+                <div class="testimonial-name">{t.name}</div>
+                <div class="testimonial-location">
+                  <img
+                    src={`https://flagcdn.com/20x15/${t.countryCode.toLowerCase()}.png`}
+                    alt={`${t.country} flag`}
+                    width="20"
+                    height="15"
+                    loading="lazy"
+                  />
+                  {t.country}
+                </div>
+              </div>
+              <div class="testimonial-time">{t.year}</div>
+            </div>
+            <div class="testimonial-stars" aria-label={`${t.rating} out of 5 stars`}>
+              {Array.from({ length: t.rating }).map(() => (
+                <Star className="lucide-icon star-filled" size={18} strokeWidth={0} />
+              ))}
+            </div>
+            <blockquote class="testimonial-body">
+              <p>{t.review}</p>
+            </blockquote>
+            <div class="testimonial-details">
+              <div class="testimonial-detail">
+                <Briefcase className="lucide-icon" aria-hidden="true" size={15} strokeWidth={2} />
+                <span>{t.gig}</span>
+              </div>
+              <a href={FIVERR_PROFILE} class="testimonial-fiverr-link" target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="lucide-icon" aria-hidden="true" size={14} strokeWidth={2} />
+                View on Fiverr
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection heading="Ready to Join Our Happy Clients?" subtext="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000." />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* ── Stats Bar ──────────────────────────────────────────────── */
+  .testimonials-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .testimonial-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .testimonial-stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .stat-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--accent-lt);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .testimonial-stat-card .stat-number {
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+    line-height: 1.2;
+  }
+  .testimonial-stat-card .stat-label {
+    font-size: 0.82rem;
+    color: var(--ink-3);
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ── Testimonials Grid ──────────────────────────────────────── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  /* ── Testimonial Card ───────────────────────────────────────── */
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent), #7ed4a0);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+  }
+  .testimonial-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--border-2);
+  }
+  .testimonial-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .testimonial-quote-icon {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    color: var(--accent);
+    opacity: 0.08;
+  }
+
+  /* ── Header Row ─────────────────────────────────────────────── */
+  .testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .testimonial-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+  .testimonial-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .testimonial-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .testimonial-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .testimonial-location img {
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  }
+  .testimonial-time {
+    font-size: 0.78rem;
+    color: var(--ink-4);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Stars ──────────────────────────────────────────────────── */
+  .testimonial-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+  .star-filled {
+    fill: #f59e0b;
+    color: #f59e0b;
+  }
+
+  /* ── Body ───────────────────────────────────────────────────── */
+  .testimonial-body {
+    margin: 0 0 20px;
+    border: none;
+    padding: 0;
+  }
+  .testimonial-body p {
+    font-size: 0.93rem;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Details Strip ──────────────────────────────────────────── */
+  .testimonial-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .testimonial-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: var(--surface);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .testimonial-detail .lucide-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .testimonial-fiverr-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: var(--accent-lt);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s var(--ease);
+    margin-left: auto;
+  }
+  .testimonial-fiverr-link:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .testimonial-fiverr-link .lucide-icon {
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .testimonials-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .testimonials-stats {
+      grid-template-columns: 1fr;
+    }
+    .testimonial-card {
+      padding: 24px;
+    }
+    .testimonial-header {
+      flex-wrap: wrap;
+    }
+    .testimonial-time {
+      width: 100%;
+      margin-top: -4px;
+      padding-left: 60px;
+    }
+  }
+</style>
