@@ -48,6 +48,8 @@
 
   /* Status / data */
   --color-critical:    #b42318; /* severity dots — critical issues */
+  --color-critical-soft: #fdf1f0; /* Phase 5 addition (not in the §4.1 table): light red tint
+                                     behind danger callouts on migrated content pages. */
   --color-warn:        #b4530a; /* severity dots — serious issues, "30–40%", star fill */
   --color-warn-ink:    #8a3f08; /* text on amber tint */
   --color-warn-bar:    #b4530a; /* automated-tools meter fill.
@@ -105,6 +107,10 @@
   --type-chip:    12px; /* 600 ("WCAG 2.2 AA", "28 issues found") */
   --type-micro:    9px; /* 0.04em ("SCORE" under the ring) */
 
+  /* Added in Phase 3 (not in the §4.2 table): the audit-card ring figure.
+     Same 22px the logo uses, kept separate so the two can drift. */
+  --type-score:   22px;
+
   /* ── Space, radius, shadow, layout ─────────────────────────────────────── */
   --layout-max: 1200px; /* 1440 artboard − 2 × 120 gutter */
 
@@ -154,4 +160,30 @@ body.ds-theme {
   --radius-sm: 14px;
   --radius-md: 16px;
   --radius-lg: 20px;
+
+  /* Legacy-token bridge (Phase 5): content pages still style against the old
+     token names from global.css. On ds pages those names resolve to the new
+     system so a page flips with its layout intact. Deleted with global.css
+     at the end of the rollout. */
+  --ink:        var(--color-ink);
+  --ink-2:      var(--color-body);
+  --ink-3:      var(--color-muted);
+  --ink-4:      var(--color-muted-2);
+  --surface:    var(--color-bg);
+  --surface-2:  var(--color-surface-muted);
+  --surface-3:  var(--color-track);
+  --white:      var(--color-surface);
+  --accent:     var(--color-accent);
+  --accent-2:   var(--color-accent-ink);
+  --accent-lt:  var(--color-surface-mint);
+  --danger:     var(--color-critical);
+  --danger-lt:  var(--color-critical-soft);
+  --amber:      var(--color-warn);
+  --amber-lt:   var(--color-surface-amber);
+  --border:     var(--border-subtle);
+  --border-2:   var(--border-button);
+  --font-head:  var(--font-display);
+  --shadow-sm: 0 1px 3px rgba(20, 37, 28, 0.06), 0 1px 2px rgba(20, 37, 28, 0.04);
+  --shadow-md: 0 4px 12px rgba(20, 37, 28, 0.08), 0 2px 6px rgba(20, 37, 28, 0.04);
+  --shadow-lg: 0 16px 40px rgba(20, 37, 28, 0.10), 0 4px 16px rgba(20, 37, 28, 0.06);
 }

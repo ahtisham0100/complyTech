@@ -979,3 +979,77 @@ strong { color: var(--ink); font-weight: 600; }
   color: var(--ink-3);
   line-height: 1.4;
 }
+
+/* ═══ Design-system re-skins (ds pages only — see tokens.css bridge) ══════
+   These override the legacy component styles above when a page opts into the
+   new system via BaseLayout's `ds` prop. Removed together with the bridge. */
+
+body.ds-theme .btn {
+  border-radius: var(--radius-btn, var(--radius-sm));
+}
+
+/* Inner-page hero: flat deep-green panel in the new dark-panel language */
+body.ds-theme .page-hero {
+  background: var(--color-accent-deep);
+  padding: 64px 0 56px;
+}
+body.ds-theme .page-hero::after { content: none; }
+body.ds-theme .page-hero h1 {
+  font-size: clamp(2.125rem, 1.5rem + 2.6vw, var(--type-h1));
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+body.ds-theme .page-hero .hero-sub {
+  color: var(--color-on-dark-sage);
+  font-size: var(--type-lead);
+  line-height: 1.65;
+}
+body.ds-theme .page-hero .breadcrumb a,
+body.ds-theme .page-hero .breadcrumb .current { color: var(--color-on-dark-sage); }
+body.ds-theme .page-hero .breadcrumb a:hover { color: var(--color-on-dark); }
+body.ds-theme .page-hero .breadcrumb .sep { color: var(--color-on-dark-sage); }
+body.ds-theme .page-hero .hero-badge {
+  background: var(--surface-on-dark-chip);
+  border-color: transparent;
+  color: var(--color-on-dark-mint);
+}
+
+/* CTA section: flat deep-green panel */
+body.ds-theme .cta-section {
+  background: var(--color-accent-deep);
+}
+body.ds-theme .cta-section::after { content: none; }
+body.ds-theme .cta-section p { color: var(--color-on-dark-sage); }
+body.ds-theme .cta-trust-item { color: var(--color-on-dark-sage); }
+
+/* WhatsApp affordances adopt the accent instead of the brand green */
+body.ds-theme .btn-whatsapp {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+body.ds-theme .btn-whatsapp:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-bg);
+}
+body.ds-theme .whatsapp-float {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  box-shadow: var(--shadow-card-float);
+}
+body.ds-theme .whatsapp-float:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-bg);
+}
+
+/* Focus visibility for legacy-pattern interactive elements on ds pages */
+body.ds-theme .btn:focus-visible,
+body.ds-theme .toc ol li a:focus-visible,
+body.ds-theme .rel-ind-card:focus-visible,
+body.ds-theme .dd-item:focus-visible,
+body.ds-theme .nav-link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
