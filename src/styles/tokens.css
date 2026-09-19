@@ -1,0 +1,157 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   complyTech design system — token layer
+   Source of truth: design/Main.dc.html (values extracted from its inline
+   styles and <helmet> block). Components consume tokens ONLY — no hex values,
+   font sizes, radii, or shadows outside this file.
+
+   NOTE ON SCOPING: `--font-body`, `--radius-sm`, `--radius-md` and
+   `--radius-lg` collide with legacy tokens in global.css (Inter / 6px / 12px)
+   that unmigrated pages still consume. Until the legacy stylesheet is deleted,
+   those four are declared on `body.ds-theme` (set via the `ds` prop on
+   BaseLayout) so migrated pages get the new values and legacy pages keep
+   theirs. When global.css is retired, promote the four back to :root.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Color ────────────────────────────────────────────────────────────────
+     Themeable accent. The mockup exposed `accent` as a prop with default
+     #1c3a2a and alternates #144a3a, #2a4d1a, #3a2a5a. Re-theme the whole site
+     from this one declaration (update the derived -deep/-darker/-hover values
+     to stay harmonious). */
+  --color-accent: #1c3a2a;
+
+  /* Brand / accent */
+  --color-accent-ink:    #1c3a2a; /* icon/text on mint tints, "Explore" links, "100%" figure */
+  --color-accent-deep:   #12281c; /* hero audit card bg, CTA panel bg */
+  --color-accent-darker: #14251c; /* stats panel bg, heading text */
+  --color-accent-hover:  #12281c; /* link hover */
+
+  /* Surfaces */
+  --color-bg:            #faf8f3; /* page background; also text on dark panels */
+  --color-surface:       #ffffff; /* service cards, coverage card, FAQ items */
+  --color-surface-muted: #f2f1ee; /* meter track, neutral badge bg */
+  --color-surface-mint:  #e8f0ea; /* hero pill, icon tiles, MOST POPULAR badge, process panel */
+  --color-surface-amber: #fbeedd; /* "28 issues found" chip, HEALTHCARE badge */
+  --color-track:         #e8e7e2; /* unfilled arc of the score ring */
+
+  /* Text */
+  --color-ink:          #14251c; /* headings, strong emphasis, stat values */
+  --color-body:         #3c443e; /* default body text, nav links, issue rows */
+  --color-body-strong:  #4a524b; /* hero paragraph, hero trust-badge row */
+  --color-muted:        #5a615a; /* card body copy, footer links, figcaption */
+  --color-muted-2:      #6b726b; /* section decks, source note, micro labels, footer copy.
+                                    ~4.66:1 on --color-bg — passes AA but with no margin; never
+                                    re-tint it, never use it below 16px for anything critical. */
+  --color-on-dark:      #faf8f3; /* text on dark panels */
+  --color-on-dark-mint: #c9e8d4; /* "WCAG 2.2 AA" chip text, .u-link on dark */
+  --color-on-dark-sage: #a9c4b3; /* stat captions, CTA deck copy */
+
+  /* Status / data */
+  --color-critical:    #b42318; /* severity dots — critical issues */
+  --color-warn:        #b4530a; /* severity dots — serious issues, "30–40%", star fill */
+  --color-warn-ink:    #8a3f08; /* text on amber tint */
+  --color-warn-bar:    #b4530a; /* automated-tools meter fill.
+                                   DEVIATION from mockup (#e39a52): the mockup's fill measures
+                                   ~2.1:1 on the #f2f1ee track, below the 3:1 SC 1.4.11 minimum
+                                   for a meaningful graphic. #b4530a keeps the amber/warn family
+                                   and clears the bar. */
+  --color-warn-on-dark: #f3b878; /* highlighted "30–40%" stat on the dark panel */
+  --color-score-ring:  #b4530a; /* filled arc of the score ring */
+
+  /* Borders / overlays (ink or bg color at low alpha) */
+  --border-subtle:       rgba(20, 37, 28, 0.08);  /* header bottom rule, hairline dividers */
+  --border-card:         rgba(20, 37, 28, 0.09);  /* card and FAQ borders */
+  --border-footer:       rgba(20, 37, 28, 0.10);  /* footer top rule */
+  --border-button:       rgba(20, 37, 28, 0.22);  /* secondary button outline */
+  --border-on-dark:      rgba(250, 248, 243, 0.30); /* outline button on dark */
+  --border-stat-rule:    rgba(201, 232, 212, 0.30); /* 2px left rule on stat items */
+  --surface-on-dark-chip: rgba(250, 248, 243, 0.12); /* chip bg on dark */
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Weights in use — Fraunces: 400/500/600/700. Public Sans: 400/500/600/700. */
+
+  /* Display scale (Fraunces; canonical desktop px values — components wrap
+     these in clamp() for the fluid scale, keeping the ratios below). */
+  --type-h1:      58px; /* hero headline: lh 1.08 / -0.02em / 600; the italic emphasis
+                           line is weight 500, color --color-accent, display:block */
+  --type-h2:      40px; /* section headings (Services, Why): -0.02em / 600 */
+  --type-h2-cta:  42px; /* CTA panel heading: lh 1.15 / -0.02em / 600, max-width 720px */
+  --type-h2-sm:   36px; /* FAQ heading: -0.02em / 600 */
+  --type-h2-xs:   34px; /* process heading (centered): -0.02em / 600 */
+  --type-quote:   30px; /* testimonial blockquote: lh 1.35 / -0.01em / 500 */
+  --type-h3:      21px; /* service card titles: 600 */
+  --type-h3-sm:   19px; /* process step titles: 600 */
+  --type-stat:    40px; /* stat panel figures: lh 1.0 / 600 */
+  --type-logo:    22px; /* wordmark: 600 / -0.01em (20px in the footer) */
+
+  /* Body scale (Public Sans) */
+  --type-lead:     18px; /* hero paragraph: lh 1.65 / 400, max-width 520px */
+  --type-lead-cta: 17px; /* CTA deck: lh 1.6 / 400, max-width 560px */
+  --type-body:     16px; /* section decks, Why paragraph: lh 1.65 / 400 */
+  --type-body-list: 15.5px; /* checklist items: 400 */
+  --type-body-sm:  15px; /* nav links, small button labels, coverage rows: 500 */
+  --type-card:     14.5px; /* card body copy: lh 1.6 / 400 */
+  --type-sm:       14px; /* trust badges, footer links, figcaption: 500 */
+  --type-xs:       13px; /* source note, footer legal, micro copy: 400 */
+  --type-issue-row: 13.5px; /* audit-card issue rows: 400 */
+
+  /* Label / eyebrow scale */
+  --type-eyebrow: 13px; /* 700 / uppercase / 0.12em / --color-accent */
+  --type-label:   13px; /* 700 / uppercase / 0.02em ("DETECTION COVERAGE", footer headings) */
+  --type-pill:    13px; /* 600 / 0.02em (hero certification pill) */
+  --type-badge:   11px; /* 700 / 0.03em / uppercase (card corner badges) */
+  --type-chip:    12px; /* 600 ("WCAG 2.2 AA", "28 issues found") */
+  --type-micro:    9px; /* 0.04em ("SCORE" under the ring) */
+
+  /* ── Space, radius, shadow, layout ─────────────────────────────────────── */
+  --layout-max: 1200px; /* 1440 artboard − 2 × 120 gutter */
+
+  /* Fluid gutter ladder (§9): 20px <480 / 32px to 768 / 48px to 1024 / 80px to
+     1280 / 120px at 1440+. Plain steps read cleaner here than one clamp().
+     Media-query steps are declared after this :root block. */
+  --gutter: 20px;
+
+  --section-y: 96px;      /* standard section vertical padding */
+  --section-y-hero: 80px; /* hero top padding; hero bottom padding uses --section-y */
+
+  /* Radii */
+  --radius-panel: 24px; /* process panel, CTA panel */
+  --radius-lg:    20px; /* stats panel, hero audit card, coverage card */
+  --radius-card:  18px; /* service cards */
+  --radius-md:    16px; /* process step cards */
+  --radius-sm:    14px; /* FAQ items, inner white card of the hero visual */
+  --radius-tile:  13px; /* 52px icon tiles */
+  --radius-logo:  10px; /* 38px nav logo mark (9px for the 34px footer mark) */
+  --radius-btn:    9px; /* hero/CTA buttons (8px for the nav button) */
+  --radius-step:   9px; /* numbered step tile */
+  --radius-chip:   6px; /* issues-found chip */
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-card-float: 0 30px 60px rgba(18, 40, 28, 0.28); /* hero audit card */
+  --shadow-card-soft:  0 16px 40px rgba(20, 37, 28, 0.06); /* coverage card */
+
+  /* Focus ring (§10.1 — the mockup defines none). Light variant for dark
+     panels. Never `outline: none` without a replacement. */
+  --focus-ring-color: var(--color-accent);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-dark: var(--color-on-dark);
+}
+
+/* Fluid gutter ladder steps */
+@media (min-width: 768px)  { :root { --gutter: 32px; } }
+@media (min-width: 1024px) { :root { --gutter: 48px; } }
+@media (min-width: 1280px) { :root { --gutter: 80px; } }
+@media (min-width: 1440px) { :root { --gutter: 120px; } }
+
+/* Migrated pages only: the four tokens that collide with legacy global.css
+   values. See the note at the top of this file. */
+body.ds-theme {
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius-sm: 14px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+}

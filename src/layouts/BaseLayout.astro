@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/tokens.css';
 
 // Direct paths for preloading FOUC critical fonts
 import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
@@ -13,6 +14,8 @@ export interface Props {
   ogType?: string;
   keywords?: string;
   ogImage?: string;
+  /** Opt migrated pages into the new design-system token values (body.ds-theme). */
+  ds?: boolean;
 }
 
 const {
@@ -23,6 +26,7 @@ const {
   ogType = 'website',
   keywords = '',
   ogImage = 'https://adacomplianceservices.tech/og-image.png',
+  ds = false,
 } = Astro.props;
 
 const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [schema]) : null;
@@ -92,7 +96,7 @@ const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [s
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </head>
-<body>
+<body class:list={[{ 'ds-theme': ds }]}>
   <!-- Skip to main content (accessibility) -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <slot name="nav" />
