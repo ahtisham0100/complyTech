@@ -6,6 +6,12 @@ import '../styles/tokens.css';
 import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import inter700Url from '@fontsource/inter/files/inter-latin-700-normal.woff2?url';
 
+// Design-system fonts (variable, latin subset). Files carry the opsz axis for
+// Fraunces so font-optical-sizing: auto renders the high-contrast display cut.
+import frauncesNormalUrl from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import frauncesItalicUrl from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2?url';
+import publicSansUrl from '@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url';
+
 export interface Props {
   title: string;
   description: string;
@@ -35,11 +41,22 @@ const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [s
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 1. Critical preloads stream immediately -->
-  <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href={inter700Url} as="font" type="font/woff2" crossorigin="anonymous" />
-  
-  <style define:vars={{ inter400Url, inter700Url }}>
+  <!-- 1. Critical preloads stream immediately (per page type) -->
+  {!ds && (
+    <>
+      <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin="anonymous" />
+      <link rel="preload" href={inter700Url} as="font" type="font/woff2" crossorigin="anonymous" />
+    </>
+  )}
+  {ds && (
+    <>
+      <link rel="preload" href={frauncesNormalUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+      <link rel="preload" href={frauncesItalicUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+      <link rel="preload" href={publicSansUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+    </>
+  )}
+
+  <style define:vars={{ inter400Url, inter700Url, frauncesNormalUrl, frauncesItalicUrl, publicSansUrl }}>
     @font-face {
       font-family: 'Inter';
       font-style: normal;
@@ -54,12 +71,35 @@ const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [s
       font-display: optional;
       src: url(var(--inter700Url)) format('woff2');
     }
+    /* Design-system faces. Variable weight ranges cover 400–700 usage;
+       Fraunces keeps the opsz axis so optical sizing works. */
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(var(--frauncesNormalUrl)) format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: italic;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(var(--frauncesItalicUrl)) format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Public Sans';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(var(--publicSansUrl)) format('woff2-variations');
+    }
   </style>
 
   <!-- 2. Document encoding and rendering rules -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1a3a2a" />
+  <meta name="theme-color" content={ds ? '#1c3a2a' : '#1a3a2a'} />
   
   <!-- 3. Meta metadata -->
   <title>{title}</title>
