@@ -1,0 +1,209 @@
+---
+// The hero audit-report card. Dark panel; score ring; sample issue list.
+// Driven entirely by props. The conic-gradient stop is the one dynamic value
+// that reaches an inline style (ring percent), per the design-system rules.
+import Icon from '../ui/Icon.astro';
+import Badge from '../ui/Badge.astro';
+
+export interface AuditIssue {
+  label: string;
+  count: number;
+  severity: 'critical' | 'serious';
+}
+
+interface Props {
+  title?: string;
+  chip?: string;
+  score: number;
+  scanLabel?: string;
+  domain: string;
+  issueCount: number;
+  issues: AuditIssue[];
+  footnote: string;
+}
+
+const {
+  title = 'Accessibility Audit',
+  chip = 'WCAG 2.2 AA',
+  score,
+  scanLabel = 'Home page scan',
+  domain,
+  issueCount,
+  issues,
+  footnote,
+} = Astro.props;
+---
+
+<div class="audit-card on-dark">
+  <div class="audit-head">
+    <span class="audit-title">{title}</span>
+    <Badge variant="on-dark" size="chip">{chip}</Badge>
+  </div>
+
+  <div class="audit-body">
+    <div class="audit-top">
+      <div class="ring" aria-hidden="true" style={`--ring:${score}`}>
+        <div class="ring-inner">
+          <span class="ring-score">{score}</span>
+          <span class="ring-label">SCORE</span>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="meta-scan">{scanLabel}</div>
+        <div class="meta-domain">{domain}</div>
+        <Badge variant="amber" size="chip" square class="meta-issues">
+          <Icon name="alert-triangle" size={13} strokeWidth={2.4} />
+          {issueCount} issues found
+        </Badge>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <ul class="issue-list">
+      {
+        issues.map((issue) => (
+          <li>
+            <span class:list={['dot', `dot-${issue.severity}`]} aria-hidden="true" />
+            {/* Severity is color-coded visually; this gives non-visual parity (SC 1.4.1) */}
+            <span class="sr-only">{issue.severity === 'critical' ? 'Critical — ' : 'Serious — '}</span>
+            <span class="issue-label">{issue.label}</span>
+            <span class="issue-count">{issue.count}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="audit-foot">
+    <Icon name="shield-check" size={18} strokeWidth={2.2} />
+    <span>{footnote}</span>
+  </div>
+</div>
+
+<style>
+  .audit-card {
+    background: var(--color-accent-deep);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    box-shadow: var(--shadow-card-float);
+  }
+  .audit-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .audit-title {
+    font-family: var(--font-display);
+    color: var(--color-on-dark);
+    font-size: var(--type-lead-cta);
+    font-weight: 600;
+  }
+
+  .audit-body {
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+  }
+  .audit-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Decorative rendering of the score — the number below is the source of truth */
+  .ring {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: conic-gradient(var(--color-score-ring) 0 calc(var(--ring) * 1%), var(--color-track) 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+  .ring-inner {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ring-score {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-score);
+    color: var(--color-ink);
+    line-height: 1;
+  }
+  .ring-label {
+    font-size: var(--type-micro);
+    color: var(--color-muted-2);
+    letter-spacing: 0.04em;
+  }
+
+  .meta-scan {
+    font-size: var(--type-body-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .meta-domain {
+    font-size: var(--type-xs);
+    color: var(--color-muted-2);
+  }
+  .meta-issues { margin-top: 7px; }
+
+  .divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 18px 0;
+  }
+
+  .issue-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .issue-list li {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: var(--type-issue-row);
+    color: var(--color-body);
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+  }
+  .dot-critical { background: var(--color-critical); }
+  .dot-serious  { background: var(--color-warn); }
+  .issue-label { flex-grow: 1; }
+  .issue-count {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .audit-foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 0 4px;
+  }
+  .audit-foot :global(svg) { color: var(--color-on-dark-mint); flex: none; }
+  .audit-foot span {
+    color: var(--color-surface-mint);
+    font-size: var(--type-xs);
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+// Eyebrow + h2 + optional deck paragraph.
+// layout: 'split'   — eyebrow row, then h2 left / deck right, bottom-aligned (Services)
+//          'stacked' — eyebrow, h2, optional deck below (Why)
+//          'centered'— all centered (Process)
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  /** id for the h2 so the parent <section> can aria-labelledby it */
+  id: string;
+  deck?: string;
+  layout?: 'split' | 'stacked' | 'centered';
+  /** Display token for the h2: h2 (40px) | h2-sm (36px) | h2-xs (34px) */
+  size?: 'h2' | 'h2-sm' | 'h2-xs';
+}
+
+const { eyebrow, heading, id, deck, layout = 'stacked', size = 'h2' } = Astro.props;
+---
+
+{eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+
+<div class:list={['ds-sh', `ds-sh-${layout}`, `ds-sh-size-${size}`]}>
+  <h2 id={id}>{heading}</h2>
+  {deck && <p class="ds-sh-deck">{deck}</p>}
+</div>
+
+<style>
+  .ds-sh h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    line-height: 1.15;
+  }
+  .ds-sh-size-h2     h2 { font-size: clamp(1.75rem, 1.375rem + 1.56vw, var(--type-h2)); }
+  .ds-sh-size-h2-sm  h2 { font-size: clamp(1.625rem, 1.25rem + 1.5vw, var(--type-h2-sm)); }
+  .ds-sh-size-h2-xs  h2 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, var(--type-h2-xs)); }
+
+  .ds-sh-split {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 12px;
+  }
+  .ds-sh-split h2 { margin: 0; max-width: 640px; }
+  .ds-sh-split .ds-sh-deck { margin: 0 0 6px; max-width: 360px; }
+
+  .ds-sh-stacked h2,
+  .ds-sh-centered h2 { margin: 12px 0 0; }
+  .ds-sh-stacked .ds-sh-deck { margin: 20px 0 0; max-width: 640px; }
+  .ds-sh-centered { text-align: center; }
+  .ds-sh-centered h2 { margin-left: auto; margin-right: auto; }
+
+  .ds-sh-deck {
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: var(--color-muted-2);
+  }
+</style>

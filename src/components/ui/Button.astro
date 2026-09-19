@@ -1,0 +1,105 @@
+---
+// Design-system button. Renders <a> when href is given, <button> otherwise.
+// Variants: primary | secondary | on-dark-solid | on-dark-outline | nav
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'on-dark-solid' | 'on-dark-outline' | 'nav';
+  size?: 'md' | 'sm';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, variant = 'primary', size = 'md', class: className, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  type={href ? undefined : 'button'}
+  class:list={['ds-btn', `ds-btn-${variant}`, { 'ds-btn-sm': size === 'sm' }, className]}
+  {...rest}
+>
+  <slot name="leading" />
+  <slot />
+  <slot name="trailing" />
+</Tag>
+
+<style>
+  .ds-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .ds-btn-sm { font-size: 15px; gap: 8px; }
+
+  /* Primary — accent bg, cream text (hero primary) */
+  .ds-btn-primary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: 15px 28px;
+    border-radius: var(--radius-btn);
+  }
+  .ds-btn-primary:hover { background: var(--color-accent-hover); color: var(--color-bg); }
+  .ds-btn-primary:active { transform: translateY(1px); }
+
+  /* Secondary — outline on light (hero secondary) */
+  .ds-btn-secondary {
+    background: transparent;
+    color: var(--color-ink);
+    padding: 15px 26px;
+    border-radius: var(--radius-btn);
+    border: 1.5px solid var(--border-button);
+  }
+  .ds-btn-secondary:hover { background: var(--color-surface-mint); color: var(--color-ink); }
+  .ds-btn-secondary:active { transform: translateY(1px); }
+
+  /* Solid on dark (CTA panel) */
+  .ds-btn-on-dark-solid {
+    background: var(--color-bg);
+    color: var(--color-accent-deep);
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: var(--radius-btn);
+  }
+  .ds-btn-on-dark-solid:hover { background: var(--color-on-dark-mint); color: var(--color-accent-deep); }
+  .ds-btn-on-dark-solid:active { transform: translateY(1px); }
+
+  /* Outline on dark (CTA panel) */
+  .ds-btn-on-dark-outline {
+    background: transparent;
+    color: var(--color-on-dark);
+    padding: 15px 28px;
+    border-radius: var(--radius-btn);
+    border: 1.5px solid var(--border-on-dark);
+  }
+  .ds-btn-on-dark-outline:hover { background: var(--surface-on-dark-chip); color: var(--color-on-dark); }
+  .ds-btn-on-dark-outline:active { transform: translateY(1px); }
+
+  /* Nav-size button (header) */
+  .ds-btn-nav {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-size: 15px;
+    padding: 11px 20px;
+    border-radius: calc(var(--radius-btn) - 1px); /* 8px */
+  }
+  .ds-btn-nav:hover { background: var(--color-accent-hover); color: var(--color-bg); }
+  .ds-btn-nav:active { transform: translateY(1px); }
+
+  /* Visible focus everywhere (SC 2.4.11/2.4.13); dark-panel variants flip the
+     ring color via the .on-dark ancestor rule in BaseLayout. */
+  .ds-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+</style>

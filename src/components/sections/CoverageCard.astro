@@ -1,0 +1,136 @@
+---
+// "Detection coverage" card with accessible meters. Each meter is a
+// role="meter" element carrying aria-valuenow/min/max plus the same value as
+// visible text — the bar itself is decorative (SC 1.4.11 fill contrast fixed
+// via --color-warn-bar).
+import Icon from '../ui/Icon.astro';
+
+interface Meter {
+  label: string;
+  /** Visible value text, e.g. "30–40%" */
+  value: string;
+  /** Fill width, 0–100 */
+  percent: number;
+  tone: 'warn' | 'accent';
+}
+
+interface Props {
+  label: string;
+  meters: Meter[];
+  source?: { text: string; href?: string };
+}
+
+const { label, meters, source } = Astro.props;
+---
+
+<div class="coverage">
+  <div class="coverage-label">{label}</div>
+  {
+    meters.map((m) => (
+      <div class="meter">
+        <div
+          class="meter-group"
+          role="meter"
+          aria-label={`${m.label}: ${m.value}`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={m.percent}
+        >
+          <div class="meter-row" aria-hidden="true">
+            <span class="meter-label">{m.label}</span>
+            <span class:list={['meter-value', `meter-value-${m.tone}`]}>{m.value}</span>
+          </div>
+          <div class="meter-track" aria-hidden="true">
+            <div class:list={['meter-fill', `meter-fill-${m.tone}`]} style={`width:${m.percent}%`} />
+          </div>
+        </div>
+      </div>
+    ))
+  }
+  {
+    source && (
+      <div class="coverage-source">
+        <Icon name="info" size={20} strokeWidth={2} />
+        <p>
+          {source.href ? (
+            <a href={source.href} target="_blank" rel="noopener noreferrer">
+              {source.text}
+            </a>
+          ) : (
+            source.text
+          )}
+        </p>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .coverage {
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: var(--shadow-card-soft);
+  }
+  .coverage-label {
+    font-size: var(--type-label);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--color-muted-2);
+    text-transform: uppercase;
+  }
+
+  .meter + .meter { margin-top: 24px; }
+  .meter:first-of-type { margin-top: 26px; }
+  .meter-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: var(--type-body-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 9px;
+  }
+  .meter-value-warn   { color: var(--color-warn); }
+  .meter-value-accent { color: var(--color-accent-ink); }
+
+  .meter-track {
+    height: 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-muted);
+    overflow: hidden;
+  }
+  .meter-fill {
+    height: 100%;
+    border-radius: var(--radius-pill);
+  }
+  .meter-fill-warn   { background: var(--color-warn-bar); }
+  .meter-fill-accent { background: var(--color-accent); }
+
+  .coverage-source {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .coverage-source :global(svg) {
+    color: var(--color-muted-2);
+    flex: none;
+    margin-top: 1px;
+  }
+  .coverage-source p {
+    margin: 0;
+    font-size: var(--type-xs);
+    color: var(--color-muted-2);
+    line-height: 1.55;
+  }
+  .coverage-source a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .coverage-source a:hover { color: var(--color-accent-hover); }
+</style>

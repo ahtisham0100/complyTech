@@ -1,0 +1,72 @@
+---
+// Service card: corner badge, 52px mint icon tile, Fraunces h3, body, and a
+// bottom "Explore →" affordance. Whole card is the link.
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  href: string;
+  icon: string;
+  title: string;
+  body: string;
+  cta?: string;
+  badge?: { label: string; tone: 'mint' | 'amber' | 'neutral' };
+}
+
+const { href, icon, title, body, cta = 'Explore', badge } = Astro.props;
+---
+
+<Card href={href} radius="card" pad="30px" class="svc-card">
+  {
+    badge && (
+      <Badge variant={badge.tone} size="badge" class="ds-card-badge">
+        {badge.label}
+      </Badge>
+    )
+  }
+  <span class="svc-icon" aria-hidden="true">
+    <Icon name={icon} size={24} strokeWidth={2} />
+  </span>
+  <h3 class="svc-title">{title}</h3>
+  <p class="svc-body">{body}</p>
+  <span class="svc-cta">
+    {cta}
+    <Icon name="arrow-right" size={16} strokeWidth={2.3} />
+  </span>
+</Card>
+
+<style>
+  .svc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-tile);
+    background: var(--color-surface-mint);
+    color: var(--color-accent-ink);
+  }
+  .svc-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-h3);
+    color: var(--color-ink);
+    margin: 20px 0 8px;
+  }
+  .svc-body {
+    font-size: var(--type-card);
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin: 0;
+  }
+  .svc-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: var(--type-sm);
+    font-weight: 600;
+    color: var(--color-accent-ink);
+    margin-top: 18px;
+  }
+</style>

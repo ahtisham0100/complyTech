@@ -1,0 +1,65 @@
+---
+// Client testimonial. The mockup's quote was an explicit placeholder — this
+// component renders ONLY what it is given; the homepage omits the section
+// until a real, permissioned quote exists.
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+  rating?: number;
+  maxRating?: number;
+}
+
+const { quote, name, role, rating = 5, maxRating = 5 } = Astro.props;
+---
+
+<section class="testimonial" aria-label="Client testimonial">
+  <figure class="testimonial-figure">
+    <div class="stars" aria-hidden="true">
+      {Array.from({ length: maxRating }).map((_, i) => (
+        <Icon name="star" size={20} class={i < rating ? 'star-fill' : 'star-empty'} />
+      ))}
+    </div>
+    <span class="sr-only">Rated {rating} out of {maxRating}</span>
+    <blockquote>{quote}</blockquote>
+    <figcaption><strong>{name}</strong> · {role}</figcaption>
+  </figure>
+</section>
+
+<style>
+  .testimonial {
+    padding: 0 var(--gutter) var(--section-y);
+  }
+  .testimonial-figure {
+    margin: 0;
+    max-width: 900px;
+  }
+  .stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+  .star-fill { color: var(--color-warn); }
+  .star-empty { color: var(--color-track); }
+
+  blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.375rem, 1.125rem + 1vw, var(--type-quote));
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  figcaption {
+    margin-top: 22px;
+    font-size: var(--type-body-sm);
+    color: var(--color-muted);
+  }
+  figcaption strong {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+</style>

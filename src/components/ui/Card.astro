@@ -1,0 +1,47 @@
+---
+// White surface card. Renders as <a> (whole-card link) when href is given;
+// the `badge` slot is positioned in the card's top-right corner.
+interface Props {
+  href?: string;
+  /** Radius token suffix: lg (20px, panels/coverage) | card (18px, service cards) | sm (14px) */
+  radius?: 'lg' | 'card' | 'sm';
+  pad?: string;
+  class?: string;
+}
+
+const { href, radius = 'card', pad = '30px', class: className } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag href={href} class:list={['ds-card', `ds-card-r-${radius}`, className]} style={`--card-pad:${pad}`}>
+  <slot name="badge" />
+  <slot />
+</Tag>
+
+<style>
+  .ds-card {
+    display: block;
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    padding: var(--card-pad, 30px);
+  }
+  .ds-card-r-lg   { border-radius: var(--radius-lg); }
+  .ds-card-r-card { border-radius: var(--radius-card); }
+  .ds-card-r-sm   { border-radius: var(--radius-sm); }
+
+  a.ds-card { color: inherit; text-decoration: none; }
+
+  /* Corner badge (e.g. MOST POPULAR) */
+  .ds-card > :global(.ds-card-badge) {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+
+  /* Whole-card link focus + the inner "Explore" affordance highlight */
+  a.ds-card:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+// Process panel: mint panel, centered heading, three numbered step cards.
+import SectionHeader from '../ui/SectionHeader.astro';
+
+interface Step {
+  title: string;
+  body: string;
+}
+
+interface Props {
+  id: string;
+  heading: string;
+  steps: Step[];
+}
+
+const { id, heading, steps } = Astro.props;
+---
+
+<section class="process" id={id} aria-labelledby={`${id}-h`}>
+  <div class="process-panel">
+    <SectionHeader heading={heading} id={`${id}-h`} layout="centered" size="h2-xs" />
+    <div class="process-grid">
+      {
+        steps.map((step, i) => (
+          <div class="process-card">
+            <div class="process-num" aria-hidden="true">{i + 1}</div>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    padding: 0 var(--gutter) var(--section-y);
+  }
+  .process-panel {
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    background: var(--color-surface-mint);
+    border-radius: var(--radius-panel);
+    padding: clamp(1.75rem, 1rem + 2.77vw, 3.5rem);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 44px;
+  }
+  .process-card {
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: clamp(1.5rem, 1rem + 1.6vw, 1.75rem);
+  }
+  .process-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-body-sm);
+    color: var(--color-bg);
+    background: var(--color-accent);
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .process-card h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-h3-sm);
+    color: var(--color-ink);
+    margin: 16px 0 7px;
+  }
+  .process-card p {
+    font-size: var(--type-card);
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 820px) {
+    .process-grid { grid-template-columns: 1fr; }
+  }
+</style>

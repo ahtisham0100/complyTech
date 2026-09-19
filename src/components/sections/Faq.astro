@@ -1,0 +1,140 @@
+---
+// FAQ section: intro column + native <details>/<summary> accordion with a
+// custom rotating chevron, visible focus ring, and optional FAQPage JSON-LD
+// generated from the same data (so copy and structured data cannot drift).
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+
+interface Faq {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  id: string;
+  eyebrow?: string;
+  heading: string;
+  /** Plain intro text under the heading; use the `deck` slot to include links */
+  deck?: string;
+  faqs: Faq[];
+  firstOpen?: boolean;
+  /** Emit FAQPage JSON-LD from the same data (disable if the page already emits one) */
+  emitJsonLd?: boolean;
+}
+
+const { id, eyebrow = 'FAQ', heading, deck, faqs, firstOpen = true, emitJsonLd = true } = Astro.props;
+const headingId = `${id}-h`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section class="faq" id={id} aria-labelledby={headingId}>
+  <div class="faq-grid">
+    <div class="faq-intro">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 class="faq-h" id={headingId}>{heading}</h2>
+      {deck && <p class="faq-deck">{deck}</p>}
+      <slot name="deck" />
+    </div>
+
+    <div class="faq-list">
+      {
+        faqs.map((f, i) => (
+          <details open={firstOpen && i === 0 ? true : undefined}>
+            <summary>
+              <span>{f.q}</span>
+              <Icon name="chevron-down" size={18} strokeWidth={2} class="faq-chevron" />
+            </summary>
+            <p set:html={f.a} />
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+{emitJsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+<style>
+  .faq {
+    padding: 0 var(--gutter) var(--section-y);
+  }
+  .faq-grid {
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  .faq-h {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.625rem, 1.25rem + 1.5vw, var(--type-h2-sm));
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 12px 0 0;
+  }
+  .faq-deck {
+    font-size: var(--type-body-list);
+    line-height: 1.6;
+    color: var(--color-muted-2);
+    margin: 18px 0 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  details {
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: var(--type-body);
+    font-weight: 600;
+    color: var(--color-ink);
+    /* ≥44px hit area without changing the card's visual rhythm */
+    padding: 10px 0;
+    margin: -10px 0;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::marker { content: ''; }
+  summary:hover { color: var(--color-accent); }
+
+  .faq-chevron {
+    flex: none;
+    color: var(--color-muted);
+    transition: transform 0.15s ease;
+  }
+  details[open] .faq-chevron { transform: rotate(180deg); }
+
+  details p {
+    font-size: var(--type-card);
+    line-height: 1.65;
+    color: var(--color-muted);
+    margin: 12px 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

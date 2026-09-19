@@ -1,0 +1,331 @@
+---
+// Site header — mockup visual language, site-wide dropdown IA (approved in
+// Phase 0: "Dropdown IA everywhere"). Zero-JS: dropdowns open on hover and
+// :focus-within; the mobile pattern is a native <details> disclosure.
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+
+const WA_LINK = `https://wa.me/923010910933?text=${encodeURIComponent('Hi, I need an ADA compliance audit for my website.')}`;
+
+const dropdowns = [
+  {
+    label: 'Services',
+    href: '/services',
+    items: [
+      { href: '/ada-compliance-audit-small-business', label: 'Small Business Audit' },
+      { href: '/ada-compliance-audit-pricing', label: 'Pricing & Tax Credit' },
+      { href: '/vpat-documentation-services', label: 'VPAT Documentation' },
+      { href: '/how-to-make-pdf-ada-compliant', label: 'PDF Remediation' },
+      { href: '/accessibility-statement-template', label: 'Accessibility Statement' },
+    ],
+  },
+  {
+    label: 'Industries',
+    href: '/industries',
+    items: [
+      { href: '/ada-compliance-ecommerce-websites', label: 'E-commerce' },
+      { href: '/ada-compliance-shopify', label: 'Shopify' },
+      { href: '/ada-compliance-healthcare-websites', label: 'Healthcare' },
+      { href: '/ada-compliance-restaurants', label: 'Restaurants' },
+      { href: '/ada-compliance-law-firms', label: 'Law Firms' },
+      { href: '/ada-compliance-dental-offices', label: 'Dental Offices' },
+      { href: '/ada-compliance-for-nonprofits', label: 'Nonprofits' },
+    ],
+  },
+  {
+    label: 'Resources',
+    href: '/what-is-ada-compliance-websites',
+    items: [
+      { href: '/what-is-ada-compliance-websites', label: 'What Is ADA Compliance?' },
+      { href: '/received-ada-demand-letter', label: 'Got a Demand Letter?' },
+      { href: '/accessibility-overlay-alternatives', label: 'Overlay Alternatives' },
+      { href: '/wcag-2-1-vs-wcag-2-2', label: 'WCAG 2.1 vs 2.2' },
+      { href: '/section-508-compliance', label: 'Section 508 Guide' },
+      { href: '/disabled-access-credit-tax', label: 'Tax Credit Guide' },
+      { href: '/ada-compliance-checklist-2026', label: 'ADA Checklist 2026' },
+      { href: '/ada-compliance-faq', label: 'FAQ Hub' },
+    ],
+  },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  const h = href.replace(/\/$/, '') || '/';
+  return h === '/' ? currentPath === '/' : currentPath.startsWith(h);
+};
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="complyTech — home">
+      <span class="logo-mark" aria-hidden="true">
+        <Icon name="shield-check" size={21} strokeWidth={2} />
+      </span>
+      <span class="logo-text">comply<span class="logo-accent">Tech</span></span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      {
+        dropdowns.map((dd) => (
+          <div class:list={['nav-dd', { 'is-active': isActive(dd.href) || dd.items.some((i) => isActive(i.href)) }]}>
+            <a href={dd.href} class="nav-link nav-dd-link" aria-current={isActive(dd.href) ? 'page' : undefined}>
+              {dd.label}
+              <Icon name="chevron-down" size={16} strokeWidth={2} class="dd-chevron" />
+            </a>
+            <div class="dd-panel">
+              {dd.items.map((item) => (
+                <a
+                  href={item.href}
+                  class:list={['dd-item', { 'is-active': isActive(item.href) }]}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+      <a href="/about" class:list={['nav-link', { 'is-active': isActive('/about') }]} aria-current={isActive('/about') ? 'page' : undefined}>About</a>
+      <a href="/testimonials" class:list={['nav-link', { 'is-active': isActive('/testimonials') }]} aria-current={isActive('/testimonials') ? 'page' : undefined}>Testimonials</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/free-ada-website-scan" class="free-scan">Free scan</a>
+      <Button href={WA_LINK} variant="nav" target="_blank" rel="noopener noreferrer">
+        Get a quote
+        <Icon name="arrow-right" size={16} strokeWidth={2.2} slot="trailing" />
+      </Button>
+    </div>
+
+    <details class="mobile-nav">
+      <summary aria-label="Open menu">
+        <span class="sr-only">Menu</span>
+        <span class="burger" aria-hidden="true"><span /><span /><span /></span>
+      </summary>
+      <nav class="mobile-panel" aria-label="Mobile">
+        {
+          dropdowns.map((dd) => (
+            <details class="mobile-group">
+              <summary>{dd.label}</summary>
+              <div class="mobile-group-panel">
+                <a href={dd.href} class="mobile-link mobile-link-landing">{dd.label} overview</a>
+                {dd.items.map((item) => (
+                  <a href={item.href} class="mobile-link">{item.label}</a>
+                ))}
+              </div>
+            </details>
+          ))
+        }
+        <a href="/about" class="mobile-link">About</a>
+        <a href="/testimonials" class="mobile-link">Testimonials</a>
+        <a href="/free-ada-website-scan" class="mobile-link">Free scan</a>
+        <Button href={WA_LINK} variant="primary" class="mobile-cta" target="_blank" rel="noopener noreferrer">
+          Get a quote
+          <Icon name="arrow-right" size={16} strokeWidth={2.2} slot="trailing" />
+        </Button>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 20px var(--gutter);
+    max-width: calc(var(--layout-max) + 2 * var(--gutter));
+    margin-inline: auto;
+  }
+
+  /* Logo lockup */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-logo);
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--type-logo);
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .logo-accent { color: var(--color-accent); }
+
+  /* Primary nav */
+  .primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-left: 8px;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--type-body-sm);
+    font-weight: 500;
+    color: var(--color-body);
+    text-decoration: none;
+    /* Expand the hit area to ≥44px without shifting the visual bar */
+    padding: 13px 0;
+    margin: -13px 0;
+  }
+  .nav-link:hover { color: var(--color-accent); }
+  .nav-link.is-active { color: var(--color-accent); font-weight: 600; }
+  .dd-chevron { transition: transform 0.15s ease; }
+
+  .nav-dd { position: relative; }
+  .nav-dd:hover .dd-chevron,
+  .nav-dd:focus-within .dd-chevron { transform: rotate(180deg); }
+
+  .dd-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    flex-direction: column;
+    min-width: 240px;
+    padding: 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card-soft);
+    z-index: 200;
+  }
+  .nav-dd:hover .dd-panel,
+  .nav-dd:focus-within .dd-panel { display: flex; }
+  .dd-item {
+    padding: 9px 12px;
+    border-radius: var(--radius-btn);
+    font-size: var(--type-body-sm);
+    color: var(--color-body);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .dd-item:hover,
+  .dd-item.is-active { background: var(--color-surface-mint); color: var(--color-accent-ink); }
+
+  /* Right cluster */
+  .header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .free-scan {
+    font-size: var(--type-body-sm);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: 13px 0;
+    margin: -13px 0;
+  }
+  .free-scan:hover { color: var(--color-accent); }
+
+  /* Mobile disclosure (native <details>, zero JS) */
+  .mobile-nav { display: none; }
+  .mobile-nav summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-btn);
+  }
+  .mobile-nav summary::-webkit-details-marker { display: none; }
+  .mobile-nav summary::marker { content: ''; }
+  .burger { display: flex; flex-direction: column; gap: 5px; }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-ink);
+  }
+  .mobile-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--border-card);
+    padding: 8px var(--gutter) 20px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    box-shadow: var(--shadow-card-soft);
+  }
+  .mobile-group { border-bottom: 1px solid var(--border-subtle); }
+  .mobile-group > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    font-size: var(--type-body);
+    font-weight: 600;
+    color: var(--color-ink);
+    min-height: 44px;
+  }
+  .mobile-group > summary::-webkit-details-marker { display: none; }
+  .mobile-group > summary::marker { content: ''; }
+  .mobile-group > summary::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-muted);
+    border-bottom: 2px solid var(--color-muted);
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+  .mobile-group[open] > summary::after { transform: rotate(225deg); }
+  .mobile-group-panel { display: flex; flex-direction: column; padding-bottom: 10px; }
+  .mobile-link {
+    padding: 12px 0;
+    font-size: var(--type-body);
+    color: var(--color-body);
+    text-decoration: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .mobile-link-landing { color: var(--color-accent-ink); font-weight: 600; }
+  .mobile-cta { margin-top: 16px; justify-content: center; }
+
+  @media (max-width: 1100px) {
+    .primary-nav { gap: 20px; }
+  }
+  @media (max-width: 900px) {
+    .primary-nav,
+    .header-actions { display: none; }
+    .mobile-nav { display: block; margin-left: auto; }
+    .header-inner { gap: 16px; padding-top: 14px; padding-bottom: 14px; }
+  }
+</style>

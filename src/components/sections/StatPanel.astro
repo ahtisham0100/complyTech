@@ -1,0 +1,79 @@
+---
+// Dark stats panel sitting flush under the hero. 4-up → 2-up → 1-up; the 2px
+// left rules are kept at every width. `highlight` renders the figure in the
+// warm on-dark tone (the "30–40%" stat).
+interface StatItem {
+  value: string;
+  caption: string;
+  highlight?: boolean;
+  /** Optional visible citation line (§11 — unsourced legal statistics) */
+  source?: string;
+}
+
+interface Props {
+  ariaLabel: string;
+  stats: StatItem[];
+}
+
+const { ariaLabel, stats } = Astro.props;
+---
+
+<section class="stats" aria-label={ariaLabel}>
+  <div class="stats-panel">
+    {
+      stats.map((s) => (
+        <div class="stat">
+          <div class:list={['stat-value', { 'stat-value-hl': s.highlight }]}>{s.value}</div>
+          <div class="stat-caption">{s.caption}</div>
+          {s.source && <div class="stat-source">{s.source}</div>}
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .stats {
+    padding: 0 var(--gutter);
+  }
+  .stats-panel {
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    background: var(--color-accent-darker);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 1rem + 2.6vw, 2.75rem) clamp(1.5rem, 0.5rem + 3.5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px;
+  }
+  .stat {
+    border-left: 2px solid var(--border-stat-rule);
+    padding-left: 22px;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 1.5rem + 1vw, var(--type-stat));
+    color: var(--color-on-dark);
+    line-height: 1;
+  }
+  .stat-value-hl { color: var(--color-warn-on-dark); }
+  .stat-caption {
+    font-size: var(--type-sm);
+    color: var(--color-on-dark-sage);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .stat-source {
+    font-size: var(--type-xs);
+    color: var(--color-on-dark-sage);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .stats-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  }
+  @media (max-width: 560px) {
+    .stats-panel { grid-template-columns: 1fr; }
+  }
+</style>

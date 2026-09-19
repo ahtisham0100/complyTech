@@ -1,0 +1,145 @@
+---
+// Hero section: pill, h1 with italic accent line, lead, CTA row, trust badges.
+// The audit-report visual is passed through the `visual` slot so the homepage
+// grid owns the composition.
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  /** id for the h1 so the section can aria-labelledby it */
+  id: string;
+  pill: string;
+  line1: string;
+  line2: string;
+  /** Lead paragraph — trusted HTML (from our own content module) so the bold figure can be marked up */
+  lead: string;
+  trust: string[];
+}
+
+const { id, pill, line1, line2, lead, trust } = Astro.props;
+---
+
+<section class="hero" id="top" aria-labelledby={id}>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="hero-pill">
+        <Icon name="shield" size={15} strokeWidth={2.2} />
+        {pill}
+      </span>
+
+      <h1 class="hero-h1" id={id}>
+        {line1}
+        <span class="hero-em">{line2}</span>
+      </h1>
+
+      <p class="hero-lead" set:html={lead} />
+
+      <div class="hero-actions">
+        <slot name="actions" />
+      </div>
+
+      <ul class="hero-trust">
+        {
+          trust.map((t) => (
+            <li>
+              <Icon name="check" size={17} strokeWidth={2.4} />
+              {t}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <slot name="visual" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--section-y-hero) var(--gutter) var(--section-y);
+  }
+  .hero-grid {
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--color-surface-mint);
+    color: var(--color-accent-ink);
+    font-size: var(--type-pill);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.125rem, 1.5rem + 2.6vw, var(--type-h1));
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 22px 0 0;
+    text-wrap: balance;
+  }
+  .hero-em {
+    display: block;
+    color: var(--color-accent);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .hero-lead {
+    font-size: var(--type-lead);
+    line-height: 1.65;
+    color: var(--color-body-strong);
+    max-width: 520px;
+    margin: 24px 0 0;
+  }
+  .hero-lead :global(strong) {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .hero-trust {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 26px;
+    margin: 30px 0 0;
+    padding: 0;
+  }
+  .hero-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: var(--type-sm);
+    font-weight: 500;
+    color: var(--color-body-strong);
+  }
+  .hero-trust :global(svg) { color: var(--color-accent-ink); flex: none; }
+
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { max-width: 620px; }
+  }
+  @media (max-width: 480px) {
+    .hero-actions :global(.ds-btn) { width: 100%; }
+  }
+</style>

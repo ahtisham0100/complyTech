@@ -1,0 +1,45 @@
+---
+// Pill badge / chip. Variants: mint | amber | neutral | on-dark
+// Sizes: badge (11px uppercase) | chip (12px). `square` uses the 6px chip
+// radius instead of the pill (e.g. the "28 issues found" chip).
+interface Props {
+  variant?: 'mint' | 'amber' | 'neutral' | 'on-dark';
+  size?: 'badge' | 'chip';
+  square?: boolean;
+  class?: string;
+}
+
+const { variant = 'mint', size = 'badge', square = false, class: className } = Astro.props;
+---
+
+<span class:list={['ds-badge', `ds-badge-${variant}`, `ds-badge-${size}`, { 'ds-badge-square': square }, className]}>
+  <slot />
+</span>
+
+<style>
+  .ds-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+  .ds-badge-badge {
+    font-size: var(--type-badge);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+  .ds-badge-chip {
+    font-size: var(--type-chip);
+    font-weight: 600;
+    padding: 5px 10px;
+  }
+  .ds-badge-square { border-radius: var(--radius-chip); padding: 4px 9px; }
+
+  .ds-badge-mint    { background: var(--color-surface-mint);  color: var(--color-accent-ink); }
+  .ds-badge-amber   { background: var(--color-surface-amber); color: var(--color-warn-ink); }
+  .ds-badge-neutral { background: var(--color-surface-muted); color: var(--color-body-strong); }
+  .ds-badge-on-dark { background: var(--surface-on-dark-chip); color: var(--color-on-dark-mint); }
+</style>

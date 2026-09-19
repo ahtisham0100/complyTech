@@ -1,0 +1,64 @@
+---
+// "Why complyTech" section: copy + checklist on the left, a dark-contrast
+// panel (usually the CoverageCard) on the right.
+import Eyebrow from '../ui/Eyebrow.astro';
+import CheckList from './CheckList.astro';
+
+interface Props {
+  id: string;
+  eyebrow?: string;
+  heading: string;
+  /** Trusted HTML (our own content module) */
+  body: string;
+  checklist: string[];
+}
+
+const { id, eyebrow, heading, body, checklist } = Astro.props;
+---
+
+<section class="why" id={id} aria-labelledby={`${id}-h`}>
+  <div class="why-grid">
+    <div>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h2 class="why-h" id={`${id}-h`}>{heading}</h2>
+      <p class="why-body" set:html={body} />
+      <CheckList items={checklist} class="why-list" />
+    </div>
+    <div class="why-panel">
+      <slot name="panel" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    padding: var(--section-y) var(--gutter);
+  }
+  .why-grid {
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 72px;
+    align-items: center;
+  }
+  .why-h {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 1.375rem + 1.56vw, var(--type-h2));
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 12px 0 0;
+  }
+  .why-body {
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: var(--color-muted);
+    margin: 20px 0 0;
+  }
+  .why-list { margin-top: 26px; }
+
+  @media (max-width: 960px) {
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+</style>

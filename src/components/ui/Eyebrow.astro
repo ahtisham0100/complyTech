@@ -1,0 +1,20 @@
+---
+// Uppercase accent label above section headings ("What we do", "Why complyTech", "FAQ").
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<p class:list={['ds-eyebrow', className]}><slot /></p>
+
+<style>
+  .ds-eyebrow {
+    margin: 0;
+    font-size: var(--type-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+</style>
