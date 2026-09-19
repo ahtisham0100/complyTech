@@ -247,7 +247,8 @@ const isActive = (href: string) => {
 
   /* Mobile disclosure (native <details>, zero JS) */
   .mobile-nav { display: none; }
-  .mobile-nav summary {
+  /* Direct child only — nested group summaries style themselves below */
+  .mobile-nav > summary {
     list-style: none;
     cursor: pointer;
     display: flex;
@@ -257,8 +258,8 @@ const isActive = (href: string) => {
     height: 44px;
     border-radius: var(--radius-btn);
   }
-  .mobile-nav summary::-webkit-details-marker { display: none; }
-  .mobile-nav summary::marker { content: ''; }
+  .mobile-nav > summary::-webkit-details-marker { display: none; }
+  .mobile-nav > summary::marker { content: ''; }
   .burger { display: flex; flex-direction: column; gap: 5px; }
   .burger span {
     display: block;

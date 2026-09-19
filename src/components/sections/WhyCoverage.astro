@@ -22,7 +22,9 @@ const { id, eyebrow, heading, body, checklist } = Astro.props;
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2 class="why-h" id={`${id}-h`}>{heading}</h2>
       <p class="why-body" set:html={body} />
-      <CheckList items={checklist} class="why-list" />
+      <div class="why-list-wrap">
+        <CheckList items={checklist} />
+      </div>
     </div>
     <div class="why-panel">
       <slot name="panel" />
@@ -56,7 +58,8 @@ const { id, eyebrow, heading, body, checklist } = Astro.props;
     color: var(--color-muted);
     margin: 20px 0 0;
   }
-  .why-list { margin-top: 26px; }
+  /* Wrapper carries the spacing — the checklist's own margin:0 must not be fought */
+  .why-list-wrap { margin-top: 26px; }
 
   @media (max-width: 960px) {
     .why-grid { grid-template-columns: 1fr; gap: 48px; }
