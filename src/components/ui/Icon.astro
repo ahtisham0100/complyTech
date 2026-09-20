@@ -1,7 +1,11 @@
 ---
-// Single inline-icon component (Lucide-style stroke paths, hand-copied from
-// design/Main.dc.html). No runtime icon library. Filled glyphs (star,
-// whatsapp) set fill:currentColor and no stroke; everything else is stroke.
+// Single inline-icon component (Lucide-style stroke paths). No runtime icon
+// library. Filled glyphs (star, whatsapp) set fill:currentColor and no stroke;
+// everything else is stroke. `generatedGlyphs` carries path data extracted
+// from the lucide-react package; the hand-authored artboard glyphs below win
+// where both define a key.
+import { generatedGlyphs } from './icon-paths.js';
+
 interface Props {
   name: string;
   size?: number;
@@ -13,9 +17,14 @@ interface Props {
 
 const { name, size = 24, strokeWidth = 2, class: className, label } = Astro.props;
 
-type Glyph = { d: string[]; circles?: { cx: number; cy: number; r: number }[]; filled?: boolean };
+type Glyph = {
+  d: string[];
+  circles?: { cx: number; cy: number; r: number }[];
+  rects?: { x: number; y: number; width: number; height: number; rx?: number }[];
+  filled?: boolean;
+};
 
-const glyphs: Record<string, Glyph> = {
+const artboardGlyphs: Record<string, Glyph> = {
   'shield-check': {
     d: ['M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z', 'm9 12 2 2 4-4'],
   },
@@ -61,6 +70,35 @@ const glyphs: Record<string, Glyph> = {
   'chevron-down': {
     d: ['m6 9 6 6 6-6'],
   },
+  'clipboard-check': {
+    d: ['M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2', 'm9 14 2 2 4-4'],
+    rects: [{ x: 8, y: 2, width: 8, height: 4, rx: 1 }],
+  },
+  'file-text': {
+    d: [
+      'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z',
+      'M14 2v4a2 2 0 0 0 2 2h4',
+      'M10 9H8',
+      'M16 13H8',
+      'M16 17H8',
+    ],
+  },
+  'file-check': {
+    d: ['M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z', 'M14 2v4a2 2 0 0 0 2 2h4', 'm9 15 2 2 4-4'],
+  },
+  award: {
+    d: ['M15.477 12.89 17 22l-5-3-5 3 1.523-9.11'],
+    circles: [{ cx: 12, cy: 8, r: 6 }],
+  },
+  'check-circle': {
+    d: ['m9 12 2 2 4-4', 'M21 12c.552 0 1.005-.449.95-.998a10 10 0 1 0-9.953 9.95c.55.045.998-.398.998-.95V12a1 1 0 0 0-1-1H2.25'],
+  },
+  zap: {
+    d: ['M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z'],
+  },
+  send: {
+    d: ['m22 2-7 20-4-9-9-4Z', 'M22 2 11 13'],
+  },
   star: {
     d: ['m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'],
     filled: true,
@@ -72,6 +110,8 @@ const glyphs: Record<string, Glyph> = {
     filled: true,
   },
 };
+
+const glyphs: Record<string, Glyph> = { ...generatedGlyphs, ...artboardGlyphs };
 
 const glyph = glyphs[name];
 if (!glyph) throw new Error(`Icon.astro: unknown icon "${name}"`);
@@ -93,5 +133,6 @@ if (!glyph) throw new Error(`Icon.astro: unknown icon "${name}"`);
   aria-label={label}
 >
   {glyph.circles?.map((c) => <circle cx={c.cx} cy={c.cy} r={c.r} />)}
+  {glyph.rects?.map((r) => <rect x={r.x} y={r.y} width={r.width} height={r.height} rx={r.rx} />)}
   {glyph.d.map((d) => <path d={d} />)}
 </svg>

@@ -1,10 +1,12 @@
 ---
-import { FileText, Zap, Landmark, Building2, Hospital, Shield } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -48,13 +50,14 @@ const faqItems = [
 ---
 
 <BaseLayout
+  ds
   title="VPAT Documentation Services — IAAP-Certified | complyTech"
   description="IAAP-certified VPAT documentation for federal procurement and enterprise sales. Audit-backed ACR documents starting at $1,500. Section 508 conformance reporting."
   canonical={`${DOMAIN}/vpat-documentation-services`}
   schema={schema}
   keywords="VPAT documentation services, website VPAT, ACR accessibility conformance report, Section 508 VPAT, VPAT for government contracts"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -64,7 +67,7 @@ const faqItems = [
         <span class="current">VPAT Services</span>
       </nav>
       <div class="hero-badge">
-        <FileText className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="file-text" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Section 508 · WCAG 2.2 · Government & Enterprise Procurement
       </div>
       <h1 id="page-h1">VPAT Documentation Services</h1>
@@ -82,7 +85,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>A VPAT (completed as an ACR) is required for selling to U.S. federal agencies (Section 508).</li>
               <li>Enterprise, healthcare, and education buyers increasingly require ACRs in procurement.</li>
@@ -105,22 +108,22 @@ const faqItems = [
           <h2>When Do You Need a VPAT?</h2>
           <div class="use-case-grid">
             <div class="use-case-card">
-              <Landmark className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="landmark" className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Federal Government Sales</h4>
               <p>Required by law under Section 508 of the Rehabilitation Act. All IT products and services procured by federal agencies must have a VPAT/ACR.</p>
             </div>
             <div class="use-case-card">
-              <Building2 className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="building-2" className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Enterprise B2B Procurement</h4>
               <p>Fortune 500 and large enterprise buyers increasingly require ACRs as part of vendor due diligence. A missing or self-reported VPAT can block deals.</p>
             </div>
             <div class="use-case-card">
-              <Hospital className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="hospital" className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Healthcare & Education</h4>
               <p>Hospital systems, universities, K–12 districts, and healthcare organizations routinely require VPAT documentation from digital vendors.</p>
             </div>
             <div class="use-case-card">
-              <Shield className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="shield" className="lucide-icon use-case-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>ADA Risk Mitigation</h4>
               <p>A current, audit-backed VPAT demonstrates good-faith compliance effort — valuable documentation in ADA demand letter defense and settlement negotiations.</p>
             </div>
@@ -140,7 +143,7 @@ const faqItems = [
           </div>
 
           <h2 id="faq-vpat">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -163,7 +166,12 @@ const faqItems = [
     </div>
   </section>
 
-  <CTASection heading="Need a VPAT for Government or Enterprise Sales?" subtext="Our IAAP-certified team produces audit-backed ACR documents that meet federal procurement and enterprise buyer standards. Starting at $1,500 for websites." />
+  <CtaPanel id="cta" heading="Need a VPAT for Government or Enterprise Sales?" deck="Our IAAP-certified team produces audit-backed ACR documents that meet federal procurement and enterprise buyer standards. Starting at $1,500 for websites.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -179,7 +187,7 @@ const faqItems = [
       </div>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

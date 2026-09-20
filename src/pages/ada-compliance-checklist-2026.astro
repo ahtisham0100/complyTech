@@ -1,10 +1,11 @@
 ---
-import { ListChecks, Zap } from 'lucide-react';
-import { CheckCircle2, ShieldCheck, Globe, MapPin, Store, Image as ImageComponent, Palette, FileEdit, Keyboard, AlignLeft, AppWindow, Unlock } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -41,7 +42,7 @@ interface CheckItem { id: string; text: string; level: 'A' | 'AA'; }
 interface CheckCategory { category: string; icon: any; items: CheckItem[]; }
 
 const categories: CheckCategory[] = [
-  { category: 'Images & Media', icon: ImageComponent, items: [
+  { category: 'Images & Media', icon: 'image', items: [
     { id: 'img-1', text: 'All meaningful images have descriptive alt text', level: 'A' },
     { id: 'img-2', text: 'Decorative images have empty alt text (alt="")', level: 'A' },
     { id: 'img-3', text: 'Complex images (charts, graphs) have long descriptions', level: 'A' },
@@ -49,14 +50,14 @@ const categories: CheckCategory[] = [
     { id: 'img-5', text: 'Videos have audio description for visual info', level: 'AA' },
     { id: 'img-6', text: 'No content flashes more than 3 times per second', level: 'A' },
   ]},
-  { category: 'Color & Contrast', icon: Palette, items: [
+  { category: 'Color & Contrast', icon: 'palette', items: [
     { id: 'col-1', text: 'Normal text meets 4.5:1 contrast ratio', level: 'AA' },
     { id: 'col-2', text: 'Large text (18pt or 14pt bold) meets 3:1 contrast ratio', level: 'AA' },
     { id: 'col-3', text: 'Interactive UI components meet 3:1 contrast ratio', level: 'AA' },
     { id: 'col-4', text: 'Color is not the only means of conveying information', level: 'A' },
     { id: 'col-5', text: 'Links are distinguishable from surrounding text (not by color alone)', level: 'A' },
   ]},
-  { category: 'Forms', icon: FileEdit, items: [
+  { category: 'Forms', icon: 'file-pen', items: [
     { id: 'form-1', text: 'All form fields have visible, associated labels', level: 'A' },
     { id: 'form-2', text: 'Required fields are identified (not only by asterisk color)', level: 'A' },
     { id: 'form-3', text: 'Error messages identify the specific field and describe the problem', level: 'AA' },
@@ -65,7 +66,7 @@ const categories: CheckCategory[] = [
     { id: 'form-6', text: 'Submission success is announced to screen readers', level: 'A' },
     { id: 'form-7', text: 'No redundant data entry in multi-step processes (WCAG 2.2)', level: 'A' },
   ]},
-  { category: 'Keyboard & Navigation', icon: Keyboard, items: [
+  { category: 'Keyboard & Navigation', icon: 'keyboard', items: [
     { id: 'key-1', text: 'All functionality is operable by keyboard alone', level: 'A' },
     { id: 'key-2', text: 'No keyboard traps — user can always navigate away', level: 'A' },
     { id: 'key-3', text: 'Focus order is logical and matches visual order', level: 'A' },
@@ -74,7 +75,7 @@ const categories: CheckCategory[] = [
     { id: 'key-6', text: 'Skip navigation link appears before main content', level: 'A' },
     { id: 'key-7', text: 'Interactive touch targets are at least 24×24px (WCAG 2.2)', level: 'AA' },
   ]},
-  { category: 'Structure & Heading', icon: AlignLeft, items: [
+  { category: 'Structure & Heading', icon: 'align-left', items: [
     { id: 'str-1', text: 'Page has exactly one <h1> — the primary page title', level: 'A' },
     { id: 'str-2', text: 'Headings follow logical hierarchy (H1→H2→H3)', level: 'A' },
     { id: 'str-3', text: 'Landmark regions used (main, nav, footer, header, aside)', level: 'A' },
@@ -82,7 +83,7 @@ const categories: CheckCategory[] = [
     { id: 'str-5', text: 'Page title is descriptive and unique across the site', level: 'A' },
     { id: 'str-6', text: 'Links have descriptive text (not "click here" or "read more")', level: 'A' },
   ]},
-  { category: 'Popups & Dynamic Content', icon: AppWindow, items: [
+  { category: 'Popups & Dynamic Content', icon: 'app-window', items: [
     { id: 'dyn-1', text: 'Modal dialogs trap focus inside while open', level: 'A' },
     { id: 'dyn-2', text: 'Modals return focus to trigger element on close', level: 'A' },
     { id: 'dyn-3', text: 'Dynamic content changes are announced to screen readers', level: 'A' },
@@ -90,7 +91,7 @@ const categories: CheckCategory[] = [
     { id: 'dyn-5', text: 'Time limits can be extended or turned off', level: 'A' },
     { id: 'dyn-6', text: 'Content that moves or auto-updates can be paused', level: 'A' },
   ]},
-  { category: 'Authentication & Help', icon: Unlock, items: [
+  { category: 'Authentication & Help', icon: 'lock-open', items: [
     { id: 'auth-1', text: 'Login does not require solving cognitive tests (WCAG 2.2)', level: 'AA' },
     { id: 'auth-2', text: 'CAPTCHA has an audio alternative', level: 'A' },
     { id: 'auth-3', text: 'Help mechanisms appear consistently across pages (WCAG 2.2)', level: 'A' },
@@ -100,13 +101,14 @@ const categories: CheckCategory[] = [
 ---
 
 <BaseLayout
+  ds
   title="ADA Compliance Checklist 2026: WCAG 2.2 Audit Guide"
   description="Free 50+ item ADA website compliance checklist based on WCAG 2.2 Level AA. Covers images, forms, keyboard, contrast, and authentication. Updated April 2026."
   canonical={`${DOMAIN}/ada-compliance-checklist-2026`}
   schema={schema}
   keywords="ADA compliance checklist 2026, WCAG 2.2 checklist, website accessibility checklist, ADA website checklist, WCAG 2.2 audit checklist"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -116,7 +118,7 @@ const categories: CheckCategory[] = [
         <span class="current">ADA Checklist 2026</span>
       </nav>
       <div class="hero-badge">
-        <ListChecks className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="list-checks" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         50+ Items · WCAG 2.2 Level AA · Updated 2026
       </div>
       <h1 id="page-h1">ADA Compliance Checklist 2026: WCAG 2.2 Level AA</h1>
@@ -134,7 +136,7 @@ const categories: CheckCategory[] = [
         <div class="checklist-main">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />How to Use This Checklist</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />How to Use This Checklist</div>
             <ul>
               <li>This checklist covers the most commonly violated WCAG 2.2 Level AA success criteria.</li>
               <li>Level A items are minimum; Level AA items are the legal compliance standard.</li>
@@ -148,7 +150,7 @@ const categories: CheckCategory[] = [
             {categories.map((cat) => (
               <div class="check-category">
                 <h2 class="category-heading">
-                  {(() => { const Icon = cat.icon; return <Icon className="lucide-icon category-icon" aria-hidden="true" size={24} strokeWidth={2} />; })()}
+                  <Icon name={cat.icon} class="category-icon" aria-hidden="true" size={24} strokeWidth={2} />
                   {cat.category}
                 </h2>
                 <ul class="check-list" role="list">
@@ -190,8 +192,13 @@ const categories: CheckCategory[] = [
     </div>
   </section>
 
-  <CTASection heading="Ready for a Full WCAG 2.2 Professional Audit?" subtext="This checklist shows you where to start. A complyTech WCAG 2.2 manual audit shows you everything — 100% of success criteria, with a VPAT, remediation roadmap, and compliance certificate." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Ready for a Full WCAG 2.2 Professional Audit?" deck="This checklist shows you where to start. A complyTech WCAG 2.2 manual audit shows you everything — 100% of success criteria, with a VPAT, remediation roadmap, and compliance certificate.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

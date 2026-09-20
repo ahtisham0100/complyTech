@@ -1,10 +1,12 @@
 ---
-import { Hospital, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -72,13 +74,14 @@ const violations = [
 ---
 
 <BaseLayout
+  ds
   title="Healthcare Website ADA Compliance | complyTech"
   description="Healthcare sites face dual liability under ADA Title III and Section 1557. WCAG 2.2 audits for patient portals, telehealth, and booking systems. Starting at $1,500."
   canonical={`${DOMAIN}/ada-compliance-healthcare-websites`}
   schema={schema}
   keywords="ADA compliance for healthcare websites, WCAG 2.2 healthcare, patient portal accessibility, Section 508 compliance services, telehealth accessibility"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -88,7 +91,7 @@ const violations = [
         <span class="current">Healthcare</span>
       </nav>
       <div class="hero-badge">
-        <Hospital className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="hospital" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         ADA + Section 1557 Dual Compliance
       </div>
       <h1 id="page-h1">ADA Compliance for Healthcare Websites</h1>
@@ -106,7 +109,7 @@ const violations = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note" aria-label="Key takeaways">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Hospitals face <strong>dual liability</strong>: ADA + Section 1557 of the ACA for website accessibility.</li>
               <li>Patient portals, appointment booking, and telehealth are the most commonly litigated assets.</li>
@@ -192,7 +195,7 @@ const violations = [
           </div>
 
           <h2 id="faq-healthcare">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -222,7 +225,12 @@ const violations = [
     </div>
   </section>
 
-  <CTASection heading="Get Your Healthcare Website Accessibility Audit" subtext="Our WCAG 2.2 + Section 1557 specialized audit covers every digital touchpoint — from patient portals to telehealth — with compliance documentation your legal team can rely on." />
+  <CtaPanel id="cta" heading="Get Your Healthcare Website Accessibility Audit" deck="Our WCAG 2.2 + Section 1557 specialized audit covers every digital touchpoint — from patient portals to telehealth — with compliance documentation your legal team can rely on.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -239,7 +247,7 @@ const violations = [
       <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/section-508-compliance">Section 508 Guide</a> · <a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></p>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

@@ -1,10 +1,12 @@
 ---
-import { ArrowLeftRight, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -61,6 +63,7 @@ const newCriteria = [
 ---
 
 <BaseLayout
+  ds
   title="WCAG 2.1 vs WCAG 2.2 — Key Differences Explained"
   description="WCAG 2.2 adds 9 new success criteria beyond 2.1, covering mobile and cognitive accessibility. Free 2026 guide: what changed, what's required, and whether to re-audit."
   canonical={`${DOMAIN}/wcag-2-1-vs-wcag-2-2`}
@@ -68,7 +71,7 @@ const newCriteria = [
   ogType="article"
   keywords="WCAG 2.1 vs WCAG 2.2, what changed in WCAG 2.2, WCAG 2.2 new criteria, WCAG 2.2 ADA compliance, do I need WCAG 2.2"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -78,7 +81,7 @@ const newCriteria = [
         <span class="current">WCAG 2.1 vs 2.2</span>
       </nav>
       <div class="hero-badge">
-        <ArrowLeftRight className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="arrow-left-right" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         W3C Published September 2023 · 9 New Success Criteria
       </div>
       <h1 id="page-h1">WCAG 2.1 vs WCAG 2.2: What Changed and Why It Matters</h1>
@@ -96,7 +99,7 @@ const newCriteria = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>WCAG 2.2 was published by the W3C on September 5, 2023 — it is the current standard.</li>
               <li>WCAG 2.2 adds <strong>9 new success criteria</strong> and removes 1 (4.1.1 Parsing).</li>
@@ -157,7 +160,7 @@ const newCriteria = [
           <p>complyTech audits all clients to <strong>WCAG 2.2 Level AA</strong> — the current published standard. This provides the broadest legal protection and ensures your site meets both current and anticipated future enforcement standards.</p>
 
           <h2 id="faq-wcag">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -185,8 +188,13 @@ const newCriteria = [
     </div>
   </section>
 
-  <CTASection heading="Audit Your Website to WCAG 2.2 Level AA" subtext="complyTech audits to WCAG 2.2 — 9 criteria beyond what a WCAG 2.1 audit covers. Future-proof your compliance with the current published standard and a defensible legal record." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Audit Your Website to WCAG 2.2 Level AA" deck="complyTech audits to WCAG 2.2 — 9 criteria beyond what a WCAG 2.1 audit covers. Future-proof your compliance with the current published standard and a defensible legal record.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

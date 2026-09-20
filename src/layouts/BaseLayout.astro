@@ -174,5 +174,62 @@ const schemaString = schema ? JSON.stringify(Array.isArray(schema) ? schema : [s
     text-decoration: none;
     box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   }
+
+  /* ── Design-system page base (migrated pages only, via the ds prop) ── */
+  body.ds-theme {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Global link rules from the mockup's helmet block */
+  body.ds-theme a { color: var(--color-accent); text-decoration: none; }
+  body.ds-theme a:hover { color: var(--color-accent-hover); }
+
+  /* Underlined link utility for dark panels */
+  body.ds-theme .u-link {
+    color: var(--color-on-dark-mint);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  body.ds-theme .u-link:hover { color: var(--color-on-dark); }
+
+  /* Content container for section shells */
+  body.ds-theme .ds-container {
+    width: 100%;
+    max-width: var(--layout-max);
+    margin-inline: auto;
+  }
+
+  /* Focus visibility (SC 2.4.11/2.4.13) — the mockup defines none */
+  body.ds-theme :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+  /* Light ring variant so focus stays visible on dark panels */
+  body.ds-theme .on-dark :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+    outline-color: var(--focus-ring-dark);
+  }
+
+  body.ds-theme .skip-link:focus {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  /* Keep motion minimal; honour user preference */
+  @media (prefers-reduced-motion: reduce) {
+    body.ds-theme *,
+    body.ds-theme *::before,
+    body.ds-theme *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>
 

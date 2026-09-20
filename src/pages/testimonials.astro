@@ -1,9 +1,11 @@
 ---
-import { ShieldCheck, Star, Quote, Briefcase, MapPin, Zap, ExternalLink } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -109,13 +111,14 @@ const schema = [
 ---
 
 <BaseLayout
+  ds
   title="Client Testimonials — complyTech ADA Compliance Services"
   description="Read verified client reviews of complyTech's ADA compliance audits, WCAG 2.2 remediation, and web accessibility services. 5-star rated by businesses across the US, UK, and Europe."
   canonical={`${DOMAIN}/testimonials`}
   schema={schema}
   keywords="complyTech reviews, ADA compliance testimonials, WCAG audit reviews, web accessibility service reviews, complyTech client feedback"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -124,7 +127,7 @@ const schema = [
         <span class="current">Testimonials</span>
       </nav>
       <div class="hero-badge">
-        <ShieldCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="shield-check" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Verified Client Reviews
       </div>
       <h1 id="page-h1">What Our Clients Say</h1>
@@ -138,7 +141,7 @@ const schema = [
       <div class="testimonials-stats">
         <div class="testimonial-stat-card">
           <div class="stat-icon-wrap">
-            <Star className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+            <Icon name="star" class="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
           </div>
           <div>
             <span class="stat-number">5.0</span>
@@ -147,7 +150,7 @@ const schema = [
         </div>
         <div class="testimonial-stat-card">
           <div class="stat-icon-wrap">
-            <Briefcase className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+            <Icon name="briefcase" class="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
           </div>
           <div>
             <span class="stat-number">{totalReviews}</span>
@@ -156,7 +159,7 @@ const schema = [
         </div>
         <div class="testimonial-stat-card">
           <div class="stat-icon-wrap">
-            <MapPin className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+            <Icon name="map-pin" class="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
           </div>
           <div>
             <span class="stat-number">3</span>
@@ -165,7 +168,7 @@ const schema = [
         </div>
         <div class="testimonial-stat-card">
           <div class="stat-icon-wrap">
-            <Zap className="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
+            <Icon name="zap" class="lucide-icon" aria-hidden="true" size={24} strokeWidth={2} />
           </div>
           <div>
             <span class="stat-number">100%</span>
@@ -183,7 +186,7 @@ const schema = [
         {testimonials.map((t, i) => (
           <article class="testimonial-card" id={`review-${i + 1}`}>
             <div class="testimonial-quote-icon" aria-hidden="true">
-              <Quote className="lucide-icon" size={28} strokeWidth={1.5} />
+              <Icon name="quote" class="lucide-icon" size={28} strokeWidth={1.5} />
             </div>
             <div class="testimonial-header">
               <div class="testimonial-avatar" style={`background: ${t.color};`}>
@@ -206,7 +209,7 @@ const schema = [
             </div>
             <div class="testimonial-stars" aria-label={`${t.rating} out of 5 stars`}>
               {Array.from({ length: t.rating }).map(() => (
-                <Star className="lucide-icon star-filled" size={18} strokeWidth={0} />
+                <Icon name="star" className="lucide-icon star-filled" size={18} strokeWidth={0} />
               ))}
             </div>
             <blockquote class="testimonial-body">
@@ -214,11 +217,11 @@ const schema = [
             </blockquote>
             <div class="testimonial-details">
               <div class="testimonial-detail">
-                <Briefcase className="lucide-icon" aria-hidden="true" size={15} strokeWidth={2} />
+                <Icon name="briefcase" class="lucide-icon" aria-hidden="true" size={15} strokeWidth={2} />
                 <span>{t.gig}</span>
               </div>
               <a href={FIVERR_PROFILE} class="testimonial-fiverr-link" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="lucide-icon" aria-hidden="true" size={14} strokeWidth={2} />
+                <Icon name="external-link" class="lucide-icon" aria-hidden="true" size={14} strokeWidth={2} />
                 View on Fiverr
               </a>
             </div>
@@ -228,8 +231,13 @@ const schema = [
     </div>
   </section>
 
-  <CTASection heading="Ready to Join Our Happy Clients?" subtext="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Ready to Join Our Happy Clients?" deck="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

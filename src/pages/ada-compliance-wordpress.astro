@@ -1,10 +1,12 @@
 ---
-import { Globe, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 const schema = [
@@ -53,6 +55,7 @@ const pluginRisks = [
 ---
 
 <BaseLayout
+  ds
   title="WordPress ADA Compliance — Is Your Site Accessible?"
   description="No WordPress theme is WCAG 2.2 compliant by default. Plugins and page builders make it worse. Get a manual ADA audit for your WordPress site. Starting at $495."
   canonical={`${DOMAIN}/ada-compliance-wordpress`}
@@ -60,7 +63,7 @@ const pluginRisks = [
   ogType="article"
   keywords="WordPress ADA compliance, WordPress accessibility audit, is WordPress ADA compliant, WordPress WCAG, Elementor accessibility"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -70,7 +73,7 @@ const pluginRisks = [
         <span class="current">WordPress</span>
       </nav>
       <div class="hero-badge">
-        <Globe className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="globe" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         WordPress · WooCommerce · Elementor · All Themes
       </div>
       <h1 id="page-h1">Is Your WordPress Website ADA Compliant?</h1>
@@ -88,7 +91,7 @@ const pluginRisks = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — WordPress Accessibility</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — WordPress Accessibility</div>
             <ul>
               <li>No WordPress theme is fully WCAG 2.2 Level AA compliant out of the box.</li>
               <li>"Accessibility-ready" themes meet <strong>minimum</strong> criteria — not full WCAG 2.2 AA.</li>
@@ -155,7 +158,7 @@ const pluginRisks = [
           <p>View full <a href="/ada-compliance-audit-pricing">pricing and timeline details</a>. Most WordPress site owners qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — up to $5,000/year back.</p>
 
           <h2 id="faq-wordpress">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -180,8 +183,13 @@ const pluginRisks = [
     </div>
   </section>
 
-  <CTASection heading="Your WordPress Site Deserves a Real Accessibility Audit" subtext="Plugins and overlays can't fix what they can't detect. A complyTech manual audit covers your specific WordPress theme, plugins, and content — starting at $495." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Your WordPress Site Deserves a Real Accessibility Audit" deck="Plugins and overlays can't fix what they can't detect. A complyTech manual audit covers your specific WordPress theme, plugins, and content — starting at $495.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

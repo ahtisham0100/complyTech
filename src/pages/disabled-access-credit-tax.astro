@@ -1,10 +1,12 @@
 ---
-import { PiggyBank, Scale, Zap, Users, CircleDollarSign } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -48,6 +50,7 @@ const faqItems = [
 ---
 
 <BaseLayout
+  ds
   title="ADA Tax Credit for Small Business — IRS Form 8826"
   description="Claim up to $5,000/year in federal tax credits for ADA accessibility costs including website audits. Free 2026 guide to IRS Form 8826 eligibility and filing."
   canonical={`${DOMAIN}/disabled-access-credit-tax`}
@@ -55,7 +58,7 @@ const faqItems = [
   ogType="article"
   keywords="disabled access credit, IRS Form 8826, ADA tax credit small business, website accessibility tax credit, disabled access credit eligibility"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -65,7 +68,7 @@ const faqItems = [
         <span class="current">Tax Credit Guide</span>
       </nav>
       <div class="hero-badge">
-        <PiggyBank className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="piggy-bank" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         IRS Form 8826 · Up to $5,000/Year · Most Small Businesses Qualify
       </div>
       <h1 id="page-h1">IRS Disabled Access Credit: Save Up to $5,000 on ADA Compliance</h1>
@@ -83,12 +86,12 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="legal-disclaimer" role="note">
-            <Scale className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+            <Icon name="scale" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             <div><strong>Tax Disclaimer:</strong> This guide is for educational purposes only and does not constitute tax advice. Consult a licensed tax professional before claiming any tax credit on your return.</div>
           </div>
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>The IRS Disabled Access Credit (Form 8826) gives eligible small businesses <strong>50% back on accessibility costs</strong> ($250–$10,250/year).</li>
               <li><strong>Maximum credit: $5,000 per year.</strong> Claimable every year.</li>
@@ -106,12 +109,12 @@ const faqItems = [
           <p>A business is eligible if it meets <em>at least one</em> of the following criteria:</p>
           <div class="eligibility-grid">
             <div class="eligibility-card">
-              <Users className="lucide-icon eligibility-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="users" className="lucide-icon eligibility-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Employee Count Test</h4>
               <p>Had <strong>30 or fewer full-time employees</strong> during the preceding tax year. Part-time employees are not counted toward this threshold.</p>
             </div>
             <div class="eligibility-card">
-              <CircleDollarSign className="lucide-icon eligibility-icon" aria-hidden="true" size={20} strokeWidth={2} />
+              <Icon name="circle-dollar-sign" className="lucide-icon eligibility-icon" aria-hidden="true" size={20} strokeWidth={2} />
               <h4>Revenue Test</h4>
               <p>Had <strong>$1 million or less in gross receipts</strong> in the preceding tax year. This applies to the majority of small businesses in the US.</p>
             </div>
@@ -163,7 +166,7 @@ const faqItems = [
           </div>
 
           <h2 id="faq-tax-credit">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -191,8 +194,13 @@ const faqItems = [
     </div>
   </section>
 
-  <CTASection heading="Make Your ADA Audit 50% Cheaper With the Tax Credit" subtext="The IRS Disabled Access Credit returns up to $5,000/year on qualifying accessibility costs. A complyTech audit starts at $495 — and your tax advisor can help you claim back up to half." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Make Your ADA Audit 50% Cheaper With the Tax Credit" deck="The IRS Disabled Access Credit returns up to $5,000/year on qualifying accessibility costs. A complyTech audit starts at $495 — and your tax advisor can help you claim back up to half.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

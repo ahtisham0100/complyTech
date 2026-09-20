@@ -1,10 +1,12 @@
 ---
-import { FileText, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -65,6 +67,7 @@ const steps = [
 ---
 
 <BaseLayout
+  ds
   title="How to Make a PDF ADA Compliant | complyTech"
   description="Free 2026 guide: how to make PDFs ADA compliant with proper tagging, reading order, and alt text. Professional PDF remediation available starting at $50 per document."
   canonical={`${DOMAIN}/how-to-make-pdf-ada-compliant`}
@@ -72,7 +75,7 @@ const steps = [
   ogType="article"
   keywords="how to make PDF ADA compliant, PDF accessibility guide, accessible PDF requirements, PDF WCAG compliance, ADA compliant PDF checklist"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -82,7 +85,7 @@ const steps = [
         <span class="current">PDF Accessibility</span>
       </nav>
       <div class="hero-badge">
-        <FileText className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="file-text" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         8-Step Guide · Menus · Forms · Legal Documents
       </div>
       <h1 id="page-h1">How to Make a PDF ADA Compliant: Complete Guide</h1>
@@ -100,7 +103,7 @@ const steps = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>PDFs on public websites must be ADA accessible — menus, forms, brochures, guides all count.</li>
               <li>Scanned PDF images are completely inaccessible — recreate from text-based source when possible.</li>
@@ -149,7 +152,7 @@ const steps = [
           </div>
 
           <h2 id="faq-pdf">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -173,7 +176,12 @@ const steps = [
     </div>
   </section>
 
-  <CTASection heading="Need Professional PDF Accessibility Remediation?" subtext="Our team handles full PDF remediation — tagging, reading order, alt text, tables, contrast — starting at $50 per document. Volume discounts available for bulk document sets." />
+  <CtaPanel id="cta" heading="Need Professional PDF Accessibility Remediation?" deck="Our team handles full PDF remediation — tagging, reading order, alt text, tables, contrast — starting at $50 per document. Volume discounts available for bulk document sets.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -190,7 +198,7 @@ const steps = [
       <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/ada-compliance-audit-small-business">Full Audit Details</a></p>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

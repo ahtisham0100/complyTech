@@ -1,9 +1,11 @@
 ---
-import { ShieldCheck, Award, CheckCircle2, Globe, Users, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -34,13 +36,14 @@ const schema = [
 ---
 
 <BaseLayout
+  ds
   title="About complyTech — ADA Compliance Audit Experts"
   description="complyTech is an IAAP-certified accessibility audit agency helping U.S. small businesses achieve WCAG 2.2 Level AA compliance. Meet our team and learn about our mission."
   canonical={`${DOMAIN}/about`}
   schema={schema}
   keywords="about complyTech, ADA compliance team, IAAP certified accessibility auditor, website accessibility experts"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -49,7 +52,7 @@ const schema = [
         <span class="current">About</span>
       </nav>
       <div class="hero-badge">
-        <ShieldCheck className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="shield-check" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         IAAP-Certified · WCAG 2.2 Specialists
       </div>
       <h1 id="page-h1">About complyTech</h1>
@@ -63,7 +66,7 @@ const schema = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note" aria-label="Key facts">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />Who We Are</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />Who We Are</div>
             <ul>
               <li>IAAP-certified accessibility professionals specializing in <strong>WCAG 2.2 Level AA</strong> manual audits.</li>
               <li>Focused exclusively on <strong>U.S. small businesses</strong> — the most common targets of ADA demand letters.</li>
@@ -79,22 +82,22 @@ const schema = [
           <h2>What Sets complyTech Apart</h2>
           <div class="values-grid">
             <div class="value-card">
-              <Award className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <Icon name="award" className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
               <h3>IAAP Certified</h3>
               <p>Our auditors hold IAAP (International Association of Accessibility Professionals) certifications — the industry gold standard for accessibility expertise. Every audit is conducted by a certified professional, not an automated tool.</p>
             </div>
             <div class="value-card">
-              <CheckCircle2 className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <Icon name="check-circle" className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
               <h3>Manual Expert Review</h3>
               <p>Automated scanners detect only 20–30% of WCAG violations. Our audits combine automated scanning with comprehensive manual testing — the only approach that catches the other 70–80% of real-world accessibility barriers.</p>
             </div>
             <div class="value-card">
-              <Globe className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <Icon name="globe" className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
               <h3>Small Business Focus</h3>
               <p>We specialize in websites with 1–200 pages. Our <a href="/ada-compliance-audit-pricing">pricing starts at $495</a> for micro-sites, and most clients qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — returning up to $5,000 of audit costs.</p>
             </div>
             <div class="value-card">
-              <Users className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
+              <Icon name="users" className="lucide-icon value-icon" aria-hidden="true" size={28} strokeWidth={2} />
               <h3>Real Assistive Technology Testing</h3>
               <p>We test with the same tools your users rely on: NVDA (Windows screen reader), JAWS, VoiceOver (Mac/iOS), keyboard-only navigation, and browser zoom. This isn't simulated — it's real-world accessibility validation.</p>
             </div>
@@ -176,8 +179,13 @@ const schema = [
     </div>
   </section>
 
-  <CTASection heading="Ready to Make Your Website Accessible?" subtext="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Ready to Make Your Website Accessible?" deck="Get a professional WCAG 2.2 audit with VPAT, remediation roadmap, and compliance certificate. Pricing starts at $495 — and the IRS Disabled Access Credit can return up to $5,000.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

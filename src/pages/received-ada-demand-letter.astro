@@ -1,10 +1,12 @@
 ---
-import { AlertTriangle, Scale, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -61,6 +63,7 @@ const steps = [
 ---
 
 <BaseLayout
+  ds
   title="Received an ADA Demand Letter? Do This First | complyTech"
   description="Don't panic — but don't ignore it. Step-by-step response guide for ADA demand letters. Settlements range $4K–$75K. Start an emergency WCAG 2.2 audit within 24 hours."
   canonical={`${DOMAIN}/received-ada-demand-letter`}
@@ -68,7 +71,7 @@ const steps = [
   ogType="article"
   keywords="ADA demand letter received, ADA website lawsuit response, ADA demand letter small business, how to respond ADA letter, ADA compliance lawsuit"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero page-hero-urgent" aria-labelledby="page-h1">
     <div class="container">
@@ -78,7 +81,7 @@ const steps = [
         <span class="current">ADA Demand Letter</span>
       </nav>
       <div class="hero-badge badge-urgent">
-        <AlertTriangle className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="alert-triangle" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Legal Guidance · Consult an Attorney for Your Specific Situation
       </div>
       <h1 id="page-h1">Received an ADA Website Demand Letter? Here's What to Do.</h1>
@@ -96,12 +99,12 @@ const steps = [
         <article class="prose-section">
 
           <div class="legal-disclaimer" role="note">
-            <Scale className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+            <Icon name="scale" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
             <div><strong>Legal Disclaimer:</strong> This guide is for educational purposes only and does not constitute legal advice. ADA demand letters have serious legal implications. Consult a licensed attorney experienced in ADA Title III website accessibility defense immediately upon receiving a demand letter.</div>
           </div>
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Immediate Action Steps</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Immediate Action Steps</div>
             <ul>
               <li><strong>Note the response deadline</strong> — typically 20–30 days from letter date</li>
               <li><strong>Do NOT ignore it</strong> — non-response leads to automatic lawsuit filing</li>
@@ -165,7 +168,7 @@ const steps = [
           </ul>
 
           <h2 id="faq-demand-letter">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -205,8 +208,13 @@ const steps = [
     </div>
   </section>
 
-  <CTASection heading="Received a Demand Letter? Start Your Audit Today." subtext="Don't wait — commission your WCAG 2.2 manual audit in parallel with legal consultation. Demonstrating good-faith remediation effort is your best defense. Response within 1 business day." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Received a Demand Letter? Start Your Audit Today." deck="Don't wait — commission your WCAG 2.2 manual audit in parallel with legal consultation. Demonstrating good-faith remediation effort is your best defense. Response within 1 business day.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

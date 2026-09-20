@@ -1,10 +1,12 @@
 ---
-import { Search, Zap, CheckCircle2 } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 const schema = [
@@ -48,6 +50,7 @@ const freeTools = [
 ---
 
 <BaseLayout
+  ds
   title="Free ADA Website Scan — What It Finds & Misses"
   description="Run a free ADA website scan with WAVE, axe, or Lighthouse. But automated tools catch only 30–40% of WCAG violations. Learn what you're missing and when to get a manual audit."
   canonical={`${DOMAIN}/free-ada-website-scan`}
@@ -55,7 +58,7 @@ const freeTools = [
   ogType="article"
   keywords="free ADA website scan, free website accessibility checker, ADA compliance checker free, WAVE accessibility tool, is my website ADA compliant"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -65,7 +68,7 @@ const freeTools = [
         <span class="current">Free Scan</span>
       </nav>
       <div class="hero-badge">
-        <Search className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="search" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Free Tools · WAVE · axe · Lighthouse · Manual Audit
       </div>
       <h1 id="page-h1">Free ADA Website Scan: What It Finds and What It Misses</h1>
@@ -83,7 +86,7 @@ const freeTools = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Free tools like WAVE, axe, and Lighthouse test only <strong>30–40% of WCAG criteria</strong>.</li>
               <li>A passing automated scan does <strong>NOT</strong> mean your site is ADA compliant.</li>
@@ -134,23 +137,23 @@ const freeTools = [
             <div class="comparison-col">
               <h4>🔍 Automated Tools Find</h4>
               <ul>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing alt text on images</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Insufficient color contrast ratios</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing form labels</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Missing document language</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Duplicate IDs</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Empty links / buttons</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Missing alt text on images</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Insufficient color contrast ratios</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Missing form labels</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Missing document language</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Duplicate IDs</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Empty links / buttons</li>
               </ul>
             </div>
             <div class="comparison-col">
               <h4>🧑‍💻 Manual Audit Finds</h4>
               <ul>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Keyboard navigation failures</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Screen reader incompatibilities</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Focus management issues</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Cognitive accessibility gaps</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Dynamic content ARIA failures</li>
-                <li><CheckCircle2 className="lucide-icon check-icon" size={16} /> Meaningful alt text accuracy</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Keyboard navigation failures</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Screen reader incompatibilities</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Focus management issues</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Cognitive accessibility gaps</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Dynamic content ARIA failures</li>
+                <li><Icon name="check-circle" className="lucide-icon check-icon" size={16} /> Meaningful alt text accuracy</li>
               </ul>
             </div>
           </div>
@@ -168,7 +171,7 @@ const freeTools = [
           <p>View <a href="/ada-compliance-audit-pricing">pricing details</a> or check if you qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> ($5,000/year back).</p>
 
           <h2>Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -193,8 +196,13 @@ const freeTools = [
     </div>
   </section>
 
-  <CTASection heading="Ready for the Full Picture?" subtext="Free scans are a starting point. A complyTech manual WCAG 2.2 audit catches the 60–70% of violations automated tools miss — starting at $495 with full documentation." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Ready for the Full Picture?" deck="Free scans are a starting point. A complyTech manual WCAG 2.2 audit catches the 60–70% of violations automated tools miss — starting at $495 with full documentation.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

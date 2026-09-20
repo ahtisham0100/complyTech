@@ -1,10 +1,12 @@
 ---
-import { MapPin, Zap, AlertTriangle } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 const schema = [
@@ -44,6 +46,7 @@ const faqItems = [
 ---
 
 <BaseLayout
+  ds
   title="ADA Website Compliance California — Unruh Act Guide"
   description="California businesses face $4,000 per violation under the Unruh Act — on top of federal ADA penalties. Get a WCAG 2.2 audit to protect your business. Starting at $495."
   canonical={`${DOMAIN}/ada-compliance-california`}
@@ -51,7 +54,7 @@ const faqItems = [
   ogType="article"
   keywords="ADA compliance California, Unruh Civil Rights Act website, California website accessibility, California ADA audit"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero page-hero-urgent" aria-labelledby="page-h1">
     <div class="container">
@@ -61,7 +64,7 @@ const faqItems = [
         <span class="current">California</span>
       </nav>
       <div class="hero-badge badge-urgent">
-        <MapPin className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="map-pin" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         California · Unruh Civil Rights Act · $4,000 Per Violation
       </div>
       <h1 id="page-h1">ADA Website Compliance for California Businesses</h1>
@@ -79,7 +82,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — California ADA Risk</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — California ADA Risk</div>
             <ul>
               <li>California leads the U.S. in ADA website lawsuits — <strong>30–40% of all federal filings</strong>.</li>
               <li>The Unruh Act adds <strong>$4,000 per violation per visit</strong> in statutory damages.</li>
@@ -139,7 +142,7 @@ const faqItems = [
           <p>Already <a href="/received-ada-demand-letter">received a demand letter</a>? Commissioning an audit immediately demonstrates good-faith compliance. Most businesses also qualify for the <a href="/disabled-access-credit-tax">IRS Disabled Access Credit</a> — up to $5,000/year back. See full <a href="/ada-compliance-audit-pricing">pricing details</a>.</p>
 
           <h2 id="faq-california">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -163,8 +166,13 @@ const faqItems = [
     </div>
   </section>
 
-  <CTASection heading="Protect Your California Business Before the Next Demand Letter" subtext="California businesses face the highest ADA risk in the country. A complyTech WCAG 2.2 audit starts at $495 — a fraction of one Unruh Act demand letter." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Protect Your California Business Before the Next Demand Letter" deck="California businesses face the highest ADA risk in the country. A complyTech WCAG 2.2 audit starts at $495 — a fraction of one Unruh Act demand letter.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

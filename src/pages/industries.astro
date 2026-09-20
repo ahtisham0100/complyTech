@@ -1,9 +1,11 @@
 ---
-import { ShoppingCart, Hospital, Utensils, Gavel, Stethoscope, HeartHandshake, Store, ArrowRight } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -28,49 +30,49 @@ const schema = [
 
 const industries = [
   {
-    icon: ShoppingCart,
+    icon: 'shopping-cart',
     title: 'E-commerce Websites',
     desc: 'E-commerce sites account for 78% of all ADA digital accessibility lawsuits. Checkout flows, product pages, and filter controls are the most commonly cited barriers.',
     href: '/ada-compliance-ecommerce-websites',
     stat: '78% of ADA lawsuits',
   },
   {
-    icon: Store,
+    icon: 'store',
     title: 'Shopify Stores',
     desc: 'No Shopify theme is WCAG 2.2 compliant by default. Third-party apps — popups, reviews, loyalty programs — are the #1 source of accessibility violations.',
     href: '/ada-compliance-shopify',
     stat: 'Themes not compliant',
   },
   {
-    icon: Hospital,
+    icon: 'hospital',
     title: 'Healthcare Websites',
     desc: 'Healthcare organizations face dual liability under ADA Title III and Section 1557 of the ACA. Patient portals, telehealth, and appointment booking are critical.',
     href: '/ada-compliance-healthcare-websites',
     stat: 'Dual legal liability',
   },
   {
-    icon: Utensils,
+    icon: 'utensils',
     title: 'Restaurant Websites',
     desc: 'PDF menus are the #1 cited ADA violation for restaurants. Online ordering flows and reservation systems are also common accessibility failure points.',
     href: '/ada-compliance-restaurants',
     stat: 'PDF menus = #1 target',
   },
   {
-    icon: Gavel,
+    icon: 'gavel',
     title: 'Law Firm Websites',
     desc: 'Law firms have a unique ethical obligation — their websites must meet the same civil rights standards they advise clients on. Intake forms and chatbots are key targets.',
     href: '/ada-compliance-law-firms',
     stat: 'Ethical obligation',
   },
   {
-    icon: Stethoscope,
+    icon: 'stethoscope',
     title: 'Dental Office Websites',
     desc: 'Dental practices face ADA claims targeting inaccessible appointment booking, patient intake forms, and before/after photo galleries.',
     href: '/ada-compliance-dental-offices',
     stat: 'Booking systems at risk',
   },
   {
-    icon: HeartHandshake,
+    icon: 'heart-handshake',
     title: 'Nonprofit Websites',
     desc: 'Most nonprofits must comply with ADA Title III and/or Section 504. Donation forms, program applications, and event registration are key failure points.',
     href: '/ada-compliance-for-nonprofits',
@@ -80,13 +82,14 @@ const industries = [
 ---
 
 <BaseLayout
+  ds
   title="ADA Compliance by Industry — Healthcare, E-commerce, Restaurants & More | complyTech"
   description="Industry-specific ADA compliance guides and audit services. E-commerce, healthcare, restaurants, law firms, dental offices, nonprofits, and Shopify stores. Find your industry."
   canonical={`${DOMAIN}/industries`}
   schema={schema}
   keywords="ADA compliance by industry, healthcare ADA compliance, ecommerce ADA compliance, restaurant website accessibility, law firm ADA compliance, dental ADA compliance"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -110,13 +113,13 @@ const industries = [
           <a href={ind.href} class="industry-card">
             <div class="ind-header">
               <div class="ind-icon">
-                {(() => { const Icon = ind.icon; return <Icon className="lucide-icon" aria-hidden="true" size={28} strokeWidth={2} />; })()}
+                <Icon name={ind.icon} aria-hidden="true" size={28} strokeWidth={2} />
               </div>
               <span class="ind-stat">{ind.stat}</span>
             </div>
             <h2>{ind.title}</h2>
             <p>{ind.desc}</p>
-            <span class="ind-link">View industry guide <ArrowRight className="lucide-icon" aria-hidden="true" size={16} strokeWidth={2} /></span>
+            <span class="ind-link">View industry guide <Icon name="arrow-right" class="lucide-icon" aria-hidden="true" size={16} strokeWidth={2} /></span>
           </a>
         ))}
       </div>
@@ -138,8 +141,13 @@ const industries = [
     </div>
   </section>
 
-  <CTASection heading="Get Your Industry-Specific ADA Compliance Audit" subtext="Every audit is customized to your industry's specific compliance challenges. Send us your website URL and we'll include industry-specific testing protocols in your quote." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Get Your Industry-Specific ADA Compliance Audit" deck="Every audit is customized to your industry's specific compliance challenges. Send us your website URL and we'll include industry-specific testing protocols in your quote.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

@@ -1,0 +1,76 @@
+---
+// Native <details>/<summary> accordion — the interactive core shared by the
+// homepage FAQ section and content-page FAQ blocks. No JS.
+import Icon from './Icon.astro';
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: Faq[];
+  firstOpen?: boolean;
+}
+
+const { items, firstOpen = true } = Astro.props;
+---
+
+<div class="ds-faq-list">
+  {
+    items.map((f, i) => (
+      <details open={firstOpen && i === 0 ? true : undefined}>
+        <summary>
+          <span>{f.question}</span>
+          <Icon name="chevron-down" size={18} strokeWidth={2} class="ds-faq-chevron" />
+        </summary>
+        <p set:html={f.answer} />
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .ds-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  details {
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+  }
+  summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: var(--type-body);
+    font-weight: 600;
+    color: var(--color-ink);
+    /* ≥44px hit area without changing the card's visual rhythm */
+    padding: 10px 0;
+    margin: -10px 0;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::marker { content: ''; }
+  summary:hover { color: var(--color-accent); }
+
+  .ds-faq-chevron {
+    flex: none;
+    color: var(--color-muted);
+    transition: transform 0.15s ease;
+  }
+  details[open] .ds-faq-chevron { transform: rotate(180deg); }
+
+  details p {
+    font-size: var(--type-card);
+    line-height: 1.65;
+    color: var(--color-muted);
+    margin: 12px 0 0;
+  }
+</style>

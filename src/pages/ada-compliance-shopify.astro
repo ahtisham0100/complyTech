@@ -1,10 +1,12 @@
 ---
-import { Store, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -58,13 +60,14 @@ const appCategories = [
 ---
 
 <BaseLayout
+  ds
   title="Shopify ADA Compliance Audit Services | complyTech"
   description="No Shopify theme is WCAG 2.2 compliant by default. Get a manual ADA audit covering your theme, checkout flow, and third-party apps. Starting at $1,500."
   canonical={`${DOMAIN}/ada-compliance-shopify`}
   schema={schema}
   keywords="Shopify ADA compliance, is Shopify ADA compliant, Shopify accessibility audit, Shopify WCAG compliance, Shopify store ADA lawsuit"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -74,7 +77,7 @@ const appCategories = [
         <span class="current">Shopify</span>
       </nav>
       <div class="hero-badge">
-        <Store className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="store" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Shopify · WooCommerce · Magento · All Platforms
       </div>
       <h1 id="page-h1">Is Your Shopify Store ADA Compliant?</h1>
@@ -92,7 +95,7 @@ const appCategories = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Shopify ADA Compliance</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Shopify ADA Compliance</div>
             <ul>
               <li>No Shopify theme — including Dawn — is fully WCAG 2.2 AA compliant out of the box.</li>
               <li>Third-party apps (popups, reviews, loyalty, chat) are the #1 source of ADA violations in Shopify stores.</li>
@@ -148,7 +151,7 @@ const appCategories = [
           </div>
 
           <h2 id="faq-shopify">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -172,7 +175,12 @@ const appCategories = [
     </div>
   </section>
 
-  <CTASection heading="Audit Your Shopify Store for ADA Compliance" subtext="Send us your store URL and get a WCAG 2.2 audit quote within 1 business day. We test your theme, checkout flow, and every installed app — not just what automated scanners can find." />
+  <CtaPanel id="cta" heading="Audit Your Shopify Store for ADA Compliance" deck="Send us your store URL and get a WCAG 2.2 audit quote within 1 business day. We test your theme, checkout flow, and every installed app — not just what automated scanners can find.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -189,7 +197,7 @@ const appCategories = [
       <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/section-508-compliance">Section 508 Guide</a> · <a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></p>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

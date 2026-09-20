@@ -1,10 +1,12 @@
 ---
-import { Gavel, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -47,13 +49,14 @@ const faqItems = [
 ---
 
 <BaseLayout
+  ds
   title="ADA Compliance for Law Firm Websites | complyTech"
   description="Law firms have an ethical obligation to meet ADA standards. WCAG 2.2 audit for intake forms, chatbots, and client portals. Manual expert review from $1,500."
   canonical={`${DOMAIN}/ada-compliance-law-firms`}
   schema={schema}
   keywords="ADA compliance for law firms, law firm website accessibility, legal website ADA compliant, law firm intake form accessibility, attorney website WCAG"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -63,7 +66,7 @@ const faqItems = [
         <span class="current">Law Firms</span>
       </nav>
       <div class="hero-badge">
-        <Gavel className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="gavel" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Intake Forms · Client Portals · Legal Chatbots
       </div>
       <h1 id="page-h1">ADA Compliance for Law Firm Websites</h1>
@@ -81,7 +84,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Law firms are public accommodations under ADA Title III — websites must meet WCAG 2.2 AA.</li>
               <li>Case evaluation and intake forms are the most commonly cited failure points in law firm ADA claims.</li>
@@ -139,7 +142,7 @@ const faqItems = [
           </div>
 
           <h2 id="faq-law-firms">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -163,7 +166,12 @@ const faqItems = [
     </div>
   </section>
 
-  <CTASection heading="Protect Your Law Firm from ADA Website Claims" subtext="Intake forms, chatbots, and PDFs are the top ADA targets for law firm websites. Get a full WCAG 2.2 audit starting at $1,500 — with a compliance certificate after fix verification." />
+  <CtaPanel id="cta" heading="Protect Your Law Firm from ADA Website Claims" deck="Intake forms, chatbots, and PDFs are the top ADA targets for law firm websites. Get a full WCAG 2.2 audit starting at $1,500 — with a compliance certificate after fix verification.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -180,7 +188,7 @@ const faqItems = [
       <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/section-508-compliance">Section 508 Guide</a> · <a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></p>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

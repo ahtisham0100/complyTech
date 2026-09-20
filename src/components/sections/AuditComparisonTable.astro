@@ -1,0 +1,132 @@
+---
+// Static Astro port of the old React AuditTable island (its only state was
+// row hover, now plain CSS). Automated vs manual detection comparison.
+const rows = [
+  { component: 'Color contrast failures', automated: 'Detected', status: 'pass', manual: 'Includes edge cases' },
+  { component: 'Missing image alt text', automated: 'Detected', status: 'pass', manual: 'Checks contextual accuracy' },
+  { component: 'Form label errors', automated: 'Detected', status: 'pass', manual: 'Full ARIA validation' },
+  { component: 'Keyboard navigation', automated: 'Partial only', status: 'partial', manual: 'Full screen reader walk' },
+  { component: 'Focus order & trapping', automated: 'Not detected', status: 'fail', manual: 'Fully tested' },
+  { component: 'Dynamic content (modals)', automated: 'Not detected', status: 'fail', manual: 'Fully tested' },
+  { component: 'PDF document accessibility', automated: 'Not detected', status: 'fail', manual: 'Full document audit' },
+  { component: 'Video captioning', automated: 'Not detected', status: 'fail', manual: 'Synchronized captions verified' },
+  { component: 'Cognitive accessibility', automated: 'Not detected', status: 'fail', manual: 'Expert review' },
+];
+---
+
+<div class="audit-cmp">
+  <div class="audit-cmp-desktop">
+    <table class="audit-cmp-table" aria-label="Audit component comparison: automated tools versus manual expert review">
+      <thead>
+        <tr>
+          <th scope="col">Audit Component</th>
+          <th scope="col">
+            <span class="th-label th-auto">Automated Tool</span>
+            <span class="th-sub">Detects ~30–40%</span>
+          </th>
+          <th scope="col">
+            <span class="th-label th-man">Manual Expert Review</span>
+            <span class="th-sub">Detects 100%</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr>
+              <td class="cmp-component">{row.component}</td>
+              <td class:list={['cmp-status', `cmp-${row.status}`]}>{row.automated}</td>
+              <td class="cmp-status cmp-pass cmp-manual">{row.manual}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="audit-cmp-mobile">
+    {
+      rows.map((row) => (
+        <div class="audit-cmp-card">
+          <div class="cmp-card-title">{row.component}</div>
+          <div class="cmp-card-row">
+            <span class="cmp-card-label">Automated</span>
+            <span class:list={['cmp-card-value', `cmp-${row.status}`]}>{row.automated}</span>
+          </div>
+          <div class="cmp-card-row">
+            <span class="cmp-card-label">Manual</span>
+            <span class="cmp-card-value cmp-pass">{row.manual}</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .audit-cmp { margin: 28px 0; }
+  .audit-cmp-desktop {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-card);
+  }
+  .audit-cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--type-card);
+    background: var(--color-surface);
+  }
+  .audit-cmp-table thead tr { background: var(--color-accent); }
+  .audit-cmp-table th {
+    padding: 14px 18px;
+    text-align: left;
+    color: var(--color-on-dark);
+    font-weight: 600;
+    font-size: var(--type-xs);
+    vertical-align: top;
+  }
+  .th-label { display: block; margin-bottom: 2px; }
+  .th-sub { font-size: var(--type-micro); opacity: 0.75; font-weight: 400; letter-spacing: 0.02em; }
+  .th-auto { color: var(--color-warn-on-dark); }
+  .th-man  { color: var(--color-on-dark-mint); }
+
+  .audit-cmp-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+  }
+  .audit-cmp-table tr:last-child td { border-bottom: none; }
+  .audit-cmp-table tbody tr:hover td { background: var(--color-surface-mint); }
+  .cmp-component { color: var(--color-body); font-weight: 500; }
+  .cmp-status { font-size: var(--type-card); }
+  .cmp-pass    { color: var(--color-accent-ink); font-weight: 500; }
+  .cmp-partial { color: var(--color-warn); font-weight: 500; }
+  .cmp-fail    { color: var(--color-critical); font-weight: 500; }
+  .cmp-manual  { background: var(--color-surface-mint); }
+
+  .audit-cmp-mobile { display: none; flex-direction: column; gap: 12px; }
+  .audit-cmp-card {
+    background: var(--color-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-accent);
+    padding: 16px;
+  }
+  .cmp-card-title { font-weight: 600; color: var(--color-ink); font-size: var(--type-card); margin-bottom: 10px; }
+  .cmp-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .cmp-card-label { font-size: var(--type-xs); color: var(--color-muted-2); min-width: 90px; }
+  .cmp-card-value { font-size: var(--type-card); font-weight: 500; text-align: right; }
+
+  @media (max-width: 640px) {
+    .audit-cmp-desktop { display: none; }
+    .audit-cmp-mobile { display: flex; }
+  }
+</style>

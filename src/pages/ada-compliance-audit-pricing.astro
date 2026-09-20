@@ -1,11 +1,12 @@
 ---
-import { CircleDollarSign, Zap } from 'lucide-react';
-import { FileText, ClipboardCheck, Route, Code, PhoneCall, Award, CheckCircle2 } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -61,23 +62,24 @@ const pricingTiers = [
 ];
 
 const deliverables = [
-  { icon: FileText, title: 'WCAG 2.2 Conformance Report', desc: 'Every violation listed with WCAG criterion, severity, and affected page URL' },
-  { icon: ClipboardCheck, title: 'VPAT Document', desc: 'Voluntary Product Accessibility Template — required by enterprise buyers and government clients' },
-  { icon: Route, title: 'Remediation Roadmap', desc: 'Violations ranked by legal risk and user impact — your developers know exactly where to start' },
-  { icon: Code, title: 'Developer Fix Guide', desc: 'Code-level instructions with before/after examples for every violation category' },
-  { icon: PhoneCall, title: '60-Minute Walkthrough Call', desc: 'Live review of findings with your team — questions welcome' },
-  { icon: Award, title: 'Compliance Certificate', desc: 'Issued after re-test confirms all violations resolved — dated and audit-referenced' },
+  { icon: 'file-text', title: 'WCAG 2.2 Conformance Report', desc: 'Every violation listed with WCAG criterion, severity, and affected page URL' },
+  { icon: 'clipboard-check', title: 'VPAT Document', desc: 'Voluntary Product Accessibility Template — required by enterprise buyers and government clients' },
+  { icon: 'route', title: 'Remediation Roadmap', desc: 'Violations ranked by legal risk and user impact — your developers know exactly where to start' },
+  { icon: 'code', title: 'Developer Fix Guide', desc: 'Code-level instructions with before/after examples for every violation category' },
+  { icon: 'phone-call', title: '60-Minute Walkthrough Call', desc: 'Live review of findings with your team — questions welcome' },
+  { icon: 'award', title: 'Compliance Certificate', desc: 'Issued after re-test confirms all violations resolved — dated and audit-referenced' },
 ];
 ---
 
 <BaseLayout
+  ds
   title="ADA Compliance Audit Cost & Pricing 2026 | complyTech"
   description="Transparent ADA compliance audit pricing from $495. See costs by site size, what's included, and how the IRS Disabled Access Credit saves you up to $5,000. Updated 2026."
   canonical={`${DOMAIN}/ada-compliance-audit-pricing`}
   schema={schema}
   keywords="ADA compliance audit cost, website accessibility audit pricing, WCAG audit price, how much does ADA audit cost, disabled access credit"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -86,7 +88,7 @@ const deliverables = [
         <span class="current">Pricing</span>
       </nav>
       <div class="hero-badge">
-        <CircleDollarSign className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="circle-dollar-sign" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Transparent Pricing · No Hidden Fees
       </div>
       <h1 id="page-h1">ADA Compliance Audit Cost & Pricing</h1>
@@ -104,7 +106,7 @@ const deliverables = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Pricing Summary</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR — Pricing Summary</div>
             <ul>
               <li>Micro-site (1–10 pages): <strong>$495–$999</strong></li>
               <li>Small business (11–50 pages): <strong>$1,500–$3,500</strong></li>
@@ -143,7 +145,7 @@ const deliverables = [
           <div class="deliverables-grid">
             {deliverables.map((d) => (
               <div class="deliverable-card">
-                {(() => { const Icon = d.icon; return <Icon className="lucide-icon deliverable-icon" aria-hidden="true" size={24} strokeWidth={2} />; })()}
+                <Icon name={d.icon} class="deliverable-icon" aria-hidden="true" size={24} strokeWidth={2} />
                 <div>
                   <h4>{d.title}</h4>
                   <p>{d.desc}</p>
@@ -207,7 +209,7 @@ const deliverables = [
           </div>
 
           <h2 id="faq-pricing">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -236,8 +238,13 @@ const deliverables = [
     </div>
   </section>
 
-  <CTASection heading="Ready to Get Your ADA Compliance Audit?" subtext="Get a transparent quote in 1 business day. Pricing starts at $495 — and you may qualify for up to $5,000 in federal tax credits that offset your audit cost." />
-  <Footer slot="footer" />
+  <CtaPanel id="cta" heading="Ready to Get Your ADA Compliance Audit?" deck="Get a transparent quote in 1 business day. Pricing starts at $495 — and you may qualify for up to $5,000 in federal tax credits that offset your audit cost.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>

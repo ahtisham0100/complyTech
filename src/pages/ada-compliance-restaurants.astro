@@ -1,10 +1,12 @@
 ---
-import { Utensils, Zap } from 'lucide-react';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTASection from '../components/CTASection.astro';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SiteHeader from '../components/sections/SiteHeader.astro';
+import SiteFooter from '../components/sections/SiteFooter.astro';
+import CtaPanel from '../components/sections/CtaPanel.astro';
+import FaqAccordion from '../components/ui/FaqAccordion.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+import { WA_LINK } from '../data/home';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -48,13 +50,14 @@ const faqItems = [
 ---
 
 <BaseLayout
+  ds
   title="Restaurant Website ADA Compliance | complyTech"
   description="PDF menus are the #1 ADA violation for restaurants. Get a WCAG 2.2 audit covering menus, online ordering, and reservations. Includes PDF remediation from $1,500."
   canonical={`${DOMAIN}/ada-compliance-restaurants`}
   schema={schema}
   keywords="ADA compliance for restaurants, restaurant website accessibility, PDF menu ADA compliant, restaurant ADA lawsuit, online ordering accessibility"
 >
-  <Nav slot="nav" />
+  <SiteHeader slot="nav" />
 
   <section class="page-hero" aria-labelledby="page-h1">
     <div class="container">
@@ -64,7 +67,7 @@ const faqItems = [
         <span class="current">Restaurants</span>
       </nav>
       <div class="hero-badge">
-        <Utensils className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
+        <Icon name="utensils" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         PDF Menus · Online Ordering · Reservations
       </div>
       <h1 id="page-h1">ADA Compliance for Restaurant Websites</h1>
@@ -82,7 +85,7 @@ const faqItems = [
         <article class="prose-section">
 
           <div class="tldr-box" role="note">
-            <div class="tldr-label"><Zap className="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
+            <div class="tldr-label"><Icon name="zap" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />TL;DR</div>
             <ul>
               <li>Restaurants are public accommodations under ADA Title III — websites must be accessible.</li>
               <li>PDF menus are the #1 cited ADA violation for restaurants — especially scanned image PDFs.</li>
@@ -151,7 +154,7 @@ const faqItems = [
           </ul>
 
           <h2 id="faq-restaurants">Frequently Asked Questions</h2>
-          <FAQAccordion items={faqItems} client:load />
+          <FaqAccordion items={faqItems} />
 
         </article>
 
@@ -175,7 +178,12 @@ const faqItems = [
     </div>
   </section>
 
-  <CTASection heading="Protect Your Restaurant from ADA Website Lawsuits" subtext="PDF menus and inaccessible ordering flows are the top ADA targets for restaurants. Get a full WCAG 2.2 audit including PDF menu remediation — starting at $1,500." />
+  <CtaPanel id="cta" heading="Protect Your Restaurant from ADA Website Lawsuits" deck="PDF menus and inaccessible ordering flows are the top ADA targets for restaurants. Get a full WCAG 2.2 audit including PDF menu remediation — starting at $1,500.">
+    <Button href={WA_LINK} variant="on-dark-solid" target="_blank" rel="noopener noreferrer" slot="actions">
+      <Icon name="whatsapp" size={18} slot="leading" />
+      Get free quote on WhatsApp
+    </Button>
+  </CtaPanel>
 
   <section class="section section-sm" style="background: var(--surface); border-top: 1px solid var(--border);">
     <div class="container">
@@ -192,7 +200,7 @@ const faqItems = [
       <p style="text-align:center;margin-top:24px;font-size:0.88rem;"><a href="/services">View all services</a> · <a href="/vpat-documentation-services">VPAT Documentation</a> · <a href="/section-508-compliance">Section 508 Guide</a> · <a href="/how-to-make-pdf-ada-compliant">PDF Accessibility Guide</a></p>
     </div>
   </section>
-  <Footer slot="footer" />
+  <SiteFooter slot="footer" />
 </BaseLayout>
 
 <style>
