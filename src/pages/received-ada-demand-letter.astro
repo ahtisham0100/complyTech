@@ -7,6 +7,7 @@ import FaqAccordion from '../components/ui/FaqAccordion.astro';
 import Button from '../components/ui/Button.astro';
 import Icon from '../components/ui/Icon.astro';
 import { WA_LINK } from '../data/home';
+import { avgRating, totalReviews } from '../data/testimonials';
 
 const DOMAIN = 'https://adacomplianceservices.tech';
 
@@ -17,9 +18,28 @@ const schema = [
     "headline": "Received an ADA Website Demand Letter? Here's What to Do",
     "description": "Step-by-step guide for small business owners who have received an ADA website accessibility demand letter. Covers response timeline, options, legal risks, and how a professional audit protects you.",
     "datePublished": "2025-01-01T00:00:00+00:00",
-    "dateModified": "2026-04-07T00:00:00+00:00",
+    "dateModified": "2026-11-26T00:00:00+00:00",
     "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
-    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `${DOMAIN}/received-ada-demand-letter` }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Emergency ADA Demand Letter Accessibility Audit",
+    "serviceType": "WCAG 2.2 accessibility audit and remediation",
+    "description": "Manual WCAG 2.2 AA audit, remediation roadmap, re-test report and compliance documentation for businesses that have received an ADA website demand letter.",
+    "url": `${DOMAIN}/received-ada-demand-letter`,
+    "areaServed": "United States",
+    "provider": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "495", "url": `${DOMAIN}/ada-compliance-audit-pricing` },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": avgRating,
+      "bestRating": 5,
+      "worstRating": 1,
+      "ratingCount": totalReviews
+    }
   },
   {
     "@context": "https://schema.org",
@@ -64,12 +84,12 @@ const steps = [
 
 <BaseLayout
   ds
-  title="Received an ADA Demand Letter? Do This First | complyTech"
-  description="Don't panic — but don't ignore it. Step-by-step response guide for ADA demand letters. Settlements range $4K–$75K. Start an emergency WCAG 2.2 audit within 24 hours."
+  title="ADA Demand Letter Response Guide | adacomplianceservices.tech"
+  description="Don't panic — but don't ignore it. Step-by-step ADA demand letter response guide from adacomplianceservices.tech. Settlements range $4K–$75K. Start an emergency WCAG 2.2 audit in 24 hours."
   canonical={`${DOMAIN}/received-ada-demand-letter`}
   schema={schema}
   ogType="article"
-  keywords="ADA demand letter received, ADA website lawsuit response, ADA demand letter small business, how to respond ADA letter, ADA compliance lawsuit"
+  keywords="adacomplianceservices.tech, ADA demand letter received, ADA demand letter response, ADA website lawsuit response, ADA demand letter small business, how to respond ADA letter, ADA compliance lawsuit"
 >
   <SiteHeader slot="nav" />
 
@@ -84,8 +104,8 @@ const steps = [
         <Icon name="alert-triangle" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         Legal Guidance · Consult an Attorney for Your Specific Situation
       </div>
-      <h1 id="page-h1">Received an ADA Website Demand Letter? Here's What to Do.</h1>
-      <p class="hero-sub">Don't panic — but don't ignore it either. ADA website demand letters are serious legal notices. This guide walks you through your immediate steps, options, and how a professional accessibility audit protects you.</p>
+      <h1 id="page-h1">ADA Demand Letter Received? Your Step-by-Step Response Guide</h1>
+      <p class="hero-sub">Don't panic. Don't ignore it either. An ADA website demand letter is a serious legal notice. This guide shows your first steps, your options, and how a professional accessibility audit protects you.</p>
       <div class="hero-actions">
         <a href="#cta" class="btn btn-whatsapp btn-lg" id="hero-demand-cta">Start an Audit Now</a>
         <a href="#steps" class="btn btn-outline-light btn-lg">See 6-Step Response Plan</a>
@@ -116,7 +136,8 @@ const steps = [
           </div>
 
           <h2>What Is an ADA Website Demand Letter?</h2>
-          <p>An <strong>ADA website demand letter</strong> is a pre-litigation legal notice sent by a plaintiff's attorney on behalf of a person with a disability (or, in many cases, a serial plaintiff who tests accessibility across many websites). The letter claims your website violates Title III of the Americans with Disabilities Act by failing to meet web accessibility standards — typically WCAG 2.1 Level AA or WCAG 2.2 Level AA.</p>
+          <p>An <strong>ADA website demand letter</strong> is a legal notice sent before a lawsuit. A plaintiff's attorney sends it on behalf of a person with a disability. In many cases that person is a serial plaintiff who tests hundreds of websites.</p>
+          <p>The letter claims your website breaks Title III of the Americans with Disabilities Act. The usual standard cited is WCAG 2.1 Level AA or WCAG 2.2 Level AA.</p>
           <p>The letter typically includes:</p>
           <ul>
             <li>Citation to the ADA Title III and relevant case law</li>
@@ -144,7 +165,7 @@ const steps = [
           </div>
 
           <h2>What Happens If You Don't Respond?</h2>
-          <p>If you ignore a demand letter, the plaintiff's attorney will file a formal federal lawsuit in district court — this happens routinely. Once the lawsuit is filed:</p>
+          <p>If you ignore a demand letter, the plaintiff's attorney will usually file a federal lawsuit. This happens routinely. Once the lawsuit is filed:</p>
           <ul>
             <li>You must hire a defense attorney (typically $5,000 retainer minimum)</li>
             <li>The plaintiff becomes entitled to recover their attorney fees if they win (can exceed $30,000)</li>
@@ -157,7 +178,7 @@ const steps = [
           </div>
 
           <h2>How a Professional Audit Helps Your Defense</h2>
-          <p>Commissioning a WCAG 2.2 manual audit immediately after receiving a demand letter demonstrates <strong>good-faith compliance effort</strong> — one of the most important factors in ADA Title III defense and settlement negotiations. Courts have consistently given defendants credit for proactive remediation efforts.</p>
+          <p>A WCAG 2.2 manual audit, started right after the letter arrives, shows <strong>good-faith compliance effort</strong>. That is one of the most important factors in ADA Title III defense and settlement talks. Courts regularly credit defendants who fix their sites early.</p>
           <p>Specifically, a professional audit provides:</p>
           <ul>
             <li><strong>Documented baseline</strong> — objective evidence of your site's condition at the time of the demand</li>
@@ -166,6 +187,39 @@ const steps = [
             <li><strong>Re-test certificate</strong> — after fixes, provides independent verification of compliance</li>
             <li><strong>VPAT document</strong> — formal accessibility conformance statement used in settlement negotiations</li>
           </ul>
+
+          <h2>Who Sends ADA Demand Letters — and Why Your Business?</h2>
+          <p>Most ADA website demand letters come from a small number of plaintiff law firms. They use automated scanners to find sites with obvious barriers. Then they send near-identical letters to many businesses at once.</p>
+          <p>The most common triggers are easy to detect:</p>
+          <ul>
+            <li>Images with no alt text, especially product photos</li>
+            <li>Checkout or booking forms without labels</li>
+            <li>Menus and pop-ups that cannot be used with a keyboard</li>
+            <li>Low color contrast on buttons and text</li>
+            <li>Videos without captions and PDFs without tags</li>
+          </ul>
+          <p>E-commerce, restaurants, hotels, healthcare and professional services are targeted most often. New York, California and Florida see the highest volume of filings.</p>
+
+          <h2>What to Gather Before You Call Your Attorney</h2>
+          <p>Your lawyer can move faster if you bring the right material to the first call. Prepare:</p>
+          <ul>
+            <li>The full demand letter and its envelope or email, with the date received</li>
+            <li>The pages and barriers the letter names (screenshots help)</li>
+            <li>Who built and hosts your website, and who can change its code</li>
+            <li>Any past accessibility audits, statements or fixes</li>
+            <li>Whether you use an overlay or accessibility widget today</li>
+          </ul>
+          <p>Do not delete pages or rush changes to your site before your attorney advises you. Unplanned changes can complicate the record.</p>
+
+          <h2>How adacomplianceservices.tech Helps After a Demand Letter</h2>
+          <p>At <strong>adacomplianceservices.tech</strong>, the complyTech team handles the technical side while your attorney handles the legal side. Our demand-letter service covers four steps:</p>
+          <ol>
+            <li><strong>Emergency manual audit</strong> — the pages named in the letter are tested first, against WCAG 2.2 AA.</li>
+            <li><strong>Prioritized fix list</strong> — every barrier is mapped to a success criterion and a code-level fix.</li>
+            <li><strong>Remediation</strong> — our developers fix the code, or guide your own team.</li>
+            <li><strong>Re-test and documentation</strong> — a re-test report and conformance statement your attorney can use.</li>
+          </ol>
+          <p>Audits start at $495. See <a href="/ada-compliance-audit-pricing">audit pricing</a>, what a <a href="/ada-compliance-audit-small-business">small business audit includes</a>, or read <a href="/testimonials">client reviews</a>. Eligible small businesses may also recover up to half the cost through the <a href="/disabled-access-credit-tax">ADA tax credit (Form 8826)</a>.</p>
 
           <h2 id="faq-demand-letter">Frequently Asked Questions</h2>
           <FaqAccordion items={faqItems} />
@@ -177,6 +231,14 @@ const steps = [
             <h4>Act Now</h4>
             <p>Commission your audit while consulting your attorney. Parallel action demonstrates good-faith compliance effort to the court.</p>
             <a href={`https://wa.me/923010910933?text=${encodeURIComponent('Hi, I received an ADA demand letter and need an emergency audit.')}`} class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;" id="sidebar-demand-cta">Emergency Audit — WhatsApp</a>
+          </div>
+          <div class="sidebar-card sidebar-rating">
+            <h4>Client Rating</h4>
+            <div class="rating-score" aria-label={`Rated ${avgRating} out of 5 from ${totalReviews} client reviews`}>
+              <span aria-hidden="true">★★★★★</span> <strong>{avgRating.toFixed(1)}</strong>/5
+            </div>
+            <p>Based on {totalReviews} verified client reviews for website accessibility audits and remediation.</p>
+            <a href="/testimonials">Read the reviews</a>
           </div>
           <div class="sidebar-card sidebar-cost">
             <h4>Cost Comparison</h4>
@@ -201,6 +263,7 @@ const steps = [
               <li><a href="/ada-compliance-audit-pricing">Pricing & Timeline</a></li>
               <li><a href="/accessibility-overlay-alternatives">Why Widgets Don't Work</a></li>
               <li><a href="/what-is-ada-compliance-websites">What Is ADA Compliance?</a></li>
+              <li><a href="/disabled-access-credit-tax">ADA Tax Credit (Form 8826)</a></li>
             </ul>
           </div>
         </aside>
@@ -239,6 +302,10 @@ const steps = [
   .cost-value.amber { color: #b45309; }
   .cost-value.green { color: var(--accent); }
   .cost-divider { border-top: 2px solid var(--border); margin: 6px 0; }
+  .rating-score { font-family: var(--font-head); font-size: 1.4rem; color: var(--ink); margin-bottom: 6px; }
+  .rating-score span { color: #b45309; letter-spacing: 2px; }
+  .sidebar-rating p { font-size: 0.85rem; color: var(--ink-2); margin-bottom: 8px; }
+  .sidebar-rating a { font-size: 0.88rem; color: var(--accent-2); }
   .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .sidebar-links li a { font-size: 0.88rem; color: var(--accent-2); }
   .sidebar-links li a::before { content: '› '; }

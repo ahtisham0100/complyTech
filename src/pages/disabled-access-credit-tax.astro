@@ -14,11 +14,25 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "IRS Disabled Access Credit: Save Up to $5,000 on ADA Accessibility Costs",
+    "headline": "ADA Tax Credit: Form 8826 Instructions for the Disabled Access Credit",
     "description": "Small businesses can claim up to $5,000 per year in federal tax credits for ADA accessibility expenses including website audits, PDF remediation, and physical accessibility improvements under IRS Form 8826.",
     "datePublished": "2025-01-01T00:00:00+00:00",
-    "dateModified": "2026-04-07T00:00:00+00:00",
-    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN }
+    "dateModified": "2026-11-26T00:00:00+00:00",
+    "author": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "publisher": { "@type": "Organization", "name": "complyTech", "url": DOMAIN },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `${DOMAIN}/disabled-access-credit-tax` }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to fill out IRS Form 8826 (Disabled Access Credit)",
+    "step": [
+      { "@type": "HowToStep", "name": "Total your eligible access expenditures", "text": "Add up the year's eligible access expenditures paid to comply with the ADA and enter the total on line 1." },
+      { "@type": "HowToStep", "name": "Subtract the $250 minimum", "text": "Subtract $250 from line 1. If the result is zero or less, no credit is available." },
+      { "@type": "HowToStep", "name": "Apply the $10,000 cap", "text": "Use the smaller of the result or $10,000." },
+      { "@type": "HowToStep", "name": "Multiply by 50%", "text": "Multiply by 50%. This is your disabled access credit, up to $5,000." },
+      { "@type": "HowToStep", "name": "Carry the credit to Form 3800", "text": "Add any disabled access credit passed through from partnerships or S corporations, then report the total on Form 3800, General Business Credit, and attach Form 8826 to your return." }
+    ]
   },
   {
     "@context": "https://schema.org",
@@ -26,6 +40,7 @@ const schema = [
     "mainEntity": [
       { "@type": "Question", "name": "What is the Disabled Access Credit?", "acceptedAnswer": { "@type": "Answer", "text": "The Disabled Access Credit is a federal tax credit (IRS Form 8826) for eligible small businesses that incur expenses to make their operations accessible to people with disabilities. The credit equals 50% of eligible access expenditures between $250 and $10,250 per year, with a maximum annual credit of $5,000. Website accessibility audits, PDF remediation, and accessible technology purchases are qualified expenses." } },
       { "@type": "Question", "name": "Does a website accessibility audit qualify for the Disabled Access Credit?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Website accessibility audits, remediation costs, PDF accessibility remediation, and accessible software purchases qualify as 'eligible access expenditures' under the Disabled Access Credit (IRS Form 8826), provided the business meets the eligibility criteria: 30 or fewer full-time employees or $1 million or less in gross receipts in the prior year. Consult your tax advisor to confirm your specific eligibility and qualified expenses." } },
+      { "@type": "Question", "name": "Where do I report Form 8826 on my tax return?", "acceptedAnswer": { "@type": "Answer", "text": "Complete Form 8826 to calculate the credit, then carry the amount to Form 3800, General Business Credit, and attach both forms to your federal income tax return. Partnerships and S corporations report the credit on Schedule K so it passes through to owners. Check the current IRS instructions for exact line numbers." } },
       { "@type": "Question", "name": "Who qualifies for the Disabled Access Credit?", "acceptedAnswer": { "@type": "Answer", "text": "A business qualifies for the Disabled Access Credit if it meets at least one of: (1) had 30 or fewer full-time employees during the preceding tax year, OR (2) had $1 million or less in gross receipts in the preceding tax year. There is no requirement to be an existing small business — new businesses that incur accessibility expenses in their first year may qualify." } }
     ]
   },
@@ -44,6 +59,7 @@ const faqItems = [
   { question: "What is the IRS Disabled Access Credit?", answer: "The Disabled Access Credit (IRS Form 8826) is a federal tax credit for eligible small businesses that incur expenses to make their operations accessible to people with disabilities. The credit equals 50% of eligible access expenditures between $250 and $10,250 per year — up to a maximum credit of $5,000 annually. Website audits, PDF remediation, and accessible technology all qualify." },
   { question: "Does a website accessibility audit qualify for the Disabled Access Credit?", answer: "Yes. Website accessibility audits, remediation costs, PDF accessibility remediation, and accessible software purchases qualify as 'eligible access expenditures' under the Disabled Access Credit, provided the business meets the eligibility criteria: 30 or fewer full-time employees OR $1 million or less in gross receipts in the prior year. Consult your tax advisor to confirm your specific eligibility." },
   { question: "Who qualifies for the Disabled Access Credit?", answer: "A business qualifies if it meets at least one of: (1) had 30 or fewer full-time employees during the preceding tax year, OR (2) had $1 million or less in gross receipts in the preceding tax year. There is no requirement to be a long-established business — eligible startups can claim the credit in their first year." },
+  { question: "Where do I report Form 8826 on my tax return?", answer: "Complete Form 8826 to calculate the credit. Then carry the amount to Form 3800, General Business Credit, and attach both forms to your federal income tax return. Partnerships and S corporations report the credit on Schedule K so it passes through to owners. Check the current IRS instructions for exact line numbers." },
   { question: "Can I claim the Disabled Access Credit every year?", answer: "Yes. The Disabled Access Credit can be claimed annually for qualifying accessibility expenditures each tax year. There is no lifetime limit — a small business can claim up to $5,000 per year, every year, as long as they continue to incur qualified access expenditures and meet the eligibility requirements." },
   { question: "Is there a tax deduction in addition to the credit?", answer: "Yes. Businesses that don't qualify for the Disabled Access Credit (or for expenses not covered by it) may be able to deduct accessibility expenses under Section 190 of the Internal Revenue Code, which allows a deduction of up to $15,000 per year for qualified architectural and transportation barrier removal expenses. Website costs may qualify — consult a tax advisor for your specific situation." }
 ];
@@ -51,12 +67,12 @@ const faqItems = [
 
 <BaseLayout
   ds
-  title="ADA Tax Credit for Small Business — IRS Form 8826"
-  description="Claim up to $5,000/year in federal tax credits for ADA accessibility costs including website audits. Free 2026 guide to IRS Form 8826 eligibility and filing."
+  title="ADA Tax Credit: Form 8826 Instructions for Small Business"
+  description="Form 8826 instructions in plain English. Claim the ADA tax credit — up to $5,000 a year for accessibility costs like website audits. Eligibility, line-by-line steps, examples."
   canonical={`${DOMAIN}/disabled-access-credit-tax`}
   schema={schema}
   ogType="article"
-  keywords="disabled access credit, IRS Form 8826, ADA tax credit small business, website accessibility tax credit, disabled access credit eligibility"
+  keywords="form 8826 instructions, form 8826, ADA tax credit, disabled access credit, IRS Form 8826, ADA tax credit small business, website accessibility tax credit, disabled access credit eligibility"
 >
   <SiteHeader slot="nav" />
 
@@ -71,8 +87,8 @@ const faqItems = [
         <Icon name="piggy-bank" class="lucide-icon" aria-hidden="true" size={20} strokeWidth={2} />
         IRS Form 8826 · Up to $5,000/Year · Most Small Businesses Qualify
       </div>
-      <h1 id="page-h1">IRS Disabled Access Credit: Save Up to $5,000 on ADA Compliance</h1>
-      <p class="hero-sub">Most small businesses don't know they can claim a <strong style="color:#7ed4a0;">50% federal tax credit</strong> on ADA accessibility costs — including website audits. The IRS Disabled Access Credit (Form 8826) reduces your net compliance cost by up to $5,000 per year.</p>
+      <h1 id="page-h1">ADA Tax Credit: Form 8826 Instructions to Claim Up to $5,000</h1>
+      <p class="hero-sub">Many small businesses can claim a <strong style="color:#7ed4a0;">50% federal ADA tax credit</strong> on accessibility costs, including website audits. It is called the Disabled Access Credit, and you claim it on IRS Form 8826. It can cut your net compliance cost by up to $5,000 a year.</p>
       <div class="hero-actions">
         <a href="#eligibility" class="btn btn-whatsapp btn-lg" id="hero-tax-cta">Check Your Eligibility</a>
         <a href="#cta" class="btn btn-outline-light btn-lg">Get a Qualifying Audit Quote</a>
@@ -102,8 +118,8 @@ const faqItems = [
           </div>
 
           <h2>What Is the Disabled Access Credit?</h2>
-          <p>The <strong>Disabled Access Credit</strong> is a general business tax credit established under Section 44 of the Internal Revenue Code that allows eligible small businesses to claim 50% of qualified access expenditures as a credit against their federal income tax. It is filed using <strong>IRS Form 8826</strong>.</p>
-          <p>The credit is specifically designed to help small businesses offset the cost of making their operations — including digital operations — accessible to people with disabilities. It applies to both physical accessibility improvements (ramps, signage) and digital accessibility costs (website audits, PDF remediation, accessible software).</p>
+          <p>The <strong>Disabled Access Credit</strong> — often called the <strong>ADA tax credit</strong> — is a general business credit under Section 44 of the Internal Revenue Code. Eligible small businesses can claim 50% of qualified access costs against their federal income tax. You claim it on <strong>IRS Form 8826</strong>.</p>
+          <p>The credit helps small businesses pay for becoming accessible to people with disabilities. It covers physical changes, like ramps and signage. It can also cover digital work, like website audits, PDF fixes and accessible software.</p>
 
           <h2 id="eligibility">Eligibility Requirements</h2>
           <p>A business is eligible if it meets <em>at least one</em> of the following criteria:</p>
@@ -165,6 +181,50 @@ const faqItems = [
             </div>
           </div>
 
+          <h2 id="form-8826-instructions">Form 8826 Instructions: Line by Line</h2>
+          <p>Form 8826 is a one-page form. The math is simple. Here is how each step works, using the $3,500 audit example above.</p>
+          <div class="table-wrapper">
+            <table class="prose-table" aria-label="Form 8826 line-by-line walkthrough">
+              <thead>
+                <tr>
+                  <th scope="col">Line</th>
+                  <th scope="col">What to enter</th>
+                  <th scope="col">Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>1</strong></td><td>Total eligible access expenditures paid this tax year</td><td>$3,500</td></tr>
+                <tr><td><strong>2</strong></td><td>Minimum amount (fixed)</td><td>$250</td></tr>
+                <tr><td><strong>3</strong></td><td>Line 1 minus line 2 (enter 0 if less than zero)</td><td>$3,250</td></tr>
+                <tr><td><strong>4</strong></td><td>Maximum amount (fixed)</td><td>$10,000</td></tr>
+                <tr><td><strong>5</strong></td><td>The smaller of line 3 or line 4</td><td>$3,250</td></tr>
+                <tr><td><strong>6</strong></td><td>Line 5 × 50% — your credit</td><td>$1,625</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Next, add any disabled access credit passed to you from a partnership or S corporation. Report the total on <strong>Form 3800, General Business Credit</strong>, and attach Form 8826 to your return. Partnerships and S corporations pass the credit to their owners instead of using it themselves.</p>
+          <p>Always check the current Form 8826 and its instructions on IRS.gov before you file. Line numbers can change between form revisions.</p>
+
+          <h2>Records to Keep for Your ADA Tax Credit</h2>
+          <p>The IRS can ask you to prove the expense was paid to meet ADA requirements. Keep:</p>
+          <ul>
+            <li>Invoices and proof of payment for the audit, remediation or equipment</li>
+            <li>The audit report showing the barriers found and the WCAG criteria involved</li>
+            <li>A re-test report or statement showing the barriers were removed</li>
+            <li>Your prior-year employee count or gross receipts, to show eligibility</li>
+          </ul>
+          <p>A complyTech audit includes a dated report, a fix list and a re-test report. Your tax advisor can use these as supporting records.</p>
+
+          <h2>Common Form 8826 Mistakes to Avoid</h2>
+          <ul>
+            <li><strong>Double-dipping.</strong> You cannot deduct the same dollars you used for the credit. Reduce any deduction by the credit amount.</li>
+            <li><strong>Wrong tax year.</strong> Eligibility uses the <em>prior</em> year's employees or gross receipts.</li>
+            <li><strong>Forgetting the $250 floor.</strong> The first $250 of spending never earns a credit.</li>
+            <li><strong>Claiming over the cap.</strong> Spending above $10,250 in a year earns no extra credit.</li>
+            <li><strong>Skipping Form 3800.</strong> The credit flows through the General Business Credit form, not straight onto your 1040 or 1120.</li>
+          </ul>
+          <p>Want to know what an audit costs before you plan your claim? See <a href="/ada-compliance-audit-pricing">ADA audit pricing</a> or learn <a href="/what-is-ada-compliance-websites">what ADA website compliance requires</a>.</p>
+
           <h2 id="faq-tax-credit">Frequently Asked Questions</h2>
           <FaqAccordion items={faqItems} />
 
@@ -187,6 +247,7 @@ const faqItems = [
               <li><a href="/ada-compliance-audit-pricing">Pricing & ROI Calculator</a></li>
               <li><a href="/ada-compliance-audit-small-business">Full Audit Details</a></li>
               <li><a href="/what-is-ada-compliance-websites">ADA Compliance Guide</a></li>
+              <li><a href="/received-ada-demand-letter">ADA Demand Letter Guide</a></li>
             </ul>
           </div>
         </aside>
